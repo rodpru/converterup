@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowLeft, Download, Share2 } from 'lucide-react';
-import type { ActionMode } from './action-selector';
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Download, Share2 } from "lucide-react";
+import type { ActionMode } from "./action-selector";
 import {
   useIsMobile,
   useOrientation,
   shareFile,
   downloadFile,
   canShare,
-} from '@/lib/mobile-utils';
-import { createSession, uploadDocument } from '@/app/actions';
+} from "@/lib/mobile-utils";
+import { createSession, uploadDocument } from "@/app/actions";
 
 // Ensure this component only runs on client
-if (typeof window === 'undefined') {
-  throw new Error('PDFViewer must only be rendered on the client side');
+if (typeof window === "undefined") {
+  throw new Error("PDFViewer must only be rendered on the client side");
 }
 
 interface PDFViewerProps {
@@ -40,32 +40,32 @@ export default function PDFViewer({ file, mode, onBack }: PDFViewerProps) {
       try {
         // 1. Upload document
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append("file", file);
 
         const uploadResult = await uploadDocument(formData);
 
-        console.log('Nutrient API Upload Response:', uploadResult);
+        console.log("Nutrient API Upload Response:", uploadResult);
         if (!isMounted) return;
 
         if (!uploadResult.success || !uploadResult.documentId) {
-          throw new Error(uploadResult.error || 'Failed to upload document');
+          throw new Error(uploadResult.error || "Failed to upload document");
         }
 
         // 2. Create session with new document ID
         const result = await createSession(uploadResult.documentId);
 
-        console.log('Nutrient API Create Session Response:', result);
+        console.log("Nutrient API Create Session Response:", result);
         if (!isMounted) return;
 
         if (!result.success || !result.sessionToken) {
-          throw new Error(result.error || 'Failed to create session');
+          throw new Error(result.error || "Failed to create session");
         }
 
         if (isMounted) {
           setSessionToken(result.sessionToken);
         }
       } catch (error) {
-        console.error('Error initializing viewer:', error);
+        console.error("Error initializing viewer:", error);
       }
     };
 
@@ -81,10 +81,10 @@ export default function PDFViewer({ file, mode, onBack }: PDFViewerProps) {
     let viewerInstance: any = null;
     let NutrientViewer: any = null;
 
-    if (typeof window !== 'undefined' && container && file && sessionToken) {
+    if (typeof window !== "undefined" && container && file && sessionToken) {
       const loadViewer = async () => {
         try {
-          NutrientViewer = (await import('@nutrient-sdk/viewer')).default;
+          NutrientViewer = (await import("@nutrient-sdk/viewer")).default;
 
           // Ensure any previous instance is unloaded before loading a new one
           NutrientViewer.unload(container);
@@ -95,7 +95,7 @@ export default function PDFViewer({ file, mode, onBack }: PDFViewerProps) {
             container,
             document: documentBlobObjectUrl,
             baseUrl: `${window.location.protocol}//${window.location.host}/nutrient/`,
-            licenseKey: process.env.NUTRIENT_DWS_VIEWER_LICENSE_KEY || '',
+            //licenseKey: process.env.NUTRIENT_DWS_VIEWER_LICENSE_KEY || '',
             session: sessionToken,
 
             // Mobile-specific optimizations
@@ -105,68 +105,68 @@ export default function PDFViewer({ file, mode, onBack }: PDFViewerProps) {
             toolbarItems: isMobile
               ? [
                   // Navigation
-                  { type: 'pager' },
-                  { type: 'zoom-out' },
-                  { type: 'zoom-in' },
-                  { type: 'search' },
+                  { type: "pager" },
+                  { type: "zoom-out" },
+                  { type: "zoom-in" },
+                  { type: "search" },
                   // Sidebar
-                  { type: 'sidebar-thumbnails' },
-                  { type: 'sidebar-bookmarks' },
-                  { type: 'sidebar-annotations' },
+                  { type: "sidebar-thumbnails" },
+                  { type: "sidebar-bookmarks" },
+                  { type: "sidebar-annotations" },
                   // Annotations
-                  { type: 'annotate' },
-                  { type: 'ink' },
-                  { type: 'signature' },
-                  { type: 'stamp' },
-                  { type: 'note' },
-                  { type: 'text-highlighter' },
+                  { type: "annotate" },
+                  { type: "ink" },
+                  { type: "signature" },
+                  { type: "stamp" },
+                  { type: "note" },
+                  { type: "text-highlighter" },
                   // Actions
-                  { type: 'print' },
+                  { type: "print" },
                 ]
               : [
                   // LEFT SIDE - Navigation & View
-                  { type: 'sidebar-thumbnails' },
-                  { type: 'sidebar-document-outline' },
-                  { type: 'sidebar-annotations' },
-                  { type: 'sidebar-bookmarks' },
-                  { type: 'pager' },
-                  { type: 'zoom-out' },
-                  { type: 'zoom-in' },
-                  { type: 'zoom-mode' },
+                  { type: "sidebar-thumbnails" },
+                  { type: "sidebar-document-outline" },
+                  { type: "sidebar-annotations" },
+                  { type: "sidebar-bookmarks" },
+                  { type: "pager" },
+                  { type: "zoom-out" },
+                  { type: "zoom-in" },
+                  { type: "zoom-mode" },
 
                   // LEFT SIDE - Annotations
-                  { type: 'text-highlighter' },
-                  { type: 'highlighter' },
-                  { type: 'ink' },
-                  { type: 'ink-eraser' },
-                  { type: 'text' },
-                  { type: 'note' },
-                  { type: 'signature' },
-                  { type: 'stamp' },
-                  { type: 'image' },
+                  { type: "text-highlighter" },
+                  { type: "highlighter" },
+                  { type: "ink" },
+                  { type: "ink-eraser" },
+                  { type: "text" },
+                  { type: "note" },
+                  { type: "signature" },
+                  { type: "stamp" },
+                  { type: "image" },
 
                   // LEFT SIDE - Shapes dropdown
-                  { type: 'arrow', dropdownGroup: 'shapes' },
-                  { type: 'line', dropdownGroup: 'shapes' },
-                  { type: 'rectangle', dropdownGroup: 'shapes' },
-                  { type: 'ellipse', dropdownGroup: 'shapes' },
-                  { type: 'polygon', dropdownGroup: 'shapes' },
-                  { type: 'polyline', dropdownGroup: 'shapes' },
+                  { type: "arrow", dropdownGroup: "shapes" },
+                  { type: "line", dropdownGroup: "shapes" },
+                  { type: "rectangle", dropdownGroup: "shapes" },
+                  { type: "ellipse", dropdownGroup: "shapes" },
+                  { type: "polygon", dropdownGroup: "shapes" },
+                  { type: "polyline", dropdownGroup: "shapes" },
 
                   // LEFT SIDE - Document Tools
-                  { type: 'content-editor' },
-                  { type: 'document-editor' },
-                  { type: 'document-crop' },
+                  { type: "content-editor" },
+                  { type: "document-editor" },
+                  { type: "document-crop" },
 
                   // CENTER SPACER
-                  { type: 'spacer' },
+                  { type: "spacer" },
 
                   // RIGHT SIDE - Actions
-                  { type: 'search' },
-                  { type: 'undo' },
-                  { type: 'redo' },
-                  { type: 'print' },
-                  { type: 'export-pdf' },
+                  { type: "search" },
+                  { type: "undo" },
+                  { type: "redo" },
+                  { type: "print" },
+                  { type: "export-pdf" },
                 ],
           };
 
@@ -177,7 +177,7 @@ export default function PDFViewer({ file, mode, onBack }: PDFViewerProps) {
               showPageLabels: true,
               sidebarMode: null, // Hide sidebar on mobile by default
             });
-          } else if (mode === 'organize') {
+          } else if (mode === "organize") {
             config.initialViewState = new NutrientViewer.ViewState({
               sidebarMode: NutrientViewer.SidebarMode.THUMBNAILS,
             });
@@ -188,28 +188,25 @@ export default function PDFViewer({ file, mode, onBack }: PDFViewerProps) {
           setInstance(viewerInstance);
 
           // Apply mode-specific settings after load
-          if (mode === 'edit') {
+          if (mode === "edit") {
             // Use content editor mode for editing text
             viewerInstance.setViewState((v: any) =>
               v.set(
-                'interactionMode',
-                NutrientViewer.InteractionMode.CONTENT_EDITOR,
-              ),
+                "interactionMode",
+                NutrientViewer.InteractionMode.CONTENT_EDITOR
+              )
             );
-          } else if (mode === 'sign') {
+          } else if (mode === "sign") {
             viewerInstance.setViewState((v: any) =>
-              v.set(
-                'interactionMode',
-                NutrientViewer.InteractionMode.SIGNATURE,
-              ),
+              v.set("interactionMode", NutrientViewer.InteractionMode.SIGNATURE)
             );
-          } else if (mode === 'annotate') {
+          } else if (mode === "annotate") {
             viewerInstance.setViewState((v: any) =>
-              v.set('interactionMode', NutrientViewer.InteractionMode.INK),
+              v.set("interactionMode", NutrientViewer.InteractionMode.INK)
             );
           }
         } catch (error) {
-          console.error('Error loading Nutrient Viewer:', error);
+          console.error("Error loading Nutrient Viewer:", error);
         }
       };
 
@@ -229,18 +226,18 @@ export default function PDFViewer({ file, mode, onBack }: PDFViewerProps) {
 
     const updateLayoutMode = async () => {
       try {
-        const NutrientViewer = (await import('@nutrient-sdk/viewer')).default;
-        if (orientation === 'landscape') {
+        const NutrientViewer = (await import("@nutrient-sdk/viewer")).default;
+        if (orientation === "landscape") {
           instance.setViewState((v: any) =>
-            v.set('layoutMode', NutrientViewer.LayoutMode.DOUBLE),
+            v.set("layoutMode", NutrientViewer.LayoutMode.DOUBLE)
           );
         } else {
           instance.setViewState((v: any) =>
-            v.set('layoutMode', NutrientViewer.LayoutMode.SINGLE),
+            v.set("layoutMode", NutrientViewer.LayoutMode.SINGLE)
           );
         }
       } catch (error) {
-        console.error('Error updating layout mode:', error);
+        console.error("Error updating layout mode:", error);
       }
     };
 
@@ -315,8 +312,8 @@ export default function PDFViewer({ file, mode, onBack }: PDFViewerProps) {
       <div
         ref={containerRef}
         className={cn(
-          'flex-1 w-full h-full overflow-hidden bg-muted/20',
-          isMobile ? 'pb-0' : '',
+          "flex-1 w-full h-full overflow-hidden bg-muted/20",
+          isMobile ? "pb-0" : ""
         )}
       />
     </div>
@@ -325,5 +322,5 @@ export default function PDFViewer({ file, mode, onBack }: PDFViewerProps) {
 
 // Import cn utility
 function cn(...classes: (string | boolean | undefined)[]) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
