@@ -13,6 +13,11 @@ import {
 } from '@/lib/mobile-utils';
 import { createSession, uploadDocument } from '@/app/actions';
 
+// Ensure this component only runs on client
+if (typeof window === 'undefined') {
+  throw new Error('PDFViewer must only be rendered on the client side');
+}
+
 interface PDFViewerProps {
   file: File;
   mode: ActionMode;

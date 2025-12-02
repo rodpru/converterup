@@ -8,10 +8,17 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { usePrefersReducedMotion } from "@/lib/mobile-utils";
 
-const PDFViewer = dynamic(() => import("@/components/pdf-viewer"), {
-    ssr: false,
-    loading: () => <div className="flex items-center justify-center h-screen font-mono text-muted-foreground">Loading PDF Viewer...</div>,
-});
+const PDFViewer = dynamic(
+    () => import("@/components/pdf-viewer").then((mod) => mod.default),
+    {
+        ssr: false,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen font-mono text-muted-foreground">
+                Loading PDF Viewer...
+            </div>
+        ),
+    }
+);
 
 export default function DashboardPage() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
