@@ -1,0 +1,94 @@
+# Edit PDF text using our JavaScript content editor
+
+Starting with [Nutrient Web SDK 2022.5](https://www.nutrient.io/blog/pspdfkit-web-2022-5-content-editor-and-measurement-tools/), you can edit text directly in PDF documents using the built-in user interface (UI). You can also change text color, font type, and font size.
+
+[Try for free](https://www.nutrient.io/sdk/web/getting-started/)
+
+[Launch demo](https://www.nutrient.io/demo/content-editor)
+
+## License
+
+Content editing is a licensed feature. [Contact Sales](https://www.nutrient.io/contact-sales) to add it to your license.
+
+Text editing is available when using [Web SDK](/guides/web/) with [Document Engine](/guides/document-engine/). For more information, refer to the [operational mode](/guides/web/about/operational-modes/) guide.
+
+## Enabling content editing
+
+To enable content editing, add the `content-editor` toolbar item to your toolbar when you load the Nutrient Web SDK viewer:
+
+```js
+NutrientViewer.load({
+  toolbarItems: [
+    ...NutrientViewer.defaultToolbarItems,
+    { type: "content-editor", dropdownGroup: "editor" },
+  ],
+});
+```
+
+Alternatively, to enable content editing after loading a document, set the [interaction mode](https://www.nutrient.io/guides/web/customizing-the-interface/controlling-the-toolbar-via-api/#interaction-mode) to [`NutrientViewer.InteractionMode.CONTENT_EDITOR`](https://www.nutrient.io/api/web/NutrientViewer.html#.InteractionMode):
+
+```js
+instance.setViewState((v) =>
+  v.set("interactionMode", NutrientViewer.InteractionMode.CONTENT_EDITOR),
+);
+```
+
+## Editing text in a PDF using the built-in UI
+
+To edit text in a PDF using the built-in UI, follow the steps below:
+
+1. Click **Content Editor** in the toolbar.
+
+2. Click within a text box on the page.
+
+3. Add or delete content in the text box.
+
+4. Change the text color, font type, or font size in the toolbar.
+
+5. Click **Save Changes** in the main toolbar to apply the changes.
+
+## Adding a new paragraph to a PDF using the built-in UI
+
+To add a new paragraph to a PDF using the built-in UI, follow the steps below:
+
+1. Click **Content Editor** in the toolbar.
+
+2. Click the **Add text box** icon in the toolbar.
+
+3. Click the place on the page where you want to add the new paragraph.
+
+4. Start typing to add text to the new paragraph.
+
+## Deleting a paragraph from a PDF using the built-in UI
+
+To delete a paragraph from a PDF using the built-in UI, follow the steps below:
+
+1. Click **Content Editor** in the toolbar.
+
+2. Click within a text box on the page.
+
+3. Click the **Delete paragraph** icon in the toolbar. Alternatively, press **Delete** or **Backspace**.
+
+## Supported text editing functionalities
+
+The following text editing functionalities are supported:
+
+- Adding new text and changing existing text using the colors and font types supported by Nutrient Web SDK.
+
+- Adding new text and changing existing text using any font size.
+
+- Adding bold and italic text and changing existing text to bold and italic.
+
+- Selecting text with the mouse or with the key combination Control-A (Windows) or Command-A (macOS).
+
+- Changing the size of a text box.
+
+- Changing the location of a text box.
+
+## Limitations
+
+Currently, the content editor only supports left-to-right (LTR) text.
+
+## Editing text in a PDF programmatically
+
+To edit PDF text content programmatically, refer to our guide on the [PDF content editing API for Web](https://www.nutrient.io/guides/web/editor/content-editor-api/).
