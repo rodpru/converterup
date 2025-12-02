@@ -9,9 +9,6 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: "50mb",
     },
-    // Turbopack ainda é experimental para produção
-    // Descomente a linha abaixo para usar Turbopack em dev: `next dev --turbo`
-    // turbo: {},
   },
 
   // Transpila a biblioteca @nutrient-sdk/viewer (funciona com Webpack E Turbopack)
@@ -21,25 +18,9 @@ const nextConfig: NextConfig = {
     removeConsole: false,
   },
 
-  // Webpack config (usado em produção na Vercel)
-  webpack: (config, { isServer }) => {
-    // Não processa @nutrient-sdk/viewer no servidor (é client-only)
-    if (isServer) {
-      config.externals = [...(config.externals || []), "@nutrient-sdk/viewer"];
-    }
-
-    // Resolve fallbacks para módulos Node.js não disponíveis no browser
-    config.resolve = {
-      ...config.resolve,
-      fallback: {
-        ...config.resolve?.fallback,
-        fs: false,
-        path: false,
-      },
-    };
-
-    return config;
-  },
+  // Turbopack config (padrão no Next.js 16)
+  // Configuração vazia aceita o uso do Turbopack com as configurações padrão
+  turbopack: {},
 };
 
 export default nextConfig;
