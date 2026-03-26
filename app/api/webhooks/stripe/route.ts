@@ -1,4 +1,4 @@
-import { getStripe } from "@/lib/stripe";
+import { getStripe, STRIPE_WEBHOOK_SECRET } from "@/lib/stripe";
 import { activateSubscription, cancelSubscription } from "@/lib/credits";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
+      STRIPE_WEBHOOK_SECRET,
     );
   } catch {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
