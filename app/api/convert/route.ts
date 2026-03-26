@@ -30,21 +30,8 @@ function buildConvertTaskParams(
     output_format: outputFormat,
   };
 
-  if (outputFormat === "webm") {
-    params.video_codec = "libvpx";
-    params.audio_codec = "libvorbis";
-  } else if (outputFormat === "mp4") {
-    params.video_codec = "x264";
-    params.audio_codec = "aac";
-  } else if (outputFormat === "mkv") {
-    params.video_codec = "x264";
-    params.audio_codec = "aac";
-  }
-
-  if (quality !== undefined) {
-    const crf = Math.round(51 - (quality / 100) * 51);
-    params.crf = crf;
-  }
+  // Let CloudConvert choose optimal codecs per format
+  // Only set quality if specified
 
   return params;
 }
