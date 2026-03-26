@@ -23,6 +23,9 @@ export interface ConversionResult {
   duration?: number;
 }
 
+const VIDEO_FORMATS = ["mp4", "webm", "mkv", "avi", "mov"];
+const SERVER_THRESHOLD = 20 * 1024 * 1024; // 20MB
+
 function getInputExtension(file: File): string {
   const parts = file.name.split(".");
   return parts.length > 1 ? parts[parts.length - 1].toLowerCase() : "";
@@ -144,21 +147,80 @@ function buildAudioExtractionArgs(
   return args;
 }
 
-const VIDEO_MAX_SIZE_ST = 20 * 1024 * 1024; // 20MB limit for single-thread
+async function convertViaServer(
+  options: ConversionOptions,
+  onProgress?: (progress: number) => void,
+): Promise<ConversionResult> {
+  const startTime = Date.now();
+
+  const formData = new FormData();
+  formData.append("file", options.inputFile);
+  formData.append("outputFormat", options.outputFormat);
+  if (options.quality !== undefined) {
+    formData.append("quality", options.quality.toString());
+  }
+
+  // Simulate progress since CloudConvert doesn't stream it back
+  let progressInterval: ReturnType<typeof setInterval> | undefined;
+  let currentProgress = 0;
+  if (onProgress) {
+    onProgress(0);
+    progressInterval = setInterval(() => {
+      // Ease toward 90% — never reach 100% until actually done
+      currentProgress += (90 - currentProgress) * 0.05;
+      onProgress(Math.round(currentProgress));
+    }, 500);
+  }
+
+  try {
+    const response = await fetch("/api/convert", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.error || "Server conversion failed");
+    }
+
+    const { url } = await response.json();
+
+    // Download the converted file
+    const fileResponse = await fetch(url);
+    if (!fileResponse.ok) {
+      throw new Error("Failed to download converted file");
+    }
+
+    const blob = await fileResponse.blob();
+    const baseName = options.inputFile.name.replace(/\.[^.]+$/, "");
+
+    onProgress?.(100);
+
+    return {
+      blob,
+      filename: `${baseName}.${options.outputFormat}`,
+      size: blob.size,
+      duration: Date.now() - startTime,
+    };
+  } finally {
+    if (progressInterval) {
+      clearInterval(progressInterval);
+    }
+  }
+}
 
 export async function convertMedia(
   options: ConversionOptions,
   onProgress?: (progress: number) => void,
 ): Promise<ConversionResult> {
-  const isVideo = ["mp4", "webm", "mkv", "avi", "mov"].includes(
-    options.outputFormat.toLowerCase(),
+  const isVideo = VIDEO_FORMATS.includes(options.outputFormat.toLowerCase());
+  const isInputVideo = VIDEO_FORMATS.includes(
+    getInputExtension(options.inputFile),
   );
-  const isSingleThread = !globalThis.crossOriginIsolated;
 
-  if (isVideo && isSingleThread && options.inputFile.size > VIDEO_MAX_SIZE_ST) {
-    throw new Error(
-      `Video files over 20MB are not yet supported. We're working on it — try a smaller file for now.`,
-    );
+  // Route large videos to server-side CloudConvert
+  if ((isVideo || isInputVideo) && options.inputFile.size >= SERVER_THRESHOLD) {
+    return convertViaServer(options, onProgress);
   }
 
   const startTime = Date.now();

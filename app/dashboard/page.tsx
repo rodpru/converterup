@@ -33,19 +33,6 @@ export default function DashboardPage() {
   > | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Register service worker for crossOriginIsolated (SharedArrayBuffer/FFmpeg multi-thread)
-  useEffect(() => {
-    if ("serviceWorker" in navigator && !crossOriginIsolated) {
-      navigator.serviceWorker
-        .register("/cross-origin-worker.js")
-        .then((reg) => {
-          if (reg.active && !navigator.serviceWorker.controller) {
-            window.location.reload();
-          }
-        });
-    }
-  }, []);
-
   // Sync subscription status when returning from Stripe checkout
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
