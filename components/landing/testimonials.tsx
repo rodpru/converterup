@@ -13,7 +13,7 @@ const testimonials = [
   },
   {
     quote:
-      "I convert dozens of images daily for my blog. Recast saves me time and the quality is consistently excellent.",
+      "I convert dozens of images daily for my blog. ConverterUp saves me time and the quality is consistently excellent.",
     name: "Marcus Rivera",
     role: "Content Creator",
   },

@@ -17,7 +17,7 @@ export function ConversionProgress({ progress, onCancel }: ConversionProgressPro
       className="w-full max-w-2xl mx-auto text-center"
     >
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-8">
-        Recasting<span className="animate-pulse">...</span>
+        Converting<span className="animate-pulse">...</span>
       </h2>
 
       <div className="mb-4">

@@ -76,7 +76,7 @@ export function LiveDemo() {
             See it <span className="gradient-text">in action.</span>
           </h2>
           <p className="text-lg text-[#71717A] font-[Inter] max-w-lg mx-auto">
-            Watch how Recast converts your files in real time.
+            Watch how ConverterUp converts your files in real time.
           </p>
         </motion.div>
 

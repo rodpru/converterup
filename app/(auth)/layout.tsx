@@ -12,7 +12,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <Link href="/" className="flex items-center gap-2.5 mb-10 relative z-10">
         <Logo className="w-7 h-7" />
         <span className="font-[Syne] font-extrabold text-lg tracking-tight uppercase text-[#EDEDEF]">
-          Recast
+          ConverterUp
         </span>
       </Link>
       <div className="relative z-10 w-full">{children}</div>

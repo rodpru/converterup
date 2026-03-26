@@ -29,7 +29,7 @@ export function AdminSidebar() {
         <div className="p-6 flex items-center gap-2.5">
           <Logo className="w-6 h-6" />
           <span className="font-[Syne] font-extrabold text-sm uppercase tracking-tight">
-            Recast
+            ConverterUp
           </span>
           <span className="ml-auto px-2 py-0.5 rounded-full bg-[#2DD4BF]/10 text-[#2DD4BF] font-mono text-[10px] uppercase tracking-wider">
             Admin

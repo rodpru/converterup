@@ -15,34 +15,34 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Recast — Convert Anything. Upload Nothing.",
-    template: "%s | Recast",
+    default: "ConverterUp — Convert Anything. Upload Nothing.",
+    template: "%s | ConverterUp",
   },
   description:
     "Convert images and videos instantly, 100% in your browser. No uploads, no waiting, no limits. Powered by FFmpeg.wasm.",
-  metadataBase: new URL("https://recast.media"),
+  metadataBase: new URL("https://converterup.com"),
 
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Recast",
+    title: "ConverterUp",
   },
 
   manifest: "/manifest.json",
 
   openGraph: {
-    title: "Recast — Convert Anything. Upload Nothing.",
+    title: "ConverterUp — Convert Anything. Upload Nothing.",
     description:
       "Convert images and videos instantly, 100% in your browser. No uploads, no servers, no compromises.",
-    url: "https://recast.media",
-    siteName: "Recast",
+    url: "https://converterup.com",
+    siteName: "ConverterUp",
     locale: "en_US",
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Recast — Convert Anything. Upload Nothing.",
+    title: "ConverterUp — Convert Anything. Upload Nothing.",
     description:
       "Convert images and videos instantly, 100% in your browser. No uploads, no servers, no compromises.",
   },

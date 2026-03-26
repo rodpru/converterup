@@ -34,12 +34,12 @@ const faqs = [
   {
     question: "Can I use it on mobile?",
     answer:
-      "Yes! Recast is fully responsive and optimized for mobile devices. All conversion features work on smartphones and tablets, though very large files may perform better on desktop.",
+      "Yes! ConverterUp is fully responsive and optimized for mobile devices. All conversion features work on smartphones and tablets, though very large files may perform better on desktop.",
   },
   {
     question: "Do I need to create an account?",
     answer:
-      "You can use Recast without an account for basic conversions. Creating a free account unlocks daily credits tracking and the ability to purchase additional credits.",
+      "You can use ConverterUp without an account for basic conversions. Creating a free account unlocks daily credits tracking and the ability to purchase additional credits.",
   },
 ];
 
@@ -59,7 +59,7 @@ export function FAQ() {
             <span className="gradient-text">answers.</span>
           </h2>
           <p className="text-lg text-[#71717A] font-[Inter]">
-            Everything you need to know about Recast.
+            Everything you need to know about ConverterUp.
           </p>
         </motion.div>
 

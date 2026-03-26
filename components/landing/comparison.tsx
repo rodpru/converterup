@@ -6,14 +6,14 @@ import { Check, X } from "lucide-react";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const features = [
-  { name: "Client-side processing", recast: true, cloudconvert: false, zamzar: false, handbrake: true },
-  { name: "No file upload", recast: true, cloudconvert: false, zamzar: false, handbrake: true },
-  { name: "Free tier", recast: true, cloudconvert: true, zamzar: true, handbrake: true },
-  { name: "Video support", recast: true, cloudconvert: true, zamzar: true, handbrake: true },
-  { name: "No ads", recast: true, cloudconvert: true, zamzar: false, handbrake: true },
-  { name: "100% private", recast: true, cloudconvert: false, zamzar: false, handbrake: true },
-  { name: "No install required", recast: true, cloudconvert: true, zamzar: true, handbrake: false },
-  { name: "Modern UI", recast: true, cloudconvert: true, zamzar: false, handbrake: false },
+  { name: "Client-side processing", converterup: true, cloudconvert: false, zamzar: false, handbrake: true },
+  { name: "No file upload", converterup: true, cloudconvert: false, zamzar: false, handbrake: true },
+  { name: "Free tier", converterup: true, cloudconvert: true, zamzar: true, handbrake: true },
+  { name: "Video support", converterup: true, cloudconvert: true, zamzar: true, handbrake: true },
+  { name: "No ads", converterup: true, cloudconvert: true, zamzar: false, handbrake: true },
+  { name: "100% private", converterup: true, cloudconvert: false, zamzar: false, handbrake: true },
+  { name: "No install required", converterup: true, cloudconvert: true, zamzar: true, handbrake: false },
+  { name: "Modern UI", converterup: true, cloudconvert: true, zamzar: false, handbrake: false },
 ];
 
 function BoolCell({ value, highlighted }: { value: boolean; highlighted?: boolean }) {
@@ -36,7 +36,7 @@ export function Comparison() {
           className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Why <span className="gradient-text">Recast?</span>
+            Why <span className="gradient-text">ConverterUp?</span>
           </h2>
           <p className="text-lg text-[#71717A] font-[Inter] max-w-lg mx-auto">
             The only converter that combines privacy, speed, and modern design.
@@ -57,7 +57,7 @@ export function Comparison() {
                   Feature
                 </th>
                 <th className="py-4 px-3 font-mono uppercase text-[11px] tracking-wider text-[#EDEDEF] bg-[#2DD4BF]/5">
-                  Recast
+                  ConverterUp
                 </th>
                 <th className="py-4 px-3 font-mono uppercase text-[11px] tracking-wider text-[#71717A]">
                   CloudConvert
@@ -84,7 +84,7 @@ export function Comparison() {
                     {feature.name}
                   </td>
                   <td className="py-3.5 px-3 text-center bg-[#2DD4BF]/5">
-                    <BoolCell value={feature.recast} highlighted />
+                    <BoolCell value={feature.converterup} highlighted />
                   </td>
                   <td className="py-3.5 px-3 text-center">
                     <BoolCell value={feature.cloudconvert} />

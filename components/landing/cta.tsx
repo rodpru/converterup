@@ -46,7 +46,7 @@ export function CTA() {
               transition={{ duration: 0.7, delay: 0.1, ease }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-6 sm:mb-8 leading-[0.95]"
             >
-              Ready to recast{" "}
+              Ready to convert{" "}
               <br className="hidden sm:block" />
               <span className="gradient-text">your media?</span>
             </motion.h2>
@@ -57,7 +57,7 @@ export function CTA() {
               transition={{ duration: 0.6, delay: 0.2, ease }}
               className="text-base sm:text-lg md:text-xl text-[#71717A] font-[Inter] max-w-xl mx-auto mb-8 sm:mb-10 md:mb-12 leading-relaxed px-2"
             >
-              Join creators who trust Recast for their media conversions.
+              Join creators who trust ConverterUp for their media conversions.
               Private, fast, no compromises.
             </motion.p>
             <motion.div

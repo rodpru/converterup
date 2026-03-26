@@ -9,7 +9,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-2.5 group">
           <Logo className="w-7 h-7" />
           <span className="font-[Syne] font-extrabold text-lg tracking-tight uppercase text-foreground">
-            Recast
+            ConverterUp
           </span>
         </Link>
 

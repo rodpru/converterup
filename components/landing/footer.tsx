@@ -7,7 +7,7 @@ import { Logo } from "@/components/logo";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const marqueeText = "RECAST \u2014 Transform Your Media";
+const marqueeText = "CONVERTERUP \u2014 Transform Your Media";
 const marqueeItems = Array.from({ length: 12 }, () => marqueeText);
 
 export function Footer() {
@@ -43,7 +43,7 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <Logo className="w-8 h-8" />
               <span className="text-xl font-[Syne] font-bold tracking-tight text-[#EDEDEF]">
-                Recast
+                ConverterUp
               </span>
             </div>
             <p className="text-[#71717A] font-[Inter] max-w-xs text-sm leading-relaxed">
@@ -119,7 +119,7 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-[#2A2535]">
           <p className="text-sm text-[#71717A]/50 mb-4 md:mb-0 font-[Inter]">
-            &copy; {new Date().getFullYear()} Recast. All rights reserved.
+            &copy; {new Date().getFullYear()} ConverterUp. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link
