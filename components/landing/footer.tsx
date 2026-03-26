@@ -84,12 +84,52 @@ export function Footer() {
                   How It Works
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-mono text-[10px] uppercase tracking-wider text-[#71717A]/50 mb-4">
+              Free Tools
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/tools/image-compressor"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  Image Compressor
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tools/image-resizer"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  Image Resizer
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tools/video-to-gif"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  Video to GIF
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tools/qr-code-generator"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  QR Code Generator
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/tools/youtube-thumbnail-downloader"
                   className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
                 >
-                  YouTube Thumbnail Downloader
+                  YouTube Thumbnails
                 </Link>
               </li>
             </ul>
