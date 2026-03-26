@@ -1,111 +1,179 @@
 "use client";
 
-import { FileUploader } from "@/components/file-uploader";
-import { ActionSelector, type ActionMode } from "@/components/action-selector";
+import { useState, useCallback } from "react";
 import { Navbar } from "@/components/landing/navbar";
+import { FileUploader } from "@/components/file-uploader";
+import { ConversionOptions } from "@/components/conversion-options";
+import { ConversionProgress } from "@/components/conversion-progress";
+import { ConversionResult } from "@/components/conversion-result";
+import { ConversionError } from "@/components/conversion-error";
+import { CreditBadge } from "@/components/credit-badge";
+import { UpgradeModal } from "@/components/upgrade-modal";
+import { convertMedia, type ConversionResult as ConversionResultType } from "@/lib/conversion";
+import { getFileCategory } from "@/lib/media-utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import dynamic from "next/dynamic";
 import { usePrefersReducedMotion } from "@/lib/mobile-utils";
 
-const PDFViewer = dynamic(
-    () => import("@/components/pdf-viewer").then((mod) => mod.default),
-    {
-        ssr: false,
-        loading: () => (
-            <div className="flex items-center justify-center h-screen font-mono text-muted-foreground">
-                Loading PDF Viewer...
-            </div>
-        ),
-    }
-);
+type DashboardStep = "upload" | "configure" | "converting" | "result" | "error";
 
 export default function DashboardPage() {
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [mode, setMode] = useState<ActionMode | null>(null);
-    const prefersReducedMotion = usePrefersReducedMotion();
+  const [step, setStep] = useState<DashboardStep>("upload");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [result, setResult] = useState<ConversionResultType | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showUpgrade, setShowUpgrade] = useState(false);
+  const [conversionOptions, setConversionOptions] = useState<Record<string, unknown> | null>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-    const handleFileSelect = (file: File) => {
-        setSelectedFile(file);
-    };
+  const fadeInUp = prefersReducedMotion
+    ? {}
+    : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -20 } };
 
-    const handleModeSelect = (selectedMode: ActionMode) => {
-        setMode(selectedMode);
-    };
+  const handleFileSelect = (file: File) => {
+    setSelectedFile(file);
+    setStep("configure");
+  };
 
-    const handleBack = () => {
-        if (mode) {
-            setMode(null);
-        } else {
-            setSelectedFile(null);
+  const handleConvert = useCallback(
+    async (options: {
+      outputFormat: string;
+      quality: number;
+      width?: number;
+      height?: number;
+      maintainAspect: boolean;
+      extractAudio?: boolean;
+      audioFormat?: "mp3" | "aac" | "wav" | "ogg";
+    }) => {
+      if (!selectedFile) return;
+
+      setConversionOptions(options as unknown as Record<string, unknown>);
+      setStep("converting");
+      setProgress(0);
+
+      try {
+        // Deduct credit
+        const category = getFileCategory(selectedFile);
+        const creditRes = await fetch("/api/credits/deduct", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ type: category }),
+        });
+
+        if (!creditRes.ok) {
+          const data = await creditRes.json();
+          if (data.error === "insufficient_credits") {
+            setErrorMessage("No credits remaining. Upgrade to unlimited for $5/mo.");
+            setStep("error");
+            return;
+          }
         }
-    };
 
-    // Animation variants with reduced motion support
-    const fadeInUp = prefersReducedMotion
-        ? {}
-        : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -20 } };
+        const conversionResult = await convertMedia(
+          {
+            inputFile: selectedFile,
+            outputFormat: options.outputFormat,
+            quality: options.quality,
+            width: options.width,
+            height: options.height,
+            maintainAspect: options.maintainAspect,
+            extractAudio: options.extractAudio,
+            audioFormat: options.audioFormat,
+          },
+          setProgress,
+        );
 
-    const fadeIn = prefersReducedMotion
-        ? {}
-        : { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } };
+        setResult(conversionResult);
+        setStep("result");
+      } catch (err) {
+        setErrorMessage(
+          err instanceof Error ? err.message : "An unexpected error occurred",
+        );
+        setStep("error");
+      }
+    },
+    [selectedFile],
+  );
 
-    return (
-        <main className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary">
-            <Navbar />
+  const handleRetry = () => {
+    if (conversionOptions && selectedFile) {
+      handleConvert(conversionOptions as Parameters<typeof handleConvert>[0]);
+    }
+  };
 
-            <div className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16">
-                <AnimatePresence mode="wait">
-                    {!selectedFile ? (
-                        <div className="max-w-4xl mx-auto">
-                            <motion.div
-                                key="upload"
-                                {...fadeInUp}
-                                transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
-                                className="text-center mb-8 sm:mb-12"
-                            >
-                                <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-foreground mb-4 sm:mb-6 px-4">
-                                    Upload your Document
-                                </h1>
-                                <p className="text-lg sm:text-xl text-muted-foreground font-light max-w-xl mx-auto px-4">
-                                    Get started by uploading a PDF file to edit, split, or merge.
-                                </p>
-                            </motion.div>
+  const handleReset = () => {
+    setSelectedFile(null);
+    setResult(null);
+    setProgress(0);
+    setErrorMessage("");
+    setConversionOptions(null);
+    setStep("upload");
+  };
 
-                            <motion.div
-                                {...fadeInUp}
-                                transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.1 }}
-                            >
-                                <FileUploader onFileSelect={handleFileSelect} />
-                            </motion.div>
-                        </div>
-                    ) : !mode ? (
-                        <motion.div
-                            key="action-selector"
-                            {...fadeIn}
-                        >
-                            <div className="mb-6 sm:mb-8 container max-w-5xl mx-auto px-4">
-                                <button
-                                    onClick={handleBack}
-                                    className="text-xs sm:text-sm font-mono uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-2 min-h-[44px]"
-                                    aria-label="Change file"
-                                >
-                                    <span>←</span> Change File
-                                </button>
-                            </div>
-                            <ActionSelector onSelect={handleModeSelect} />
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                            key="viewer"
-                            {...fadeIn}
-                            className="fixed inset-0 z-50 bg-background"
-                        >
-                            <PDFViewer file={selectedFile} mode={mode} onBack={handleBack} />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </main>
-    );
+  return (
+    <main className="min-h-screen bg-[#0C0A12] text-[#EDEDEF] selection:bg-[#2DD4BF]/20 selection:text-[#2DD4BF]">
+      <Navbar />
+
+      <div className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16">
+        {/* Credit Badge */}
+        <div className="flex justify-end mb-6">
+          <CreditBadge onUpgradeClick={() => setShowUpgrade(true)} />
+        </div>
+
+        <AnimatePresence mode="wait">
+          {step === "upload" && (
+            <motion.div key="upload" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+              <div className="text-center mb-8 sm:mb-12">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4 sm:mb-6">
+                  Upload your media
+                </h1>
+                <p className="text-lg sm:text-xl text-[#71717A] font-light max-w-xl mx-auto">
+                  Drop an image or video to get started.
+                </p>
+              </div>
+              <FileUploader onFileSelect={handleFileSelect} />
+            </motion.div>
+          )}
+
+          {step === "configure" && selectedFile && (
+            <motion.div key="configure" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+              <ConversionOptions
+                file={selectedFile}
+                onConvert={handleConvert}
+                onBack={handleReset}
+              />
+            </motion.div>
+          )}
+
+          {step === "converting" && (
+            <motion.div key="converting" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+              <ConversionProgress progress={progress} onCancel={handleReset} />
+            </motion.div>
+          )}
+
+          {step === "result" && selectedFile && result && (
+            <motion.div key="result" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+              <ConversionResult
+                originalFile={selectedFile}
+                result={result}
+                onConvertAnother={handleReset}
+              />
+            </motion.div>
+          )}
+
+          {step === "error" && (
+            <motion.div key="error" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+              <ConversionError
+                message={errorMessage}
+                onRetry={handleRetry}
+                onBack={handleReset}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <UpgradeModal open={showUpgrade} onClose={() => setShowUpgrade(false)} />
+    </main>
+  );
 }

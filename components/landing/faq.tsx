@@ -1,59 +1,99 @@
+"use client";
+
+import { motion } from "framer-motion";
 import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
 } from "@/components/ui/accordion";
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 const faqs = [
-    {
-        question: "Is PDF Pocket Knife free to use?",
-        answer:
-            "Yes, PDF Pocket Knife offers a free tier that allows you to perform basic PDF operations. We also have premium plans for advanced features and higher usage limits.",
-    },
-    {
-        question: "Is my document data safe?",
-        answer:
-            "Absolutely. All processing happens locally in your browser for most operations. When server-side processing is required, we use secure, encrypted connections and do not store your files longer than necessary for the operation.",
-    },
-    {
-        question: "Can I use it on my mobile device?",
-        answer:
-            "Yes! PDF Pocket Knife is fully responsive and works great on smartphones and tablets, allowing you to manage your PDFs on the go.",
-    },
-    {
-        question: "What types of PDF edits can I make?",
-        answer:
-            "You can merge, split, compress, convert, sign, and annotate PDFs. We are constantly adding new tools to help you manage your documents better.",
-    },
+  {
+    question: "Is my data safe?",
+    answer:
+      "Absolutely. All file processing happens entirely in your browser using WebAssembly (FFmpeg.wasm). Your files are never uploaded to any server. They stay on your device at all times.",
+  },
+  {
+    question: "What formats are supported?",
+    answer:
+      "Images: PNG, JPG, WebP, AVIF, GIF, TIFF, BMP. Videos: MP4, WebM, MKV, AVI, MOV. Audio extraction: MP3, AAC, WAV, OGG. We're constantly adding more formats.",
+  },
+  {
+    question: "How do credits work?",
+    answer:
+      "Free users get 5 image conversions and 1 video conversion per day, resetting at midnight. If you need more, you can purchase credit packs (one-time, no subscription). Paid credits never expire.",
+  },
+  {
+    question: "Is there a file size limit?",
+    answer:
+      "Since processing happens in your browser, the limit depends on your device's memory. Most modern devices handle files up to 500MB for images and 1-2GB for videos without issues.",
+  },
+  {
+    question: "Can I use it on mobile?",
+    answer:
+      "Yes! Recast is fully responsive and optimized for mobile devices. All conversion features work on smartphones and tablets, though very large files may perform better on desktop.",
+  },
+  {
+    question: "Do I need to create an account?",
+    answer:
+      "You can use Recast without an account for basic conversions. Creating a free account unlocks daily credits tracking and the ability to purchase additional credits.",
+  },
 ];
 
 export function FAQ() {
-    return (
-        <section className="py-24 bg-white dark:bg-black">
-            <div className="container px-4 md:px-6 mx-auto max-w-3xl">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-neutral-900 dark:text-white">
-                        Frequently Asked Questions
-                    </h2>
-                    <p className="mt-4 text-lg text-neutral-500 dark:text-neutral-400">
-                        Everything you need to know about PDF Pocket Knife.
-                    </p>
-                </div>
+  return (
+    <section className="py-16 sm:py-24 md:py-32 bg-[#0C0A12] border-t border-[#2A2535]/50">
+      <div className="container px-4 sm:px-6 mx-auto max-w-3xl">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
+            Questions &{" "}
+            <span className="gradient-text">answers.</span>
+          </h2>
+          <p className="text-lg text-[#71717A] font-[Inter]">
+            Everything you need to know about Recast.
+          </p>
+        </motion.div>
 
-                <Accordion type="single" collapsible className="w-full">
-                    {faqs.map((faq, index) => (
-                        <AccordionItem key={index} value={`item-${index}`}>
-                            <AccordionTrigger className="text-left text-lg font-medium text-neutral-900 dark:text-white hover:no-underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                                {faq.question}
-                            </AccordionTrigger>
-                            <AccordionContent className="text-neutral-500 dark:text-neutral-400 text-base leading-relaxed">
-                                {faq.answer}
-                            </AccordionContent>
-                        </AccordionItem>
-                    ))}
-                </Accordion>
-            </div>
-        </section>
-    );
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15, ease }}
+        >
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={faq.question}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.06, ease }}
+              >
+                <AccordionItem
+                  value={`item-${index}`}
+                  className="border-[#2A2535]/50"
+                >
+                  <AccordionTrigger className="text-left text-base sm:text-lg font-[Syne] font-semibold text-[#EDEDEF] hover:no-underline hover:text-[#2DD4BF] transition-colors duration-200 py-5">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-[#71717A] font-[Inter] text-sm sm:text-base leading-relaxed pb-5">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
+            ))}
+          </Accordion>
+        </motion.div>
+      </div>
+    </section>
+  );
 }

@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
   poweredByHeader: false,
 
@@ -11,16 +10,31 @@ const nextConfig: NextConfig = {
     },
   },
 
-  // Transpila a biblioteca @nutrient-sdk/viewer (funciona com Webpack E Turbopack)
-  transpilePackages: ["@nutrient-sdk/viewer"],
-
   compiler: {
     removeConsole: false,
   },
 
-  // Turbopack config (padrão no Next.js 16)
-  // Configuração vazia aceita o uso do Turbopack com as configurações padrão
   turbopack: {},
+
+  async headers() {
+    return [
+      {
+        // SharedArrayBuffer headers required for FFmpeg.wasm (multi-threaded)
+        // Applied only to dashboard to avoid breaking auth/analytics
+        source: "/dashboard/:path*",
+        headers: [
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
+          },
+          {
+            key: "Cross-Origin-Embedder-Policy",
+            value: "require-corp",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

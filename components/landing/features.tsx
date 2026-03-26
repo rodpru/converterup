@@ -1,88 +1,126 @@
-import {
-    Merge,
-    Scissors,
-    Minimize2,
-    FileType,
-    Shield,
-    Zap
-} from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
+"use client";
+
+import { ImageIcon, Video, Minimize2, Crop, Music, Lock } from "lucide-react";
+import { motion } from "framer-motion";
+
+const ease = [0.16, 1, 0.3, 1] as const;
 
 const features = [
-    {
-        icon: Merge,
-        title: "Merge PDFs",
-        description: "Combine multiple PDF files into a single document in seconds."
-    },
-    {
-        icon: Scissors,
-        title: "Split PDFs",
-        description: "Extract pages or split large documents into smaller files."
-    },
-    {
-        icon: Minimize2,
-        title: "Compress PDFs",
-        description: "Reduce file size while maintaining high quality for easy sharing."
-    },
-    {
-        icon: FileType,
-        title: "Convert Format",
-        description: "Convert PDFs to Word, Excel, JPG, and more with high accuracy."
-    },
-    {
-        icon: Shield,
-        title: "Secure Processing",
-        description: "Your files are processed securely and deleted automatically."
-    },
-    {
-        icon: Zap,
-        title: "Lightning Fast",
-        description: "Powered by advanced algorithms for instant results."
-    }
+  {
+    icon: ImageIcon,
+    title: "Image Conversion",
+    description: "PNG, JPG, WebP, AVIF, GIF, TIFF, BMP. Convert between any image format instantly in your browser.",
+    span: "sm:col-span-2 sm:row-span-2",
+    large: true,
+  },
+  {
+    icon: Video,
+    title: "Video Conversion",
+    description: "MP4, WebM, MKV, AVI, MOV. Transform formats client-side.",
+    span: "",
+    large: false,
+  },
+  {
+    icon: Minimize2,
+    title: "Smart Compression",
+    description: "Reduce file sizes up to 80% with quality preservation.",
+    span: "",
+    large: false,
+  },
+  {
+    icon: Crop,
+    title: "Resize & Crop",
+    description: "Precise dimension control. Lock or override aspect ratios.",
+    span: "",
+    large: false,
+  },
+  {
+    icon: Music,
+    title: "Audio Extraction",
+    description: "Pull audio from any video. MP3, AAC, WAV, OGG.",
+    span: "",
+    large: false,
+  },
+  {
+    icon: Lock,
+    title: "100% Private",
+    description: "WebAssembly processing. Files never leave your device. No server, no tracking.",
+    span: "sm:col-span-2",
+    large: false,
+  },
 ];
 
+const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.07 } } };
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
+};
+
 export function Features() {
-    return (
-        <section id="features" className="py-16 sm:py-24 md:py-32 bg-background border-t border-foreground">
-            <div className="container mx-auto px-4 sm:px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 mb-12 sm:mb-16 md:mb-24">
-                    <div className="lg:col-span-5">
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-foreground leading-[0.9] px-2 sm:px-0">
-                            Essential <br />
-                            <span className="italic text-primary">Utilities.</span>
-                        </h2>
-                    </div>
-                    <div className="lg:col-span-7 flex items-end">
-                        <p className="text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed px-2 sm:px-0">
-                            A complete set of tools designed to handle every aspect of your digital documentation workflow.
-                        </p>
-                    </div>
-                </div>
+  return (
+    <section id="features" className="py-20 sm:py-28 md:py-36 border-t border-[#2A2535]/50">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 mb-14 sm:mb-20">
+          <div className="lg:col-span-5">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease }}
+              className="font-[Syne] font-bold text-foreground leading-[1.05]"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+            >
+              Powerful
+              <br />
+              <span className="gradient-text">conversions.</span>
+            </motion.h2>
+          </div>
+          <div className="lg:col-span-7 flex items-end">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1, ease }}
+              className="text-base sm:text-lg text-muted-foreground max-w-lg leading-relaxed"
+            >
+              A complete media toolkit powered by WebAssembly. No servers, no uploads, no compromises.
+            </motion.p>
+          </div>
+        </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-foreground">
-                    {features.map((feature, index) => (
-                        <FadeIn
-                            key={index}
-                            delay={index * 0.1}
-                            className="group relative p-6 sm:p-8 md:p-10 border-r border-b border-foreground hover:bg-secondary/30 transition-colors duration-500 min-h-[200px] sm:min-h-[220px]"
-                        >
-                            <div className="flex justify-between items-start mb-8 sm:mb-12">
-                                <span className="font-mono text-xs sm:text-sm tracking-widest opacity-40">
-                                    0{index + 1}
-                                </span>
-                                <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 stroke-1 text-primary" />
-                            </div>
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-[#2A2535]/50 rounded-2xl overflow-hidden border border-[#2A2535]"
+        >
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              variants={item}
+              className={`group relative bg-[#0C0A12] ${f.large ? "p-8 sm:p-10" : "p-6 sm:p-8"} hover:bg-card transition-all duration-500 ${f.span}`}
+            >
+              <div className={`flex justify-between items-start ${f.large ? "mb-12 sm:mb-16" : "mb-8 sm:mb-10"}`}>
+                <span className="font-mono text-[11px] tracking-widest text-muted-foreground/30">
+                  0{i + 1}
+                </span>
+                <f.icon className={`${f.large ? "w-6 h-6" : "w-5 h-5"} stroke-[1.5] text-primary/60`} />
+              </div>
 
-                            <h3 className="text-xl sm:text-2xl font-serif text-foreground mb-3 sm:mb-4 group-hover:translate-x-2 transition-transform duration-300">
-                                {feature.title}
-                            </h3>
-                            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                                {feature.description}
-                            </p>
-                        </FadeIn>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+              <h3 className={`font-[Syne] font-bold text-foreground mb-3 group-hover:translate-x-1 transition-transform duration-300 ${f.large ? "text-xl sm:text-2xl" : "text-lg"}`}>
+                {f.title}
+              </h3>
+              <p className={`text-muted-foreground leading-relaxed ${f.large ? "text-sm sm:text-base" : "text-sm"}`}>
+                {f.description}
+              </p>
+
+              {/* Hover accent line */}
+              <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary via-[#7C3AED] to-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
 }
