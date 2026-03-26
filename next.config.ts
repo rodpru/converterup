@@ -15,21 +15,6 @@ const nextConfig: NextConfig = {
   },
 
   turbopack: {},
-
-  async headers() {
-    // Only apply COEP/COOP in production — dev turbopack is incompatible
-    if (process.env.NODE_ENV !== "production") return [];
-
-    return [
-      {
-        source: "/dashboard",
-        headers: [
-          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
-          { key: "Cross-Origin-Embedder-Policy", value: "credentialless" },
-        ],
-      },
-    ];
-  },
 };
 
 export default nextConfig;

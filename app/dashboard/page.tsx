@@ -33,14 +33,16 @@ export default function DashboardPage() {
   > | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Cleanup stale coi-serviceworker if present
+  // Register service worker for crossOriginIsolated (SharedArrayBuffer/FFmpeg multi-thread)
   useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.getRegistrations().then((regs) => {
-        for (const reg of regs) {
-          reg.unregister();
-        }
-      });
+    if ("serviceWorker" in navigator && !crossOriginIsolated) {
+      navigator.serviceWorker
+        .register("/cross-origin-worker.js")
+        .then((reg) => {
+          if (reg.active && !navigator.serviceWorker.controller) {
+            window.location.reload();
+          }
+        });
     }
   }, []);
 
