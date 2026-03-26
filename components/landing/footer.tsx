@@ -132,6 +132,54 @@ export function Footer() {
                   YouTube Thumbnails
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/tools/exif-viewer"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  EXIF Viewer & Remover
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tools/color-palette"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  Color Palette Extractor
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tools/favicon-generator"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  Favicon Generator
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tools/svg-to-png"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  SVG to PNG
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tools/image-to-base64"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  Image to Base64
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tools/video-frame-extractor"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  Video Frame Extractor
+                </Link>
+              </li>
             </ul>
           </div>
 
