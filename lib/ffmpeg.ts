@@ -6,6 +6,22 @@ import { toBlobURL } from "@ffmpeg/util";
 let ffmpeg: FFmpeg | null = null;
 let loading = false;
 let loaded = false;
+let currentProgressHandler:
+  | (({ progress }: { progress: number }) => void)
+  | null = null;
+
+function registerProgressHandler(
+  ff: FFmpeg,
+  onProgress: (progress: number) => void,
+) {
+  if (currentProgressHandler) {
+    ff.off("progress", currentProgressHandler);
+  }
+  currentProgressHandler = ({ progress }) => {
+    onProgress(Math.round(progress * 100));
+  };
+  ff.on("progress", currentProgressHandler);
+}
 
 export async function loadFFmpeg(
   onProgress?: (progress: number) => void,
@@ -13,10 +29,7 @@ export async function loadFFmpeg(
   if (loaded && ffmpeg) {
     // Re-register progress callback for subsequent conversions
     if (onProgress) {
-      ffmpeg.off("progress");
-      ffmpeg.on("progress", ({ progress }) => {
-        onProgress(Math.round(progress * 100));
-      });
+      registerProgressHandler(ffmpeg, onProgress);
     }
     return ffmpeg;
   }
@@ -27,10 +40,7 @@ export async function loadFFmpeg(
         if (loaded && ffmpeg) {
           clearInterval(interval);
           if (onProgress) {
-            ffmpeg.off("progress");
-            ffmpeg.on("progress", ({ progress }) => {
-              onProgress(Math.round(progress * 100));
-            });
+            registerProgressHandler(ffmpeg, onProgress);
           }
           resolve(ffmpeg);
         }
@@ -46,9 +56,7 @@ export async function loadFFmpeg(
   });
 
   if (onProgress) {
-    ffmpeg.on("progress", ({ progress }) => {
-      onProgress(Math.round(progress * 100));
-    });
+    registerProgressHandler(ffmpeg, onProgress);
   }
 
   const useMultiThread = typeof SharedArrayBuffer !== "undefined";
