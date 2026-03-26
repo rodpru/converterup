@@ -15,12 +15,14 @@ interface ConversionResultProps {
     duration?: number;
   };
   onConvertAnother: () => void;
+  onDownload?: () => void;
 }
 
 export function ConversionResult({
   originalFile,
   result,
   onConvertAnother,
+  onDownload,
 }: ConversionResultProps) {
   const category = getFileCategory(originalFile);
   const reduction = Math.round((1 - result.size / originalFile.size) * 100);
@@ -31,6 +33,7 @@ export function ConversionResult({
       type: result.blob.type,
     });
     downloadFile(file, result.filename);
+    onDownload?.();
   };
 
   const handleShare = async () => {

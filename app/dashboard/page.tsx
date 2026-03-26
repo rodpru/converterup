@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Navbar } from "@/components/landing/navbar";
 import { FileUploader } from "@/components/file-uploader";
 import { ConversionOptions } from "@/components/conversion-options";
@@ -25,12 +26,25 @@ export default function DashboardPage() {
   const [result, setResult] = useState<ConversionResultType | null>(null);
   const [progress, setProgress] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const [errorIsCredits, setErrorIsCredits] = useState(false);
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [conversionOptions, setConversionOptions] = useState<Record<
     string,
     unknown
   > | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const searchParams = useSearchParams();
+
+  // Sync subscription status when returning from Stripe checkout
+  useEffect(() => {
+    if (searchParams.get("upgraded") === "true") {
+      fetch("/api/subscription/sync", { method: "POST" }).then(() => {
+        window.dispatchEvent(new Event("credits-updated"));
+        // Clean URL
+        window.history.replaceState({}, "", "/dashboard");
+      });
+    }
+  }, [searchParams]);
 
   const fadeInUp = prefersReducedMotion
     ? {}
@@ -62,20 +76,22 @@ export default function DashboardPage() {
       setProgress(0);
 
       try {
-        // Deduct credit
-        const category = getFileCategory(selectedFile);
-        const creditRes = await fetch("/api/credits/deduct", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ type: category }),
-        });
-
-        if (!creditRes.ok) {
-          const data = await creditRes.json();
-          if (data.error === "insufficient_credits") {
+        // Check credits before converting
+        const creditCheck = await fetch("/api/credits");
+        if (creditCheck.ok) {
+          const status = await creditCheck.json();
+          if (!status.canConvert) {
             setErrorMessage(
-              "No credits remaining. Upgrade to unlimited for $5/mo.",
+              "You've used all 3 free conversions today. Go unlimited for non-stop converting.",
             );
+            setErrorIsCredits(true);
+            setStep("error");
+            return;
+          }
+        } else {
+          const data = await creditCheck.json();
+          if (data.error === "Unauthorized") {
+            setErrorMessage("Please sign in to convert files.");
             setStep("error");
             return;
           }
@@ -98,6 +114,7 @@ export default function DashboardPage() {
         setResult(conversionResult);
         setStep("result");
       } catch (err) {
+        console.error("[Conversion Error]", err);
         setErrorMessage(
           err instanceof Error ? err.message : "An unexpected error occurred",
         );
@@ -118,6 +135,7 @@ export default function DashboardPage() {
     setResult(null);
     setProgress(0);
     setErrorMessage("");
+    setErrorIsCredits(false);
     setConversionOptions(null);
     setStep("upload");
   };
@@ -185,6 +203,12 @@ export default function DashboardPage() {
                 originalFile={selectedFile}
                 result={result}
                 onConvertAnother={handleReset}
+                onDownload={() => {
+                  fetch("/api/credits/deduct", { method: "POST" }).then(() => {
+                    // Trigger re-render to update credit badge
+                    window.dispatchEvent(new Event("credits-updated"));
+                  });
+                }}
               />
             </motion.div>
           )}
@@ -199,6 +223,7 @@ export default function DashboardPage() {
                 message={errorMessage}
                 onRetry={handleRetry}
                 onBack={handleReset}
+                showUpgrade={errorIsCredits}
               />
             </motion.div>
           )}

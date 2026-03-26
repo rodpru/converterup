@@ -10,13 +10,28 @@ let loaded = false;
 export async function loadFFmpeg(
   onProgress?: (progress: number) => void,
 ): Promise<FFmpeg> {
-  if (loaded && ffmpeg) return ffmpeg;
+  if (loaded && ffmpeg) {
+    // Re-register progress callback for subsequent conversions
+    if (onProgress) {
+      ffmpeg.off("progress");
+      ffmpeg.on("progress", ({ progress }) => {
+        onProgress(Math.round(progress * 100));
+      });
+    }
+    return ffmpeg;
+  }
   if (loading) {
     // Wait for existing load to finish
     return new Promise((resolve) => {
       const interval = setInterval(() => {
         if (loaded && ffmpeg) {
           clearInterval(interval);
+          if (onProgress) {
+            ffmpeg.off("progress");
+            ffmpeg.on("progress", ({ progress }) => {
+              onProgress(Math.round(progress * 100));
+            });
+          }
           resolve(ffmpeg);
         }
       }, 100);
@@ -36,12 +51,28 @@ export async function loadFFmpeg(
     });
   }
 
-  const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+  const useMultiThread = typeof SharedArrayBuffer !== "undefined";
+  console.log(
+    "[FFmpeg] SharedArrayBuffer:",
+    useMultiThread ? "available (multi-thread)" : "unavailable (single-thread)",
+  );
+  const cdn = "https://cdn.jsdelivr.net/npm";
+  const pkg = useMultiThread ? "@ffmpeg/core-mt@0.12.6" : "@ffmpeg/core@0.12.6";
+  const baseURL = `${cdn}/${pkg}/dist/umd`;
 
-  await ffmpeg.load({
+  const loadConfig: Parameters<typeof ffmpeg.load>[0] = {
     coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
     wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
-  });
+  };
+
+  if (useMultiThread) {
+    loadConfig.workerURL = await toBlobURL(
+      `${baseURL}/ffmpeg-core.worker.js`,
+      "text/javascript",
+    );
+  }
+
+  await ffmpeg.load(loadConfig);
 
   loaded = true;
   loading = false;

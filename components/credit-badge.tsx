@@ -5,7 +5,7 @@ import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CreditsData {
-  dailyCreditsRemaining: number;
+  remaining: number;
   isSubscriber: boolean;
 }
 
@@ -24,9 +24,9 @@ export function CreditBadge({ className, onUpgradeClick }: CreditBadgeProps) {
         if (res.ok) {
           const data = await res.json();
           setCredits({
-            dailyCreditsRemaining:
-              data.dailyCreditsRemaining ??
-              data.imageCredits + data.videoCredits + (data.paidCredits ?? 0),
+            remaining: data.isSubscriber
+              ? Number.POSITIVE_INFINITY
+              : data.dailyLimit - data.dailyUsed,
             isSubscriber: data.isSubscriber ?? false,
           });
         }
@@ -35,11 +35,13 @@ export function CreditBadge({ className, onUpgradeClick }: CreditBadgeProps) {
       }
     }
     fetchCredits();
+    window.addEventListener("credits-updated", fetchCredits);
+    return () => window.removeEventListener("credits-updated", fetchCredits);
   }, []);
 
   if (!credits) return null;
 
-  const isLow = !credits.isSubscriber && credits.dailyCreditsRemaining <= 1;
+  const isLow = !credits.isSubscriber && credits.remaining <= 1;
 
   return (
     <button
@@ -61,7 +63,7 @@ export function CreditBadge({ className, onUpgradeClick }: CreditBadgeProps) {
           <span>Unlimited</span>
         </>
       ) : (
-        <span>{credits.dailyCreditsRemaining} left today</span>
+        <span>{credits.remaining} left today</span>
       )}
     </button>
   );
