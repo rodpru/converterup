@@ -33,12 +33,12 @@ export default function DashboardPage() {
   > | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Register coi-serviceworker for SharedArrayBuffer support (FFmpeg multi-thread)
+  // Cleanup stale coi-serviceworker if present
   useEffect(() => {
-    if (!crossOriginIsolated && "serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/coi-serviceworker.js").then((reg) => {
-        if (reg.active && !navigator.serviceWorker.controller) {
-          window.location.reload();
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistrations().then((regs) => {
+        for (const reg of regs) {
+          reg.unregister();
         }
       });
     }

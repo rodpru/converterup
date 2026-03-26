@@ -97,6 +97,15 @@ function buildVideoArgs(
     args.push("-to", options.endTime.toString());
   }
 
+  const outputExt = options.outputFormat.toLowerCase();
+
+  // Codec settings per format
+  if (outputExt === "webm") {
+    args.push("-c:v", "libvpx", "-c:a", "libvorbis", "-b:v", "1M");
+  } else if (outputExt === "mp4") {
+    args.push("-c:v", "libx264", "-c:a", "aac", "-movflags", "+faststart");
+  }
+
   // Quality (CRF for video)
   if (options.quality !== undefined) {
     const crf = Math.round(51 - (options.quality / 100) * 51);
@@ -135,10 +144,23 @@ function buildAudioExtractionArgs(
   return args;
 }
 
+const VIDEO_MAX_SIZE_ST = 20 * 1024 * 1024; // 20MB limit for single-thread
+
 export async function convertMedia(
   options: ConversionOptions,
   onProgress?: (progress: number) => void,
 ): Promise<ConversionResult> {
+  const isVideo = ["mp4", "webm", "mkv", "avi", "mov"].includes(
+    options.outputFormat.toLowerCase(),
+  );
+  const isSingleThread = !globalThis.crossOriginIsolated;
+
+  if (isVideo && isSingleThread && options.inputFile.size > VIDEO_MAX_SIZE_ST) {
+    throw new Error(
+      `Video files over 20MB are not yet supported. We're working on it — try a smaller file for now.`,
+    );
+  }
+
   const startTime = Date.now();
   const ffmpeg = await loadFFmpeg(onProgress);
 

@@ -59,11 +59,8 @@ export async function loadFFmpeg(
     registerProgressHandler(ffmpeg, onProgress);
   }
 
-  const useMultiThread = typeof SharedArrayBuffer !== "undefined";
-  console.log(
-    "[FFmpeg] SharedArrayBuffer:",
-    useMultiThread ? "available (multi-thread)" : "unavailable (single-thread)",
-  );
+  const useMultiThread =
+    typeof SharedArrayBuffer !== "undefined" && crossOriginIsolated;
   const cdn = "https://cdn.jsdelivr.net/npm";
   const pkg = useMultiThread ? "@ffmpeg/core-mt@0.12.6" : "@ffmpeg/core@0.12.6";
   const baseURL = `${cdn}/${pkg}/dist/umd`;
