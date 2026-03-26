@@ -191,7 +191,7 @@ async function convertViaServer(
   // Step 3: Poll job status
   onProgress?.(20);
   const POLL_INTERVAL = 2000;
-  const MAX_POLL_TIME = 300_000; // 5 minutes
+  const MAX_POLL_TIME = 900_000; // 15 minutes
   const pollStart = Date.now();
   let progress = 20;
 
@@ -236,7 +236,7 @@ async function convertViaServer(
     onProgress?.(Math.round(progress));
   }
 
-  throw new Error("Conversion timed out after 5 minutes");
+  throw new Error("Conversion timed out after 15 minutes");
 }
 
 export async function convertMedia(

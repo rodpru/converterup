@@ -28,10 +28,8 @@ function buildConvertTaskParams(
     operation: "convert",
     input: ["import-file"],
     output_format: outputFormat,
+    timeout: 900, // 15 minutes max for large videos
   };
-
-  // Let CloudConvert choose optimal codecs per format
-  // Only set quality if specified
 
   return params;
 }
