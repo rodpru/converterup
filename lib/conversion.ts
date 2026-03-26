@@ -153,60 +153,90 @@ async function convertViaServer(
 ): Promise<ConversionResult> {
   const startTime = Date.now();
 
+  // Step 1: Create job (server-side, keeps API key secret)
+  onProgress?.(0);
+  const createRes = await fetch("/api/convert", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      outputFormat: options.outputFormat,
+      quality: options.quality,
+    }),
+  });
+
+  if (!createRes.ok) {
+    const data = await createRes.json();
+    throw new Error(data.error || "Failed to create conversion job");
+  }
+
+  const { jobId, uploadUrl, uploadParams } = await createRes.json();
+
+  // Step 2: Upload file directly from browser to CloudConvert (no server proxy)
+  onProgress?.(5);
   const formData = new FormData();
+  for (const [key, value] of Object.entries(uploadParams)) {
+    formData.append(key, value as string);
+  }
   formData.append("file", options.inputFile);
-  formData.append("outputFormat", options.outputFormat);
-  if (options.quality !== undefined) {
-    formData.append("quality", options.quality.toString());
+
+  const uploadRes = await fetch(uploadUrl, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!uploadRes.ok) {
+    throw new Error("Failed to upload file for conversion");
   }
 
-  // Simulate progress since CloudConvert doesn't stream it back
-  let progressInterval: ReturnType<typeof setInterval> | undefined;
-  let currentProgress = 0;
-  if (onProgress) {
-    onProgress(0);
-    progressInterval = setInterval(() => {
-      // Ease toward 90% — never reach 100% until actually done
-      currentProgress += (90 - currentProgress) * 0.05;
-      onProgress(Math.round(currentProgress));
-    }, 500);
+  // Step 3: Poll job status
+  onProgress?.(20);
+  const POLL_INTERVAL = 2000;
+  const MAX_POLL_TIME = 300_000; // 5 minutes
+  const pollStart = Date.now();
+  let progress = 20;
+
+  while (Date.now() - pollStart < MAX_POLL_TIME) {
+    await new Promise((resolve) => setTimeout(resolve, POLL_INTERVAL));
+
+    const statusRes = await fetch(`/api/convert?jobId=${jobId}`);
+    if (!statusRes.ok) {
+      throw new Error("Failed to check conversion status");
+    }
+
+    const status = await statusRes.json();
+
+    if (status.status === "finished" && status.url) {
+      onProgress?.(90);
+
+      // Step 4: Download converted file
+      const fileRes = await fetch(status.url);
+      if (!fileRes.ok) {
+        throw new Error("Failed to download converted file");
+      }
+
+      const blob = await fileRes.blob();
+      const baseName = options.inputFile.name.replace(/\.[^.]+$/, "");
+
+      onProgress?.(100);
+
+      return {
+        blob,
+        filename: `${baseName}.${options.outputFormat}`,
+        size: blob.size,
+        duration: Date.now() - startTime,
+      };
+    }
+
+    if (status.status === "error") {
+      throw new Error(status.error || "Conversion failed");
+    }
+
+    // Ease progress toward 90%
+    progress += (90 - progress) * 0.08;
+    onProgress?.(Math.round(progress));
   }
 
-  try {
-    const response = await fetch("/api/convert", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) {
-      const data = await response.json();
-      throw new Error(data.error || "Server conversion failed");
-    }
-
-    const { url } = await response.json();
-
-    // Download the converted file
-    const fileResponse = await fetch(url);
-    if (!fileResponse.ok) {
-      throw new Error("Failed to download converted file");
-    }
-
-    const blob = await fileResponse.blob();
-    const baseName = options.inputFile.name.replace(/\.[^.]+$/, "");
-
-    onProgress?.(100);
-
-    return {
-      blob,
-      filename: `${baseName}.${options.outputFormat}`,
-      size: blob.size,
-      duration: Date.now() - startTime,
-    };
-  } finally {
-    if (progressInterval) {
-      clearInterval(progressInterval);
-    }
-  }
+  throw new Error("Conversion timed out after 5 minutes");
 }
 
 export async function convertMedia(
