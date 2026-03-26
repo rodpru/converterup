@@ -11,16 +11,6 @@ export async function middleware(request: NextRequest) {
 
   const response = await updateSession(request);
 
-  // Add COOP/COEP headers for SharedArrayBuffer (FFmpeg multi-thread)
-  // Only in production — dev turbopack worker is incompatible with COEP
-  if (
-    request.nextUrl.pathname === "/dashboard" &&
-    process.env.NODE_ENV === "production"
-  ) {
-    response.headers.set("Cross-Origin-Opener-Policy", "same-origin");
-    response.headers.set("Cross-Origin-Embedder-Policy", "credentialless");
-  }
-
   return response;
 }
 

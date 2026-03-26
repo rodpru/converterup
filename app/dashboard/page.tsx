@@ -33,6 +33,17 @@ export default function DashboardPage() {
   > | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
+  // Register coi-serviceworker for SharedArrayBuffer support (FFmpeg multi-thread)
+  useEffect(() => {
+    if (!crossOriginIsolated && "serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/coi-serviceworker.js").then((reg) => {
+        if (reg.active && !navigator.serviceWorker.controller) {
+          window.location.reload();
+        }
+      });
+    }
+  }, []);
+
   // Sync subscription status when returning from Stripe checkout
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
