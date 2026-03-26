@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
 import { Logo } from "@/components/logo";
 
@@ -18,7 +17,11 @@ export function Footer() {
         <motion.div
           className="flex whitespace-nowrap"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+          transition={{
+            duration: 30,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
         >
           {marqueeItems.map((text, i) => (
             <span
@@ -121,20 +124,6 @@ export function Footer() {
           <p className="text-sm text-[#71717A]/50 mb-4 md:mb-0 font-[Inter]">
             &copy; {new Date().getFullYear()} ConverterUp. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <Link
-              href="#"
-              className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200"
-            >
-              <Twitter className="w-5 h-5" />
-            </Link>
-            <Link
-              href="#"
-              className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200"
-            >
-              <Github className="w-5 h-5" />
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
