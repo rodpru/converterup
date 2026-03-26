@@ -9,7 +9,11 @@ interface ConversionErrorProps {
   onBack: () => void;
 }
 
-export function ConversionError({ message, onRetry, onBack }: ConversionErrorProps) {
+export function ConversionError({
+  message,
+  onRetry,
+  onBack,
+}: ConversionErrorProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -20,7 +24,9 @@ export function ConversionError({ message, onRetry, onBack }: ConversionErrorPro
         <AlertTriangle className="w-8 h-8 text-[#FB7185]" />
       </div>
 
-      <h2 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-3">Conversion failed</h2>
+      <h2 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-3">
+        Conversion failed
+      </h2>
       <p className="text-[#71717A] mb-8 font-mono text-sm">{message}</p>
 
       <div className="flex flex-col sm:flex-row gap-3 justify-center">

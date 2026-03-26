@@ -7,10 +7,34 @@ import { ArrowRight } from "lucide-react";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const DEMO_CONVERSIONS = [
-  { from: "PNG", to: "WEBP", inputSize: "4.2 MB", outputSize: "1.1 MB", savings: "74%" },
-  { from: "MP4", to: "WEBM", inputSize: "32.5 MB", outputSize: "18.2 MB", savings: "44%" },
-  { from: "JPG", to: "AVIF", inputSize: "2.8 MB", outputSize: "0.6 MB", savings: "79%" },
-  { from: "AVI", to: "MP4", inputSize: "128 MB", outputSize: "24.3 MB", savings: "81%" },
+  {
+    from: "PNG",
+    to: "WEBP",
+    inputSize: "4.2 MB",
+    outputSize: "1.1 MB",
+    savings: "74%",
+  },
+  {
+    from: "MP4",
+    to: "WEBM",
+    inputSize: "32.5 MB",
+    outputSize: "18.2 MB",
+    savings: "44%",
+  },
+  {
+    from: "JPG",
+    to: "AVIF",
+    inputSize: "2.8 MB",
+    outputSize: "0.6 MB",
+    savings: "79%",
+  },
+  {
+    from: "AVI",
+    to: "MP4",
+    inputSize: "128 MB",
+    outputSize: "24.3 MB",
+    savings: "81%",
+  },
 ];
 
 const formats = ["PNG", "JPG", "WEBP", "AVIF", "MP4", "WEBM"];
@@ -177,13 +201,17 @@ export function LiveDemo() {
                     <p className="font-mono text-[10px] uppercase tracking-wider text-[#71717A] mb-1">
                       Input
                     </p>
-                    <p className="font-mono text-sm text-[#EDEDEF]">{demo.inputSize}</p>
+                    <p className="font-mono text-sm text-[#EDEDEF]">
+                      {demo.inputSize}
+                    </p>
                   </div>
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-wider text-[#71717A] mb-1">
                       Output
                     </p>
-                    <p className="font-mono text-sm text-[#EDEDEF]">{demo.outputSize}</p>
+                    <p className="font-mono text-sm text-[#EDEDEF]">
+                      {demo.outputSize}
+                    </p>
                   </div>
                   <div className="glow">
                     <p className="font-mono text-[10px] uppercase tracking-wider text-[#71717A] mb-1">

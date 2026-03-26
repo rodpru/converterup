@@ -8,7 +8,10 @@ interface ConversionProgressProps {
   onCancel?: () => void;
 }
 
-export function ConversionProgress({ progress, onCancel }: ConversionProgressProps) {
+export function ConversionProgress({
+  progress,
+  onCancel,
+}: ConversionProgressProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -24,7 +27,9 @@ export function ConversionProgress({ progress, onCancel }: ConversionProgressPro
         <div className="w-full h-1 bg-[#2A2535] rounded-full relative overflow-hidden">
           <motion.div
             className="absolute top-0 left-0 h-full rounded-full gradient-line"
-            style={{ background: "linear-gradient(90deg, #0D9488, #7C3AED, #F43F5E)" }}
+            style={{
+              background: "linear-gradient(90deg, #0D9488, #7C3AED, #F43F5E)",
+            }}
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.3, ease: "easeOut" }}

@@ -6,7 +6,17 @@ export function getFileCategory(file: File): FileCategory {
 
   // Fallback to extension
   const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
-  const imageExts = ["png", "jpg", "jpeg", "webp", "avif", "gif", "svg", "tiff", "bmp"];
+  const imageExts = [
+    "png",
+    "jpg",
+    "jpeg",
+    "webp",
+    "avif",
+    "gif",
+    "svg",
+    "tiff",
+    "bmp",
+  ];
   const videoExts = ["mp4", "mkv", "avi", "webm", "mov"];
 
   if (imageExts.includes(ext)) return "image";

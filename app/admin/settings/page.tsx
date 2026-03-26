@@ -54,9 +54,7 @@ export default function AdminSettingsPage() {
                   Managed via Stripe Dashboard.
                 </p>
               </div>
-              <span className="font-mono text-sm text-[#71717A]">
-                $9.99/mo
-              </span>
+              <span className="font-mono text-sm text-[#71717A]">$9.99/mo</span>
             </div>
           </div>
         </div>

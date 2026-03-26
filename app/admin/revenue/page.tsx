@@ -88,7 +88,10 @@ export default function AdminRevenuePage() {
                 >
                   <div className="flex flex-col items-center gap-3">
                     <DollarSign className="w-8 h-8 text-[#2A2535]" />
-                    <span>No transactions yet. Revenue will appear here once users subscribe.</span>
+                    <span>
+                      No transactions yet. Revenue will appear here once users
+                      subscribe.
+                    </span>
                   </div>
                 </td>
               </tr>

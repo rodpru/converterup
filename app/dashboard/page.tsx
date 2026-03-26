@@ -9,7 +9,10 @@ import { ConversionResult } from "@/components/conversion-result";
 import { ConversionError } from "@/components/conversion-error";
 import { CreditBadge } from "@/components/credit-badge";
 import { UpgradeModal } from "@/components/upgrade-modal";
-import { convertMedia, type ConversionResult as ConversionResultType } from "@/lib/conversion";
+import {
+  convertMedia,
+  type ConversionResult as ConversionResultType,
+} from "@/lib/conversion";
 import { getFileCategory } from "@/lib/media-utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePrefersReducedMotion } from "@/lib/mobile-utils";
@@ -23,12 +26,19 @@ export default function DashboardPage() {
   const [progress, setProgress] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [showUpgrade, setShowUpgrade] = useState(false);
-  const [conversionOptions, setConversionOptions] = useState<Record<string, unknown> | null>(null);
+  const [conversionOptions, setConversionOptions] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const fadeInUp = prefersReducedMotion
     ? {}
-    : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, exit: { opacity: 0, y: -20 } };
+    : {
+        initial: { opacity: 0, y: 20 },
+        animate: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: -20 },
+      };
 
   const handleFileSelect = (file: File) => {
     setSelectedFile(file);
@@ -63,7 +73,9 @@ export default function DashboardPage() {
         if (!creditRes.ok) {
           const data = await creditRes.json();
           if (data.error === "insufficient_credits") {
-            setErrorMessage("No credits remaining. Upgrade to unlimited for $5/mo.");
+            setErrorMessage(
+              "No credits remaining. Upgrade to unlimited for $5/mo.",
+            );
             setStep("error");
             return;
           }
@@ -122,7 +134,11 @@ export default function DashboardPage() {
 
         <AnimatePresence mode="wait">
           {step === "upload" && (
-            <motion.div key="upload" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+            <motion.div
+              key="upload"
+              {...fadeInUp}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+            >
               <div className="text-center mb-8 sm:mb-12">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4 sm:mb-6">
                   Upload your media
@@ -136,7 +152,11 @@ export default function DashboardPage() {
           )}
 
           {step === "configure" && selectedFile && (
-            <motion.div key="configure" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+            <motion.div
+              key="configure"
+              {...fadeInUp}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+            >
               <ConversionOptions
                 file={selectedFile}
                 onConvert={handleConvert}
@@ -146,13 +166,21 @@ export default function DashboardPage() {
           )}
 
           {step === "converting" && (
-            <motion.div key="converting" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+            <motion.div
+              key="converting"
+              {...fadeInUp}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+            >
               <ConversionProgress progress={progress} onCancel={handleReset} />
             </motion.div>
           )}
 
           {step === "result" && selectedFile && result && (
-            <motion.div key="result" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+            <motion.div
+              key="result"
+              {...fadeInUp}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+            >
               <ConversionResult
                 originalFile={selectedFile}
                 result={result}
@@ -162,7 +190,11 @@ export default function DashboardPage() {
           )}
 
           {step === "error" && (
-            <motion.div key="error" {...fadeInUp} transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}>
+            <motion.div
+              key="error"
+              {...fadeInUp}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
+            >
               <ConversionError
                 message={errorMessage}
                 onRetry={handleRetry}

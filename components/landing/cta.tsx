@@ -28,7 +28,11 @@ export function CTA() {
                 backgroundSize: "200% 100%",
               }}
               animate={{ backgroundPosition: ["0% 0%", "200% 0%"] }}
-              transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+              transition={{
+                duration: 4,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "linear",
+              }}
             />
           </div>
 
@@ -46,8 +50,7 @@ export function CTA() {
               transition={{ duration: 0.7, delay: 0.1, ease }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-6 sm:mb-8 leading-[0.95]"
             >
-              Ready to convert{" "}
-              <br className="hidden sm:block" />
+              Ready to convert <br className="hidden sm:block" />
               <span className="gradient-text">your media?</span>
             </motion.h2>
             <motion.p

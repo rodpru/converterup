@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-display: 'Syne', system-ui, sans-serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -53,77 +53,77 @@
 :root {
   --radius: 0.5rem;
   /* Dark mode IS the default for the landing page */
-  --background: #0C0A12;
-  --foreground: #EDEDEF;
-  --primary: #2DD4BF;
-  --primary-foreground: #042F2E;
-  --secondary: #1C1825;
-  --secondary-foreground: #EDEDEF;
-  --muted: #1C1825;
-  --muted-foreground: #71717A;
-  --accent: #FB7185;
-  --accent-foreground: #FFFFFF;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --card: #16131E;
-  --card-foreground: #EDEDEF;
-  --popover: #16131E;
-  --popover-foreground: #EDEDEF;
-  --border: #2A2535;
-  --input: #2A2535;
-  --ring: #2DD4BF;
-  --chart-1: #2DD4BF;
-  --chart-2: #FB7185;
-  --chart-3: #7C3AED;
-  --chart-4: #F59E0B;
-  --chart-5: #3B82F6;
-  --sidebar: #0C0A12;
-  --sidebar-foreground: #EDEDEF;
-  --sidebar-primary: #2DD4BF;
-  --sidebar-primary-foreground: #042F2E;
-  --sidebar-accent: #1C1825;
-  --sidebar-accent-foreground: #EDEDEF;
-  --sidebar-border: #2A2535;
-  --sidebar-ring: #2DD4BF;
+  --background: #0c0a12;
+  --foreground: #ededef;
+  --primary: #2dd4bf;
+  --primary-foreground: #042f2e;
+  --secondary: #1c1825;
+  --secondary-foreground: #ededef;
+  --muted: #1c1825;
+  --muted-foreground: #71717a;
+  --accent: #fb7185;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --card: #16131e;
+  --card-foreground: #ededef;
+  --popover: #16131e;
+  --popover-foreground: #ededef;
+  --border: #2a2535;
+  --input: #2a2535;
+  --ring: #2dd4bf;
+  --chart-1: #2dd4bf;
+  --chart-2: #fb7185;
+  --chart-3: #7c3aed;
+  --chart-4: #f59e0b;
+  --chart-5: #3b82f6;
+  --sidebar: #0c0a12;
+  --sidebar-foreground: #ededef;
+  --sidebar-primary: #2dd4bf;
+  --sidebar-primary-foreground: #042f2e;
+  --sidebar-accent: #1c1825;
+  --sidebar-accent-foreground: #ededef;
+  --sidebar-border: #2a2535;
+  --sidebar-ring: #2dd4bf;
 
   /* Signature gradient */
-  --gradient: linear-gradient(135deg, #0D9488, #7C3AED, #F43F5E);
-  --gradient-horizontal: linear-gradient(90deg, #0D9488, #7C3AED, #F43F5E);
+  --gradient: linear-gradient(135deg, #0d9488, #7c3aed, #f43f5e);
+  --gradient-horizontal: linear-gradient(90deg, #0d9488, #7c3aed, #f43f5e);
 }
 
 .light {
-  --background: #FAFAF9;
-  --foreground: #18181B;
-  --primary: #0D9488;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F4F4F5;
-  --secondary-foreground: #18181B;
-  --muted: #F4F4F5;
-  --muted-foreground: #71717A;
-  --accent: #F43F5E;
-  --accent-foreground: #FFFFFF;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --card: #FFFFFF;
-  --card-foreground: #18181B;
-  --popover: #FFFFFF;
-  --popover-foreground: #18181B;
-  --border: #E4E4E7;
-  --input: #E4E4E7;
-  --ring: #0D9488;
-  --chart-1: #0D9488;
-  --chart-2: #F43F5E;
-  --chart-3: #7C3AED;
-  --chart-4: #F59E0B;
-  --chart-5: #3B82F6;
-  --sidebar: #FAFAF9;
-  --sidebar-foreground: #18181B;
-  --sidebar-primary: #0D9488;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F4F4F5;
-  --sidebar-accent-foreground: #18181B;
-  --sidebar-border: #E4E4E7;
-  --sidebar-ring: #0D9488;
+  --background: #fafaf9;
+  --foreground: #18181b;
+  --primary: #0d9488;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f43f5e;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #0d9488;
+  --chart-1: #0d9488;
+  --chart-2: #f43f5e;
+  --chart-3: #7c3aed;
+  --chart-4: #f59e0b;
+  --chart-5: #3b82f6;
+  --sidebar: #fafaf9;
+  --sidebar-foreground: #18181b;
+  --sidebar-primary: #0d9488;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-accent-foreground: #18181b;
+  --sidebar-border: #e4e4e7;
+  --sidebar-ring: #0d9488;
 }
 
 @layer base {
@@ -136,20 +136,26 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "ss01", "ss02", "cv01";
   }
 
   /* Syne for all headings */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Syne', system-ui, sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Syne", system-ui, sans-serif;
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
 
-  button, a {
+  button,
+  a {
     -webkit-tap-highlight-color: rgba(45, 212, 191, 0.1);
   }
 
@@ -184,7 +190,9 @@
   }
 
   .glow-strong {
-    box-shadow: 0 0 40px rgba(45, 212, 191, 0.2), 0 0 80px rgba(45, 212, 191, 0.05);
+    box-shadow:
+      0 0 40px rgba(45, 212, 191, 0.2),
+      0 0 80px rgba(45, 212, 191, 0.05);
   }
 
   .glow-accent {
@@ -210,14 +218,23 @@
 
 /* Gradient slide animation */
 @keyframes gradient-slide {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
 }
 
 /* Subtle pulse for active elements */
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(45, 212, 191, 0.1); }
-  50% { box-shadow: 0 0 30px rgba(45, 212, 191, 0.2); }
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(45, 212, 191, 0.2);
+  }
 }
 
 /* Reduced motion support */
@@ -256,6 +273,6 @@
 /* High contrast mode */
 @media (prefers-contrast: high) {
   :root {
-    --border: #4A4555;
+    --border: #4a4555;
   }
 }

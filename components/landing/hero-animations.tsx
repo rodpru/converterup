@@ -5,7 +5,13 @@ import { type ReactNode, useState, useEffect } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-export function HeroReveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
+export function HeroReveal({
+  children,
+  delay = 0,
+}: {
+  children: ReactNode;
+  delay?: number;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
@@ -38,7 +44,10 @@ export function FormatMorphCard() {
         setTimeout(() => setShowOut(true), 350);
       }, 250);
     }, 3200);
-    return () => { clearInterval(interval); clearTimeout(t1); };
+    return () => {
+      clearInterval(interval);
+      clearTimeout(t1);
+    };
   }, []);
 
   const pair = PAIRS[idx];
@@ -51,7 +60,8 @@ export function FormatMorphCard() {
       transition={{ duration: 1.2, delay: 0.5, ease }}
       className="relative w-full max-w-[340px] aspect-[3/4] bg-card border border-border rounded-2xl p-8 hover:border-primary/20 transition-all duration-500"
       style={{
-        boxShadow: "0 0 60px rgba(45, 212, 191, 0.06), 0 0 120px rgba(124, 58, 237, 0.04)",
+        boxShadow:
+          "0 0 60px rgba(45, 212, 191, 0.06), 0 0 120px rgba(124, 58, 237, 0.04)",
       }}
     >
       {/* Gradient accent line at top */}
@@ -60,7 +70,9 @@ export function FormatMorphCard() {
       <div className="h-full flex flex-col justify-between relative z-10">
         {/* Input */}
         <div>
-          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/50 block mb-3">Input</span>
+          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/50 block mb-3">
+            Input
+          </span>
           <AnimatePresence mode="wait">
             <motion.div
               key={`in-${idx}`}
@@ -69,7 +81,9 @@ export function FormatMorphCard() {
               exit={{ opacity: 0, x: 10 }}
               transition={{ duration: 0.25 }}
               className={`inline-flex px-4 py-2 rounded-lg font-mono text-sm tracking-wider border ${
-                isTeal ? "border-primary/20 bg-primary/5 text-primary" : "border-accent/20 bg-accent/5 text-accent"
+                isTeal
+                  ? "border-primary/20 bg-primary/5 text-primary"
+                  : "border-accent/20 bg-accent/5 text-accent"
               }`}
             >
               .{pair.from}
@@ -92,14 +106,23 @@ export function FormatMorphCard() {
             className="w-10 h-10 rounded-lg border border-border flex items-center justify-center"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 3V13M8 13L4 9M8 13L12 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground" />
+              <path
+                d="M8 3V13M8 13L4 9M8 13L12 9"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-muted-foreground"
+              />
             </svg>
           </motion.div>
         </div>
 
         {/* Output */}
         <div>
-          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/50 block mb-3">Output</span>
+          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/50 block mb-3">
+            Output
+          </span>
           <AnimatePresence mode="wait">
             {showOut ? (
               <motion.div

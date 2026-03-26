@@ -60,7 +60,10 @@ function buildImageArgs(
 
   // Quality
   if (options.quality !== undefined) {
-    const q = Math.max(1, Math.min(31, Math.round(31 - (options.quality / 100) * 30)));
+    const q = Math.max(
+      1,
+      Math.min(31, Math.round(31 - (options.quality / 100) * 30)),
+    );
     args.push("-q:v", q.toString());
   }
 
@@ -153,7 +156,9 @@ export async function convertMedia(
     await ffmpeg.exec(args);
     const data = await ffmpeg.readFile(outputName);
     const uint8 = data as Uint8Array;
-  const blob = new Blob([new Uint8Array(uint8)], { type: getMimeType(outputExt) });
+    const blob = new Blob([new Uint8Array(uint8)], {
+      type: getMimeType(outputExt),
+    });
     const baseName = options.inputFile.name.replace(/\.[^.]+$/, "");
 
     // Cleanup
@@ -173,7 +178,14 @@ export async function convertMedia(
   await ffmpeg.writeFile(inputName, await fetchFile(options.inputFile));
 
   const isImage = [
-    "png", "jpg", "jpeg", "webp", "avif", "gif", "tiff", "bmp",
+    "png",
+    "jpg",
+    "jpeg",
+    "webp",
+    "avif",
+    "gif",
+    "tiff",
+    "bmp",
   ].includes(outputExt);
 
   if (isImage) {
@@ -185,7 +197,9 @@ export async function convertMedia(
   await ffmpeg.exec(args);
   const data = await ffmpeg.readFile(outputName);
   const uint8 = data as Uint8Array;
-  const blob = new Blob([new Uint8Array(uint8)], { type: getMimeType(outputExt) });
+  const blob = new Blob([new Uint8Array(uint8)], {
+    type: getMimeType(outputExt),
+  });
   const baseName = options.inputFile.name.replace(/\.[^.]+$/, "");
 
   // Cleanup

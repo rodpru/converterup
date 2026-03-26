@@ -79,10 +79,16 @@ export function UpgradeModal({ open, onClose }: UpgradeModalProps) {
               {/* Price */}
               <div className="text-center mb-6 py-4">
                 <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-4xl font-[Syne] font-bold text-[#EDEDEF]">$5</span>
-                  <span className="text-[#71717A] font-mono text-sm">/month</span>
+                  <span className="text-4xl font-[Syne] font-bold text-[#EDEDEF]">
+                    $5
+                  </span>
+                  <span className="text-[#71717A] font-mono text-sm">
+                    /month
+                  </span>
                 </div>
-                <p className="text-xs text-[#71717A] mt-1 font-mono">Cancel anytime</p>
+                <p className="text-xs text-[#71717A] mt-1 font-mono">
+                  Cancel anytime
+                </p>
               </div>
 
               {/* Features */}

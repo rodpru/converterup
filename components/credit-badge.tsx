@@ -24,7 +24,9 @@ export function CreditBadge({ className, onUpgradeClick }: CreditBadgeProps) {
         if (res.ok) {
           const data = await res.json();
           setCredits({
-            dailyCreditsRemaining: data.dailyCreditsRemaining ?? (data.imageCredits + data.videoCredits + (data.paidCredits ?? 0)),
+            dailyCreditsRemaining:
+              data.dailyCreditsRemaining ??
+              data.imageCredits + data.videoCredits + (data.paidCredits ?? 0),
             isSubscriber: data.isSubscriber ?? false,
           });
         }

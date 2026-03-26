@@ -16,16 +16,28 @@ export async function POST(request: Request) {
   const stripe = getStripe();
   let event;
   try {
-    event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!);
+    event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET!,
+    );
   } catch {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
   if (event.type === "checkout.session.completed") {
-    const session = event.data.object as { metadata?: { userId?: string }; customer?: string; subscription?: string };
+    const session = event.data.object as {
+      metadata?: { userId?: string };
+      customer?: string;
+      subscription?: string;
+    };
     const userId = session.metadata?.userId;
     if (userId && session.customer && session.subscription) {
-      await activateSubscription(userId, session.customer as string, session.subscription as string);
+      await activateSubscription(
+        userId,
+        session.customer as string,
+        session.subscription as string,
+      );
       // Log subscription event
       const supabase = await createClient();
       await supabase.from("subscription_events").insert({
@@ -38,7 +50,9 @@ export async function POST(request: Request) {
   }
 
   if (event.type === "customer.subscription.deleted") {
-    const subscription = event.data.object as { metadata?: { userId?: string } };
+    const subscription = event.data.object as {
+      metadata?: { userId?: string };
+    };
     const userId = subscription.metadata?.userId;
     if (userId) {
       await cancelSubscription(userId);

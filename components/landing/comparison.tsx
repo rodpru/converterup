@@ -6,19 +6,75 @@ import { Check, X } from "lucide-react";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const features = [
-  { name: "Client-side processing", converterup: true, cloudconvert: false, zamzar: false, handbrake: true },
-  { name: "No file upload", converterup: true, cloudconvert: false, zamzar: false, handbrake: true },
-  { name: "Free tier", converterup: true, cloudconvert: true, zamzar: true, handbrake: true },
-  { name: "Video support", converterup: true, cloudconvert: true, zamzar: true, handbrake: true },
-  { name: "No ads", converterup: true, cloudconvert: true, zamzar: false, handbrake: true },
-  { name: "100% private", converterup: true, cloudconvert: false, zamzar: false, handbrake: true },
-  { name: "No install required", converterup: true, cloudconvert: true, zamzar: true, handbrake: false },
-  { name: "Modern UI", converterup: true, cloudconvert: true, zamzar: false, handbrake: false },
+  {
+    name: "Client-side processing",
+    converterup: true,
+    cloudconvert: false,
+    zamzar: false,
+    handbrake: true,
+  },
+  {
+    name: "No file upload",
+    converterup: true,
+    cloudconvert: false,
+    zamzar: false,
+    handbrake: true,
+  },
+  {
+    name: "Free tier",
+    converterup: true,
+    cloudconvert: true,
+    zamzar: true,
+    handbrake: true,
+  },
+  {
+    name: "Video support",
+    converterup: true,
+    cloudconvert: true,
+    zamzar: true,
+    handbrake: true,
+  },
+  {
+    name: "No ads",
+    converterup: true,
+    cloudconvert: true,
+    zamzar: false,
+    handbrake: true,
+  },
+  {
+    name: "100% private",
+    converterup: true,
+    cloudconvert: false,
+    zamzar: false,
+    handbrake: true,
+  },
+  {
+    name: "No install required",
+    converterup: true,
+    cloudconvert: true,
+    zamzar: true,
+    handbrake: false,
+  },
+  {
+    name: "Modern UI",
+    converterup: true,
+    cloudconvert: true,
+    zamzar: false,
+    handbrake: false,
+  },
 ];
 
-function BoolCell({ value, highlighted }: { value: boolean; highlighted?: boolean }) {
+function BoolCell({
+  value,
+  highlighted,
+}: {
+  value: boolean;
+  highlighted?: boolean;
+}) {
   return value ? (
-    <Check className={`w-4 h-4 mx-auto ${highlighted ? "text-[#2DD4BF]" : "text-[#2DD4BF]"}`} />
+    <Check
+      className={`w-4 h-4 mx-auto ${highlighted ? "text-[#2DD4BF]" : "text-[#2DD4BF]"}`}
+    />
   ) : (
     <X className="w-4 h-4 text-[#71717A]/20 mx-auto" />
   );

@@ -1,6 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { HeroReveal, FormatMorphCard, FloatingFormats } from "./hero-animations";
+import {
+  HeroReveal,
+  FormatMorphCard,
+  FloatingFormats,
+} from "./hero-animations";
 
 export function Hero() {
   return (
@@ -16,7 +20,8 @@ export function Hero() {
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
-          backgroundImage: "radial-gradient(circle, #EDEDEF 1px, transparent 1px)",
+          backgroundImage:
+            "radial-gradient(circle, #EDEDEF 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -35,7 +40,10 @@ export function Hero() {
             </HeroReveal>
 
             <HeroReveal delay={0.1}>
-              <h1 className="font-[Syne] font-extrabold tracking-tight leading-[0.95] mb-8" style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)" }}>
+              <h1
+                className="font-[Syne] font-extrabold tracking-tight leading-[0.95] mb-8"
+                style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)" }}
+              >
                 Convert anything.
                 <br />
                 <span className="gradient-text">Upload nothing.</span>
@@ -71,7 +79,16 @@ export function Hero() {
             {/* Format pills */}
             <HeroReveal delay={0.5}>
               <div className="flex flex-wrap gap-2 mt-10">
-                {["PNG", "JPG", "WEBP", "MP4", "GIF", "AVIF", "WEBM", "MOV"].map((fmt) => (
+                {[
+                  "PNG",
+                  "JPG",
+                  "WEBP",
+                  "MP4",
+                  "GIF",
+                  "AVIF",
+                  "WEBM",
+                  "MOV",
+                ].map((fmt) => (
                   <span
                     key={fmt}
                     className="px-2.5 py-1 rounded-full font-mono text-[10px] uppercase tracking-wider text-muted-foreground border border-[#2A2535] hover:border-primary/30 hover:text-primary transition-colors duration-200"

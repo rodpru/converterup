@@ -70,8 +70,10 @@ export function FileUploader({ onFileSelect }: FileUploaderProps) {
         {...getRootProps()}
         className={cn(
           "relative group cursor-pointer flex flex-col items-center justify-center w-full h-64 sm:h-72 md:h-80 border border-[#2A2535] rounded-2xl transition-all duration-300 ease-out bg-[#16131E]",
-          isDragActive && "border-[#2DD4BF]/30 shadow-[0_0_20px_rgba(45,212,191,0.15)] scale-[1.01]",
-          !isDragActive && "hover:border-[#2DD4BF]/30 hover:shadow-[0_0_20px_rgba(45,212,191,0.15)]",
+          isDragActive &&
+            "border-[#2DD4BF]/30 shadow-[0_0_20px_rgba(45,212,191,0.15)] scale-[1.01]",
+          !isDragActive &&
+            "hover:border-[#2DD4BF]/30 hover:shadow-[0_0_20px_rgba(45,212,191,0.15)]",
           error && "border-[#FB7185]/50 bg-[#FB7185]/5",
         )}
       >
@@ -103,7 +105,11 @@ export function FileUploader({ onFileSelect }: FileUploaderProps) {
               )}
 
               <div className="flex items-center gap-2 mb-2">
-                <FormatBadge format={ext} type={category as "image" | "video"} size="sm" />
+                <FormatBadge
+                  format={ext}
+                  type={category as "image" | "video"}
+                  size="sm"
+                />
               </div>
 
               <h3 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-1 max-w-[280px] sm:max-w-md truncate px-4">
@@ -133,7 +139,9 @@ export function FileUploader({ onFileSelect }: FileUploaderProps) {
               <div
                 className={cn(
                   "w-12 h-12 sm:w-16 sm:h-16 border border-[#2A2535] rounded-xl flex items-center justify-center mb-4 sm:mb-6 transition-transform duration-300 text-[#71717A]",
-                  isDragActive ? "scale-110 rotate-3 text-[#2DD4BF]" : "group-hover:-translate-y-1 group-hover:text-[#2DD4BF]",
+                  isDragActive
+                    ? "scale-110 rotate-3 text-[#2DD4BF]"
+                    : "group-hover:-translate-y-1 group-hover:text-[#2DD4BF]",
                 )}
               >
                 <Upload className="w-5 h-5 sm:w-6 sm:h-6 stroke-1" />

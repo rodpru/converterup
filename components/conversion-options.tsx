@@ -26,10 +26,17 @@ interface ConversionOptionsProps {
   onBack: () => void;
 }
 
-export function ConversionOptions({ file, onConvert, onBack }: ConversionOptionsProps) {
+export function ConversionOptions({
+  file,
+  onConvert,
+  onBack,
+}: ConversionOptionsProps) {
   const category = getFileCategory(file);
   const inputExt = getFileExtension(file);
-  const formats = useMemo(() => getAvailableOutputFormats(inputExt), [inputExt]);
+  const formats = useMemo(
+    () => getAvailableOutputFormats(inputExt),
+    [inputExt],
+  );
 
   const [outputFormat, setOutputFormat] = useState(formats[0] || "");
   const [quality, setQuality] = useState(80);
@@ -37,7 +44,9 @@ export function ConversionOptions({ file, onConvert, onBack }: ConversionOptions
   const [height, setHeight] = useState<string>("");
   const [maintainAspect, setMaintainAspect] = useState(true);
   const [extractAudio, setExtractAudio] = useState(false);
-  const [audioFormat, setAudioFormat] = useState<"mp3" | "aac" | "wav" | "ogg">("mp3");
+  const [audioFormat, setAudioFormat] = useState<"mp3" | "aac" | "wav" | "ogg">(
+    "mp3",
+  );
 
   const previewUrl = useMemo(() => {
     if (category === "image") return createPreviewUrl(file);
@@ -82,7 +91,9 @@ export function ConversionOptions({ file, onConvert, onBack }: ConversionOptions
               </span>
             </div>
           )}
-          <p className="font-[Syne] font-bold text-lg text-[#EDEDEF] truncate max-w-full">{file.name}</p>
+          <p className="font-[Syne] font-bold text-lg text-[#EDEDEF] truncate max-w-full">
+            {file.name}
+          </p>
           <p className="font-mono text-xs text-[#71717A] mt-1">
             {formatFileSize(file.size)} &middot; {inputExt.toUpperCase()}
           </p>
@@ -157,12 +168,18 @@ export function ConversionOptions({ file, onConvert, onBack }: ConversionOptions
                 min="1"
                 max="100"
                 value={quality}
-                onChange={(e) => setQuality(Number.parseInt(e.target.value, 10))}
+                onChange={(e) =>
+                  setQuality(Number.parseInt(e.target.value, 10))
+                }
                 className="w-full h-1 bg-[#2A2535] rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#2DD4BF] [&::-webkit-slider-thumb]:border-0 [&::-webkit-slider-thumb]:shadow-[0_0_10px_rgba(45,212,191,0.3)]"
               />
               <div className="flex justify-between mt-1">
-                <span className="font-mono text-[10px] text-[#71717A]">Smaller</span>
-                <span className="font-mono text-[10px] text-[#71717A]">Better</span>
+                <span className="font-mono text-[10px] text-[#71717A]">
+                  Smaller
+                </span>
+                <span className="font-mono text-[10px] text-[#71717A]">
+                  Better
+                </span>
               </div>
             </div>
           )}
@@ -185,9 +202,17 @@ export function ConversionOptions({ file, onConvert, onBack }: ConversionOptions
                   type="button"
                   onClick={() => setMaintainAspect(!maintainAspect)}
                   className="p-2 border border-[#2A2535] rounded-lg hover:bg-[#1C1825] transition-colors text-[#71717A] hover:text-[#2DD4BF]"
-                  title={maintainAspect ? "Aspect ratio locked" : "Aspect ratio unlocked"}
+                  title={
+                    maintainAspect
+                      ? "Aspect ratio locked"
+                      : "Aspect ratio unlocked"
+                  }
                 >
-                  {maintainAspect ? <Lock className="w-4 h-4" /> : <Unlock className="w-4 h-4" />}
+                  {maintainAspect ? (
+                    <Lock className="w-4 h-4" />
+                  ) : (
+                    <Unlock className="w-4 h-4" />
+                  )}
                 </button>
                 <input
                   type="number"
@@ -207,7 +232,9 @@ export function ConversionOptions({ file, onConvert, onBack }: ConversionOptions
             disabled={!outputFormat && !extractAudio}
             className="w-full h-14 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono uppercase tracking-wider text-base font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] flex items-center justify-center gap-2"
           >
-            {extractAudio ? "Extract Audio" : `Convert to ${outputFormat.toUpperCase()}`}
+            {extractAudio
+              ? "Extract Audio"
+              : `Convert to ${outputFormat.toUpperCase()}`}
             <ArrowRight className="w-5 h-5" />
           </button>
         </div>

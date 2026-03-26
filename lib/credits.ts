@@ -11,22 +11,29 @@ export interface UserStatus {
 function isToday(dateStr: string): boolean {
   const d = new Date(dateStr);
   const now = new Date();
-  return d.getUTCFullYear() === now.getUTCFullYear() &&
+  return (
+    d.getUTCFullYear() === now.getUTCFullYear() &&
     d.getUTCMonth() === now.getUTCMonth() &&
-    d.getUTCDate() === now.getUTCDate();
+    d.getUTCDate() === now.getUTCDate()
+  );
 }
 
-export async function getUserStatus(userId: string): Promise<UserStatus | null> {
+export async function getUserStatus(
+  userId: string,
+): Promise<UserStatus | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("profiles")
-    .select("daily_conversions, last_conversion_date, subscription_status, subscription_end")
+    .select(
+      "daily_conversions, last_conversion_date, subscription_status, subscription_end",
+    )
     .eq("id", userId)
     .single();
 
   if (error || !data) return null;
 
-  const isSubscriber = data.subscription_status === "active" &&
+  const isSubscriber =
+    data.subscription_status === "active" &&
     (!data.subscription_end || new Date(data.subscription_end) > new Date());
 
   // Reset daily counter if new day
@@ -35,7 +42,10 @@ export async function getUserStatus(userId: string): Promise<UserStatus | null> 
     dailyUsed = 0;
     await supabase
       .from("profiles")
-      .update({ daily_conversions: 0, last_conversion_date: new Date().toISOString().split("T")[0] })
+      .update({
+        daily_conversions: 0,
+        last_conversion_date: new Date().toISOString().split("T")[0],
+      })
       .eq("id", userId);
   }
 
@@ -51,7 +61,9 @@ export async function getUserStatus(userId: string): Promise<UserStatus | null> 
   };
 }
 
-export async function useConversion(userId: string): Promise<{ success: boolean; status: UserStatus | null }> {
+export async function useConversion(
+  userId: string,
+): Promise<{ success: boolean; status: UserStatus | null }> {
   const status = await getUserStatus(userId);
   if (!status || !status.canConvert) return { success: false, status };
 

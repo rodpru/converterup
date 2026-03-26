@@ -43,7 +43,10 @@ const plans = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-20 sm:py-28 md:py-36 border-t border-[#2A2535]/50">
+    <section
+      id="pricing"
+      className="py-20 sm:py-28 md:py-36 border-t border-[#2A2535]/50"
+    >
       <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,7 +55,10 @@ export function Pricing() {
           transition={{ duration: 0.6, ease }}
           className="text-center mb-14 sm:mb-20"
         >
-          <h2 className="font-[Syne] font-bold text-foreground mb-4" style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
+          <h2
+            className="font-[Syne] font-bold text-foreground mb-4"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+          >
             Simple <span className="gradient-text">pricing.</span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-md mx-auto">
@@ -83,7 +89,9 @@ export function Pricing() {
                   <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
                     {plan.name}
                   </span>
-                  {plan.highlighted && <Sparkles className="w-3.5 h-3.5 text-primary" />}
+                  {plan.highlighted && (
+                    <Sparkles className="w-3.5 h-3.5 text-primary" />
+                  )}
                 </div>
                 <div className="flex items-baseline gap-1.5 mb-2">
                   <span className="font-mono text-5xl sm:text-6xl font-bold text-foreground">
@@ -93,7 +101,9 @@ export function Pricing() {
                     / {plan.period}
                   </span>
                 </div>
-                <p className="text-sm text-muted-foreground">{plan.description}</p>
+                <p className="text-sm text-muted-foreground">
+                  {plan.description}
+                </p>
               </div>
 
               <ul className="space-y-3 mb-10">

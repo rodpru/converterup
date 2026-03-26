@@ -13,9 +13,7 @@ export default function AdminUsersPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="font-[Syne] font-bold text-2xl text-[#EDEDEF]">
-          Users
-        </h1>
+        <h1 className="font-[Syne] font-bold text-2xl text-[#EDEDEF]">Users</h1>
         <p className="text-sm text-[#71717A] mt-1">
           Manage users and subscriptions.
         </p>

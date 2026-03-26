@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 export function isMobileDevice(): boolean {
   if (typeof window === "undefined") return false;
   return /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
+    navigator.userAgent,
   );
 }
 
@@ -20,13 +20,13 @@ export function useMediaQuery(query: string): boolean {
 
   useEffect(() => {
     const media = window.matchMedia(query);
-    
+
     // Set initial value
     setMatches(media.matches);
 
     // Create listener
     const listener = (e: MediaQueryListEvent) => setMatches(e.matches);
-    
+
     // Modern browsers
     if (media.addEventListener) {
       media.addEventListener("change", listener);
@@ -55,13 +55,13 @@ export function useOrientation(): "portrait" | "landscape" {
   const [orientation, setOrientation] = useState<"portrait" | "landscape">(
     typeof window !== "undefined" && window.innerWidth > window.innerHeight
       ? "landscape"
-      : "portrait"
+      : "portrait",
   );
 
   useEffect(() => {
     const handleOrientationChange = () => {
       setOrientation(
-        window.innerWidth > window.innerHeight ? "landscape" : "portrait"
+        window.innerWidth > window.innerHeight ? "landscape" : "portrait",
       );
     };
 
@@ -109,11 +109,11 @@ export function downloadFile(file: File, filename?: string): void {
   const link = document.createElement("a");
   link.href = url;
   link.download = filename || file.name;
-  
+
   // Append to body for iOS compatibility
   document.body.appendChild(link);
   link.click();
-  
+
   // Clean up
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
@@ -122,7 +122,9 @@ export function downloadFile(file: File, filename?: string): void {
 /**
  * Trigger haptic feedback on supported devices
  */
-export function triggerHapticFeedback(type: "light" | "medium" | "heavy" = "light"): void {
+export function triggerHapticFeedback(
+  type: "light" | "medium" | "heavy" = "light",
+): void {
   if (!("vibrate" in navigator)) return;
 
   const patterns = {
@@ -151,7 +153,9 @@ export function useIsStandalone(): boolean {
     const checkStandalone = () => {
       // @ts-ignore - standalone is not in TypeScript types
       const standalone = window.navigator.standalone;
-      const matchMedia = window.matchMedia("(display-mode: standalone)").matches;
+      const matchMedia = window.matchMedia(
+        "(display-mode: standalone)",
+      ).matches;
       setIsStandalone(standalone || matchMedia);
     };
 

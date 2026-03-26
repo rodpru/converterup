@@ -17,7 +17,10 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
     const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
     if (error) {
       setError(error.message);
       setLoading(false);
@@ -112,7 +115,10 @@ export default function LoginPage() {
 
       <p className="text-center mt-6 text-sm text-[#71717A]">
         Don&apos;t have an account?{" "}
-        <Link href="/signup" className="text-[#2DD4BF] hover:underline font-medium">
+        <Link
+          href="/signup"
+          className="text-[#2DD4BF] hover:underline font-medium"
+        >
           Sign up
         </Link>
       </p>

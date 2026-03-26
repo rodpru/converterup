@@ -27,12 +27,16 @@ export function ConversionResult({
   const outputExt = result.filename.split(".").pop() ?? "";
 
   const handleDownload = () => {
-    const file = new File([result.blob], result.filename, { type: result.blob.type });
+    const file = new File([result.blob], result.filename, {
+      type: result.blob.type,
+    });
     downloadFile(file, result.filename);
   };
 
   const handleShare = async () => {
-    const file = new File([result.blob], result.filename, { type: result.blob.type });
+    const file = new File([result.blob], result.filename, {
+      type: result.blob.type,
+    });
     await shareFile(file);
   };
 
@@ -44,7 +48,9 @@ export function ConversionResult({
       className="w-full max-w-3xl mx-auto"
     >
       <div className="text-center mb-8">
-        <h2 className="text-3xl sm:text-4xl font-[Syne] font-bold text-[#EDEDEF] mb-2">Done.</h2>
+        <h2 className="text-3xl sm:text-4xl font-[Syne] font-bold text-[#EDEDEF] mb-2">
+          Done.
+        </h2>
         {result.duration && (
           <p className="text-[#71717A] font-mono text-xs">
             Completed in {(result.duration / 1000).toFixed(1)}s
@@ -63,7 +69,9 @@ export function ConversionResult({
             type={category as "image" | "video"}
             className="mb-3"
           />
-          <p className="font-mono text-lg text-[#EDEDEF]">{formatFileSize(originalFile.size)}</p>
+          <p className="font-mono text-lg text-[#EDEDEF]">
+            {formatFileSize(originalFile.size)}
+          </p>
         </div>
         <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-6 text-center">
           <span className="text-xs font-mono uppercase tracking-wider text-[#71717A] block mb-3">
@@ -75,7 +83,9 @@ export function ConversionResult({
             active
             className="mb-3"
           />
-          <p className="font-mono text-lg text-[#EDEDEF]">{formatFileSize(result.size)}</p>
+          <p className="font-mono text-lg text-[#EDEDEF]">
+            {formatFileSize(result.size)}
+          </p>
           {reduction > 0 && (
             <p className="font-mono text-xs text-[#2DD4BF] mt-1">
               {reduction}% smaller
