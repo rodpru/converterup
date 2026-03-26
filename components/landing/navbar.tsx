@@ -49,6 +49,12 @@ export function Navbar() {
           >
             Pricing
           </Link>
+          <Link
+            href="/tools/youtube-thumbnail-downloader"
+            className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+          >
+            Tools
+          </Link>
         </div>
 
         {/* Desktop actions */}
@@ -121,6 +127,13 @@ export function Navbar() {
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
               Pricing
+            </Link>
+            <Link
+              href="/tools/youtube-thumbnail-downloader"
+              onClick={() => setMobileOpen(false)}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+            >
+              Tools
             </Link>
             <div className="pt-2 border-t border-[#2A2535]">
               {isLoggedIn ? (

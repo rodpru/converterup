@@ -84,6 +84,14 @@ export function Footer() {
                   How It Works
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/tools/youtube-thumbnail-downloader"
+                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
+                >
+                  YouTube Thumbnail Downloader
+                </Link>
+              </li>
             </ul>
           </div>
 
