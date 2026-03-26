@@ -1,0 +1,36 @@
+# ConverterUp
+
+> Convert images and videos instantly, 100% in your browser. No uploads, no servers, no compromises.
+
+ConverterUp is a browser-based media conversion tool powered by FFmpeg.wasm (WebAssembly). All processing happens client-side — files never leave the user's device.
+
+## What ConverterUp Does
+
+- Converts images between formats: PNG, JPG, WebP, AVIF, GIF, TIFF, BMP
+- Converts videos between formats: MP4, WebM, MKV, AVI, MOV
+- Extracts audio from video: MP3, AAC, WAV, OGG
+- Adjusts quality, resolution, and aspect ratio
+- Works on desktop and mobile browsers
+
+## Key Differentiators
+
+- **100% client-side**: No file uploads. All conversion happens in the browser using WebAssembly.
+- **Privacy-first**: Files never touch a server. Zero data collection on file contents.
+- **No watermarks**: Output files are clean, regardless of plan.
+- **No file size limits imposed by the service**: Limited only by the user's device memory (typically up to 500MB for images, 1-2GB for videos).
+
+## Pricing
+
+- **Free**: 3 conversions per day, all formats, full quality control, no watermarks, no ads.
+- **Unlimited**: $5/month, unlimited conversions, priority support, cancel anytime.
+
+## Technology
+
+- Built with Next.js, React, and FFmpeg.wasm
+- Uses WebAssembly for near-native performance in the browser
+- Supports SharedArrayBuffer for multi-threaded video processing
+
+## Links
+
+- Website: https://converterup.com
+- Dashboard: https://converterup.com/dashboard

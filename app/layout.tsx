@@ -57,6 +57,10 @@ export const metadata: Metadata = {
       "Convert images and videos instantly, 100% in your browser. No uploads, no servers, no compromises.",
   },
 
+  alternates: {
+    canonical: "https://converterup.com",
+  },
+
   robots: {
     index: true,
     follow: true,

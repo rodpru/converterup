@@ -89,31 +89,31 @@ export function Footer() {
 
           <div>
             <h3 className="font-mono text-[10px] uppercase tracking-wider text-[#71717A]/50 mb-4">
-              Company
+              Get Started
             </h3>
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/about"
+                  href="/signup"
                   className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
                 >
-                  About
+                  Sign Up
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/privacy"
+                  href="/login"
                   className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
                 >
-                  Privacy Policy
+                  Sign In
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/terms"
+                  href="/dashboard"
                   className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
                 >
-                  Terms of Service
+                  Dashboard
                 </Link>
               </li>
             </ul>

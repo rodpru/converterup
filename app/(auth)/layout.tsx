@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import { Logo } from "@/components/logo";
 import Link from "next/link";
 
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
+
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div className="min-h-screen bg-[#0C0A12] flex flex-col items-center justify-center px-4 relative">
       {/* Mesh gradient */}

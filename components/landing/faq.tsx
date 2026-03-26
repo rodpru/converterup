@@ -22,9 +22,9 @@ const faqs = [
       "Images: PNG, JPG, WebP, AVIF, GIF, TIFF, BMP. Videos: MP4, WebM, MKV, AVI, MOV. Audio extraction: MP3, AAC, WAV, OGG. We're constantly adding more formats.",
   },
   {
-    question: "How do credits work?",
+    question: "How does pricing work?",
     answer:
-      "Free users get 5 image conversions and 1 video conversion per day, resetting at midnight. If you need more, you can purchase credit packs (one-time, no subscription). Paid credits never expire.",
+      "Free users get 3 conversions per day — images, videos, or audio. For unlimited conversions, you can upgrade to the Unlimited plan at $5/month. Cancel anytime.",
   },
   {
     question: "Is there a file size limit?",
@@ -39,7 +39,7 @@ const faqs = [
   {
     question: "Do I need to create an account?",
     answer:
-      "You can use ConverterUp without an account for basic conversions. Creating a free account unlocks daily credits tracking and the ability to purchase additional credits.",
+      "You can use ConverterUp without an account for basic conversions. Creating a free account unlocks daily conversion tracking and the ability to upgrade to unlimited.",
   },
 ];
 
@@ -55,8 +55,7 @@ export function FAQ() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Questions &{" "}
-            <span className="gradient-text">answers.</span>
+            Questions & <span className="gradient-text">answers.</span>
           </h2>
           <p className="text-lg text-[#71717A] font-[Inter]">
             Everything you need to know about ConverterUp.
