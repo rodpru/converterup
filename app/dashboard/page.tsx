@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { Navbar } from "@/components/landing/navbar";
 import { FileUploader } from "@/components/file-uploader";
 import { ConversionOptions } from "@/components/conversion-options";
@@ -33,18 +32,17 @@ export default function DashboardPage() {
     unknown
   > | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const searchParams = useSearchParams();
 
   // Sync subscription status when returning from Stripe checkout
   useEffect(() => {
-    if (searchParams.get("upgraded") === "true") {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("upgraded") === "true") {
       fetch("/api/subscription/sync", { method: "POST" }).then(() => {
         window.dispatchEvent(new Event("credits-updated"));
-        // Clean URL
         window.history.replaceState({}, "", "/dashboard");
       });
     }
-  }, [searchParams]);
+  }, []);
 
   const fadeInUp = prefersReducedMotion
     ? {}

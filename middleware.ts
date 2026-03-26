@@ -2,6 +2,13 @@ import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname === "/en/youtube-thumbnail-downloader") {
+    return NextResponse.redirect(
+      new URL("/tools/youtube-thumbnail-downloader", request.url),
+      301,
+    );
+  }
+
   const response = await updateSession(request);
 
   // Add COOP/COEP headers for SharedArrayBuffer (FFmpeg multi-thread)
