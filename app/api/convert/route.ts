@@ -138,8 +138,15 @@ export async function GET(request: NextRequest) {
       const failedTask = job.tasks.find(
         (t: { status: string }) => t.status === "error",
       );
-      console.error("[CloudConvert] Failed task:", JSON.stringify(failedTask, null, 2));
-      const taskMessage = failedTask?.message || failedTask?.code || failedTask?.name || "unknown";
+      console.error(
+        "[CloudConvert] Failed task:",
+        JSON.stringify(failedTask, null, 2),
+      );
+      const taskMessage =
+        failedTask?.message ||
+        failedTask?.code ||
+        failedTask?.name ||
+        "unknown";
       return NextResponse.json({
         status: "error",
         error: `Conversion failed: ${taskMessage}`,
