@@ -32,19 +32,19 @@ export function Navbar() {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           <Link
-            href="#features"
+            href="/#features"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
             Features
           </Link>
           <Link
-            href="#how-it-works"
+            href="/#how-it-works"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
             How It Works
           </Link>
           <Link
-            href="#pricing"
+            href="/#pricing"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
             Pricing
@@ -108,21 +108,21 @@ export function Navbar() {
         <div className="md:hidden border-t border-[#2A2535] bg-[#0C0A12]/95 backdrop-blur-sm">
           <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
             <Link
-              href="#features"
+              href="/#features"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
               Features
             </Link>
             <Link
-              href="#how-it-works"
+              href="/#how-it-works"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
               How It Works
             </Link>
             <Link
-              href="#pricing"
+              href="/#pricing"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >

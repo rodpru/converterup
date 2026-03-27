@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { JsonLd } from "@/components/json-ld";
 import {
   ImageDown,
   Scaling,
@@ -144,6 +145,23 @@ const tools = [
 export default function ToolsPage() {
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "ConverterUp Free Online Tools",
+          description:
+            "16 free browser-based tools for images, video, code, and more.",
+          numberOfItems: tools.length,
+          itemListElement: tools.map((tool, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: tool.name,
+            description: tool.description,
+            url: `https://converterup.com${tool.href}`,
+          })),
+        }}
+      />
       <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
         <div className="max-w-3xl mx-auto text-center">
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">

@@ -78,19 +78,19 @@ export function Footer() {
 
             <div className="flex flex-wrap gap-x-8 gap-y-4 text-sm font-[Inter]">
               <Link
-                href="#features"
+                href="/#features"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
                 Features
               </Link>
               <Link
-                href="#pricing"
+                href="/#pricing"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
                 Pricing
               </Link>
               <Link
-                href="#how-it-works"
+                href="/#how-it-works"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
                 How It Works

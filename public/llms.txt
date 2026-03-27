@@ -4,7 +4,7 @@
 
 ConverterUp is a browser-based media conversion tool powered by FFmpeg.wasm (WebAssembly). All processing happens client-side — files never leave the user's device.
 
-## What ConverterUp Does
+## Media Converter
 
 - Converts images between formats: PNG, JPG, WebP, AVIF, GIF, TIFF, BMP
 - Converts videos between formats: MP4, WebM, MKV, AVI, MOV
@@ -12,25 +12,48 @@ ConverterUp is a browser-based media conversion tool powered by FFmpeg.wasm (Web
 - Adjusts quality, resolution, and aspect ratio
 - Works on desktop and mobile browsers
 
+## Free Online Tools
+
+All tools are free with 3 uses per day. Unlimited for $5/month.
+
+- **Image Compressor** (https://converterup.com/tools/image-compressor) — Reduce image file size without losing quality. Client-side Canvas API.
+- **Image Resizer** (https://converterup.com/tools/image-resizer) — Resize images to exact dimensions or percentages with aspect ratio lock.
+- **Video to GIF** (https://converterup.com/tools/video-to-gif) — Convert video clips into animated GIFs with FPS and width control.
+- **QR Code Generator** (https://converterup.com/tools/qr-code-generator) — Generate custom QR codes with colors, sizes, center logo, and error correction.
+- **YouTube Thumbnail Downloader** (https://converterup.com/tools/youtube-thumbnail-downloader) — Download YouTube thumbnails in all available resolutions.
+- **EXIF Viewer & Remover** (https://converterup.com/tools/exif-viewer) — View photo metadata (camera, GPS, settings) and strip EXIF data for privacy.
+- **Color Palette Extractor** (https://converterup.com/tools/color-palette) — Extract dominant colors from any image with HEX, RGB, and HSL values.
+- **Favicon Generator** (https://converterup.com/tools/favicon-generator) — Generate all standard favicon sizes from a single image, download as ZIP.
+- **SVG to PNG Converter** (https://converterup.com/tools/svg-to-png) — Convert SVG vector files to PNG with scale and background options.
+- **Image to Base64 Encoder** (https://converterup.com/tools/image-to-base64) — Encode images as Base64 data URIs for embedding in code.
+- **Video Frame Extractor** (https://converterup.com/tools/video-frame-extractor) — Capture individual frames from video files with precision seek.
+- **Stripe Fee Calculator** (https://converterup.com/tools/stripe-fee-calculator) — Calculate Stripe processing fees for USD, EUR, GBP, BRL with reverse calculator.
+- **Text Repeater** (https://converterup.com/tools/text-repeater) — Repeat any text multiple times with custom separators.
+- **VTT to SRT Converter** (https://converterup.com/tools/vtt-to-srt) — Convert WebVTT subtitles to SRT format instantly.
+- **JSON Viewer & Formatter** (https://converterup.com/tools/json-viewer) — Format, validate, and explore JSON with syntax highlighting.
+- **Hex to Decimal Converter** (https://converterup.com/tools/hex-to-decimal) — Convert between hex, decimal, binary, and octal with color preview.
+
 ## Key Differentiators
 
 - **100% client-side**: No file uploads. All conversion happens in the browser using WebAssembly.
 - **Privacy-first**: Files never touch a server. Zero data collection on file contents.
 - **No watermarks**: Output files are clean, regardless of plan.
-- **No file size limits imposed by the service**: Limited only by the user's device memory (typically up to 500MB for images, 1-2GB for videos).
+- **16 free tools**: Image, video, code, and utility tools — all browser-based.
 
 ## Pricing
 
-- **Free**: 3 conversions per day, all formats, full quality control, no watermarks, no ads.
-- **Unlimited**: $5/month, unlimited conversions, priority support, cancel anytime.
+- **Free**: 3 uses per day, all formats and tools, no watermarks, no ads.
+- **Unlimited**: $5/month, unlimited conversions and tool usage, cancel anytime.
 
 ## Technology
 
 - Built with Next.js, React, and FFmpeg.wasm
 - Uses WebAssembly for near-native performance in the browser
-- Supports SharedArrayBuffer for multi-threaded video processing
+- Canvas API for image processing tools
+- CloudConvert API for large video files (>20MB)
 
 ## Links
 
 - Website: https://converterup.com
+- All Tools: https://converterup.com/tools
 - Dashboard: https://converterup.com/dashboard
