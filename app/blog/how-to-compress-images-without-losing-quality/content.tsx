@@ -234,7 +234,7 @@ export function ArticleContent() {
               </h3>
               <p className="text-[#71717A] font-[Inter] text-sm mb-4">
                 Drag and drop your images into our free browser-based
-                compressor. No uploads, no sign-ups. Your files never leave your
+                compressor. No uploads required. Your files never leave your
                 device.
               </p>
               <Link
