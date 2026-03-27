@@ -3,11 +3,31 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Logo } from "@/components/logo";
+import { ArrowUpRight } from "lucide-react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const marqueeText = "CONVERTERUP \u2014 Transform Your Media";
 const marqueeItems = Array.from({ length: 12 }, () => marqueeText);
+
+const tools = [
+  { name: "Image Compressor", href: "/tools/image-compressor" },
+  { name: "Image Resizer", href: "/tools/image-resizer" },
+  { name: "Video to GIF", href: "/tools/video-to-gif" },
+  { name: "QR Code Generator", href: "/tools/qr-code-generator" },
+  { name: "YouTube Thumbnails", href: "/tools/youtube-thumbnail-downloader" },
+  { name: "EXIF Viewer", href: "/tools/exif-viewer" },
+  { name: "Color Palette", href: "/tools/color-palette" },
+  { name: "Favicon Generator", href: "/tools/favicon-generator" },
+  { name: "SVG to PNG", href: "/tools/svg-to-png" },
+  { name: "Image to Base64", href: "/tools/image-to-base64" },
+  { name: "Frame Extractor", href: "/tools/video-frame-extractor" },
+  { name: "Stripe Fees", href: "/tools/stripe-fee-calculator" },
+  { name: "Text Repeater", href: "/tools/text-repeater" },
+  { name: "VTT to SRT", href: "/tools/vtt-to-srt" },
+  { name: "JSON Viewer", href: "/tools/json-viewer" },
+  { name: "Hex to Decimal", href: "/tools/hex-to-decimal" },
+];
 
 export function Footer() {
   return (
@@ -34,193 +54,106 @@ export function Footer() {
         </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 py-12">
+      <div className="container mx-auto px-4 sm:px-6 py-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12"
         >
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <Logo className="w-8 h-8" />
-              <span className="text-xl font-[Syne] font-bold tracking-tight text-[#EDEDEF]">
-                ConverterUp
-              </span>
+          {/* Top: Brand + Nav */}
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-8">
+            <div className="max-w-xs">
+              <div className="flex items-center gap-2.5 mb-3">
+                <Logo className="w-7 h-7" />
+                <span className="text-lg font-[Syne] font-bold tracking-tight text-[#EDEDEF]">
+                  ConverterUp
+                </span>
+              </div>
+              <p className="text-[#71717A] font-[Inter] text-sm leading-relaxed">
+                Convert images and videos instantly in your browser. Private,
+                fast, and beautifully simple.
+              </p>
             </div>
-            <p className="text-[#71717A] font-[Inter] max-w-xs text-sm leading-relaxed">
-              Convert images and videos instantly in your browser. Private,
-              fast, and beautifully simple.
+
+            <div className="flex flex-wrap gap-x-8 gap-y-4 text-sm font-[Inter]">
+              <Link
+                href="#features"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                Features
+              </Link>
+              <Link
+                href="#pricing"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                Pricing
+              </Link>
+              <Link
+                href="#how-it-works"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                How It Works
+              </Link>
+              <Link
+                href="/dashboard"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                Dashboard
+              </Link>
+              <Link
+                href="/signup"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                Sign Up
+              </Link>
+              <Link
+                href="/login"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                Sign In
+              </Link>
+            </div>
+          </div>
+
+          {/* Tools grid */}
+          <div className="border-t border-[#2A2535] pt-6 mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-mono text-[10px] uppercase tracking-wider text-[#71717A]/50">
+                Free Tools
+              </h3>
+              <Link
+                href="/tools"
+                className="flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider text-[#2DD4BF] hover:text-[#EDEDEF] transition-colors"
+              >
+                View All
+                <ArrowUpRight className="w-3 h-3" />
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {tools.map((tool) => (
+                <Link
+                  key={tool.href}
+                  href={tool.href}
+                  className="px-3 py-1.5 rounded-md border border-[#2A2535] text-[#71717A] hover:text-[#EDEDEF] hover:border-[#2DD4BF]/20 transition-colors text-xs font-[Inter]"
+                >
+                  {tool.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom */}
+          <div className="border-t border-[#2A2535] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-[#71717A]/40 font-[Inter]">
+              &copy; {new Date().getFullYear()} ConverterUp. All rights
+              reserved.
+            </p>
+            <p className="text-xs text-[#71717A]/40 font-mono">
+              3 free uses/day &middot; Unlimited for $5/mo
             </p>
           </div>
-
-          <div>
-            <h3 className="font-mono text-[10px] uppercase tracking-wider text-[#71717A]/50 mb-4">
-              Product
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="#features"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#pricing"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#how-it-works"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  How It Works
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-mono text-[10px] uppercase tracking-wider text-[#71717A]/50 mb-4">
-              Free Tools
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/tools/image-compressor"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Image Compressor
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/image-resizer"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Image Resizer
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/video-to-gif"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Video to GIF
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/qr-code-generator"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  QR Code Generator
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/youtube-thumbnail-downloader"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  YouTube Thumbnails
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/exif-viewer"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  EXIF Viewer & Remover
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/color-palette"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Color Palette Extractor
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/favicon-generator"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Favicon Generator
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/svg-to-png"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  SVG to PNG
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/image-to-base64"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Image to Base64
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tools/video-frame-extractor"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Video Frame Extractor
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-mono text-[10px] uppercase tracking-wider text-[#71717A]/50 mb-4">
-              Get Started
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/signup"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Sign Up
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/login"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Sign In
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dashboard"
-                  className="text-[#71717A] hover:text-[#EDEDEF] transition-colors duration-200 text-sm font-[Inter]"
-                >
-                  Dashboard
-                </Link>
-              </li>
-            </ul>
-          </div>
         </motion.div>
-
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-[#2A2535]">
-          <p className="text-sm text-[#71717A]/50 mb-4 md:mb-0 font-[Inter]">
-            &copy; {new Date().getFullYear()} ConverterUp. All rights reserved.
-          </p>
-        </div>
       </div>
     </footer>
   );
