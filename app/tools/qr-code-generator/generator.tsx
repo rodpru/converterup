@@ -1,7 +1,15 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { AlertCircle, Download, Loader2, QrCode, Type } from "lucide-react";
+import {
+  AlertCircle,
+  Download,
+  ImagePlus,
+  Loader2,
+  QrCode,
+  Type,
+  X,
+} from "lucide-react";
 import QRCode from "qrcode";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
@@ -56,14 +64,29 @@ export function QRCodeGenerator() {
 
 function QRCodeGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const logoInputRef = useRef<HTMLInputElement>(null);
   const [text, setText] = useState("");
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#FFFFFF");
   const [size, setSize] = useState(512);
   const [errorCorrection, setErrorCorrection] =
-    useState<ErrorCorrectionLevel>("M");
+    useState<ErrorCorrectionLevel>("H");
+  const [logoSrc, setLogoSrc] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
+
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setLogoSrc(reader.result as string);
+    reader.readAsDataURL(file);
+  };
+
+  const removeLogo = () => {
+    setLogoSrc(null);
+    if (logoInputRef.current) logoInputRef.current.value = "";
+  };
 
   const generateQR = useCallback(async () => {
     if (!text.trim() || !canvasRef.current) return;
@@ -79,10 +102,40 @@ function QRCodeGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
         },
         errorCorrectionLevel: errorCorrection,
       });
+
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      // Draw center logo if provided
+      if (logoSrc) {
+        const img = new Image();
+        img.onload = () => {
+          const logoSize = size * 0.2;
+          const x = (canvas.width - logoSize) / 2;
+          const y = (canvas.height - logoSize) / 2;
+
+          // White background behind logo
+          const padding = logoSize * 0.1;
+          ctx.fillStyle = bgColor;
+          ctx.beginPath();
+          ctx.roundRect(
+            x - padding,
+            y - padding,
+            logoSize + padding * 2,
+            logoSize + padding * 2,
+            8,
+          );
+          ctx.fill();
+
+          ctx.drawImage(img, x, y, logoSize, logoSize);
+        };
+        img.src = logoSrc;
+      }
     } catch {
       setError("Failed to generate QR code. Please check your input.");
     }
-  }, [text, fgColor, bgColor, size, errorCorrection]);
+  }, [text, fgColor, bgColor, size, errorCorrection, logoSrc]);
 
   useEffect(() => {
     if (text.trim()) {
@@ -95,7 +148,36 @@ function QRCodeGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
 
     setDownloading(true);
     try {
-      const dataUrl = canvasRef.current.toDataURL("image/png");
+      // Create a final canvas with the "powered by" watermark
+      const srcCanvas = canvasRef.current;
+      const watermarkHeight = 24;
+      const finalCanvas = document.createElement("canvas");
+      finalCanvas.width = srcCanvas.width;
+      finalCanvas.height = srcCanvas.height + watermarkHeight;
+
+      const ctx = finalCanvas.getContext("2d");
+      if (!ctx) return;
+
+      // Draw QR code
+      ctx.drawImage(srcCanvas, 0, 0);
+
+      // Draw watermark bar
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, srcCanvas.height, finalCanvas.width, watermarkHeight);
+
+      // Draw watermark text
+      const fontSize = Math.max(10, size * 0.022);
+      ctx.fillStyle = "#999999";
+      ctx.font = `${fontSize}px Inter, system-ui, sans-serif`;
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      ctx.fillText(
+        "powered by ConverterUp.com",
+        finalCanvas.width - 8,
+        srcCanvas.height + watermarkHeight / 2,
+      );
+
+      const dataUrl = finalCanvas.toDataURL("image/png");
       const a = document.createElement("a");
       a.href = dataUrl;
       a.download = `qrcode-${size}px.png`;
@@ -107,7 +189,7 @@ function QRCodeGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
       setError("Failed to download QR code. Please try again.");
     }
     setDownloading(false);
-  }, [text, size, deduct]);
+  }, [text, size, bgColor, deduct]);
 
   return (
     <>
@@ -252,6 +334,51 @@ function QRCodeGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
                     )?.label
                   }{" "}
                   — Higher correction allows more damage tolerance
+                </p>
+              </div>
+
+              {/* Center Logo */}
+              <div>
+                <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
+                  Center Logo (optional)
+                </label>
+                {logoSrc ? (
+                  <div className="flex items-center gap-3 h-12 px-3 border border-[#2A2535] bg-[#1C1825] rounded-lg min-h-[44px]">
+                    {/* biome-ignore lint/a11y/useAltText: decorative preview */}
+                    <img
+                      src={logoSrc}
+                      className="w-8 h-8 rounded object-contain"
+                    />
+                    <span className="text-xs text-[#EDEDEF] font-[Inter] flex-1 truncate">
+                      Logo added
+                    </span>
+                    <button
+                      type="button"
+                      onClick={removeLogo}
+                      className="p-1 text-[#71717A] hover:text-[#FB7185] transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => logoInputRef.current?.click()}
+                    className="flex items-center justify-center gap-2 w-full h-11 border border-dashed border-[#2A2535] bg-[#1C1825] rounded-lg text-[#71717A] hover:border-[#2DD4BF]/30 hover:text-[#EDEDEF] transition-colors font-mono text-xs min-h-[44px]"
+                  >
+                    <ImagePlus className="w-4 h-4" />
+                    Upload Logo
+                  </button>
+                )}
+                <input
+                  ref={logoInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleLogoUpload}
+                  className="hidden"
+                />
+                <p className="mt-1.5 font-mono text-[10px] text-[#71717A]">
+                  Best with error correction H (30%) for logo visibility
                 </p>
               </div>
 
