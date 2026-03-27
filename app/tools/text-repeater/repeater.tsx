@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, ClipboardCopy, Repeat, Type } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { ToolGate } from "@/components/tool-gate";
 
 const SEPARATOR_OPTIONS = [
   { value: "newline", label: "New Line" },
@@ -56,6 +57,14 @@ function countWords(text: string): number {
 }
 
 export function TextRepeater() {
+  return (
+    <ToolGate>
+      {({ deduct }) => <TextRepeaterContent deduct={deduct} />}
+    </ToolGate>
+  );
+}
+
+function TextRepeaterContent({ deduct }: { deduct: () => Promise<void> }) {
   const [text, setText] = useState("");
   const [repeatCount, setRepeatCount] = useState(3);
   const [separatorType, setSeparatorType] = useState<SeparatorType>("newline");
@@ -79,6 +88,7 @@ export function TextRepeater() {
       await navigator.clipboard.writeText(output);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      await deduct();
     } catch {
       // Fallback for older browsers
       const textarea = document.createElement("textarea");
@@ -89,8 +99,9 @@ export function TextRepeater() {
       document.body.removeChild(textarea);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      await deduct();
     }
-  }, [output]);
+  }, [output, deduct]);
 
   const handleRepeatCountChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

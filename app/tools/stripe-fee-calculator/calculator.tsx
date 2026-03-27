@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownUp, Calculator, DollarSign, Info } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { ToolGate } from "@/components/tool-gate";
 
 type Currency = "USD" | "EUR" | "GBP" | "BRL";
 
@@ -117,6 +118,10 @@ function formatMoney(value: number, symbol: string): string {
 }
 
 export function StripeFeeCalculator() {
+  return <ToolGate>{() => <StripeFeeCalculatorContent />}</ToolGate>;
+}
+
+function StripeFeeCalculatorContent() {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState<Currency>("USD");
   const [mode, setMode] = useState<CalcMode>("charge");

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -91,6 +92,14 @@ function convertVttToSrt(vtt: string): string {
 }
 
 export function VttToSrtConverter() {
+  return (
+    <ToolGate>
+      {({ deduct }) => <VttToSrtConverterContent deduct={deduct} />}
+    </ToolGate>
+  );
+}
+
+function VttToSrtConverterContent({ deduct }: { deduct: () => Promise<void> }) {
   const [vttInput, setVttInput] = useState("");
   const [srtOutput, setSrtOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -156,9 +165,10 @@ export function VttToSrtConverter() {
     await navigator.clipboard.writeText(srtOutput);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  }, [srtOutput]);
+    await deduct();
+  }, [srtOutput, deduct]);
 
-  const handleDownload = useCallback(() => {
+  const handleDownload = useCallback(async () => {
     if (!srtOutput) return;
     const blob = new Blob([srtOutput], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
@@ -170,7 +180,8 @@ export function VttToSrtConverter() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  }, [srtOutput, fileName]);
+    await deduct();
+  }, [srtOutput, fileName, deduct]);
 
   return (
     <>

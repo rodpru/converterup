@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -68,6 +69,12 @@ function syntaxHighlight(json: string): string {
 }
 
 export function JsonViewer() {
+  return (
+    <ToolGate>{({ deduct }) => <JsonViewerContent deduct={deduct} />}</ToolGate>
+  );
+}
+
+function JsonViewerContent({ deduct }: { deduct: () => Promise<void> }) {
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<"formatted" | "minified" | null>(null);
@@ -135,8 +142,9 @@ export function JsonViewer() {
       await navigator.clipboard.writeText(text);
       setCopied(type);
       setTimeout(() => setCopied(null), 2000);
+      await deduct();
     },
-    [parsed],
+    [parsed, deduct],
   );
 
   return (

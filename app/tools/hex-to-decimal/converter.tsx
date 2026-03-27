@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, Check, ClipboardCopy, Hash, Palette } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -61,6 +62,18 @@ function parseColorHex(hex: string): ColorInfo {
 }
 
 export function HexToDecimalConverter() {
+  return (
+    <ToolGate>
+      {({ deduct }) => <HexToDecimalConverterContent deduct={deduct} />}
+    </ToolGate>
+  );
+}
+
+function HexToDecimalConverterContent({
+  deduct,
+}: {
+  deduct: () => Promise<void>;
+}) {
   const [hexInput, setHexInput] = useState("");
   const [decInput, setDecInput] = useState("");
   const [source, setSource] = useState<"hex" | "dec">("hex");
@@ -142,11 +155,15 @@ export function HexToDecimalConverter() {
     [],
   );
 
-  const handleCopy = useCallback(async (value: string, field: string) => {
-    await navigator.clipboard.writeText(value);
-    setCopiedField(field);
-    setTimeout(() => setCopiedField(null), 2000);
-  }, []);
+  const handleCopy = useCallback(
+    async (value: string, field: string) => {
+      await navigator.clipboard.writeText(value);
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+      await deduct();
+    },
+    [deduct],
+  );
 
   return (
     <>
