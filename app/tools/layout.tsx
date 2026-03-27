@@ -1,5 +1,6 @@
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { RelatedTools } from "@/components/related-tools";
 
 export default function ToolsLayout({
@@ -10,7 +11,10 @@ export default function ToolsLayout({
   return (
     <main className="min-h-screen bg-background selection:bg-primary/20 selection:text-primary">
       <Navbar />
-      <div className="pt-20">{children}</div>
+      <div className="pt-20">
+        <Breadcrumbs />
+        {children}
+      </div>
       <RelatedTools />
       <Footer />
     </main>
