@@ -7,14 +7,12 @@ import {
   Download,
   ImageIcon,
   Loader2,
-  LogIn,
   Package,
   Upload,
 } from "lucide-react";
-import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { createClient } from "@/lib/supabase/client";
+import { ToolGate } from "@/components/tool-gate";
 
 const FAVICON_SIZES = [
   { size: 16, label: "16x16", description: "Browser tab" },
@@ -111,7 +109,14 @@ function downloadBlob(blob: Blob, filename: string) {
 }
 
 export function FaviconGenerator() {
-  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  return (
+    <ToolGate>
+      {({ deduct }) => <FaviconGeneratorContent deduct={deduct} />}
+    </ToolGate>
+  );
+}
+
+function FaviconGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [sourcePreview, setSourcePreview] = useState<string | null>(null);
   const [favicons, setFavicons] = useState<GeneratedFavicon[]>([]);
@@ -121,13 +126,6 @@ export function FaviconGenerator() {
   const [error, setError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      setAuthenticated(!!data.user);
-    });
-  }, []);
 
   const resetState = useCallback(() => {
     if (sourcePreview) URL.revokeObjectURL(sourcePreview);
@@ -184,15 +182,19 @@ export function FaviconGenerator() {
     }
   }, [sourcePreview]);
 
-  const handleDownloadSingle = useCallback((fav: GeneratedFavicon) => {
-    setDownloadingSize(fav.size);
-    const name =
-      fav.size === 180
-        ? "apple-touch-icon.png"
-        : `favicon-${fav.size}x${fav.size}.png`;
-    downloadBlob(fav.blob, name);
-    setDownloadingSize(null);
-  }, []);
+  const handleDownloadSingle = useCallback(
+    async (fav: GeneratedFavicon) => {
+      setDownloadingSize(fav.size);
+      const name =
+        fav.size === 180
+          ? "apple-touch-icon.png"
+          : `favicon-${fav.size}x${fav.size}.png`;
+      downloadBlob(fav.blob, name);
+      await deduct();
+      setDownloadingSize(null);
+    },
+    [deduct],
+  );
 
   const handleDownloadAll = useCallback(async () => {
     if (favicons.length === 0) return;
@@ -220,12 +222,13 @@ export function FaviconGenerator() {
 
       const content = await zip.generateAsync({ type: "blob" });
       downloadBlob(content, "favicons.zip");
+      await deduct();
     } catch {
       setError("Failed to create ZIP file. Please try again.");
     } finally {
       setDownloadingAll(false);
     }
-  }, [favicons]);
+  }, [favicons, deduct]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -246,68 +249,6 @@ export function FaviconGenerator() {
     e.preventDefault();
     setDragOver(false);
   }, []);
-
-  if (authenticated === null) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-6 h-6 animate-spin text-[#2DD4BF]" />
-      </div>
-    );
-  }
-
-  if (!authenticated) {
-    return (
-      <>
-        <JsonLd data={jsonLdSchema} />
-        <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-              Free Tool
-            </span>
-            <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-              Favicon
-              <br />
-              <span className="gradient-text">Generator</span>
-            </h1>
-            <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto mb-10">
-              Generate favicons in all standard sizes from any image. Download
-              individually or as a complete ZIP package.
-            </p>
-          </motion.div>
-        </section>
-
-        <section className="container mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease, delay: 0.1 }}
-            className="max-w-md mx-auto bg-[#16131E] border border-[#2A2535] rounded-xl p-8 text-center"
-          >
-            <div className="w-12 h-12 rounded-lg bg-[#2DD4BF]/10 flex items-center justify-center mx-auto mb-4">
-              <LogIn className="w-6 h-6 text-[#2DD4BF]" />
-            </div>
-            <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF] mb-2">
-              Sign in to use this tool
-            </h2>
-            <p className="text-sm text-[#71717A] font-[Inter] mb-6">
-              Create a free account or log in to start generating favicons.
-            </p>
-            <Link
-              href="/login"
-              className="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
-            >
-              Sign In
-            </Link>
-          </motion.div>
-        </section>
-      </>
-    );
-  }
 
   return (
     <>

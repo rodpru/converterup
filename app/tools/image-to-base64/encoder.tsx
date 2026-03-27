@@ -7,14 +7,11 @@ import {
   Clipboard,
   FileImage,
   ImageIcon,
-  Loader2,
-  Lock,
   Upload,
 } from "lucide-react";
-import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { createClient } from "@/lib/supabase/client";
+import { ToolGate } from "@/components/tool-gate";
 
 const ACCEPTED_TYPES = [
   "image/png",
@@ -55,6 +52,18 @@ function formatBytes(bytes: number): string {
 }
 
 export function ImageToBase64Encoder() {
+  return (
+    <ToolGate>
+      {({ deduct }) => <ImageToBase64EncoderContent deduct={deduct} />}
+    </ToolGate>
+  );
+}
+
+function ImageToBase64EncoderContent({
+  deduct,
+}: {
+  deduct: () => Promise<void>;
+}) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -64,16 +73,6 @@ export function ImageToBase64Encoder() {
   const [copiedField, setCopiedField] = useState<"base64" | "datauri" | null>(
     null,
   );
-  const [authLoading, setAuthLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      setIsAuthenticated(!!data.user);
-      setAuthLoading(false);
-    });
-  }, []);
 
   const handleFileUpload = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,54 +129,14 @@ export function ImageToBase64Encoder() {
       try {
         await navigator.clipboard.writeText(text);
         setCopiedField(field);
+        await deduct();
         setTimeout(() => setCopiedField(null), 2000);
       } catch {
         setError("Failed to copy to clipboard.");
       }
     },
-    [],
+    [deduct],
   );
-
-  if (authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-6 h-6 animate-spin text-[#2DD4BF]" />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <>
-        <JsonLd data={jsonLdSchema} />
-        <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="max-w-md mx-auto text-center"
-          >
-            <div className="mx-auto w-16 h-16 rounded-2xl bg-[#16131E] border border-[#2A2535] flex items-center justify-center mb-6">
-              <Lock className="w-7 h-7 text-[#71717A]" />
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-3">
-              Sign in to continue
-            </h1>
-            <p className="text-[#71717A] font-[Inter] text-sm sm:text-base mb-8">
-              The Image to Base64 Encoder requires a free account. Sign in to
-              start encoding your images.
-            </p>
-            <Link
-              href="/login"
-              className="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
-            >
-              Sign in to use this tool
-            </Link>
-          </motion.div>
-        </section>
-      </>
-    );
-  }
 
   return (
     <>

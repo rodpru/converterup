@@ -1,19 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  AlertCircle,
-  Download,
-  Loader2,
-  Lock,
-  QrCode,
-  Type,
-} from "lucide-react";
-import Link from "next/link";
+import { AlertCircle, Download, Loader2, QrCode, Type } from "lucide-react";
 import QRCode from "qrcode";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { createClient } from "@/lib/supabase/client";
+import { ToolGate } from "@/components/tool-gate";
 
 const SIZE_OPTIONS = [
   { value: 256, label: "256px" },
@@ -55,6 +47,14 @@ const jsonLdSchema = {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function QRCodeGenerator() {
+  return (
+    <ToolGate>
+      {({ deduct }) => <QRCodeGeneratorContent deduct={deduct} />}
+    </ToolGate>
+  );
+}
+
+function QRCodeGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [text, setText] = useState("");
   const [fgColor, setFgColor] = useState("#000000");
@@ -64,16 +64,6 @@ export function QRCodeGenerator() {
     useState<ErrorCorrectionLevel>("M");
   const [error, setError] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
-  const [authLoading, setAuthLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      setIsAuthenticated(!!data.user);
-      setAuthLoading(false);
-    });
-  }, []);
 
   const generateQR = useCallback(async () => {
     if (!text.trim() || !canvasRef.current) return;
@@ -95,10 +85,10 @@ export function QRCodeGenerator() {
   }, [text, fgColor, bgColor, size, errorCorrection]);
 
   useEffect(() => {
-    if (isAuthenticated && text.trim()) {
+    if (text.trim()) {
       generateQR();
     }
-  }, [generateQR, isAuthenticated, text]);
+  }, [generateQR, text]);
 
   const handleDownload = useCallback(async () => {
     if (!canvasRef.current || !text.trim()) return;
@@ -112,52 +102,12 @@ export function QRCodeGenerator() {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+      await deduct();
     } catch {
       setError("Failed to download QR code. Please try again.");
     }
     setDownloading(false);
-  }, [text, size]);
-
-  if (authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-6 h-6 animate-spin text-[#2DD4BF]" />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <>
-        <JsonLd data={jsonLdSchema} />
-        <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="max-w-md mx-auto text-center"
-          >
-            <div className="mx-auto w-16 h-16 rounded-2xl bg-[#16131E] border border-[#2A2535] flex items-center justify-center mb-6">
-              <Lock className="w-7 h-7 text-[#71717A]" />
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-3">
-              Sign in to continue
-            </h1>
-            <p className="text-[#71717A] font-[Inter] text-sm sm:text-base mb-8">
-              The QR Code Generator requires a free account. Sign in to start
-              creating custom QR codes.
-            </p>
-            <Link
-              href="/login"
-              className="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
-            >
-              Sign in to use this tool
-            </Link>
-          </motion.div>
-        </section>
-      </>
-    );
-  }
+  }, [text, size, deduct]);
 
   return (
     <>

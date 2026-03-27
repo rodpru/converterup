@@ -1,7 +1,7 @@
 "use client";
 
 import { JsonLd } from "@/components/json-ld";
-import { createClient } from "@/lib/supabase/client";
+import { ToolGate } from "@/components/tool-gate";
 import { AnimatePresence, motion } from "framer-motion";
 import JSZip from "jszip";
 import {
@@ -12,13 +12,11 @@ import {
   Download,
   ImageIcon,
   Loader2,
-  LogIn,
   Maximize2,
   Trash2,
   Upload,
   X,
 } from "lucide-react";
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const ACCEPTED_FORMATS = ".mp4,.webm,.mov";
@@ -73,9 +71,18 @@ function formatFileSize(bytes: number): string {
 }
 
 export function VideoFrameExtractor() {
-  const [authChecking, setAuthChecking] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  return (
+    <ToolGate>
+      {({ deduct }) => <VideoFrameExtractorContent deduct={deduct} />}
+    </ToolGate>
+  );
+}
 
+function VideoFrameExtractorContent({
+  deduct,
+}: {
+  deduct: () => Promise<void>;
+}) {
   const [file, setFile] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [frames, setFrames] = useState<CapturedFrame[]>([]);
@@ -89,15 +96,6 @@ export function VideoFrameExtractor() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Auth check
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      setIsAuthenticated(!!data.user);
-      setAuthChecking(false);
-    });
-  }, []);
 
   // Cleanup object URLs on unmount
   useEffect(() => {
@@ -206,7 +204,7 @@ export function VideoFrameExtractor() {
   }, []);
 
   const downloadFrame = useCallback(
-    (frame: CapturedFrame) => {
+    async (frame: CapturedFrame) => {
       const ext = outputFormat === "jpg" ? "jpg" : "png";
       const a = document.createElement("a");
       a.href = frame.url;
@@ -214,8 +212,9 @@ export function VideoFrameExtractor() {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+      await deduct();
     },
-    [outputFormat],
+    [outputFormat, deduct],
   );
 
   const downloadAllFrames = useCallback(async () => {
@@ -241,11 +240,12 @@ export function VideoFrameExtractor() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      await deduct();
     } catch {
       setError("Failed to create ZIP file. Please try again.");
     }
     setDownloadingAll(false);
-  }, [frames, outputFormat, file]);
+  }, [frames, outputFormat, file, deduct]);
 
   const seekBy = useCallback((seconds: number) => {
     const video = videoRef.current;
@@ -268,49 +268,6 @@ export function VideoFrameExtractor() {
     setLightboxFrame(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }, [videoUrl, frames]);
-
-  // Auth gate
-  if (authChecking) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-6 h-6 text-[#2DD4BF] animate-spin" />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <>
-        <JsonLd data={jsonLdSchema} />
-        <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="max-w-xl mx-auto text-center"
-          >
-            <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-[#16131E] border border-[#2A2535] flex items-center justify-center">
-              <LogIn className="w-7 h-7 text-[#2DD4BF]" />
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-              Sign in to use this tool
-            </h1>
-            <p className="text-[#71717A] font-[Inter] text-base mb-8">
-              The Video Frame Extractor requires a free account. Sign in to
-              start capturing frames from your videos.
-            </p>
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 h-12 px-8 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
-            >
-              <LogIn className="w-4 h-4" />
-              Sign In
-            </Link>
-          </motion.div>
-        </section>
-      </>
-    );
-  }
 
   return (
     <>

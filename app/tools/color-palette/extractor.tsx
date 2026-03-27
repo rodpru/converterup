@@ -8,14 +8,12 @@ import {
   Download,
   ImageIcon,
   Loader2,
-  LogIn,
   Palette,
   Upload,
 } from "lucide-react";
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { createClient } from "@/lib/supabase/client";
+import { ToolGate } from "@/components/tool-gate";
 
 const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/webp"];
 const ACCEPTED_EXTENSIONS = ".png,.jpg,.jpeg,.webp";
@@ -80,10 +78,6 @@ function rgbToHsl([r, g, b]: RGBColor): string {
 
 function colorDistance(a: RGBColor, b: RGBColor): number {
   return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2;
-}
-
-function isLightColor([r, g, b]: RGBColor): boolean {
-  return r * 0.299 + g * 0.587 + b * 0.114 > 150;
 }
 
 /**
@@ -293,7 +287,18 @@ function generatePalettePng(colors: ExtractedColor[]): Promise<Blob> {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ColorPaletteExtractor() {
-  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  return (
+    <ToolGate>
+      {({ deduct }) => <ColorPaletteExtractorContent deduct={deduct} />}
+    </ToolGate>
+  );
+}
+
+function ColorPaletteExtractorContent({
+  deduct,
+}: {
+  deduct: () => Promise<void>;
+}) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [colors, setColors] = useState<ExtractedColor[]>([]);
@@ -305,13 +310,6 @@ export function ColorPaletteExtractor() {
   const [downloading, setDownloading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      setAuthenticated(!!data.user);
-    });
-  }, []);
 
   const resetState = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -445,74 +443,12 @@ export function ColorPaletteExtractor() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      await deduct();
     } catch {
       setError("Failed to generate palette image.");
     }
     setDownloading(false);
-  }, [colors]);
-
-  if (authenticated === null) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-6 h-6 animate-spin text-[#2DD4BF]" />
-      </div>
-    );
-  }
-
-  if (!authenticated) {
-    return (
-      <>
-        <JsonLd data={jsonLdSchema} />
-        <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-              Free Tool
-            </span>
-            <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-              Color Palette
-              <br />
-              <span className="gradient-text">Extractor</span>
-            </h1>
-            <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto mb-10">
-              Extract dominant colors from any image. Get HEX, RGB, and HSL
-              values instantly.
-            </p>
-          </motion.div>
-        </section>
-
-        <section className="container mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease, delay: 0.1 }}
-            className="max-w-md mx-auto bg-[#16131E] border border-[#2A2535] rounded-xl p-8 text-center"
-          >
-            <div className="w-12 h-12 rounded-lg bg-[#2DD4BF]/10 flex items-center justify-center mx-auto mb-4">
-              <LogIn className="w-6 h-6 text-[#2DD4BF]" />
-            </div>
-            <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF] mb-2">
-              Sign in to use this tool
-            </h2>
-            <p className="text-sm text-[#71717A] font-[Inter] mb-6">
-              Create a free account or log in to start extracting color
-              palettes.
-            </p>
-            <Link
-              href="/login"
-              className="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
-            >
-              Sign In
-            </Link>
-          </motion.div>
-        </section>
-      </>
-    );
-  }
+  }, [colors, deduct]);
 
   return (
     <>

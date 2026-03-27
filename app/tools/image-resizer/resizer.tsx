@@ -7,14 +7,12 @@ import {
   ImageIcon,
   Link as LinkIcon,
   Loader2,
-  Lock,
   Unlink,
   Upload,
 } from "lucide-react";
-import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { createClient } from "@/lib/supabase/client";
+import { ToolGate } from "@/components/tool-gate";
 
 const ACCEPTED_TYPES = [
   "image/png",
@@ -113,8 +111,14 @@ function formatFileSize(bytes: number): string {
 }
 
 export function ImageResizer() {
-  const [authChecking, setAuthChecking] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  return (
+    <ToolGate>
+      {({ deduct }) => <ImageResizerContent deduct={deduct} />}
+    </ToolGate>
+  );
+}
+
+function ImageResizerContent({ deduct }: { deduct: () => Promise<void> }) {
   const [original, setOriginal] = useState<ImageInfo | null>(null);
   const [targetWidth, setTargetWidth] = useState<number>(0);
   const [targetHeight, setTargetHeight] = useState<number>(0);
@@ -125,14 +129,6 @@ export function ImageResizer() {
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const aspectRatio = useRef<number>(1);
-
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      setIsAuthenticated(!!data.user);
-      setAuthChecking(false);
-    });
-  }, []);
 
   const loadImage = useCallback((file: File) => {
     setError(null);
@@ -283,7 +279,7 @@ export function ImageResizer() {
     }
   }, [original, targetWidth, targetHeight, resizedUrl]);
 
-  const handleDownload = useCallback(() => {
+  const handleDownload = useCallback(async () => {
     if (!resizedBlob || !original) return;
     const mime = getMimeType(original.file);
     const ext = getExtension(mime);
@@ -298,48 +294,8 @@ export function ImageResizer() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  }, [resizedBlob, original, targetWidth, targetHeight]);
-
-  if (authChecking) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="w-6 h-6 text-[#2DD4BF] animate-spin" />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <>
-        <JsonLd data={jsonLdSchema} />
-        <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease }}
-            className="max-w-xl mx-auto text-center"
-          >
-            <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-8 sm:p-12">
-              <Lock className="w-10 h-10 text-[#2DD4BF] mx-auto mb-4" />
-              <h1 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-3">
-                Sign in to use this tool
-              </h1>
-              <p className="text-[#71717A] font-[Inter] text-sm sm:text-base mb-6">
-                The Image Resizer requires a free account. Sign in to resize
-                images directly in your browser.
-              </p>
-              <Link
-                href="/login"
-                className="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
-              >
-                Sign In
-              </Link>
-            </div>
-          </motion.div>
-        </section>
-      </>
-    );
-  }
+    await deduct();
+  }, [resizedBlob, original, targetWidth, targetHeight, deduct]);
 
   return (
     <>
