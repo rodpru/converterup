@@ -1,9 +1,18 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { AlertCircle, Download, ImageIcon, Link2, Loader2 } from "lucide-react";
-import { useCallback, useState } from "react";
+import {
+  AlertCircle,
+  Download,
+  ImageIcon,
+  Link2,
+  Loader2,
+  Lock,
+} from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 
 const THUMBNAIL_QUALITIES = [
   { key: "maxresdefault", label: "Max Resolution", width: 1280, height: 720 },
@@ -91,12 +100,56 @@ async function downloadThumbnail(url: string, filename: string) {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function YouTubeThumbnailDownloader() {
+  const [isAuthed, setIsAuthed] = useState<boolean | null>(null);
   const [url, setUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
   const [thumbnails, setThumbnails] = useState<ThumbnailResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [downloadingKey, setDownloadingKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setIsAuthed(!!user);
+    });
+  }, []);
+
+  if (isAuthed === null) {
+    return (
+      <div className="flex items-center justify-center py-32">
+        <Loader2 className="w-6 h-6 animate-spin text-[#2DD4BF]" />
+      </div>
+    );
+  }
+
+  if (!isAuthed) {
+    return (
+      <div className="flex items-center justify-center py-32">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center max-w-md"
+        >
+          <div className="w-16 h-16 rounded-xl border border-[#2A2535] bg-[#16131E] flex items-center justify-center mx-auto mb-6">
+            <Lock className="w-8 h-8 text-[#71717A]" />
+          </div>
+          <h2 className="text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-3">
+            Sign in to use this tool
+          </h2>
+          <p className="text-[#71717A] mb-6 text-sm">
+            Create a free account to access all tools.
+          </p>
+          <Link
+            href="/login"
+            className="inline-flex items-center h-12 px-8 bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
+          >
+            Sign In
+          </Link>
+        </motion.div>
+      </div>
+    );
+  }
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
