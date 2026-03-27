@@ -14,6 +14,14 @@ export const websiteSchema = {
   url: "https://converterup.com",
   description:
     "Convert images and videos instantly, 100% in your browser. No uploads, no servers, no compromises.",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://converterup.com/tools?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export const organizationSchema = {
