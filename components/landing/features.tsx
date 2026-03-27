@@ -47,7 +47,7 @@ const features = [
     title: "100% Private",
     description:
       "WebAssembly processing. Files never leave your device. No server, no tracking.",
-    span: "sm:col-span-2",
+    span: "sm:col-span-2 lg:col-span-3",
     large: false,
   },
 ];
