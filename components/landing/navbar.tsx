@@ -55,6 +55,12 @@ export function Navbar() {
           >
             Tools
           </Link>
+          <Link
+            href="/blog"
+            className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+          >
+            Blog
+          </Link>
         </div>
 
         {/* Desktop actions */}
@@ -134,6 +140,13 @@ export function Navbar() {
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
               Tools
+            </Link>
+            <Link
+              href="/blog"
+              onClick={() => setMobileOpen(false)}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+            >
+              Blog
             </Link>
             <div className="pt-2 border-t border-[#2A2535]">
               {isLoggedIn ? (
