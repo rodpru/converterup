@@ -22,14 +22,14 @@ import {
 export const metadata: Metadata = {
   title: "Free Online Tools | ConverterUp",
   description:
-    "Free browser-based tools for images, video, code, and more. No uploads, no sign-ups. Convert, compress, generate, and calculate — all client-side.",
+    "16 free browser-based tools for images, video, code, and more. 3 free uses per day. 100% private — files never leave your device.",
   alternates: {
     canonical: "https://converterup.com/tools",
   },
   openGraph: {
     title: "Free Online Tools | ConverterUp",
     description:
-      "Free browser-based tools for images, video, code, and more. No uploads, no sign-ups.",
+      "16 free browser-based tools for images, video, code, and more. 3 free uses per day.",
     url: "https://converterup.com/tools",
     siteName: "ConverterUp",
     type: "website",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Free Online Tools | ConverterUp",
     description:
-      "Free browser-based tools for images, video, code, and more. No uploads, no sign-ups.",
+      "16 free browser-based tools for images, video, code, and more. 3 free uses per day.",
   },
 };
 
@@ -152,10 +152,18 @@ export default function ToolsPage() {
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
             Free Online <span className="gradient-text">Tools</span>
           </h1>
-          <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Browser-based utilities for images, video, code, and more. No
-            uploads, no sign-ups required.
+          <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto mb-6">
+            Browser-based utilities for images, video, code, and more. 100%
+            private — your files never leave your device.
           </p>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#2DD4BF]/20 bg-[#2DD4BF]/5">
+            <span className="text-[#2DD4BF] font-mono text-xs">
+              3 free uses per day
+            </span>
+            <span className="text-[#71717A] font-mono text-xs">
+              — sign up for free, or go unlimited for $5/mo
+            </span>
+          </div>
         </div>
       </section>
 
