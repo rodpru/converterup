@@ -50,7 +50,7 @@ export function Navbar() {
             Pricing
           </Link>
           <Link
-            href="/tools/youtube-thumbnail-downloader"
+            href="/tools"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
             Tools
@@ -129,7 +129,7 @@ export function Navbar() {
               Pricing
             </Link>
             <Link
-              href="/tools/youtube-thumbnail-downloader"
+              href="/tools"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
