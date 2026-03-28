@@ -7,7 +7,7 @@ export async function isAdmin(userId: string): Promise<boolean> {
     .select("role")
     .eq("id", userId)
     .single();
-  return data?.role === "admin";
+  return data?.role === "boss";
 }
 
 // ---------------------------------------------------------------------------
