@@ -93,19 +93,34 @@ function convertVttToSrt(vtt: string): string {
 
 export function VttToSrtConverter() {
   return (
-    <ToolGate>
-      {({ deduct }) => <VttToSrtConverterContent deduct={deduct} />}
+    <ToolGate toolName="vtt-to-srt">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <VttToSrtConverterContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
-function VttToSrtConverterContent({ deduct }: { deduct: () => Promise<void> }) {
+function VttToSrtConverterContent({
+  deduct,
+  trackStarted,
+  trackCompleted,
+}: {
+  deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
+}) {
   const [vttInput, setVttInput] = useState("");
   const [srtOutput, setSrtOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const hasTrackedStarted = useRef(false);
 
   const handleConvert = useCallback((input: string) => {
     setError(null);
@@ -135,12 +150,16 @@ function VttToSrtConverterContent({ deduct }: { deduct: () => Promise<void> }) {
       setVttInput(value);
       if (value.trim()) {
         handleConvert(value);
+        if (!hasTrackedStarted.current) {
+          trackStarted();
+          hasTrackedStarted.current = true;
+        }
       } else {
         setSrtOutput("");
         setError(null);
       }
     },
-    [handleConvert],
+    [handleConvert, trackStarted],
   );
 
   const handleFileUpload = useCallback(
@@ -154,10 +173,14 @@ function VttToSrtConverterContent({ deduct }: { deduct: () => Promise<void> }) {
         const text = ev.target?.result as string;
         setVttInput(text);
         handleConvert(text);
+        if (!hasTrackedStarted.current) {
+          trackStarted();
+          hasTrackedStarted.current = true;
+        }
       };
       reader.readAsText(file);
     },
-    [handleConvert],
+    [handleConvert, trackStarted],
   );
 
   const handleCopy = useCallback(async () => {
@@ -165,8 +188,9 @@ function VttToSrtConverterContent({ deduct }: { deduct: () => Promise<void> }) {
     await navigator.clipboard.writeText(srtOutput);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+    trackCompleted();
     await deduct();
-  }, [srtOutput, deduct]);
+  }, [srtOutput, deduct, trackCompleted]);
 
   const handleDownload = useCallback(async () => {
     if (!srtOutput) return;
@@ -180,8 +204,9 @@ function VttToSrtConverterContent({ deduct }: { deduct: () => Promise<void> }) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    trackCompleted();
     await deduct();
-  }, [srtOutput, fileName, deduct]);
+  }, [srtOutput, fileName, deduct, trackCompleted]);
 
   return (
     <>

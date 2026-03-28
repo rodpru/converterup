@@ -9,7 +9,7 @@ import {
   Minimize2,
   Maximize2,
 } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 import { ToolGate } from "@/components/tool-gate";
 
@@ -70,12 +70,29 @@ function syntaxHighlight(json: string): string {
 
 export function JsonViewer() {
   return (
-    <ToolGate>{({ deduct }) => <JsonViewerContent deduct={deduct} />}</ToolGate>
+    <ToolGate toolName="json-viewer">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <JsonViewerContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
+    </ToolGate>
   );
 }
 
-function JsonViewerContent({ deduct }: { deduct: () => Promise<void> }) {
+function JsonViewerContent({
+  deduct,
+  trackStarted,
+  trackCompleted,
+}: {
+  deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
+}) {
   const [input, setInput] = useState("");
+  const hasTrackedStarted = useRef(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<"formatted" | "minified" | null>(null);
   const [collapsed, setCollapsed] = useState(false);
@@ -107,10 +124,15 @@ function JsonViewerContent({ deduct }: { deduct: () => Promise<void> }) {
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setInput(e.target.value);
+      const val = e.target.value;
+      setInput(val);
       setError(null);
+      if (val.trim() && !hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
     },
-    [],
+    [trackStarted],
   );
 
   const handleFormat = useCallback(() => {
@@ -142,9 +164,10 @@ function JsonViewerContent({ deduct }: { deduct: () => Promise<void> }) {
       await navigator.clipboard.writeText(text);
       setCopied(type);
       setTimeout(() => setCopied(null), 2000);
+      trackCompleted();
       await deduct();
     },
-    [parsed, deduct],
+    [parsed, deduct, trackCompleted],
   );
 
   return (

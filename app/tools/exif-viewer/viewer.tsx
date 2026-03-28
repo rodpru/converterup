@@ -162,11 +162,27 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ExifViewer() {
   return (
-    <ToolGate>{({ deduct }) => <ExifViewerContent deduct={deduct} />}</ToolGate>
+    <ToolGate toolName="exif-viewer">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <ExifViewerContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
+    </ToolGate>
   );
 }
 
-function ExifViewerContent({ deduct }: { deduct: () => Promise<void> }) {
+function ExifViewerContent({
+  deduct,
+  trackStarted,
+  trackCompleted,
+}: {
+  deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
+}) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [exifData, setExifData] = useState<ExifData | null>(null);
@@ -178,6 +194,7 @@ function ExifViewerContent({ deduct }: { deduct: () => Promise<void> }) {
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const hasTrackedStarted = useRef(false);
 
   const resetState = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -237,8 +254,12 @@ function ExifViewerContent({ deduct }: { deduct: () => Promise<void> }) {
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
       parseExif(selectedFile);
+      if (!hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
     },
-    [resetState, parseExif],
+    [resetState, parseExif, trackStarted],
   );
 
   const handleDrop = useCallback(
@@ -333,8 +354,9 @@ function ExifViewerContent({ deduct }: { deduct: () => Promise<void> }) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    trackCompleted();
     await deduct();
-  }, [cleanedUrl, file, deduct]);
+  }, [cleanedUrl, file, deduct, trackCompleted]);
 
   // Priority keys to show at the top of the table
   const priorityKeys = [

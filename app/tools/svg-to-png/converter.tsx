@@ -47,15 +47,30 @@ type InputMode = "upload" | "paste";
 
 export function SvgToPngConverter() {
   return (
-    <ToolGate>
-      {({ deduct }) => <SvgToPngConverterContent deduct={deduct} />}
+    <ToolGate toolName="svg-to-png">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <SvgToPngConverterContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
-function SvgToPngConverterContent({ deduct }: { deduct: () => Promise<void> }) {
+function SvgToPngConverterContent({
+  deduct,
+  trackStarted,
+  trackCompleted,
+}: {
+  deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const hasTrackedStarted = useRef(false);
   const [inputMode, setInputMode] = useState<InputMode>("upload");
   const [svgCode, setSvgCode] = useState("");
   const [svgBlobUrl, setSvgBlobUrl] = useState<string | null>(null);
@@ -119,19 +134,27 @@ function SvgToPngConverterContent({ deduct }: { deduct: () => Promise<void> }) {
         const text = reader.result as string;
         setSvgCode(text);
         processSvg(text);
+        if (!hasTrackedStarted.current) {
+          trackStarted();
+          hasTrackedStarted.current = true;
+        }
       };
       reader.onerror = () => setError("Failed to read the file.");
       reader.readAsText(file);
     },
-    [processSvg],
+    [processSvg, trackStarted],
   );
 
   const handlePaste = useCallback(
     (value: string) => {
       setSvgCode(value);
       processSvg(value);
+      if (value.trim() && !hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
     },
-    [processSvg],
+    [processSvg, trackStarted],
   );
 
   const handleConvert = useCallback(async () => {
@@ -193,8 +216,9 @@ function SvgToPngConverterContent({ deduct }: { deduct: () => Promise<void> }) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    trackCompleted();
     await deduct();
-  }, [pngUrl, scale, deduct]);
+  }, [pngUrl, scale, deduct, trackCompleted]);
 
   return (
     <>

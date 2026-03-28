@@ -1,27 +1,36 @@
 import { KpiCard } from "@/components/admin/kpi-card";
 import { ActivityFeed } from "@/components/admin/activity-feed";
+import { getOverviewData } from "@/lib/admin";
 
-export default function AdminOverviewPage() {
+export default async function AdminOverviewPage() {
+  const data = await getOverviewData();
+
   const kpis = [
     {
       label: "Total Users",
-      value: "0",
-      delta: { value: "+0 this week", positive: true },
+      value: data.totalUsers.toLocaleString(),
+      delta: { value: `${data.activeSubscribers} subscribers`, positive: true },
     },
     {
-      label: "Active Users (7d)",
-      value: "0",
-      delta: { value: "0% of total", positive: true },
+      label: "Active Subscribers",
+      value: data.activeSubscribers.toLocaleString(),
+      delta: {
+        value:
+          data.totalUsers > 0
+            ? `${Math.round((data.activeSubscribers / data.totalUsers) * 100)}% of total`
+            : "0% of total",
+        positive: data.activeSubscribers > 0,
+      },
     },
     {
-      label: "MRR",
-      value: "$0",
-      delta: { value: "+$0 this month", positive: true },
+      label: "Revenue",
+      value: `$${(data.revenue / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}`,
+      delta: { value: "all time", positive: true },
     },
     {
-      label: "Conversions Today",
-      value: "0",
-      delta: { value: "vs 0 avg", positive: true },
+      label: "Total Conversions",
+      value: data.totalConversions.toLocaleString(),
+      delta: { value: "all time", positive: true },
     },
   ];
 
@@ -42,7 +51,7 @@ export default function AdminOverviewPage() {
         ))}
       </div>
 
-      <ActivityFeed items={[]} />
+      <ActivityFeed items={data.recentActivity} />
     </div>
   );
 }

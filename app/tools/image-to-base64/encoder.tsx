@@ -53,18 +53,29 @@ function formatBytes(bytes: number): string {
 
 export function ImageToBase64Encoder() {
   return (
-    <ToolGate>
-      {({ deduct }) => <ImageToBase64EncoderContent deduct={deduct} />}
+    <ToolGate toolName="image-to-base64">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <ImageToBase64EncoderContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
 function ImageToBase64EncoderContent({
   deduct,
+  trackStarted,
+  trackCompleted,
 }: {
   deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const hasTrackedStarted = useRef(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [dataUri, setDataUri] = useState<string | null>(null);
@@ -96,6 +107,11 @@ function ImageToBase64EncoderContent({
       const objectUrl = URL.createObjectURL(file);
       setPreviewUrl(objectUrl);
 
+      if (!hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
+
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result as string;
@@ -107,7 +123,7 @@ function ImageToBase64EncoderContent({
         setError("Failed to read the file. Please try again.");
       reader.readAsDataURL(file);
     },
-    [],
+    [trackStarted],
   );
 
   const handleDrop = useCallback(
@@ -129,13 +145,14 @@ function ImageToBase64EncoderContent({
       try {
         await navigator.clipboard.writeText(text);
         setCopiedField(field);
+        trackCompleted();
         await deduct();
         setTimeout(() => setCopiedField(null), 2000);
       } catch {
         setError("Failed to copy to clipboard.");
       }
     },
-    [deduct],
+    [deduct, trackCompleted],
   );
 
   return (

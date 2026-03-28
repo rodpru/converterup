@@ -72,16 +72,26 @@ function formatFileSize(bytes: number): string {
 
 export function VideoFrameExtractor() {
   return (
-    <ToolGate>
-      {({ deduct }) => <VideoFrameExtractorContent deduct={deduct} />}
+    <ToolGate toolName="video-frame-extractor">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <VideoFrameExtractorContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
 function VideoFrameExtractorContent({
   deduct,
+  trackStarted,
+  trackCompleted,
 }: {
   deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
@@ -96,6 +106,7 @@ function VideoFrameExtractorContent({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hasTrackedStarted = useRef(false);
 
   // Cleanup object URLs on unmount
   useEffect(() => {
@@ -135,8 +146,12 @@ function VideoFrameExtractorContent({
       setVideoUrl(url);
       setFrames([]);
       setLightboxFrame(null);
+      if (!hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
     },
-    [videoUrl, frames],
+    [videoUrl, frames, trackStarted],
   );
 
   const captureFrame = useCallback(() => {
@@ -212,9 +227,10 @@ function VideoFrameExtractorContent({
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+      trackCompleted();
       await deduct();
     },
-    [outputFormat, deduct],
+    [outputFormat, deduct, trackCompleted],
   );
 
   const downloadAllFrames = useCallback(async () => {
@@ -240,12 +256,13 @@ function VideoFrameExtractorContent({
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      trackCompleted();
       await deduct();
     } catch {
       setError("Failed to create ZIP file. Please try again.");
     }
     setDownloadingAll(false);
-  }, [frames, outputFormat, file, deduct]);
+  }, [frames, outputFormat, file, deduct, trackCompleted]);
 
   const seekBy = useCallback((seconds: number) => {
     const video = videoRef.current;

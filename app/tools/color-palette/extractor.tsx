@@ -288,16 +288,26 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ColorPaletteExtractor() {
   return (
-    <ToolGate>
-      {({ deduct }) => <ColorPaletteExtractorContent deduct={deduct} />}
+    <ToolGate toolName="color-palette">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <ColorPaletteExtractorContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
 function ColorPaletteExtractorContent({
   deduct,
+  trackStarted,
+  trackCompleted,
 }: {
   deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -310,6 +320,7 @@ function ColorPaletteExtractorContent({
   const [downloading, setDownloading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const hasTrackedStarted = useRef(false);
 
   const resetState = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -332,8 +343,12 @@ function ColorPaletteExtractorContent({
 
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
+      if (!hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
     },
-    [resetState],
+    [resetState, trackStarted],
   );
 
   const handleDrop = useCallback(
@@ -443,12 +458,13 @@ function ColorPaletteExtractorContent({
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      trackCompleted();
       await deduct();
     } catch {
       setError("Failed to generate palette image.");
     }
     setDownloading(false);
-  }, [colors, deduct]);
+  }, [colors, deduct, trackCompleted]);
 
   return (
     <>

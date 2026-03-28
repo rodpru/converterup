@@ -112,13 +112,27 @@ function formatFileSize(bytes: number): string {
 
 export function ImageResizer() {
   return (
-    <ToolGate>
-      {({ deduct }) => <ImageResizerContent deduct={deduct} />}
+    <ToolGate toolName="image-resizer">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <ImageResizerContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
-function ImageResizerContent({ deduct }: { deduct: () => Promise<void> }) {
+function ImageResizerContent({
+  deduct,
+  trackStarted,
+  trackCompleted,
+}: {
+  deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
+}) {
   const [original, setOriginal] = useState<ImageInfo | null>(null);
   const [targetWidth, setTargetWidth] = useState<number>(0);
   const [targetHeight, setTargetHeight] = useState<number>(0);
@@ -129,6 +143,7 @@ function ImageResizerContent({ deduct }: { deduct: () => Promise<void> }) {
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const aspectRatio = useRef<number>(1);
+  const hasTrackedStarted = useRef(false);
 
   const loadImage = useCallback((file: File) => {
     setError(null);
@@ -154,6 +169,10 @@ function ImageResizerContent({ deduct }: { deduct: () => Promise<void> }) {
       setTargetWidth(img.naturalWidth);
       setTargetHeight(img.naturalHeight);
       aspectRatio.current = img.naturalWidth / img.naturalHeight;
+      if (!hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
     };
     img.onerror = () => {
       setError("Failed to load image. The file may be corrupted.");
@@ -294,8 +313,16 @@ function ImageResizerContent({ deduct }: { deduct: () => Promise<void> }) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    trackCompleted();
     await deduct();
-  }, [resizedBlob, original, targetWidth, targetHeight, deduct]);
+  }, [
+    resizedBlob,
+    original,
+    targetWidth,
+    targetHeight,
+    deduct,
+    trackCompleted,
+  ]);
 
   return (
     <>

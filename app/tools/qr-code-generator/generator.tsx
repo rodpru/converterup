@@ -56,15 +56,30 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export function QRCodeGenerator() {
   return (
-    <ToolGate>
-      {({ deduct }) => <QRCodeGeneratorContent deduct={deduct} />}
+    <ToolGate toolName="qr-code-generator">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <QRCodeGeneratorContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
-function QRCodeGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
+function QRCodeGeneratorContent({
+  deduct,
+  trackStarted,
+  trackCompleted,
+}: {
+  deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
+  const hasTrackedStarted = useRef(false);
   const [text, setText] = useState("");
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#FFFFFF");
@@ -184,6 +199,7 @@ function QRCodeGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
+      trackCompleted();
       await deduct();
     } catch {
       setError("Failed to download QR code. Please try again.");
@@ -236,7 +252,14 @@ function QRCodeGeneratorContent({ deduct }: { deduct: () => Promise<void> }) {
                   <Type className="absolute left-4 top-4 w-4 h-4 text-[#71717A]" />
                   <textarea
                     value={text}
-                    onChange={(e) => setText(e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setText(val);
+                      if (val.length === 1 && !hasTrackedStarted.current) {
+                        trackStarted();
+                        hasTrackedStarted.current = true;
+                      }
+                    }}
                     placeholder="Enter text or URL to encode..."
                     rows={3}
                     className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm resize-none"

@@ -7,6 +7,7 @@ import {
   Users,
   ArrowLeftRight,
   DollarSign,
+  Wrench,
   Settings,
 } from "lucide-react";
 import { Logo } from "@/components/logo";
@@ -16,6 +17,7 @@ const links = [
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/conversions", label: "Conversions", icon: ArrowLeftRight },
   { href: "/admin/revenue", label: "Revenue", icon: DollarSign },
+  { href: "/admin/tools", label: "Tools", icon: Wrench },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

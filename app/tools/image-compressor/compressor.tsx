@@ -9,6 +9,7 @@ import {
   Upload,
 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
+
 import { JsonLd } from "@/components/json-ld";
 import { ToolGate } from "@/components/tool-gate";
 
@@ -67,13 +68,27 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ImageCompressor() {
   return (
-    <ToolGate>
-      {({ deduct }) => <ImageCompressorContent deduct={deduct} />}
+    <ToolGate toolName="image-compressor">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <ImageCompressorContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
-function ImageCompressorContent({ deduct }: { deduct: () => Promise<void> }) {
+function ImageCompressorContent({
+  deduct,
+  trackStarted,
+  trackCompleted,
+}: {
+  deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
+}) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [quality, setQuality] = useState(75);
@@ -83,6 +98,7 @@ function ImageCompressorContent({ deduct }: { deduct: () => Promise<void> }) {
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const hasTrackedStarted = useRef(false);
 
   const resetState = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -106,8 +122,12 @@ function ImageCompressorContent({ deduct }: { deduct: () => Promise<void> }) {
 
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
+      if (!hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
     },
-    [resetState],
+    [resetState, trackStarted],
   );
 
   const handleDrop = useCallback(
@@ -210,8 +230,9 @@ function ImageCompressorContent({ deduct }: { deduct: () => Promise<void> }) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    trackCompleted();
     await deduct();
-  }, [result, deduct]);
+  }, [result, deduct, trackCompleted]);
 
   const reductionPercent =
     result && result.originalSize > 0

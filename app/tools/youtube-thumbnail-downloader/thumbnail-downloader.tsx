@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, Download, ImageIcon, Link2, Loader2 } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 import { ToolGate } from "@/components/tool-gate";
 
@@ -93,16 +93,26 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 export function YouTubeThumbnailDownloader() {
   return (
-    <ToolGate>
-      {({ deduct }) => <YouTubeThumbnailDownloaderContent deduct={deduct} />}
+    <ToolGate toolName="youtube-thumbnail-downloader">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <YouTubeThumbnailDownloaderContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
 function YouTubeThumbnailDownloaderContent({
   deduct,
+  trackStarted,
+  trackCompleted,
 }: {
   deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
 }) {
   const [url, setUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
@@ -110,6 +120,7 @@ function YouTubeThumbnailDownloaderContent({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [downloadingKey, setDownloadingKey] = useState<string | null>(null);
+  const hasTrackedStarted = useRef(false);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -127,6 +138,10 @@ function YouTubeThumbnailDownloaderContent({
 
       setVideoId(id);
       setLoading(true);
+      if (!hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
 
       const results: ThumbnailResult[] = [];
 
@@ -152,7 +167,7 @@ function YouTubeThumbnailDownloaderContent({
       setThumbnails(ordered);
       setLoading(false);
     },
-    [url],
+    [url, trackStarted],
   );
 
   const handleDownload = useCallback(
@@ -163,13 +178,14 @@ function YouTubeThumbnailDownloaderContent({
           thumb.url,
           `yt-thumbnail-${videoId}-${thumb.key}.jpg`,
         );
+        trackCompleted();
         await deduct();
       } catch {
         setError("Failed to download thumbnail. Please try again.");
       }
       setDownloadingKey(null);
     },
-    [videoId, deduct],
+    [videoId, deduct, trackCompleted],
   );
 
   const availableThumbnails = thumbnails.filter((t) => t.exists);

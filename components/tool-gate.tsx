@@ -6,15 +6,26 @@ import Link from "next/link";
 import { useToolAuth } from "@/lib/use-tool-auth";
 
 interface ToolGateProps {
+  toolName: string;
   children: (gate: {
     canUse: boolean;
     remaining: number;
     isSubscriber: boolean;
     deduct: () => Promise<void>;
+    trackStarted: () => void;
+    trackCompleted: () => void;
   }) => React.ReactNode;
 }
 
-export function ToolGate({ children }: ToolGateProps) {
+function trackEvent(toolName: string, eventType: "started" | "completed") {
+  fetch("/api/tool-events", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ toolName, eventType }),
+  }).catch(() => {});
+}
+
+export function ToolGate({ toolName, children }: ToolGateProps) {
   const { loading, isAuthed, canUse, remaining, isSubscriber, deduct } =
     useToolAuth();
 
@@ -92,5 +103,16 @@ export function ToolGate({ children }: ToolGateProps) {
     );
   }
 
-  return <>{children({ canUse, remaining, isSubscriber, deduct })}</>;
+  return (
+    <>
+      {children({
+        canUse,
+        remaining,
+        isSubscriber,
+        deduct,
+        trackStarted: () => trackEvent(toolName, "started"),
+        trackCompleted: () => trackEvent(toolName, "completed"),
+      })}
+    </>
+  );
 }

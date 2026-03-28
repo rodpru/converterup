@@ -68,16 +68,26 @@ function getFileExtension(file: File): string {
 
 export function VideoToGifConverter() {
   return (
-    <ToolGate>
-      {({ deduct }) => <VideoToGifConverterContent deduct={deduct} />}
+    <ToolGate toolName="video-to-gif">
+      {({ deduct, trackStarted, trackCompleted }) => (
+        <VideoToGifConverterContent
+          deduct={deduct}
+          trackStarted={trackStarted}
+          trackCompleted={trackCompleted}
+        />
+      )}
     </ToolGate>
   );
 }
 
 function VideoToGifConverterContent({
   deduct,
+  trackStarted,
+  trackCompleted,
 }: {
   deduct: () => Promise<void>;
+  trackStarted: () => void;
+  trackCompleted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
@@ -93,6 +103,7 @@ function VideoToGifConverterContent({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hasTrackedStarted = useRef(false);
 
   // Cleanup object URLs on unmount
   useEffect(() => {
@@ -126,8 +137,12 @@ function VideoToGifConverterContent({
       setVideoUrl(URL.createObjectURL(selected));
       setGifUrl(null);
       setGifSize(0);
+      if (!hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
     },
-    [videoUrl, gifUrl],
+    [videoUrl, gifUrl, trackStarted],
   );
 
   const handleDrop = useCallback(
@@ -158,8 +173,12 @@ function VideoToGifConverterContent({
       setVideoUrl(URL.createObjectURL(dropped));
       setGifUrl(null);
       setGifSize(0);
+      if (!hasTrackedStarted.current) {
+        trackStarted();
+        hasTrackedStarted.current = true;
+      }
     },
-    [videoUrl, gifUrl],
+    [videoUrl, gifUrl, trackStarted],
   );
 
   const handleConvert = useCallback(async () => {
@@ -228,8 +247,9 @@ function VideoToGifConverterContent({
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    trackCompleted();
     await deduct();
-  }, [gifUrl, file, deduct]);
+  }, [gifUrl, file, deduct, trackCompleted]);
 
   const handleReset = useCallback(() => {
     if (videoUrl) URL.revokeObjectURL(videoUrl);
