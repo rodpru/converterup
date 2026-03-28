@@ -53,7 +53,7 @@ export function AdminConversionsClient({
           params.delete(key);
         }
       }
-      router.push(`/admin/conversions?${params.toString()}`);
+      router.push(`/internal/conversions?${params.toString()}`);
     },
     [router, searchParams],
   );

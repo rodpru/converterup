@@ -13,12 +13,12 @@ import {
 import { Logo } from "@/components/logo";
 
 const links = [
-  { href: "/admin", label: "Overview", icon: LayoutDashboard },
-  { href: "/admin/users", label: "Users", icon: Users },
-  { href: "/admin/conversions", label: "Conversions", icon: ArrowLeftRight },
-  { href: "/admin/revenue", label: "Revenue", icon: DollarSign },
-  { href: "/admin/tools", label: "Tools", icon: Wrench },
-  { href: "/admin/settings", label: "Settings", icon: Settings },
+  { href: "/internal", label: "Overview", icon: LayoutDashboard },
+  { href: "/internal/users", label: "Users", icon: Users },
+  { href: "/internal/conversions", label: "Conversions", icon: ArrowLeftRight },
+  { href: "/internal/revenue", label: "Revenue", icon: DollarSign },
+  { href: "/internal/tools", label: "Tools", icon: Wrench },
+  { href: "/internal/settings", label: "Settings", icon: Settings },
 ];
 
 export function AdminSidebar() {
@@ -41,7 +41,7 @@ export function AdminSidebar() {
           {links.map((link) => {
             const isActive =
               pathname === link.href ||
-              (link.href !== "/admin" && pathname.startsWith(link.href));
+              (link.href !== "/internal" && pathname.startsWith(link.href));
             return (
               <Link
                 key={link.href}
@@ -66,7 +66,7 @@ export function AdminSidebar() {
           {links.map((link) => {
             const isActive =
               pathname === link.href ||
-              (link.href !== "/admin" && pathname.startsWith(link.href));
+              (link.href !== "/internal" && pathname.startsWith(link.href));
             return (
               <Link
                 key={link.href}

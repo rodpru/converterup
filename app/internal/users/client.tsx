@@ -41,7 +41,7 @@ export function AdminUsersClient({
           params.delete(key);
         }
       }
-      router.push(`/admin/users?${params.toString()}`);
+      router.push(`/internal/users?${params.toString()}`);
     },
     [router, searchParams],
   );

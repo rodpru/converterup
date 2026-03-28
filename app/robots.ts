@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api", "/dashboard", "/callback"],
+        disallow: ["/internal", "/api", "/dashboard", "/callback"],
       },
     ],
     sitemap: "https://converterup.com/sitemap.xml",

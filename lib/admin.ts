@@ -181,13 +181,12 @@ export async function getOverviewData(): Promise<OverviewData> {
   const subActivities: ActivityWithDate[] = (
     (recentSubEventsRes.data ?? []) as SubEvent[]
   ).map((e) => {
-    const email =
-      e.profiles
-        ? Array.isArray(e.profiles)
-          ? (e.profiles[0]?.email as string) ?? "unknown"
-          : ((e.profiles as Record<string, unknown>).email as string) ??
-            "unknown"
-        : "unknown";
+    const email = e.profiles
+      ? Array.isArray(e.profiles)
+        ? ((e.profiles[0]?.email as string) ?? "unknown")
+        : (((e.profiles as Record<string, unknown>).email as string) ??
+          "unknown")
+      : "unknown";
     let action: ActivityItem["action"] = "signup";
     let detail = "";
     if (e.event_type === "subscribed") {
@@ -211,13 +210,12 @@ export async function getOverviewData(): Promise<OverviewData> {
   const convActivities: ActivityWithDate[] = (
     (recentConversionsRes.data ?? []) as ConvEvent[]
   ).map((e) => {
-    const email =
-      e.profiles
-        ? Array.isArray(e.profiles)
-          ? (e.profiles[0]?.email as string) ?? "unknown"
-          : ((e.profiles as Record<string, unknown>).email as string) ??
-            "unknown"
-        : "unknown";
+    const email = e.profiles
+      ? Array.isArray(e.profiles)
+        ? ((e.profiles[0]?.email as string) ?? "unknown")
+        : (((e.profiles as Record<string, unknown>).email as string) ??
+          "unknown")
+      : "unknown";
     return {
       timestamp: timeAgo(e.created_at),
       email,
