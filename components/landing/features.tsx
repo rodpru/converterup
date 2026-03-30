@@ -25,7 +25,7 @@ const features = [
     icon: Minimize2,
     title: "Smart Compression",
     description: "Reduce file sizes up to 80% with quality preservation.",
-    span: "lg:row-span-2",
+    span: "",
     large: false,
   },
   {
