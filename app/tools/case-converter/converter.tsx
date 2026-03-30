@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Check, ClipboardCopy, Type } from "lucide-react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -129,31 +128,8 @@ function countWords(text: string): number {
 }
 
 export function CaseConverter() {
-  return (
-    <ToolGate toolName="case-converter">
-      {({ deduct, trackStarted, trackCompleted }) => (
-        <CaseConverterContent
-          deduct={deduct}
-          trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function CaseConverterContent({
-  deduct,
-  trackStarted,
-  trackCompleted,
-}: {
-  deduct: () => Promise<void>;
-  trackStarted: () => void;
-  trackCompleted: () => void;
-}) {
   const [input, setInput] = useState("");
   const [selectedCase, setSelectedCase] = useState<CaseType>("upper");
-  const hasTrackedStarted = useRef(false);
   const [copied, setCopied] = useState(false);
 
   const output = convertCase(input, selectedCase);
@@ -166,8 +142,6 @@ function CaseConverterContent({
       await navigator.clipboard.writeText(output);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-      trackCompleted();
-      await deduct();
     } catch {
       const textarea = document.createElement("textarea");
       textarea.value = output;
@@ -177,10 +151,8 @@ function CaseConverterContent({
       document.body.removeChild(textarea);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-      trackCompleted();
-      await deduct();
     }
-  }, [output, deduct, trackCompleted]);
+  }, [output]);
 
   return (
     <>
@@ -228,14 +200,7 @@ function CaseConverterContent({
               <textarea
                 id="case-input"
                 value={input}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setInput(val);
-                  if (val.length === 1 && !hasTrackedStarted.current) {
-                    trackStarted();
-                    hasTrackedStarted.current = true;
-                  }
-                }}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Enter or paste text to convert..."
                 rows={5}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm resize-y min-h-[44px]"

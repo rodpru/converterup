@@ -2,9 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownUp, Calculator, DollarSign, Info } from "lucide-react";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 type Currency = "USD" | "EUR" | "GBP" | "BRL";
 
@@ -118,24 +117,9 @@ function formatMoney(value: number, symbol: string): string {
 }
 
 export function StripeFeeCalculator() {
-  return (
-    <ToolGate toolName="stripe-fee-calculator">
-      {({ trackStarted }) => (
-        <StripeFeeCalculatorContent trackStarted={trackStarted} />
-      )}
-    </ToolGate>
-  );
-}
-
-function StripeFeeCalculatorContent({
-  trackStarted,
-}: {
-  trackStarted: () => void;
-}) {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState<Currency>("USD");
   const [mode, setMode] = useState<CalcMode>("charge");
-  const hasTrackedStarted = useRef(false);
 
   const selectedCurrency = useMemo(
     () => CURRENCIES.find((c) => c.code === currency) as CurrencyConfig,
@@ -154,13 +138,9 @@ function StripeFeeCalculatorContent({
       const val = e.target.value;
       if (val === "" || /^\d*\.?\d{0,2}$/.test(val)) {
         setAmount(val);
-        if (val && !hasTrackedStarted.current) {
-          trackStarted();
-          hasTrackedStarted.current = true;
-        }
       }
     },
-    [trackStarted],
+    [],
   );
 
   const toggleMode = useCallback(() => {

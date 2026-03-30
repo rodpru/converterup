@@ -2,9 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, Check, ClipboardCopy, Hash, Palette } from "lucide-react";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -62,31 +61,8 @@ function parseColorHex(hex: string): ColorInfo {
 }
 
 export function HexToDecimalConverter() {
-  return (
-    <ToolGate toolName="hex-to-decimal">
-      {({ deduct, trackStarted, trackCompleted }) => (
-        <HexToDecimalConverterContent
-          deduct={deduct}
-          trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function HexToDecimalConverterContent({
-  deduct,
-  trackStarted,
-  trackCompleted,
-}: {
-  deduct: () => Promise<void>;
-  trackStarted: () => void;
-  trackCompleted: () => void;
-}) {
   const [hexInput, setHexInput] = useState("");
   const [decInput, setDecInput] = useState("");
-  const hasTrackedStarted = useRef(false);
   const [source, setSource] = useState<"hex" | "dec">("hex");
   const [error, setError] = useState<string | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
@@ -126,10 +102,6 @@ function HexToDecimalConverterContent({
       setHexInput(val);
       setSource("hex");
       setError(null);
-      if (val.trim() && !hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
 
       const cleaned = val.replace(/^(0x|#)/i, "").trim();
       if (!cleaned) {
@@ -144,7 +116,7 @@ function HexToDecimalConverterContent({
       const dec = Number.parseInt(cleaned, 16);
       setDecInput(dec.toString(10));
     },
-    [trackStarted],
+    [],
   );
 
   const handleDecChange = useCallback(
@@ -153,10 +125,6 @@ function HexToDecimalConverterContent({
       setDecInput(val);
       setSource("dec");
       setError(null);
-      if (val.trim() && !hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
 
       const trimmed = val.trim();
       if (!trimmed) {
@@ -171,19 +139,14 @@ function HexToDecimalConverterContent({
       const dec = Number.parseInt(trimmed, 10);
       setHexInput(dec.toString(16).toUpperCase());
     },
-    [trackStarted],
+    [],
   );
 
-  const handleCopy = useCallback(
-    async (value: string, field: string) => {
-      await navigator.clipboard.writeText(value);
-      setCopiedField(field);
-      setTimeout(() => setCopiedField(null), 2000);
-      trackCompleted();
-      await deduct();
-    },
-    [deduct, trackCompleted],
-  );
+  const handleCopy = useCallback(async (value: string, field: string) => {
+    await navigator.clipboard.writeText(value);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  }, []);
 
   return (
     <>
