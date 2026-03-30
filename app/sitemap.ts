@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "vtt-to-srt",
     "json-viewer",
     "hex-to-decimal",
+    "html-minifier",
+    "css-minifier",
+    "uuid-generator",
+    "base64-decode",
+    "case-converter",
+    "csv-to-json",
   ];
 
   const blogEntries = blogPosts.map((post) => ({

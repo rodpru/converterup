@@ -21,6 +21,12 @@ import {
   Subtitles,
   Braces,
   Hash,
+  FileCode,
+  Paintbrush,
+  Fingerprint,
+  Unlock,
+  CaseSensitive,
+  Table,
 } from "lucide-react";
 
 export const tools = [
@@ -135,6 +141,48 @@ export const tools = [
     href: "/tools/hex-to-decimal",
     icon: Hash,
     tags: ["hex", "decimal", "binary", "octal", "convert", "number"],
+  },
+  {
+    name: "HTML Minifier",
+    description: "Minify HTML code to reduce file size.",
+    href: "/tools/html-minifier",
+    icon: FileCode,
+    tags: ["html", "minify", "compress", "code", "web"],
+  },
+  {
+    name: "CSS Minifier",
+    description: "Minify CSS stylesheets for faster loading.",
+    href: "/tools/css-minifier",
+    icon: Paintbrush,
+    tags: ["css", "minify", "compress", "stylesheet", "web"],
+  },
+  {
+    name: "UUID Generator",
+    description: "Generate UUID v4 identifiers instantly.",
+    href: "/tools/uuid-generator",
+    icon: Fingerprint,
+    tags: ["uuid", "guid", "generate", "random", "identifier"],
+  },
+  {
+    name: "Base64 Decoder",
+    description: "Decode Base64 strings to text or images.",
+    href: "/tools/base64-decode",
+    icon: Unlock,
+    tags: ["base64", "decode", "text", "image", "data uri"],
+  },
+  {
+    name: "Case Converter",
+    description: "Convert text between camelCase, snake_case, and more.",
+    href: "/tools/case-converter",
+    icon: CaseSensitive,
+    tags: ["case", "convert", "camel", "snake", "uppercase", "lowercase"],
+  },
+  {
+    name: "CSV to JSON",
+    description: "Convert CSV files to JSON format instantly.",
+    href: "/tools/csv-to-json",
+    icon: Table,
+    tags: ["csv", "json", "convert", "data", "spreadsheet"],
   },
 ];
 

@@ -27,6 +27,12 @@ const tools = [
   { name: "VTT to SRT", href: "/tools/vtt-to-srt" },
   { name: "JSON Viewer", href: "/tools/json-viewer" },
   { name: "Hex to Decimal", href: "/tools/hex-to-decimal" },
+  { name: "HTML Minifier", href: "/tools/html-minifier" },
+  { name: "CSS Minifier", href: "/tools/css-minifier" },
+  { name: "UUID Generator", href: "/tools/uuid-generator" },
+  { name: "Base64 Decoder", href: "/tools/base64-decode" },
+  { name: "Case Converter", href: "/tools/case-converter" },
+  { name: "CSV to JSON", href: "/tools/csv-to-json" },
 ];
 
 export function Footer() {

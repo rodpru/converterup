@@ -49,6 +49,16 @@ const allTools = [
   { name: "VTT to SRT", href: "/tools/vtt-to-srt", category: "utility" },
   { name: "JSON Viewer", href: "/tools/json-viewer", category: "code" },
   { name: "Hex to Decimal", href: "/tools/hex-to-decimal", category: "code" },
+  { name: "HTML Minifier", href: "/tools/html-minifier", category: "code" },
+  { name: "CSS Minifier", href: "/tools/css-minifier", category: "code" },
+  { name: "UUID Generator", href: "/tools/uuid-generator", category: "code" },
+  { name: "Base64 Decoder", href: "/tools/base64-decode", category: "code" },
+  {
+    name: "Case Converter",
+    href: "/tools/case-converter",
+    category: "utility",
+  },
+  { name: "CSV to JSON", href: "/tools/csv-to-json", category: "code" },
 ];
 
 export function RelatedTools() {

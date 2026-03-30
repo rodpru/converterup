@@ -35,7 +35,7 @@ export default function ToolsPage() {
           name: "ConverterUp Free Online Tools",
           description:
             "16 free browser-based tools for images, video, code, and more.",
-          numberOfItems: 16,
+          numberOfItems: 22,
           itemListElement: [
             {
               name: "Image Compressor",
@@ -119,6 +119,37 @@ export default function ToolsPage() {
               name: "Hex to Decimal",
               href: "/tools/hex-to-decimal",
               description: "Convert between hex, decimal, binary, and octal.",
+            },
+            {
+              name: "HTML Minifier",
+              href: "/tools/html-minifier",
+              description: "Minify HTML code to reduce file size.",
+            },
+            {
+              name: "CSS Minifier",
+              href: "/tools/css-minifier",
+              description: "Minify CSS stylesheets for faster loading.",
+            },
+            {
+              name: "UUID Generator",
+              href: "/tools/uuid-generator",
+              description: "Generate UUID v4 identifiers instantly.",
+            },
+            {
+              name: "Base64 Decoder",
+              href: "/tools/base64-decode",
+              description: "Decode Base64 strings to text or images.",
+            },
+            {
+              name: "Case Converter",
+              href: "/tools/case-converter",
+              description:
+                "Convert text between camelCase, snake_case, and more.",
+            },
+            {
+              name: "CSV to JSON",
+              href: "/tools/csv-to-json",
+              description: "Convert CSV files to JSON format instantly.",
             },
           ].map((tool, i) => ({
             "@type": "ListItem",

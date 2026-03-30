@@ -22,6 +22,12 @@ const toolNames: Record<string, string> = {
   "vtt-to-srt": "VTT to SRT Converter",
   "json-viewer": "JSON Viewer",
   "hex-to-decimal": "Hex to Decimal",
+  "html-minifier": "HTML Minifier",
+  "css-minifier": "CSS Minifier",
+  "uuid-generator": "UUID Generator",
+  "base64-decode": "Base64 Decoder",
+  "case-converter": "Case Converter",
+  "csv-to-json": "CSV to JSON",
 };
 
 export function Breadcrumbs() {
