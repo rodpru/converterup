@@ -13,6 +13,14 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const getRedirect = () => {
+    if (typeof window === "undefined") return "/dashboard";
+    return (
+      new URLSearchParams(window.location.search).get("redirect") ||
+      "/dashboard"
+    );
+  };
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -25,22 +33,27 @@ export default function SignupPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: `${window.location.origin}/callback` },
+      options: {
+        emailRedirectTo: `${window.location.origin}/callback?next=${encodeURIComponent(getRedirect())}`,
+      },
     });
     if (error) {
       setError(error.message);
       setLoading(false);
     } else {
-      router.push("/dashboard");
+      router.push(getRedirect());
       router.refresh();
     }
   };
 
   const handleOAuth = async (provider: "google" | "github") => {
     const supabase = createClient();
+    const redirect = getRedirect();
     await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo: `${window.location.origin}/callback` },
+      options: {
+        redirectTo: `${window.location.origin}/callback?next=${encodeURIComponent(redirect)}`,
+      },
     });
   };
 

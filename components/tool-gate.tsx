@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Lock, Loader2, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useToolAuth } from "@/lib/use-tool-auth";
 
 interface ToolGateProps {
@@ -26,8 +27,10 @@ function trackEvent(toolName: string, eventType: "started" | "completed") {
 }
 
 export function ToolGate({ toolName, children }: ToolGateProps) {
+  const pathname = usePathname();
   const { loading, isAuthed, canUse, remaining, isSubscriber, deduct } =
     useToolAuth();
+  const redirectParam = encodeURIComponent(pathname);
 
   if (loading) {
     return (
@@ -57,13 +60,13 @@ export function ToolGate({ toolName, children }: ToolGateProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/signup"
+              href={`/signup?redirect=${redirectParam}`}
               className="inline-flex items-center justify-center h-12 px-8 bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
             >
               Sign Up Free
             </Link>
             <Link
-              href="/login"
+              href={`/login?redirect=${redirectParam}`}
               className="inline-flex items-center justify-center h-12 px-8 border border-[#2A2535] text-[#EDEDEF] font-mono text-sm uppercase tracking-wider rounded-lg hover:border-[#2DD4BF]/30 transition-colors min-h-[44px]"
             >
               Sign In
