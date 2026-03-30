@@ -1,7 +1,8 @@
 "use client";
 
-import { ImageIcon, Video, Minimize2, Crop, Music, Lock } from "lucide-react";
 import { motion } from "framer-motion";
+import { Crop, ImageIcon, Lock, Minimize2, Music, Video } from "lucide-react";
+import Link from "next/link";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -13,6 +14,7 @@ const features = [
       "PNG, JPG, WebP, AVIF, GIF, TIFF, BMP. Convert between any image format instantly in your browser.",
     span: "sm:col-span-2 sm:row-span-2",
     large: true,
+    href: "/tools/svg-to-png",
   },
   {
     icon: Video,
@@ -20,6 +22,7 @@ const features = [
     description: "MP4, WebM, MKV, AVI, MOV. Transform formats client-side.",
     span: "",
     large: false,
+    href: "/tools/video-to-gif",
   },
   {
     icon: Minimize2,
@@ -27,6 +30,7 @@ const features = [
     description: "Reduce file sizes up to 80% with quality preservation.",
     span: "",
     large: false,
+    href: "/tools/image-compressor",
   },
   {
     icon: Crop,
@@ -34,6 +38,7 @@ const features = [
     description: "Precise dimension control. Lock or override aspect ratios.",
     span: "",
     large: false,
+    href: "/tools/image-resizer",
   },
   {
     icon: Music,
@@ -41,6 +46,7 @@ const features = [
     description: "Pull audio from any video. MP3, AAC, WAV, OGG.",
     span: "",
     large: false,
+    href: "/tools/video-frame-extractor",
   },
   {
     icon: Lock,
@@ -49,6 +55,7 @@ const features = [
       "WebAssembly processing. Files never leave your device. No server, no tracking.",
     span: "",
     large: false,
+    href: null,
   },
 ];
 
@@ -60,6 +67,46 @@ const item = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
 };
+
+function FeatureCard({
+  feature: f,
+  index: i,
+}: {
+  feature: (typeof features)[number];
+  index: number;
+}) {
+  return (
+    <motion.div
+      variants={item}
+      className={`group relative h-full bg-[#0C0A12] ${f.large ? "p-8 sm:p-10" : "p-6 sm:p-8"} hover:bg-card transition-all duration-500 ${f.href ? "" : f.span}`}
+    >
+      <div
+        className={`flex justify-between items-start ${f.large ? "mb-12 sm:mb-16" : "mb-8 sm:mb-10"}`}
+      >
+        <span className="font-mono text-[11px] tracking-widest text-muted-foreground/30">
+          0{i + 1}
+        </span>
+        <f.icon
+          className={`${f.large ? "w-6 h-6" : "w-5 h-5"} stroke-[1.5] text-primary/60`}
+        />
+      </div>
+
+      <h3
+        className={`font-[Syne] font-bold text-foreground mb-3 group-hover:translate-x-1 transition-transform duration-300 ${f.large ? "text-xl sm:text-2xl" : "text-lg"}`}
+      >
+        {f.title}
+      </h3>
+      <p
+        className={`text-muted-foreground leading-relaxed ${f.large ? "text-sm sm:text-base" : "text-sm"}`}
+      >
+        {f.description}
+      </p>
+
+      {/* Hover accent line */}
+      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary via-[#7C3AED] to-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+    </motion.div>
+  );
+}
 
 export function Features() {
   return (
@@ -104,38 +151,15 @@ export function Features() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-[#2A2535]/50 rounded-2xl overflow-hidden border border-[#2A2535]"
         >
-          {features.map((f, i) => (
-            <motion.div
-              key={f.title}
-              variants={item}
-              className={`group relative bg-[#0C0A12] ${f.large ? "p-8 sm:p-10" : "p-6 sm:p-8"} hover:bg-card transition-all duration-500 ${f.span}`}
-            >
-              <div
-                className={`flex justify-between items-start ${f.large ? "mb-12 sm:mb-16" : "mb-8 sm:mb-10"}`}
-              >
-                <span className="font-mono text-[11px] tracking-widest text-muted-foreground/30">
-                  0{i + 1}
-                </span>
-                <f.icon
-                  className={`${f.large ? "w-6 h-6" : "w-5 h-5"} stroke-[1.5] text-primary/60`}
-                />
-              </div>
-
-              <h3
-                className={`font-[Syne] font-bold text-foreground mb-3 group-hover:translate-x-1 transition-transform duration-300 ${f.large ? "text-xl sm:text-2xl" : "text-lg"}`}
-              >
-                {f.title}
-              </h3>
-              <p
-                className={`text-muted-foreground leading-relaxed ${f.large ? "text-sm sm:text-base" : "text-sm"}`}
-              >
-                {f.description}
-              </p>
-
-              {/* Hover accent line */}
-              <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary via-[#7C3AED] to-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-            </motion.div>
-          ))}
+          {features.map((f, i) =>
+            f.href ? (
+              <Link key={f.title} href={f.href} className={`block ${f.span}`}>
+                <FeatureCard feature={f} index={i} />
+              </Link>
+            ) : (
+              <FeatureCard key={f.title} feature={f} index={i} />
+            ),
+          )}
         </motion.div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { getSiteUrl } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -52,7 +53,7 @@ export default function SignupPage() {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/callback?next=${encodeURIComponent(redirect)}`,
+        redirectTo: `${getSiteUrl()}/callback?next=${encodeURIComponent(redirect)}`,
       },
     });
   };
