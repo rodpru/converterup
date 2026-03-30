@@ -9,8 +9,9 @@ import {
   Minimize2,
   Maximize2,
 } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { trackToolEvent } from "@/lib/track-tool";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -72,6 +73,7 @@ export function JsonViewer() {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<"formatted" | "minified" | null>(null);
   const [collapsed, setCollapsed] = useState(false);
+  const hasTrackedStarted = useRef(false);
 
   const parsed = useMemo(() => {
     if (!input.trim()) return { formatted: null, minified: null, valid: true };
@@ -103,6 +105,10 @@ export function JsonViewer() {
       const val = e.target.value;
       setInput(val);
       setError(null);
+      if (val && !hasTrackedStarted.current) {
+        trackToolEvent("json-viewer", "started");
+        hasTrackedStarted.current = true;
+      }
     },
     [],
   );
@@ -135,6 +141,7 @@ export function JsonViewer() {
       if (!text) return;
       await navigator.clipboard.writeText(text);
       setCopied(type);
+      trackToolEvent("json-viewer", "completed");
       setTimeout(() => setCopied(null), 2000);
     },
     [parsed],

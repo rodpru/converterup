@@ -32,14 +32,12 @@ export default function SettingsPage() {
               </span>
             </div>
             <div className="flex items-center justify-between pt-3 border-t border-[#2A2535]/50">
-              <span className="text-sm text-[#71717A]">
-                Subscription Price
-              </span>
+              <span className="text-sm text-[#71717A]">Subscription Price</span>
               <span className="font-mono text-sm text-[#EDEDEF]">$5/mo</span>
             </div>
             <div className="flex items-center justify-between pt-3 border-t border-[#2A2535]/50">
               <span className="text-sm text-[#71717A]">Total Tools</span>
-              <span className="font-mono text-sm text-[#EDEDEF]">16</span>
+              <span className="font-mono text-sm text-[#EDEDEF]">22</span>
             </div>
           </div>
         </div>

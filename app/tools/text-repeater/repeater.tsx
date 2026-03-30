@@ -2,8 +2,9 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, ClipboardCopy, Repeat, Type } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { trackToolEvent } from "@/lib/track-tool";
 
 const SEPARATOR_OPTIONS = [
   { value: "newline", label: "New Line" },
@@ -61,6 +62,7 @@ export function TextRepeater() {
   const [separatorType, setSeparatorType] = useState<SeparatorType>("newline");
   const [customSeparator, setCustomSeparator] = useState("");
   const [copied, setCopied] = useState(false);
+  const hasTrackedStarted = useRef(false);
 
   const separator = getSeparator(separatorType, customSeparator);
 
@@ -78,6 +80,7 @@ export function TextRepeater() {
     try {
       await navigator.clipboard.writeText(output);
       setCopied(true);
+      trackToolEvent("text-repeater", "completed");
       setTimeout(() => setCopied(false), 2000);
     } catch {
       // Fallback for older browsers
@@ -88,6 +91,7 @@ export function TextRepeater() {
       document.execCommand("copy");
       document.body.removeChild(textarea);
       setCopied(true);
+      trackToolEvent("text-repeater", "completed");
       setTimeout(() => setCopied(false), 2000);
     }
   }, [output]);
@@ -150,7 +154,13 @@ export function TextRepeater() {
               <textarea
                 id="input-text"
                 value={text}
-                onChange={(e) => setText(e.target.value)}
+                onChange={(e) => {
+                  setText(e.target.value);
+                  if (e.target.value && !hasTrackedStarted.current) {
+                    trackToolEvent("text-repeater", "started");
+                    hasTrackedStarted.current = true;
+                  }
+                }}
                 placeholder="Enter text to repeat..."
                 rows={4}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm resize-y min-h-[44px]"

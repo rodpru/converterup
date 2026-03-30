@@ -2,8 +2,9 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownUp, Calculator, DollarSign, Info } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { trackToolEvent } from "@/lib/track-tool";
 
 type Currency = "USD" | "EUR" | "GBP" | "BRL";
 
@@ -120,6 +121,8 @@ export function StripeFeeCalculator() {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState<Currency>("USD");
   const [mode, setMode] = useState<CalcMode>("charge");
+  const hasTrackedStarted = useRef(false);
+  const hasTrackedCompleted = useRef(false);
 
   const selectedCurrency = useMemo(
     () => CURRENCIES.find((c) => c.code === currency) as CurrencyConfig,
@@ -138,6 +141,15 @@ export function StripeFeeCalculator() {
       const val = e.target.value;
       if (val === "" || /^\d*\.?\d{0,2}$/.test(val)) {
         setAmount(val);
+        if (val && !hasTrackedStarted.current) {
+          trackToolEvent("stripe-fee-calculator", "started");
+          hasTrackedStarted.current = true;
+        }
+        const num = Number.parseFloat(val);
+        if (num > 0 && !hasTrackedCompleted.current) {
+          trackToolEvent("stripe-fee-calculator", "completed");
+          hasTrackedCompleted.current = true;
+        }
       }
     },
     [],

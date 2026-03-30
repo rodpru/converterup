@@ -2,8 +2,9 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, Check, ClipboardCopy, Hash, Palette } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { trackToolEvent } from "@/lib/track-tool";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -66,6 +67,7 @@ export function HexToDecimalConverter() {
   const [source, setSource] = useState<"hex" | "dec">("hex");
   const [error, setError] = useState<string | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const hasTrackedStarted = useRef(false);
 
   const decimalValue = useMemo(() => {
     if (source === "hex") {
@@ -103,6 +105,11 @@ export function HexToDecimalConverter() {
       setSource("hex");
       setError(null);
 
+      if (val && !hasTrackedStarted.current) {
+        trackToolEvent("hex-to-decimal", "started");
+        hasTrackedStarted.current = true;
+      }
+
       const cleaned = val.replace(/^(0x|#)/i, "").trim();
       if (!cleaned) {
         setDecInput("");
@@ -126,6 +133,11 @@ export function HexToDecimalConverter() {
       setSource("dec");
       setError(null);
 
+      if (val && !hasTrackedStarted.current) {
+        trackToolEvent("hex-to-decimal", "started");
+        hasTrackedStarted.current = true;
+      }
+
       const trimmed = val.trim();
       if (!trimmed) {
         setHexInput("");
@@ -145,6 +157,7 @@ export function HexToDecimalConverter() {
   const handleCopy = useCallback(async (value: string, field: string) => {
     await navigator.clipboard.writeText(value);
     setCopiedField(field);
+    trackToolEvent("hex-to-decimal", "completed");
     setTimeout(() => setCopiedField(null), 2000);
   }, []);
 

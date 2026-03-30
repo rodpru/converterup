@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Check, ClipboardCopy, Type } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
+import { trackToolEvent } from "@/lib/track-tool";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -131,6 +132,7 @@ export function CaseConverter() {
   const [input, setInput] = useState("");
   const [selectedCase, setSelectedCase] = useState<CaseType>("upper");
   const [copied, setCopied] = useState(false);
+  const hasTrackedStarted = useRef(false);
 
   const output = convertCase(input, selectedCase);
   const charCount = output.length;
@@ -141,6 +143,7 @@ export function CaseConverter() {
     try {
       await navigator.clipboard.writeText(output);
       setCopied(true);
+      trackToolEvent("case-converter", "completed");
       setTimeout(() => setCopied(false), 2000);
     } catch {
       const textarea = document.createElement("textarea");
@@ -150,6 +153,7 @@ export function CaseConverter() {
       document.execCommand("copy");
       document.body.removeChild(textarea);
       setCopied(true);
+      trackToolEvent("case-converter", "completed");
       setTimeout(() => setCopied(false), 2000);
     }
   }, [output]);
@@ -200,7 +204,13 @@ export function CaseConverter() {
               <textarea
                 id="case-input"
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                  if (e.target.value && !hasTrackedStarted.current) {
+                    trackToolEvent("case-converter", "started");
+                    hasTrackedStarted.current = true;
+                  }
+                }}
                 placeholder="Enter or paste text to convert..."
                 rows={5}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm resize-y min-h-[44px]"
