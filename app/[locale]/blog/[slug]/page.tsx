@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/json-ld";
 import { ArticlePageContent } from "@/components/blog/article-page-content";
 
 interface Props {
-	params: Promise<{ slug: string }>;
+	params: Promise<{ locale: string; slug: string }>;
 }
 
 export function generateStaticParams() {
@@ -17,11 +17,12 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const { slug } = await params;
+	const { locale, slug } = await params;
 	const article = getArticleBySlug(slug);
 	if (!article) return {};
 
-	const url = `https://converterup.com/blog/${article.slug}`;
+	const localePrefix = locale === "en" ? "" : `/${locale}`;
+	const url = `https://converterup.com${localePrefix}/blog/${article.slug}`;
 
 	return {
 		title: article.title,
@@ -43,12 +44,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ArticlePage({ params }: Props) {
-	const { slug } = await params;
+	const { locale, slug } = await params;
 	const article = getArticleBySlug(slug);
 	if (!article) notFound();
 
 	const faqItems = extractFaqItems(article);
-	const url = `https://converterup.com/blog/${article.slug}`;
+	const localePrefix = locale === "en" ? "" : `/${locale}`;
+	const url = `https://converterup.com${localePrefix}/blog/${article.slug}`;
 
 	return (
 		<>

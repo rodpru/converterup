@@ -29,12 +29,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "csv-to-json",
   ];
 
-  const blogEntries = getAllArticles().map((article) => ({
-    url: `${baseUrl}/blog/${article.slug}`,
-    lastModified: new Date(article.publishedAt),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  const blogEntries = getAllArticles().map((article) => {
+    const localePrefix = article.lang === "en" ? "" : `/${article.lang}`;
+    return {
+      url: `${baseUrl}${localePrefix}/blog/${article.slug}`,
+      lastModified: new Date(article.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    };
+  });
 
   return [
     {
@@ -57,6 +60,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     {
       url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/pt/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/es/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
