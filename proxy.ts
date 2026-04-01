@@ -111,7 +111,14 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(staticRedirects[staticSlug], request.url), 301);
   }
 
-  // 2. Run next-intl middleware, then merge Supabase auth cookies onto its response
+  // 2. Blog article paths without locale prefix are always EN (default locale).
+  //    Slugs are language-specific, so prevent next-intl from redirecting
+  //    e.g. /blog/how-to-convert-svg-to-png → /pt/blog/how-to-convert-svg-to-png (wrong!)
+  if (/^\/blog\/[^/]+$/.test(pathname)) {
+    request.cookies.set('NEXT_LOCALE', 'en');
+  }
+
+  // 3. Run next-intl middleware, then merge Supabase auth cookies onto its response
   const intlResponse = intlMiddleware(request);
   return await updateSession(request, intlResponse);
 }

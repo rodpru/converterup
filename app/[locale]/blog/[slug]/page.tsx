@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
 	getArticleBySlug,
-	getArticleSlugs,
+	getAllArticles,
 	extractFaqItems,
 } from "@/lib/blog";
 import { JsonLd } from "@/components/json-ld";
@@ -13,7 +13,10 @@ interface Props {
 }
 
 export function generateStaticParams() {
-	return getArticleSlugs().map((slug) => ({ slug }));
+	return getAllArticles().map((article) => ({
+		locale: article.lang,
+		slug: article.slug,
+	}));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -86,7 +89,7 @@ export default async function ArticlePage({ params }: Props) {
 							"@type": "ListItem",
 							position: 2,
 							name: "Blog",
-							item: "https://converterup.com/blog",
+							item: `https://converterup.com${localePrefix}/blog`,
 						},
 						{
 							"@type": "ListItem",
@@ -113,7 +116,7 @@ export default async function ArticlePage({ params }: Props) {
 					}}
 				/>
 			)}
-			<ArticlePageContent slug={slug} />
+			<ArticlePageContent slug={slug} locale={locale} />
 		</>
 	);
 }

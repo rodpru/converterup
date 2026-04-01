@@ -22,11 +22,12 @@ function formatDate(dateStr: string): string {
 	});
 }
 
-export function ArticlePageContent({ slug }: { slug: string }) {
+export function ArticlePageContent({ slug, locale }: { slug: string; locale: string }) {
 	const article = getArticleBySlug(slug);
 	if (!article) return null;
 
 	const related = getRelatedArticles(slug);
+	const prefix = locale === "en" ? "" : `/${locale}`;
 
 	return (
 		<motion.article
@@ -38,12 +39,12 @@ export function ArticlePageContent({ slug }: { slug: string }) {
 			<div className="max-w-3xl mx-auto">
 				{/* Breadcrumb */}
 				<nav className="flex items-center gap-1.5 text-sm font-[Inter] text-[#71717A] mb-8 pt-8">
-					<Link href="/" className="hover:text-[#EDEDEF] transition-colors">
+					<Link href={`${prefix}/`} className="hover:text-[#EDEDEF] transition-colors">
 						Home
 					</Link>
 					<ChevronRight className="w-3.5 h-3.5" />
 					<Link
-						href="/blog"
+						href={`${prefix}/blog`}
 						className="hover:text-[#EDEDEF] transition-colors"
 					>
 						Blog
@@ -87,7 +88,7 @@ export function ArticlePageContent({ slug }: { slug: string }) {
 							{related.map((post) => (
 								<Link
 									key={post.slug}
-									href={`/blog/${post.slug}`}
+									href={`${prefix}/blog/${post.slug}`}
 									className="group bg-[#16131E] border border-[#2A2535] rounded-xl p-5 hover:border-[#2DD4BF]/20 transition-colors"
 								>
 									<span className="font-mono text-[10px] uppercase tracking-wider text-[#2DD4BF]">
