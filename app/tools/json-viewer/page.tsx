@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JsonViewer } from "./viewer";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free JSON Viewer & Formatter — Format JSON Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function JsonViewerPage() {
-  return <JsonViewer />;
+  return (
+    <>
+      <JsonViewer />
+      <RelatedGuides toolHref="/tools/json-viewer" />
+    </>
+  );
 }

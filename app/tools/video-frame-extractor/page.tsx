@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { VideoFrameExtractor } from "./extractor";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title:
@@ -26,5 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default function VideoFrameExtractorPage() {
-  return <VideoFrameExtractor />;
+  return (
+    <>
+      <VideoFrameExtractor />
+      <RelatedGuides toolHref="/tools/video-frame-extractor" />
+    </>
+  );
 }

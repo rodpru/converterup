@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Base64Decoder } from "./decoder";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free Base64 Decoder — Decode Base64 Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function Base64DecodePage() {
-  return <Base64Decoder />;
+  return (
+    <>
+      <Base64Decoder />
+      <RelatedGuides toolHref="/tools/base64-decode" />
+    </>
+  );
 }

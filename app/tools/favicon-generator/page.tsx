@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FaviconGenerator } from "./generator";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free Favicon Generator — Create Favicons from Images | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function FaviconGeneratorPage() {
-  return <FaviconGenerator />;
+  return (
+    <>
+      <FaviconGenerator />
+      <RelatedGuides toolHref="/tools/favicon-generator" />
+    </>
+  );
 }

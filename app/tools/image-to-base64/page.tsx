@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ImageToBase64Encoder } from "./encoder";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title:
@@ -26,5 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default function ImageToBase64Page() {
-  return <ImageToBase64Encoder />;
+  return (
+    <>
+      <ImageToBase64Encoder />
+      <RelatedGuides toolHref="/tools/image-to-base64" />
+    </>
+  );
 }

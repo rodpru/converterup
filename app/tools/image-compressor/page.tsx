@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ImageCompressor } from "./compressor";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free Image Compressor — Reduce File Size Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function ImageCompressorPage() {
-  return <ImageCompressor />;
+  return (
+    <>
+      <ImageCompressor />
+      <RelatedGuides toolHref="/tools/image-compressor" />
+    </>
+  );
 }

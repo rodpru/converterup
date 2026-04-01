@@ -168,6 +168,27 @@
 }
 
 @layer utilities {
+  /* Article body inline HTML styles */
+  .article-body strong {
+    color: #ededef;
+  }
+  .article-body code {
+    color: #2dd4bf;
+    background-color: #16131e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+  .article-body a {
+    color: #2dd4bf;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+  .article-body a:hover {
+    color: #5eead4;
+  }
+
   /* Signature gradient text */
   .gradient-text {
     background: var(--gradient);

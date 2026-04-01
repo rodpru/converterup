@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ImageResizer } from "./resizer";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free Image Resizer — Resize Images Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function ImageResizerPage() {
-  return <ImageResizer />;
+  return (
+    <>
+      <ImageResizer />
+      <RelatedGuides toolHref="/tools/image-resizer" />
+    </>
+  );
 }

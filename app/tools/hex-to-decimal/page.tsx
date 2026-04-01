@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { HexToDecimalConverter } from "./converter";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free Hex to Decimal Converter — Number Base Converter | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function HexToDecimalPage() {
-  return <HexToDecimalConverter />;
+  return (
+    <>
+      <HexToDecimalConverter />
+      <RelatedGuides toolHref="/tools/hex-to-decimal" />
+    </>
+  );
 }

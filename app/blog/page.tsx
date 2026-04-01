@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { blogPosts } from "@/lib/blog-data";
+import { getAllArticles } from "@/lib/blog";
 import { ArrowRight } from "lucide-react";
+
+const LANG_LABELS: Record<string, string> = {
+	en: "EN",
+	pt: "PT",
+	es: "ES",
+};
 
 export const metadata: Metadata = {
   title: "Blog | ConverterUp",
@@ -40,16 +46,21 @@ export default function BlogIndex() {
 
       <section className="container mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
         <div className="max-w-4xl mx-auto grid grid-cols-1 gap-4">
-          {blogPosts.map((post) => (
+          {getAllArticles().map((post) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
               className="group bg-[#16131E] border border-[#2A2535] rounded-xl p-6 hover:border-[#2DD4BF]/20 transition-colors duration-200 flex flex-col sm:flex-row sm:items-center gap-4"
             >
               <div className="flex-1">
-                <span className="inline-block font-mono text-[10px] uppercase tracking-wider text-[#2DD4BF] mb-2">
-                  {post.category}
-                </span>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="inline-block font-mono text-[10px] uppercase tracking-wider text-[#2DD4BF]">
+                    {post.category}
+                  </span>
+                  <span className="inline-block font-mono text-[10px] uppercase tracking-wider text-[#71717A] border border-[#2A2535] rounded px-1.5 py-0.5">
+                    {LANG_LABELS[post.lang] ?? post.lang.toUpperCase()}
+                  </span>
+                </div>
                 <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF] mb-2 group-hover:text-[#2DD4BF] transition-colors">
                   {post.title}
                 </h2>

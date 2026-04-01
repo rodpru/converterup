@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { QRCodeGenerator } from "./generator";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free QR Code Generator — Custom Colors & Sizes | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function QRCodeGeneratorPage() {
-  return <QRCodeGenerator />;
+  return (
+    <>
+      <QRCodeGenerator />
+      <RelatedGuides toolHref="/tools/qr-code-generator" />
+    </>
+  );
 }

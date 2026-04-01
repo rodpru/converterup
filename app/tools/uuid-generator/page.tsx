@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { UuidGenerator } from "./generator";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free UUID Generator — Generate UUIDs Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function UuidGeneratorPage() {
-  return <UuidGenerator />;
+  return (
+    <>
+      <UuidGenerator />
+      <RelatedGuides toolHref="/tools/uuid-generator" />
+    </>
+  );
 }

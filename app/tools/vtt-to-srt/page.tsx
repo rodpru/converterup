@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { VttToSrtConverter } from "./converter";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free VTT to SRT Converter — Convert Subtitles Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function VttToSrtPage() {
-  return <VttToSrtConverter />;
+  return (
+    <>
+      <VttToSrtConverter />
+      <RelatedGuides toolHref="/tools/vtt-to-srt" />
+    </>
+  );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CaseConverter } from "./converter";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free Case Converter — Convert Text Case Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function CaseConverterPage() {
-  return <CaseConverter />;
+  return (
+    <>
+      <CaseConverter />
+      <RelatedGuides toolHref="/tools/case-converter" />
+    </>
+  );
 }

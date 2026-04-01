@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { blogPosts } from "@/lib/blog-data";
+import { getAllArticles } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://converterup.com";
@@ -29,9 +29,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "csv-to-json",
   ];
 
-  const blogEntries = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.publishedAt),
+  const blogEntries = getAllArticles().map((article) => ({
+    url: `${baseUrl}/blog/${article.slug}`,
+    lastModified: new Date(article.publishedAt),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));

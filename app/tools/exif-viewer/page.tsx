@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ExifViewer } from "./viewer";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free EXIF Data Viewer & Remover — Check Photo Metadata | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function ExifViewerPage() {
-  return <ExifViewer />;
+  return (
+    <>
+      <ExifViewer />
+      <RelatedGuides toolHref="/tools/exif-viewer" />
+    </>
+  );
 }

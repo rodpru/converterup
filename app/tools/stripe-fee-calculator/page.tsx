@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { StripeFeeCalculator } from "./calculator";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title:
@@ -26,5 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default function StripeFeeCalculatorPage() {
-  return <StripeFeeCalculator />;
+  return (
+    <>
+      <StripeFeeCalculator />
+      <RelatedGuides toolHref="/tools/stripe-fee-calculator" />
+    </>
+  );
 }

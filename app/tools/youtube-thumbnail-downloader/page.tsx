@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { YouTubeThumbnailDownloader } from "./thumbnail-downloader";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "YouTube Thumbnail Downloader - Free HD Thumbnails | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function YouTubeThumbnailDownloaderPage() {
-  return <YouTubeThumbnailDownloader />;
+  return (
+    <>
+      <YouTubeThumbnailDownloader />
+      <RelatedGuides toolHref="/tools/youtube-thumbnail-downloader" />
+    </>
+  );
 }

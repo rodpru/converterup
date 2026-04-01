@@ -5,14 +5,14 @@ import { ToolsGrid } from "./tools-grid";
 export const metadata: Metadata = {
   title: "Free Online Tools | ConverterUp",
   description:
-    "16 free browser-based tools for images, video, code, and more. 3 free uses per day. 100% private — files never leave your device.",
+    "22 free browser-based tools for images, video, code, and more. 3 free uses per day. 100% private — files never leave your device.",
   alternates: {
     canonical: "https://converterup.com/tools",
   },
   openGraph: {
     title: "Free Online Tools | ConverterUp",
     description:
-      "16 free browser-based tools for images, video, code, and more. 3 free uses per day.",
+      "22 free browser-based tools for images, video, code, and more. 3 free uses per day.",
     url: "https://converterup.com/tools",
     siteName: "ConverterUp",
     type: "website",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Free Online Tools | ConverterUp",
     description:
-      "16 free browser-based tools for images, video, code, and more. 3 free uses per day.",
+      "22 free browser-based tools for images, video, code, and more. 3 free uses per day.",
   },
 };
 
@@ -34,7 +34,7 @@ export default function ToolsPage() {
           "@type": "ItemList",
           name: "ConverterUp Free Online Tools",
           description:
-            "16 free browser-based tools for images, video, code, and more.",
+            "22 free browser-based tools for images, video, code, and more.",
           numberOfItems: 22,
           itemListElement: [
             {

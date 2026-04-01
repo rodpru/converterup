@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CsvToJsonConverter } from "./converter";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free CSV to JSON Converter — Convert CSV Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function CsvToJsonPage() {
-  return <CsvToJsonConverter />;
+  return (
+    <>
+      <CsvToJsonConverter />
+      <RelatedGuides toolHref="/tools/csv-to-json" />
+    </>
+  );
 }

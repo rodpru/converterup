@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { TextRepeater } from "./repeater";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free Text Repeater — Repeat Text Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function TextRepeaterPage() {
-  return <TextRepeater />;
+  return (
+    <>
+      <TextRepeater />
+      <RelatedGuides toolHref="/tools/text-repeater" />
+    </>
+  );
 }

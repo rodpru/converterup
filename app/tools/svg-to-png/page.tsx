@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SvgToPngConverter } from "./converter";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free SVG to PNG Converter — Convert SVG Files Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function SvgToPngPage() {
-  return <SvgToPngConverter />;
+  return (
+    <>
+      <SvgToPngConverter />
+      <RelatedGuides toolHref="/tools/svg-to-png" />
+    </>
+  );
 }

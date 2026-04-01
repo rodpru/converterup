@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { VideoToGifConverter } from "./converter";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title:
@@ -26,5 +27,10 @@ export const metadata: Metadata = {
 };
 
 export default function VideoToGifPage() {
-  return <VideoToGifConverter />;
+  return (
+    <>
+      <VideoToGifConverter />
+      <RelatedGuides toolHref="/tools/video-to-gif" />
+    </>
+  );
 }

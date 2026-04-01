@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CssMinifier } from "./minifier";
+import { RelatedGuides } from "@/components/related-guides";
 
 export const metadata: Metadata = {
   title: "Free CSS Minifier — Minify CSS Online | ConverterUp",
@@ -25,5 +26,10 @@ export const metadata: Metadata = {
 };
 
 export default function CssMinifierPage() {
-  return <CssMinifier />;
+  return (
+    <>
+      <CssMinifier />
+      <RelatedGuides toolHref="/tools/css-minifier" />
+    </>
+  );
 }
