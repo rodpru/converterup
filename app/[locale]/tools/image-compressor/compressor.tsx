@@ -83,7 +83,7 @@ function ImageCompressorContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
@@ -228,7 +228,7 @@ function ImageCompressorContent({
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    });
+    }, { data: result.compressedBlob, filename: result.fileName });
   }, [result, gatedDownload]);
 
   const reductionPercent =

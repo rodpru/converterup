@@ -146,7 +146,7 @@ function Base64DecoderContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [input, setInput] = useState("");
@@ -178,6 +178,12 @@ function Base64DecoderContent({
   const handleDownload = useCallback(async () => {
     if (result.type === "error") return;
 
+    const persistable = result.type === "image" && result.imageSrc
+      ? { data: result.imageSrc, filename: `decoded-image.${result.imageMime?.split("/")[1] ?? "png"}` }
+      : result.type === "text" && result.text
+        ? { data: new Blob([result.text], { type: "text/plain" }), filename: "decoded-text.txt" }
+        : undefined;
+
     await gatedDownload(() => {
       if (result.type === "image" && result.imageSrc) {
         const link = document.createElement("a");
@@ -198,7 +204,7 @@ function Base64DecoderContent({
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
       }
-    });
+    }, persistable);
   }, [result, gatedDownload]);
 
   return (

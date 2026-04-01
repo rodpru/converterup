@@ -108,7 +108,7 @@ function VttToSrtConverterContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [vttInput, setVttInput] = useState("");
@@ -191,18 +191,19 @@ function VttToSrtConverterContent({
 
   const handleDownload = useCallback(async () => {
     if (!srtOutput) return;
+    const baseName = fileName ? fileName.replace(/\.vtt$/i, "") : "subtitles";
+    const downloadFilename = `${baseName}.srt`;
     await gatedDownload(() => {
       const blob = new Blob([srtOutput], { type: "text/plain;charset=utf-8" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      const baseName = fileName ? fileName.replace(/\.vtt$/i, "") : "subtitles";
-      a.download = `${baseName}.srt`;
+      a.download = downloadFilename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-    });
+    }, { data: new Blob([srtOutput], { type: "text/plain;charset=utf-8" }), filename: downloadFilename });
   }, [srtOutput, fileName, gatedDownload]);
 
   return (

@@ -127,7 +127,7 @@ function ImageResizerContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [original, setOriginal] = useState<ImageInfo | null>(null);
@@ -297,12 +297,12 @@ function ImageResizerContent({
 
   const handleDownload = useCallback(async () => {
     if (!resizedBlob || !original) return;
-    await gatedDownload(() => {
-      const mime = getMimeType(original.file);
-      const ext = getExtension(mime);
-      const baseName = original.file.name.replace(/\.[^.]+$/, "");
-      const filename = `${baseName}-${targetWidth}x${targetHeight}.${ext}`;
+    const mime = getMimeType(original.file);
+    const ext = getExtension(mime);
+    const baseName = original.file.name.replace(/\.[^.]+$/, "");
+    const filename = `${baseName}-${targetWidth}x${targetHeight}.${ext}`;
 
+    await gatedDownload(() => {
       const url = URL.createObjectURL(resizedBlob);
       const a = document.createElement("a");
       a.href = url;
@@ -311,7 +311,7 @@ function ImageResizerContent({
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-    });
+    }, { data: resizedBlob, filename });
   }, [resizedBlob, original, targetWidth, targetHeight, gatedDownload]);
 
   return (

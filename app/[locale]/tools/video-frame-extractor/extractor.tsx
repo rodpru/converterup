@@ -87,7 +87,7 @@ function VideoFrameExtractorContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
@@ -217,15 +217,16 @@ function VideoFrameExtractorContent({
 
   const downloadFrame = useCallback(
     async (frame: CapturedFrame) => {
+      const ext = outputFormat === "jpg" ? "jpg" : "png";
+      const filename = `frame-${formatTimestamp(frame.timestamp).replace(/[:.]/g, "-")}.${ext}`;
       await gatedDownload(() => {
-        const ext = outputFormat === "jpg" ? "jpg" : "png";
         const a = document.createElement("a");
         a.href = frame.url;
-        a.download = `frame-${formatTimestamp(frame.timestamp).replace(/[:.]/g, "-")}.${ext}`;
+        a.download = filename;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-      });
+      }, { data: frame.blob, filename });
     },
     [outputFormat, gatedDownload],
   );
@@ -235,26 +236,27 @@ function VideoFrameExtractorContent({
 
     setDownloadingAll(true);
     try {
-      await gatedDownload(async () => {
-        const zip = new JSZip();
-        const ext = outputFormat === "jpg" ? "jpg" : "png";
+      const zip = new JSZip();
+      const ext = outputFormat === "jpg" ? "jpg" : "png";
 
-        for (let i = 0; i < frames.length; i++) {
-          const frame = frames[i];
-          const filename = `frame-${(i + 1).toString().padStart(3, "0")}-${formatTimestamp(frame.timestamp).replace(/[:.]/g, "-")}.${ext}`;
-          zip.file(filename, frame.blob);
-        }
+      for (let i = 0; i < frames.length; i++) {
+        const frame = frames[i];
+        const zipFilename = `frame-${(i + 1).toString().padStart(3, "0")}-${formatTimestamp(frame.timestamp).replace(/[:.]/g, "-")}.${ext}`;
+        zip.file(zipFilename, frame.blob);
+      }
 
-        const content = await zip.generateAsync({ type: "blob" });
+      const content = await zip.generateAsync({ type: "blob" });
+      const downloadFilename = `frames-${file?.name?.replace(/\.[^.]+$/, "") || "video"}.zip`;
+      await gatedDownload(() => {
         const url = URL.createObjectURL(content);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `frames-${file?.name?.replace(/\.[^.]+$/, "") || "video"}.zip`;
+        a.download = downloadFilename;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-      });
+      }, { data: content, filename: downloadFilename });
     } catch {
       setError("Failed to create ZIP file. Please try again.");
     }

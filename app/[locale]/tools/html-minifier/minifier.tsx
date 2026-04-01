@@ -65,7 +65,7 @@ function HtmlMinifierContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [input, setInput] = useState("");
@@ -117,7 +117,7 @@ function HtmlMinifierContent({
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-    });
+    }, { data: new Blob([output], { type: "text/html" }), filename: "minified.html" });
   }, [output, gatedDownload]);
 
   return (

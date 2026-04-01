@@ -108,7 +108,7 @@ function YouTubeThumbnailDownloaderContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [url, setUrl] = useState("");
@@ -171,12 +171,19 @@ function YouTubeThumbnailDownloaderContent({
     async (thumb: ThumbnailResult) => {
       setDownloadingKey(thumb.key);
       try {
-        await gatedDownload(async () => {
-          await downloadThumbnail(
-            thumb.url,
-            `yt-thumbnail-${videoId}-${thumb.key}.jpg`,
-          );
-        });
+        const filename = `yt-thumbnail-${videoId}-${thumb.key}.jpg`;
+        const response = await fetch(thumb.url);
+        const blob = await response.blob();
+        await gatedDownload(() => {
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = blobUrl;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(blobUrl);
+        }, { data: blob, filename });
       } catch {
         setError("Failed to download thumbnail. Please try again.");
       }

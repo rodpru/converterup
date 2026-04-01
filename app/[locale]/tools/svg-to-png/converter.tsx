@@ -62,7 +62,7 @@ function SvgToPngConverterContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -79,6 +79,7 @@ function SvgToPngConverterContent({
   const [bgMode, setBgMode] = useState<"transparent" | "custom">("transparent");
   const [bgColor, setBgColor] = useState("#FFFFFF");
   const [pngUrl, setPngUrl] = useState<string | null>(null);
+  const [pngBlob, setPngBlob] = useState<Blob | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [converting, setConverting] = useState(false);
 
@@ -196,6 +197,7 @@ function SvgToPngConverterContent({
       if (!pngBlob) throw new Error("Failed to generate PNG");
 
       const pngObjUrl = URL.createObjectURL(pngBlob);
+      setPngBlob(pngBlob);
       setPngUrl(pngObjUrl);
     } catch {
       setError("Failed to convert SVG to PNG. Please check your SVG content.");
@@ -206,15 +208,16 @@ function SvgToPngConverterContent({
 
   const handleDownload = useCallback(async () => {
     if (!pngUrl) return;
+    const filename = `converted-${scale}x.png`;
     await gatedDownload(() => {
       const a = document.createElement("a");
       a.href = pngUrl;
-      a.download = `converted-${scale}x.png`;
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    });
-  }, [pngUrl, scale, gatedDownload]);
+    }, pngBlob ? { data: pngBlob, filename } : undefined);
+  }, [pngUrl, pngBlob, scale, gatedDownload]);
 
   return (
     <>

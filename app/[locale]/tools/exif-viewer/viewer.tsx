@@ -177,7 +177,7 @@ function ExifViewerContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
@@ -187,6 +187,7 @@ function ExifViewerContent({
   const [loading, setLoading] = useState(false);
   const [stripping, setStripping] = useState(false);
   const [cleanedUrl, setCleanedUrl] = useState<string | null>(null);
+  const [cleanedBlob, setCleanedBlob] = useState<Blob | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -201,6 +202,7 @@ function ExifViewerContent({
     setExifData(null);
     setGps(null);
     setCleanedUrl(null);
+    setCleanedBlob(null);
     setError(null);
   }, [previewUrl, cleanedUrl]);
 
@@ -210,6 +212,7 @@ function ExifViewerContent({
     setExifData(null);
     setGps(null);
     setCleanedUrl(null);
+    setCleanedBlob(null);
 
     try {
       const data = await exifr.parse(imageFile, {
@@ -332,6 +335,7 @@ function ExifViewerContent({
 
       if (cleanedUrl) URL.revokeObjectURL(cleanedUrl);
       const url = URL.createObjectURL(blob);
+      setCleanedBlob(blob);
       setCleanedUrl(url);
     } catch {
       setError("Failed to strip EXIF data. Please try again.");
@@ -342,17 +346,18 @@ function ExifViewerContent({
 
   const downloadClean = useCallback(async () => {
     if (!cleanedUrl || !file) return;
+    const ext = file.type === "image/png" ? ".png" : ".jpg";
+    const baseName = file.name.replace(/\.[^.]+$/, "");
+    const filename = `${baseName}-no-exif${ext}`;
     await gatedDownload(() => {
-      const ext = file.type === "image/png" ? ".png" : ".jpg";
-      const baseName = file.name.replace(/\.[^.]+$/, "");
       const a = document.createElement("a");
       a.href = cleanedUrl;
-      a.download = `${baseName}-no-exif${ext}`;
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    });
-  }, [cleanedUrl, file, gatedDownload]);
+    }, cleanedBlob ? { data: cleanedBlob, filename } : undefined);
+  }, [cleanedUrl, cleanedBlob, file, gatedDownload]);
 
   // Priority keys to show at the top of the table
   const priorityKeys = [

@@ -79,7 +79,7 @@ function CssMinifierContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [input, setInput] = useState("");
@@ -131,7 +131,7 @@ function CssMinifierContent({
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-    });
+    }, { data: new Blob([output], { type: "text/css" }), filename: "minified.css" });
   }, [output, gatedDownload]);
 
   return (

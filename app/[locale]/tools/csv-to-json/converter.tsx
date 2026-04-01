@@ -158,7 +158,7 @@ function CsvToJsonContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [input, setInput] = useState("");
@@ -236,7 +236,7 @@ function CsvToJsonContent({
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-    });
+    }, { data: new Blob([result.json], { type: "application/json" }), filename: "converted.json" });
   }, [result.json, gatedDownload]);
 
   return (

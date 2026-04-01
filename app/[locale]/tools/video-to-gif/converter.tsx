@@ -83,7 +83,7 @@ function VideoToGifConverterContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
@@ -96,6 +96,7 @@ function VideoToGifConverterContent({
   const [error, setError] = useState<string | null>(null);
 
   const [gifUrl, setGifUrl] = useState<string | null>(null);
+  const [gifBlob, setGifBlob] = useState<Blob | null>(null);
   const [gifSize, setGifSize] = useState<number>(0);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -114,6 +115,7 @@ function VideoToGifConverterContent({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setError(null);
       setGifUrl(null);
+      setGifBlob(null);
       setGifSize(0);
       setProgress(0);
 
@@ -133,6 +135,7 @@ function VideoToGifConverterContent({
       setFile(selected);
       setVideoUrl(URL.createObjectURL(selected));
       setGifUrl(null);
+      setGifBlob(null);
       setGifSize(0);
       if (!hasTrackedStarted.current) {
         trackStarted();
@@ -169,6 +172,7 @@ function VideoToGifConverterContent({
       setFile(dropped);
       setVideoUrl(URL.createObjectURL(dropped));
       setGifUrl(null);
+      setGifBlob(null);
       setGifSize(0);
       if (!hasTrackedStarted.current) {
         trackStarted();
@@ -185,6 +189,7 @@ function VideoToGifConverterContent({
     setProgress(0);
     setError(null);
     setGifUrl(null);
+    setGifBlob(null);
     setGifSize(0);
 
     try {
@@ -216,6 +221,7 @@ function VideoToGifConverterContent({
 
       if (gifUrl) URL.revokeObjectURL(gifUrl);
 
+      setGifBlob(blob);
       setGifUrl(URL.createObjectURL(blob));
       setGifSize(blob.size);
 
@@ -238,15 +244,16 @@ function VideoToGifConverterContent({
 
   const handleDownload = useCallback(async () => {
     if (!gifUrl || !file) return;
+    const filename = `${file.name.replace(/\.[^.]+$/, "")}-converted.gif`;
     await gatedDownload(() => {
       const a = document.createElement("a");
       a.href = gifUrl;
-      a.download = `${file.name.replace(/\.[^.]+$/, "")}-converted.gif`;
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    });
-  }, [gifUrl, file, gatedDownload]);
+    }, gifBlob ? { data: gifBlob, filename } : undefined);
+  }, [gifUrl, gifBlob, file, gatedDownload]);
 
   const handleReset = useCallback(() => {
     if (videoUrl) URL.revokeObjectURL(videoUrl);
@@ -254,6 +261,7 @@ function VideoToGifConverterContent({
     setFile(null);
     setVideoUrl(null);
     setGifUrl(null);
+    setGifBlob(null);
     setGifSize(0);
     setProgress(0);
     setError(null);

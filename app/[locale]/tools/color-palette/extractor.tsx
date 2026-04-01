@@ -303,7 +303,7 @@ function ColorPaletteExtractorContent({
   gatedDownload,
   trackStarted,
 }: {
-  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
   trackStarted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
@@ -446,8 +446,8 @@ function ColorPaletteExtractorContent({
     if (colors.length === 0) return;
     setDownloading(true);
     try {
-      await gatedDownload(async () => {
-        const blob = await generatePalettePng(colors);
+      const blob = await generatePalettePng(colors);
+      await gatedDownload(() => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
@@ -456,7 +456,7 @@ function ColorPaletteExtractorContent({
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-      });
+      }, { data: blob, filename: "color-palette.png" });
     } catch {
       setError("Failed to generate palette image.");
     }
