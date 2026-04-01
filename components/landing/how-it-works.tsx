@@ -46,7 +46,8 @@ export function HowItWorks() {
           className="text-center mb-12 sm:mb-16 md:mb-24"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            {t("title")} <span className="gradient-text">{t("titleGradient")}</span>
+            {t("title")}{" "}
+            <span className="gradient-text">{t("titleGradient")}</span>
           </h2>
           <p className="text-lg sm:text-xl text-[#71717A] font-[Inter] max-w-lg mx-auto">
             {t("desc")}

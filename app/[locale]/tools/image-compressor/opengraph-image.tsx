@@ -5,8 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function OgImage() {
-	return generateOgImage({
-		title: "Image Compressor",
-		badge: "Image",
-	});
+  return generateOgImage({
+    title: "Image Compressor",
+    badge: "Image",
+  });
 }

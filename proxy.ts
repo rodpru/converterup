@@ -39,15 +39,18 @@ const toolRedirects: Record<string, string> = {
 const blogRedirects: Record<string, string> = {
   "how-to-use-stripe-fee-calculator": "/blog/stripe-fees-explained",
   "stripe-processing-fees-calculator-guide": "/blog/stripe-fees-explained",
-  "how-to-use-youtube-thumbnail-downloader": "/blog/how-to-download-youtube-thumbnail",
-  "how-to-download-youtube-thumbnails-online-in-3-simple-steps": "/blog/how-to-download-youtube-thumbnail",
+  "how-to-use-youtube-thumbnail-downloader":
+    "/blog/how-to-download-youtube-thumbnail",
+  "how-to-download-youtube-thumbnails-online-in-3-simple-steps":
+    "/blog/how-to-download-youtube-thumbnail",
   "how-to-use-json-editor-online": "/blog/json-formatting-validation-guide",
   "how-to-use-json-minify-online": "/blog/json-formatting-validation-guide",
   "how-to-use-webp-to-jpg-converter": "/blog/png-vs-jpg-vs-webp",
   "how-to-use-jpg-converter": "/blog/png-vs-jpg-vs-webp",
   "how-to-use-png-to-ico-converter": "/blog/how-to-create-favicon",
   "how-to-use-hex-to-octal-converter": "/blog/hex-to-decimal-conversion",
-  "how-to-use-decimal-to-octal-converter-tool": "/blog/hex-to-decimal-conversion",
+  "how-to-use-decimal-to-octal-converter-tool":
+    "/blog/hex-to-decimal-conversion",
   "how-to-use-octal-to-binary": "/blog/hex-to-decimal-conversion",
   "how-to-use-csv-to-json-converter": "/tools/csv-to-json",
   "how-to-use-base64-to-image-online": "/tools/base64-decode",
@@ -82,20 +85,29 @@ export async function proxy(request: NextRequest) {
   // Tool redirects
   const toolSlug = slug.startsWith("/") ? slug.slice(1) : slug;
   if (toolRedirects[toolSlug]) {
-    return NextResponse.redirect(new URL(toolRedirects[toolSlug], request.url), 301);
+    return NextResponse.redirect(
+      new URL(toolRedirects[toolSlug], request.url),
+      301,
+    );
   }
 
   // Blog Redirects
   if (toolSlug.startsWith("blog/")) {
     const blogSlug = toolSlug.replace("blog/", "");
     if (blogRedirects[blogSlug]) {
-      return NextResponse.redirect(new URL(blogRedirects[blogSlug], request.url), 301);
+      return NextResponse.redirect(
+        new URL(blogRedirects[blogSlug], request.url),
+        301,
+      );
     }
   }
 
   // Direct path redirects (without lang prefix)
   if (toolRedirects[pathname.slice(1)]) {
-    return NextResponse.redirect(new URL(toolRedirects[pathname.slice(1)], request.url), 301);
+    return NextResponse.redirect(
+      new URL(toolRedirects[pathname.slice(1)], request.url),
+      301,
+    );
   }
 
   // Static redirects
@@ -108,14 +120,17 @@ export async function proxy(request: NextRequest) {
   };
   const staticSlug = slug.startsWith("/") ? slug : `/${slug}`;
   if (staticRedirects[staticSlug]) {
-    return NextResponse.redirect(new URL(staticRedirects[staticSlug], request.url), 301);
+    return NextResponse.redirect(
+      new URL(staticRedirects[staticSlug], request.url),
+      301,
+    );
   }
 
   // 2. Blog article paths without locale prefix are always EN (default locale).
   //    Slugs are language-specific, so prevent next-intl from redirecting
   //    e.g. /blog/how-to-convert-svg-to-png → /pt/blog/how-to-convert-svg-to-png (wrong!)
   if (/^\/blog\/[^/]+$/.test(pathname)) {
-    request.cookies.set('NEXT_LOCALE', 'en');
+    request.cookies.set("NEXT_LOCALE", "en");
   }
 
   // 3. Run next-intl middleware, then merge Supabase auth cookies onto its response
@@ -124,7 +139,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next|_vercel|monitoring|.*\\..*).*)'
-  ]
+  matcher: ["/((?!api|_next|_vercel|monitoring|.*\\..*).*)"],
 };

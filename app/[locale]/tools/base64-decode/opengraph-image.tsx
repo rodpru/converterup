@@ -5,8 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function OgImage() {
-	return generateOgImage({
-		title: "Base64 Decoder",
-		badge: "Developer",
-	});
+  return generateOgImage({
+    title: "Base64 Decoder",
+    badge: "Developer",
+  });
 }

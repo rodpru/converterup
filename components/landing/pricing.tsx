@@ -62,7 +62,8 @@ export function Pricing() {
             className="font-[Syne] font-bold text-foreground mb-4"
             style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
-            {t("title")} <span className="gradient-text">{t("titleGradient")}</span>
+            {t("title")}{" "}
+            <span className="gradient-text">{t("titleGradient")}</span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-md mx-auto">
             {t("desc")}

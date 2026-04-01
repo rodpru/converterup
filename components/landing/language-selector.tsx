@@ -15,7 +15,10 @@ export function LanguageSelector() {
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     }
@@ -45,8 +48,10 @@ export function LanguageSelector() {
         className="flex justify-center md:justify-start items-center gap-1.5 h-10 px-3 text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 rounded-lg min-h-[44px] w-full md:w-auto"
       >
         <Globe className="w-4 h-4" />
-        <span>{languages.find(l => l.code === locale)?.label || "EN"}</span>
-        <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+        <span>{languages.find((l) => l.code === locale)?.label || "EN"}</span>
+        <ChevronDown
+          className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
 
       {isOpen && (
@@ -57,7 +62,9 @@ export function LanguageSelector() {
                 key={lang.code}
                 onClick={() => onSelectChange(lang.code)}
                 className={`group flex w-full items-center justify-between px-4 py-2.5 text-sm transition-colors hover:bg-[#2A2535]/50 ${
-                  locale === lang.code ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground"
+                  locale === lang.code
+                    ? "text-primary font-medium"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {lang.full}

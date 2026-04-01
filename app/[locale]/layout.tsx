@@ -1,8 +1,30 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  display: "swap",
+  variable: "--font-syne",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-jetbrains",
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -72,10 +94,6 @@ export async function generateMetadata({
         "Convert images and videos instantly, 100% in your browser. No uploads, no servers, no compromises.",
     },
 
-    alternates: {
-      canonical: "https://converterup.com",
-    },
-
     robots: {
       index: true,
       follow: true,
@@ -100,7 +118,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           {children}

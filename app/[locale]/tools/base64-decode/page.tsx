@@ -1,33 +1,44 @@
 import type { Metadata } from "next";
-import { Base64Decoder } from "./decoder";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { Base64Decoder } from "./decoder";
 
-export const metadata: Metadata = {
-  title: "Free Base64 Decoder — Decode Base64 Online | ConverterUp",
-  description:
-    "Decode Base64 strings to text or images instantly. Supports data URIs and plain Base64. Free, fast, and 100% browser-based.",
-  alternates: {
-    canonical: "https://converterup.com/tools/base64-decode",
-  },
-  openGraph: {
-    title: "Free Base64 Decoder — Decode Base64 Online",
-    description:
-      "Decode Base64 strings to text or images instantly. Supports data URIs and plain Base64. Free, fast, and works entirely in your browser.",
-    url: "https://converterup.com/tools/base64-decode",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free Base64 Decoder — Decode Base64 Online",
-    description:
-      "Decode Base64 strings to text or images instantly. Supports data URIs and plain Base64. Free, fast, and works entirely in your browser.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/base64-decode", locale);
+  const title = t("base64-decode-title");
+  const description = t("base64-decode-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function Base64DecodePage() {
   return (
     <>
+      <ToolJsonLd slug="base64-decode" />
       <Base64Decoder />
       <RelatedGuides toolHref="/tools/base64-decode" />
     </>

@@ -19,14 +19,20 @@ import {
   softwareApplicationSchema,
   faqPageSchema,
 } from "@/components/json-ld";
+import { generateAlternates } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "https://converterup.com",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    alternates: generateAlternates("", locale),
+  };
+}
 
-export default function Home() {
+export default async function Home() {
   return (
     <main className="min-h-screen bg-background selection:bg-primary/20 selection:text-primary">
       <JsonLd data={websiteSchema} />

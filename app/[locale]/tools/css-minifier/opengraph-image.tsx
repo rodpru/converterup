@@ -5,8 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function OgImage() {
-	return generateOgImage({
-		title: "CSS Minifier",
-		badge: "Developer",
-	});
+  return generateOgImage({
+    title: "CSS Minifier",
+    badge: "Developer",
+  });
 }

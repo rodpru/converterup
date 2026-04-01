@@ -1,33 +1,44 @@
 import type { Metadata } from "next";
-import { ImageResizer } from "./resizer";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { ImageResizer } from "./resizer";
 
-export const metadata: Metadata = {
-  title: "Free Image Resizer — Resize Images Online | ConverterUp",
-  description:
-    "Resize PNG, JPG, WebP, GIF, and AVIF images directly in your browser. Lock aspect ratio, use presets, preview results, and download instantly. No uploads, 100% client-side.",
-  alternates: {
-    canonical: "https://converterup.com/tools/image-resizer",
-  },
-  openGraph: {
-    title: "Free Image Resizer — Resize Images Online",
-    description:
-      "Resize images directly in your browser. Lock aspect ratio, use presets, preview results, and download instantly. No uploads required.",
-    url: "https://converterup.com/tools/image-resizer",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free Image Resizer — Resize Images Online",
-    description:
-      "Resize images directly in your browser. Lock aspect ratio, use presets, and download instantly.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/image-resizer", locale);
+  const title = t("image-resizer-title");
+  const description = t("image-resizer-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function ImageResizerPage() {
   return (
     <>
+      <ToolJsonLd slug="image-resizer" />
       <ImageResizer />
       <RelatedGuides toolHref="/tools/image-resizer" />
     </>

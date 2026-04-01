@@ -1,34 +1,44 @@
 import type { Metadata } from "next";
-import { ColorPaletteExtractor } from "./extractor";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { ColorPaletteExtractor } from "./extractor";
 
-export const metadata: Metadata = {
-  title:
-    "Free Color Palette Extractor — Extract Colors from Images | ConverterUp",
-  description:
-    "Extract dominant colors from any image. Upload PNG, JPG, or WebP files and get a beautiful color palette with HEX, RGB, and HSL values. 100% browser-based.",
-  alternates: {
-    canonical: "https://converterup.com/tools/color-palette",
-  },
-  openGraph: {
-    title: "Free Color Palette Extractor — Extract Colors from Images",
-    description:
-      "Extract dominant colors from any image. Get HEX, RGB, and HSL values instantly. Free, fast, and works entirely in your browser.",
-    url: "https://converterup.com/tools/color-palette",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free Color Palette Extractor — Extract Colors from Images",
-    description:
-      "Extract dominant colors from any image. Get HEX, RGB, and HSL values instantly. Free, fast, and works entirely in your browser.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/color-palette", locale);
+  const title = t("color-palette-title");
+  const description = t("color-palette-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function ColorPalettePage() {
   return (
     <>
+      <ToolJsonLd slug="color-palette" />
       <ColorPaletteExtractor />
       <RelatedGuides toolHref="/tools/color-palette" />
     </>

@@ -196,22 +196,10 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Filename",
-          "Resolution",
-          "Notes"
-        ],
+        "headers": ["Filename", "Resolution", "Notes"],
         "rows": [
-          [
-            "default.jpg",
-            "120 x 90",
-            "Always available. Small preview."
-          ],
-          [
-            "mqdefault.jpg",
-            "320 x 180",
-            "Always available. Medium quality."
-          ],
+          ["default.jpg", "120 x 90", "Always available. Small preview."],
+          ["mqdefault.jpg", "320 x 180", "Always available. Medium quality."],
           [
             "hqdefault.jpg",
             "480 x 360",
@@ -413,32 +401,12 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Format",
-          "Typical Size",
-          "vs. JPEG"
-        ],
+        "headers": ["Format", "Typical Size", "vs. JPEG"],
         "rows": [
-          [
-            "JPEG (80%)",
-            "250 KB",
-            "Baseline"
-          ],
-          [
-            "PNG-24",
-            "1.8 MB",
-            "7x larger"
-          ],
-          [
-            "WebP (lossy 80%)",
-            "170 KB",
-            "30% smaller"
-          ],
-          [
-            "WebP (lossless)",
-            "1.2 MB",
-            "33% smaller than PNG"
-          ]
+          ["JPEG (80%)", "250 KB", "Baseline"],
+          ["PNG-24", "1.8 MB", "7x larger"],
+          ["WebP (lossy 80%)", "170 KB", "30% smaller"],
+          ["WebP (lossless)", "1.2 MB", "33% smaller than PNG"]
         ]
       },
       {
@@ -572,32 +540,12 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Frame Rate",
-          "5s Clip Size",
-          "Smoothness"
-        ],
+        "headers": ["Frame Rate", "5s Clip Size", "Smoothness"],
         "rows": [
-          [
-            "30 fps",
-            "~8 MB",
-            "Very smooth, overkill for GIF"
-          ],
-          [
-            "15 fps",
-            "~4 MB",
-            "Smooth, good for action clips"
-          ],
-          [
-            "10 fps",
-            "~2.5 MB",
-            "Slightly choppy, great for UI demos"
-          ],
-          [
-            "5 fps",
-            "~1.2 MB",
-            "Slideshow feel, fine for simple animations"
-          ]
+          ["30 fps", "~8 MB", "Very smooth, overkill for GIF"],
+          ["15 fps", "~4 MB", "Smooth, good for action clips"],
+          ["10 fps", "~2.5 MB", "Slightly choppy, great for UI demos"],
+          ["5 fps", "~1.2 MB", "Slideshow feel, fine for simple animations"]
         ]
       },
       {
@@ -888,32 +836,16 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Region",
-          "Domestic Rate",
-          "International Card"
-        ],
+        "headers": ["Region", "Domestic Rate", "International Card"],
         "rows": [
           [
             "United States (USD)",
             "2.9% + 30¢",
             "+1% international, +1% conversion"
           ],
-          [
-            "Europe (EUR)",
-            "1.5% + 25¢",
-            "+2% for non-EEA cards"
-          ],
-          [
-            "United Kingdom (GBP)",
-            "1.5% + 20p",
-            "+2% for non-UK cards"
-          ],
-          [
-            "Brazil (BRL)",
-            "3.99% + R$0.39",
-            "+2% international"
-          ]
+          ["Europe (EUR)", "1.5% + 25¢", "+2% for non-EEA cards"],
+          ["United Kingdom (GBP)", "1.5% + 20p", "+2% for non-UK cards"],
+          ["Brazil (BRL)", "3.99% + R$0.39", "+2% international"]
         ]
       },
       {
@@ -987,22 +919,10 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Processor",
-          "Online Rate (US)",
-          "Key Difference"
-        ],
+        "headers": ["Processor", "Online Rate (US)", "Key Difference"],
         "rows": [
-          [
-            "Stripe",
-            "2.9% + 30¢",
-            "Best developer API, most flexible"
-          ],
-          [
-            "PayPal",
-            "3.49% + 49¢",
-            "Higher fees, but buyers trust the brand"
-          ],
+          ["Stripe", "2.9% + 30¢", "Best developer API, most flexible"],
+          ["PayPal", "3.49% + 49¢", "Higher fees, but buyers trust the brand"],
           [
             "Square",
             "2.9% + 30¢",
@@ -1077,32 +997,12 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Level",
-          "Recovery Capacity",
-          "Best For"
-        ],
+        "headers": ["Level", "Recovery Capacity", "Best For"],
         "rows": [
-          [
-            "L (Low)",
-            "~7% damage",
-            "Simple QR codes, clean environments"
-          ],
-          [
-            "M (Medium)",
-            "~15% damage",
-            "General purpose, no logo"
-          ],
-          [
-            "Q (Quartile)",
-            "~25% damage",
-            "Small logo overlay"
-          ],
-          [
-            "H (High)",
-            "~30% damage",
-            "Logo overlay, custom designs"
-          ]
+          ["L (Low)", "~7% damage", "Simple QR codes, clean environments"],
+          ["M (Medium)", "~15% damage", "General purpose, no logo"],
+          ["Q (Quartile)", "~25% damage", "Small logo overlay"],
+          ["H (High)", "~30% damage", "Logo overlay, custom designs"]
         ]
       },
       {
@@ -1264,47 +1164,15 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Feature",
-          "SRT",
-          "VTT"
-        ],
+        "headers": ["Feature", "SRT", "VTT"],
         "rows": [
-          [
-            "File extension",
-            ".srt",
-            ".vtt"
-          ],
-          [
-            "Header required",
-            "No",
-            "Yes (WEBVTT)"
-          ],
-          [
-            "Cue numbers",
-            "Required (sequential)",
-            "Optional (can be named)"
-          ],
-          [
-            "Millisecond separator",
-            ", (comma)",
-            ". (period)"
-          ],
-          [
-            "CSS-like styling",
-            "No",
-            "Yes"
-          ],
-          [
-            "Positioning",
-            "No",
-            "Yes (line, position, align)"
-          ],
-          [
-            "HTML5 native",
-            "No",
-            "Yes (<code>&lt;track&gt;</code>)"
-          ]
+          ["File extension", ".srt", ".vtt"],
+          ["Header required", "No", "Yes (WEBVTT)"],
+          ["Cue numbers", "Required (sequential)", "Optional (can be named)"],
+          ["Millisecond separator", ", (comma)", ". (period)"],
+          ["CSS-like styling", "No", "Yes"],
+          ["Positioning", "No", "Yes (line, position, align)"],
+          ["HTML5 native", "No", "Yes (<code>&lt;track&gt;</code>)"]
         ]
       },
       {
@@ -2431,79 +2299,19 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Decimal",
-          "Hex",
-          "Binary",
-          "Octal"
-        ],
+        "headers": ["Decimal", "Hex", "Binary", "Octal"],
         "rows": [
-          [
-            "0",
-            "0",
-            "0000",
-            "0"
-          ],
-          [
-            "10",
-            "A",
-            "1010",
-            "12"
-          ],
-          [
-            "15",
-            "F",
-            "1111",
-            "17"
-          ],
-          [
-            "16",
-            "10",
-            "10000",
-            "20"
-          ],
-          [
-            "100",
-            "64",
-            "1100100",
-            "144"
-          ],
-          [
-            "127",
-            "7F",
-            "1111111",
-            "177"
-          ],
-          [
-            "128",
-            "80",
-            "10000000",
-            "200"
-          ],
-          [
-            "255",
-            "FF",
-            "11111111",
-            "377"
-          ],
-          [
-            "256",
-            "100",
-            "100000000",
-            "400"
-          ],
-          [
-            "1024",
-            "400",
-            "10000000000",
-            "2000"
-          ],
-          [
-            "65535",
-            "FFFF",
-            "1111111111111111",
-            "177777"
-          ]
+          ["0", "0", "0000", "0"],
+          ["10", "A", "1010", "12"],
+          ["15", "F", "1111", "17"],
+          ["16", "10", "10000", "20"],
+          ["100", "64", "1100100", "144"],
+          ["127", "7F", "1111111", "177"],
+          ["128", "80", "10000000", "200"],
+          ["255", "FF", "11111111", "377"],
+          ["256", "100", "100000000", "400"],
+          ["1024", "400", "10000000000", "2000"],
+          ["65535", "FFFF", "1111111111111111", "177777"]
         ]
       },
       {
@@ -2921,22 +2729,10 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Nome do arquivo",
-          "Resolução",
-          "Observações"
-        ],
+        "headers": ["Nome do arquivo", "Resolução", "Observações"],
         "rows": [
-          [
-            "default.jpg",
-            "120 x 90",
-            "Sempre disponível. Preview pequeno."
-          ],
-          [
-            "mqdefault.jpg",
-            "320 x 180",
-            "Sempre disponível. Qualidade média."
-          ],
+          ["default.jpg", "120 x 90", "Sempre disponível. Preview pequeno."],
+          ["mqdefault.jpg", "320 x 180", "Sempre disponível. Qualidade média."],
           [
             "hqdefault.jpg",
             "480 x 360",
@@ -3030,49 +2826,19 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Característica",
-          "JPG (JPEG)",
-          "PNG",
-          "WebP"
-        ],
+        "headers": ["Característica", "JPG (JPEG)", "PNG", "WebP"],
         "rows": [
-          [
-            "Compressão",
-            "Com perda",
-            "Sem perda",
-            "Ambas"
-          ],
-          [
-            "Transparência",
-            "Não",
-            "Sim",
-            "Sim"
-          ],
-          [
-            "Animação",
-            "Não",
-            "Não (APNG limitado)",
-            "Sim"
-          ],
-          [
-            "Tamanho do arquivo",
-            "Pequeno",
-            "Grande",
-            "Muito pequeno"
-          ],
+          ["Compressão", "Com perda", "Sem perda", "Ambas"],
+          ["Transparência", "Não", "Sim", "Sim"],
+          ["Animação", "Não", "Não (APNG limitado)", "Sim"],
+          ["Tamanho do arquivo", "Pequeno", "Grande", "Muito pequeno"],
           [
             "Melhor para",
             "Fotografias",
             "Gráficos, logos, capturas de tela",
             "Uso geral na web"
           ],
-          [
-            "Suporte",
-            "Universal",
-            "Universal",
-            "Todos os navegadores modernos"
-          ]
+          ["Suporte", "Universal", "Universal", "Todos os navegadores modernos"]
         ]
       },
       {
@@ -3341,47 +3107,15 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Plataforma",
-          "Remove EXIF?",
-          "Remove GPS?"
-        ],
+        "headers": ["Plataforma", "Remove EXIF?", "Remove GPS?"],
         "rows": [
-          [
-            "Facebook",
-            "Sim",
-            "Sim"
-          ],
-          [
-            "Instagram",
-            "Sim",
-            "Sim"
-          ],
-          [
-            "Twitter/X",
-            "Sim",
-            "Sim"
-          ],
-          [
-            "WhatsApp",
-            "Sim",
-            "Sim"
-          ],
-          [
-            "Flickr",
-            "Não (exibe publicamente)",
-            "Não"
-          ],
-          [
-            "E-mail (anexo)",
-            "Não",
-            "Não"
-          ],
-          [
-            "Fóruns e blogs",
-            "Geralmente não",
-            "Geralmente não"
-          ]
+          ["Facebook", "Sim", "Sim"],
+          ["Instagram", "Sim", "Sim"],
+          ["Twitter/X", "Sim", "Sim"],
+          ["WhatsApp", "Sim", "Sim"],
+          ["Flickr", "Não (exibe publicamente)", "Não"],
+          ["E-mail (anexo)", "Não", "Não"],
+          ["Fóruns e blogs", "Geralmente não", "Geralmente não"]
         ]
       },
       {
@@ -3441,32 +3175,20 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Região",
-          "Taxa Doméstica",
-          "Cartão Internacional"
-        ],
+        "headers": ["Região", "Taxa Doméstica", "Cartão Internacional"],
         "rows": [
           [
             "Estados Unidos (USD)",
             "2,9% + US$0,30",
             "+1% internacional, +1% conversão"
           ],
-          [
-            "Europa (EUR)",
-            "1,5% + €0,25",
-            "+2% para cartões fora do EEE"
-          ],
+          ["Europa (EUR)", "1,5% + €0,25", "+2% para cartões fora do EEE"],
           [
             "Reino Unido (GBP)",
             "1,5% + £0,20",
             "+2% para cartões fora do Reino Unido"
           ],
-          [
-            "Brasil (BRL)",
-            "3,99% + R$0,39",
-            "+2% internacional"
-          ]
+          ["Brasil (BRL)", "3,99% + R$0,39", "+2% internacional"]
         ]
       },
       {
@@ -3589,32 +3311,16 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Nível",
-          "Recuperação",
-          "Recomendação"
-        ],
+        "headers": ["Nível", "Recuperação", "Recomendação"],
         "rows": [
-          [
-            "L (Low)",
-            "7%",
-            "Sem logo. Menor QR code possível."
-          ],
+          ["L (Low)", "7%", "Sem logo. Menor QR code possível."],
           [
             "M (Medium)",
             "15%",
             "Logo muito pequeno. Padrão para maioria dos usos."
           ],
-          [
-            "Q (Quartile)",
-            "25%",
-            "Logo de tamanho médio. Boa opção com logo."
-          ],
-          [
-            "H (High)",
-            "30%",
-            "Logo maior. Recomendado para QR codes com logo."
-          ]
+          ["Q (Quartile)", "25%", "Logo de tamanho médio. Boa opção com logo."],
+          ["H (High)", "30%", "Logo maior. Recomendado para QR codes com logo."]
         ]
       },
       {
@@ -3701,17 +3407,9 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Característica",
-          "WebVTT (.vtt)",
-          "SubRip (.srt)"
-        ],
+        "headers": ["Característica", "WebVTT (.vtt)", "SubRip (.srt)"],
         "rows": [
-          [
-            "Cabeçalho",
-            "Obrigatório: WEBVTT",
-            "Nenhum"
-          ],
+          ["Cabeçalho", "Obrigatório: WEBVTT", "Nenhum"],
           [
             "Formato de tempo",
             "00:00:00.000 (ponto decimal)",
@@ -3722,16 +3420,8 @@
             "Suporta CSS (bold, italic, cor, posição)",
             "Básico (bold, italic apenas)"
           ],
-          [
-            "Posicionamento",
-            "Sim (line, position, align)",
-            "Não"
-          ],
-          [
-            "Suporte a metadados",
-            "Sim (NOTE, REGION)",
-            "Não"
-          ],
+          ["Posicionamento", "Sim (line, position, align)", "Não"],
+          ["Suporte a metadados", "Sim (NOTE, REGION)", "Não"],
           [
             "Compatibilidade",
             "Web (HTML5, YouTube)",
@@ -3844,37 +3534,13 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Tipo de post",
-          "Dimensão (px)",
-          "Proporção"
-        ],
+        "headers": ["Tipo de post", "Dimensão (px)", "Proporção"],
         "rows": [
-          [
-            "Post quadrado",
-            "1080 x 1080",
-            "1:1"
-          ],
-          [
-            "Post retrato",
-            "1080 x 1350",
-            "4:5"
-          ],
-          [
-            "Post paisagem",
-            "1080 x 566",
-            "1.91:1"
-          ],
-          [
-            "Stories/Reels",
-            "1080 x 1920",
-            "9:16"
-          ],
-          [
-            "Foto de perfil",
-            "320 x 320",
-            "1:1"
-          ]
+          ["Post quadrado", "1080 x 1080", "1:1"],
+          ["Post retrato", "1080 x 1350", "4:5"],
+          ["Post paisagem", "1080 x 566", "1.91:1"],
+          ["Stories/Reels", "1080 x 1920", "9:16"],
+          ["Foto de perfil", "320 x 320", "1:1"]
         ]
       },
       {
@@ -3884,32 +3550,12 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Tipo de post",
-          "Dimensão (px)",
-          "Proporção"
-        ],
+        "headers": ["Tipo de post", "Dimensão (px)", "Proporção"],
         "rows": [
-          [
-            "Post no feed",
-            "1200 x 630",
-            "1.91:1"
-          ],
-          [
-            "Capa do perfil",
-            "820 x 312",
-            "2.63:1"
-          ],
-          [
-            "Capa de evento",
-            "1920 x 1005",
-            "1.91:1"
-          ],
-          [
-            "Stories",
-            "1080 x 1920",
-            "9:16"
-          ]
+          ["Post no feed", "1200 x 630", "1.91:1"],
+          ["Capa do perfil", "820 x 312", "2.63:1"],
+          ["Capa de evento", "1920 x 1005", "1.91:1"],
+          ["Stories", "1080 x 1920", "9:16"]
         ]
       },
       {
@@ -3919,27 +3565,11 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Tipo de post",
-          "Dimensão (px)",
-          "Proporção"
-        ],
+        "headers": ["Tipo de post", "Dimensão (px)", "Proporção"],
         "rows": [
-          [
-            "Imagem no tweet",
-            "1200 x 675",
-            "16:9"
-          ],
-          [
-            "Capa do perfil",
-            "1500 x 500",
-            "3:1"
-          ],
-          [
-            "Foto de perfil",
-            "400 x 400",
-            "1:1"
-          ]
+          ["Imagem no tweet", "1200 x 675", "16:9"],
+          ["Capa do perfil", "1500 x 500", "3:1"],
+          ["Foto de perfil", "400 x 400", "1:1"]
         ]
       },
       {
@@ -3949,27 +3579,11 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Tipo de post",
-          "Dimensão (px)",
-          "Proporção"
-        ],
+        "headers": ["Tipo de post", "Dimensão (px)", "Proporção"],
         "rows": [
-          [
-            "Post no feed",
-            "1200 x 627",
-            "1.91:1"
-          ],
-          [
-            "Capa do perfil",
-            "1584 x 396",
-            "4:1"
-          ],
-          [
-            "Capa da empresa",
-            "1128 x 191",
-            "5.9:1"
-          ]
+          ["Post no feed", "1200 x 627", "1.91:1"],
+          ["Capa do perfil", "1584 x 396", "4:1"],
+          ["Capa da empresa", "1128 x 191", "5.9:1"]
         ]
       },
       {
@@ -4271,37 +3885,17 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Uso",
-          "Resolução Recomendada",
-          "Motivo"
-        ],
+        "headers": ["Uso", "Resolução Recomendada", "Motivo"],
         "rows": [
           [
             "Redes sociais",
             "1080 x 1080 px",
             "Padrão de alta qualidade para feeds sociais"
           ],
-          [
-            "Favicon",
-            "512 x 512 px",
-            "Maior tamanho necessário para PWA"
-          ],
-          [
-            "Impressão (A4)",
-            "2480 x 3508 px",
-            "300 DPI para impressão nítida"
-          ],
-          [
-            "Web geral",
-            "2x a dimensão de exibição",
-            "Para telas Retina/HiDPI"
-          ],
-          [
-            "Thumbnail",
-            "256 x 256 px",
-            "Preview rápido"
-          ]
+          ["Favicon", "512 x 512 px", "Maior tamanho necessário para PWA"],
+          ["Impressão (A4)", "2480 x 3508 px", "300 DPI para impressão nítida"],
+          ["Web geral", "2x a dimensão de exibição", "Para telas Retina/HiDPI"],
+          ["Thumbnail", "256 x 256 px", "Preview rápido"]
         ]
       },
       {
@@ -4517,11 +4111,7 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Formato",
-          "Exemplo",
-          "Uso"
-        ],
+        "headers": ["Formato", "Exemplo", "Uso"],
         "rows": [
           [
             "HEX",
@@ -4538,11 +4128,7 @@
             "hsl(168, 33%, 27%)",
             "Intuitivo para ajustar matiz, saturação e luminosidade."
           ],
-          [
-            "CMYK",
-            "50, 0, 8, 64",
-            "Usado em impressão profissional."
-          ]
+          ["CMYK", "50, 0, 8, 64", "Usado em impressão profissional."]
         ]
       },
       {
@@ -4645,47 +4231,15 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Hexadecimal",
-          "Decimal",
-          "Binário"
-        ],
+        "headers": ["Hexadecimal", "Decimal", "Binário"],
         "rows": [
-          [
-            "0",
-            "0",
-            "0000"
-          ],
-          [
-            "5",
-            "5",
-            "0101"
-          ],
-          [
-            "A",
-            "10",
-            "1010"
-          ],
-          [
-            "F",
-            "15",
-            "1111"
-          ],
-          [
-            "10",
-            "16",
-            "00010000"
-          ],
-          [
-            "FF",
-            "255",
-            "11111111"
-          ],
-          [
-            "100",
-            "256",
-            "100000000"
-          ]
+          ["0", "0", "0000"],
+          ["5", "5", "0101"],
+          ["A", "10", "1010"],
+          ["F", "15", "1111"],
+          ["10", "16", "00010000"],
+          ["FF", "255", "11111111"],
+          ["100", "256", "100000000"]
         ]
       },
       {
@@ -5070,22 +4624,14 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Archivo",
-          "Resolución",
-          "Notas"
-        ],
+        "headers": ["Archivo", "Resolución", "Notas"],
         "rows": [
           [
             "default.jpg",
             "120 x 90",
             "Siempre disponible. Vista previa pequeña."
           ],
-          [
-            "mqdefault.jpg",
-            "320 x 180",
-            "Siempre disponible. Calidad media."
-          ],
+          ["mqdefault.jpg", "320 x 180", "Siempre disponible. Calidad media."],
           [
             "hqdefault.jpg",
             "480 x 360",
@@ -5258,32 +4804,12 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Formato",
-          "Tamaño típico",
-          "vs. JPEG"
-        ],
+        "headers": ["Formato", "Tamaño típico", "vs. JPEG"],
         "rows": [
-          [
-            "JPEG (80%)",
-            "250 KB",
-            "Base de referencia"
-          ],
-          [
-            "PNG-24",
-            "1.8 MB",
-            "7x más grande"
-          ],
-          [
-            "WebP (lossy 80%)",
-            "170 KB",
-            "30% más pequeño"
-          ],
-          [
-            "WebP (lossless)",
-            "1.2 MB",
-            "33% más pequeño que PNG"
-          ]
+          ["JPEG (80%)", "250 KB", "Base de referencia"],
+          ["PNG-24", "1.8 MB", "7x más grande"],
+          ["WebP (lossy 80%)", "170 KB", "30% más pequeño"],
+          ["WebP (lossless)", "1.2 MB", "33% más pequeño que PNG"]
         ]
       },
       {
@@ -5469,32 +4995,16 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Categoría",
-          "Campos",
-          "Ejemplo"
-        ],
+        "headers": ["Categoría", "Campos", "Ejemplo"],
         "rows": [
-          [
-            "Cámara",
-            "Fabricante, modelo, lente",
-            "iPhone 15 Pro, Sony A7IV"
-          ],
-          [
-            "Exposición",
-            "Apertura, velocidad, ISO",
-            "f/1.8, 1/120s, ISO 200"
-          ],
+          ["Cámara", "Fabricante, modelo, lente", "iPhone 15 Pro, Sony A7IV"],
+          ["Exposición", "Apertura, velocidad, ISO", "f/1.8, 1/120s, ISO 200"],
           [
             "Fecha/Hora",
             "Fecha de captura, zona horaria",
             "2026-03-15 14:30:22"
           ],
-          [
-            "Ubicación",
-            "Latitud, longitud, altitud",
-            "40.4168° N, 3.7038° W"
-          ],
+          ["Ubicación", "Latitud, longitud, altitud", "40.4168° N, 3.7038° W"],
           [
             "Imagen",
             "Dimensiones, orientación, resolución",
@@ -5596,26 +5106,10 @@
           "Tarjetas internacionales"
         ],
         "rows": [
-          [
-            "Estados Unidos",
-            "2.9% + $0.30",
-            "3.9% + $0.30"
-          ],
-          [
-            "Europa (EUR)",
-            "1.5% + €0.25",
-            "3.25% + €0.25"
-          ],
-          [
-            "México",
-            "3.6% + $3 MXN",
-            "4.5% + $3 MXN"
-          ],
-          [
-            "España",
-            "1.5% + €0.25",
-            "3.25% + €0.25"
-          ]
+          ["Estados Unidos", "2.9% + $0.30", "3.9% + $0.30"],
+          ["Europa (EUR)", "1.5% + €0.25", "3.25% + €0.25"],
+          ["México", "3.6% + $3 MXN", "4.5% + $3 MXN"],
+          ["España", "1.5% + €0.25", "3.25% + €0.25"]
         ]
       },
       {
@@ -5813,37 +5307,13 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Característica",
-          "VTT (.vtt)",
-          "SRT (.srt)"
-        ],
+        "headers": ["Característica", "VTT (.vtt)", "SRT (.srt)"],
         "rows": [
-          [
-            "Encabezado",
-            "Requiere 'WEBVTT' al inicio",
-            "No tiene encabezado"
-          ],
-          [
-            "Separador decimal",
-            "Punto (00:01:30.500)",
-            "Coma (00:01:30,500)"
-          ],
-          [
-            "Numeración",
-            "Opcional",
-            "Obligatoria"
-          ],
-          [
-            "Estilos CSS",
-            "Soportados",
-            "No soportados"
-          ],
-          [
-            "Compatibilidad",
-            "Navegadores, YouTube",
-            "Reproductores, editores"
-          ]
+          ["Encabezado", "Requiere 'WEBVTT' al inicio", "No tiene encabezado"],
+          ["Separador decimal", "Punto (00:01:30.500)", "Coma (00:01:30,500)"],
+          ["Numeración", "Opcional", "Obligatoria"],
+          ["Estilos CSS", "Soportados", "No soportados"],
+          ["Compatibilidad", "Navegadores, YouTube", "Reproductores, editores"]
         ]
       },
       {
@@ -5932,37 +5402,13 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Tipo",
-          "Dimensiones",
-          "Relación de aspecto"
-        ],
+        "headers": ["Tipo", "Dimensiones", "Relación de aspecto"],
         "rows": [
-          [
-            "Foto cuadrada",
-            "1080 x 1080 px",
-            "1:1"
-          ],
-          [
-            "Foto vertical",
-            "1080 x 1350 px",
-            "4:5"
-          ],
-          [
-            "Story / Reel",
-            "1080 x 1920 px",
-            "9:16"
-          ],
-          [
-            "Foto de perfil",
-            "320 x 320 px",
-            "1:1"
-          ],
-          [
-            "Carrusel",
-            "1080 x 1080 px",
-            "1:1"
-          ]
+          ["Foto cuadrada", "1080 x 1080 px", "1:1"],
+          ["Foto vertical", "1080 x 1350 px", "4:5"],
+          ["Story / Reel", "1080 x 1920 px", "9:16"],
+          ["Foto de perfil", "320 x 320 px", "1:1"],
+          ["Carrusel", "1080 x 1080 px", "1:1"]
         ]
       },
       {
@@ -5976,37 +5422,13 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Tipo",
-          "Dimensiones",
-          "Relación de aspecto"
-        ],
+        "headers": ["Tipo", "Dimensiones", "Relación de aspecto"],
         "rows": [
-          [
-            "Publicación",
-            "1200 x 630 px",
-            "1.91:1"
-          ],
-          [
-            "Portada",
-            "820 x 312 px",
-            "2.63:1"
-          ],
-          [
-            "Foto de perfil",
-            "170 x 170 px",
-            "1:1"
-          ],
-          [
-            "Story",
-            "1080 x 1920 px",
-            "9:16"
-          ],
-          [
-            "Evento",
-            "1920 x 1005 px",
-            "1.91:1"
-          ]
+          ["Publicación", "1200 x 630 px", "1.91:1"],
+          ["Portada", "820 x 312 px", "2.63:1"],
+          ["Foto de perfil", "170 x 170 px", "1:1"],
+          ["Story", "1080 x 1920 px", "9:16"],
+          ["Evento", "1920 x 1005 px", "1.91:1"]
         ]
       },
       {
@@ -6016,27 +5438,11 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Tipo",
-          "Dimensiones",
-          "Relación de aspecto"
-        ],
+        "headers": ["Tipo", "Dimensiones", "Relación de aspecto"],
         "rows": [
-          [
-            "Imagen en tweet",
-            "1600 x 900 px",
-            "16:9"
-          ],
-          [
-            "Encabezado",
-            "1500 x 500 px",
-            "3:1"
-          ],
-          [
-            "Foto de perfil",
-            "400 x 400 px",
-            "1:1"
-          ]
+          ["Imagen en tweet", "1600 x 900 px", "16:9"],
+          ["Encabezado", "1500 x 500 px", "3:1"],
+          ["Foto de perfil", "400 x 400 px", "1:1"]
         ]
       },
       {
@@ -6046,37 +5452,13 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Plataforma",
-          "Tipo",
-          "Dimensiones"
-        ],
+        "headers": ["Plataforma", "Tipo", "Dimensiones"],
         "rows": [
-          [
-            "LinkedIn",
-            "Publicación",
-            "1200 x 627 px"
-          ],
-          [
-            "LinkedIn",
-            "Portada personal",
-            "1584 x 396 px"
-          ],
-          [
-            "LinkedIn",
-            "Portada empresa",
-            "1128 x 191 px"
-          ],
-          [
-            "TikTok",
-            "Video/Portada",
-            "1080 x 1920 px"
-          ],
-          [
-            "TikTok",
-            "Foto de perfil",
-            "200 x 200 px"
-          ]
+          ["LinkedIn", "Publicación", "1200 x 627 px"],
+          ["LinkedIn", "Portada personal", "1584 x 396 px"],
+          ["LinkedIn", "Portada empresa", "1128 x 191 px"],
+          ["TikTok", "Video/Portada", "1080 x 1920 px"],
+          ["TikTok", "Foto de perfil", "200 x 200 px"]
         ]
       },
       {
@@ -6377,11 +5759,7 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Uso",
-          "Resolución recomendada",
-          "Notas"
-        ],
+        "headers": ["Uso", "Resolución recomendada", "Notas"],
         "rows": [
           [
             "Favicon",
@@ -6403,11 +5781,7 @@
             "2480x3508 px (300 DPI)",
             "Para impresión de alta calidad"
           ],
-          [
-            "Web general",
-            "2x del tamaño de display",
-            "Para pantallas retina"
-          ]
+          ["Web general", "2x del tamaño de display", "Para pantallas retina"]
         ]
       },
       {
@@ -6463,42 +5837,14 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Tamaño",
-          "Uso",
-          "Formato"
-        ],
+        "headers": ["Tamaño", "Uso", "Formato"],
         "rows": [
-          [
-            "16x16",
-            "Pestaña del navegador (estándar)",
-            "ICO o PNG"
-          ],
-          [
-            "32x32",
-            "Pestaña del navegador (retina)",
-            "PNG"
-          ],
-          [
-            "180x180",
-            "Apple Touch Icon (iPhone/iPad)",
-            "PNG"
-          ],
-          [
-            "192x192",
-            "Android Chrome / PWA",
-            "PNG"
-          ],
-          [
-            "512x512",
-            "PWA splash screen / Google",
-            "PNG"
-          ],
-          [
-            "favicon.ico",
-            "Compatibilidad legacy",
-            "ICO (multi-size)"
-          ]
+          ["16x16", "Pestaña del navegador (estándar)", "ICO o PNG"],
+          ["32x32", "Pestaña del navegador (retina)", "PNG"],
+          ["180x180", "Apple Touch Icon (iPhone/iPad)", "PNG"],
+          ["192x192", "Android Chrome / PWA", "PNG"],
+          ["512x512", "PWA splash screen / Google", "PNG"],
+          ["favicon.ico", "Compatibilidad legacy", "ICO (multi-size)"]
         ]
       },
       {
@@ -6625,27 +5971,11 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Formato",
-          "Ejemplo",
-          "Uso principal"
-        ],
+        "headers": ["Formato", "Ejemplo", "Uso principal"],
         "rows": [
-          [
-            "HEX",
-            "#2E5C55",
-            "CSS, diseño web, herramientas de diseño"
-          ],
-          [
-            "RGB",
-            "rgb(46, 92, 85)",
-            "CSS, programación, pantallas"
-          ],
-          [
-            "HSL",
-            "hsl(168, 33%, 27%)",
-            "CSS, ajuste intuitivo de tonos"
-          ]
+          ["HEX", "#2E5C55", "CSS, diseño web, herramientas de diseño"],
+          ["RGB", "rgb(46, 92, 85)", "CSS, programación, pantallas"],
+          ["HSL", "hsl(168, 33%, 27%)", "CSS, ajuste intuitivo de tonos"]
         ]
       },
       {
@@ -6749,32 +6079,12 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Color",
-          "HEX",
-          "Decimal (R,G,B)"
-        ],
+        "headers": ["Color", "HEX", "Decimal (R,G,B)"],
         "rows": [
-          [
-            "Blanco",
-            "#FFFFFF",
-            "255, 255, 255"
-          ],
-          [
-            "Negro",
-            "#000000",
-            "0, 0, 0"
-          ],
-          [
-            "Rojo puro",
-            "#FF0000",
-            "255, 0, 0"
-          ],
-          [
-            "Verde ConverterUp",
-            "#2E5C55",
-            "46, 92, 85"
-          ]
+          ["Blanco", "#FFFFFF", "255, 255, 255"],
+          ["Negro", "#000000", "0, 0, 0"],
+          ["Rojo puro", "#FF0000", "255, 0, 0"],
+          ["Verde ConverterUp", "#2E5C55", "46, 92, 85"]
         ]
       },
       {
@@ -6897,11 +6207,7 @@
       },
       {
         "type": "table",
-        "headers": [
-          "Formato",
-          "Ventaja principal",
-          "Desventaja principal"
-        ],
+        "headers": ["Formato", "Ventaja principal", "Desventaja principal"],
         "rows": [
           [
             "JSON",
@@ -6918,11 +6224,7 @@
             "Esquemas validables, estándar empresarial",
             "Muy verboso, difícil de leer"
           ],
-          [
-            "TOML",
-            "Simple para configuración",
-            "Menos soporte en herramientas"
-          ]
+          ["TOML", "Simple para configuración", "Menos soporte en herramientas"]
         ]
       },
       {

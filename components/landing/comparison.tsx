@@ -19,16 +19,61 @@ const featureKeys = [
 
 const featureData: Record<
   string,
-  { converterup: boolean; cloudconvert: boolean; zamzar: boolean; handbrake: boolean }
+  {
+    converterup: boolean;
+    cloudconvert: boolean;
+    zamzar: boolean;
+    handbrake: boolean;
+  }
 > = {
-  clientSide: { converterup: true, cloudconvert: false, zamzar: false, handbrake: true },
-  noUpload: { converterup: true, cloudconvert: false, zamzar: false, handbrake: true },
-  freeTier: { converterup: true, cloudconvert: true, zamzar: true, handbrake: true },
-  videoSupport: { converterup: true, cloudconvert: true, zamzar: true, handbrake: true },
-  noAds: { converterup: true, cloudconvert: true, zamzar: false, handbrake: true },
-  private: { converterup: true, cloudconvert: false, zamzar: false, handbrake: true },
-  noInstall: { converterup: true, cloudconvert: true, zamzar: true, handbrake: false },
-  modernUI: { converterup: true, cloudconvert: true, zamzar: false, handbrake: false },
+  clientSide: {
+    converterup: true,
+    cloudconvert: false,
+    zamzar: false,
+    handbrake: true,
+  },
+  noUpload: {
+    converterup: true,
+    cloudconvert: false,
+    zamzar: false,
+    handbrake: true,
+  },
+  freeTier: {
+    converterup: true,
+    cloudconvert: true,
+    zamzar: true,
+    handbrake: true,
+  },
+  videoSupport: {
+    converterup: true,
+    cloudconvert: true,
+    zamzar: true,
+    handbrake: true,
+  },
+  noAds: {
+    converterup: true,
+    cloudconvert: true,
+    zamzar: false,
+    handbrake: true,
+  },
+  private: {
+    converterup: true,
+    cloudconvert: false,
+    zamzar: false,
+    handbrake: true,
+  },
+  noInstall: {
+    converterup: true,
+    cloudconvert: true,
+    zamzar: true,
+    handbrake: false,
+  },
+  modernUI: {
+    converterup: true,
+    cloudconvert: true,
+    zamzar: false,
+    handbrake: false,
+  },
 };
 
 function BoolCell({
@@ -61,7 +106,8 @@ export function Comparison() {
           className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            {t("title")} <span className="gradient-text">{t("titleGradient")}</span>
+            {t("title")}{" "}
+            <span className="gradient-text">{t("titleGradient")}</span>
           </h2>
           <p className="text-lg text-[#71717A] font-[Inter] max-w-lg mx-auto">
             {t("desc")}

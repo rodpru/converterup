@@ -1,33 +1,47 @@
 import type { Metadata } from "next";
-import { YouTubeThumbnailDownloader } from "./thumbnail-downloader";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { YouTubeThumbnailDownloader } from "./thumbnail-downloader";
 
-export const metadata: Metadata = {
-  title: "YouTube Thumbnail Downloader - Free HD Thumbnails | ConverterUp",
-  description:
-    "Download YouTube video thumbnails in all resolutions (HD, SD, HQ, MQ). Free, fast, and 100% browser-based. No sign-up required.",
-  alternates: {
-    canonical: "https://converterup.com/tools/youtube-thumbnail-downloader",
-  },
-  openGraph: {
-    title: "YouTube Thumbnail Downloader - Free HD Thumbnails",
-    description:
-      "Download YouTube video thumbnails in all resolutions. Free, fast, and works entirely in your browser.",
-    url: "https://converterup.com/tools/youtube-thumbnail-downloader",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "YouTube Thumbnail Downloader - Free HD Thumbnails",
-    description:
-      "Download YouTube video thumbnails in all resolutions. Free, fast, and works entirely in your browser.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates(
+    "/tools/youtube-thumbnail-downloader",
+    locale,
+  );
+  const title = t("youtube-thumbnail-downloader-title");
+  const description = t("youtube-thumbnail-downloader-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function YouTubeThumbnailDownloaderPage() {
   return (
     <>
+      <ToolJsonLd slug="youtube-thumbnail-downloader" />
       <YouTubeThumbnailDownloader />
       <RelatedGuides toolHref="/tools/youtube-thumbnail-downloader" />
     </>

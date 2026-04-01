@@ -1,33 +1,44 @@
 import type { Metadata } from "next";
-import { ExifViewer } from "./viewer";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { ExifViewer } from "./viewer";
 
-export const metadata: Metadata = {
-  title: "Free EXIF Data Viewer & Remover — Check Photo Metadata | ConverterUp",
-  description:
-    "View and remove EXIF metadata from your photos. See camera model, GPS coordinates, date taken, and more. Strip metadata for privacy. 100% browser-based.",
-  alternates: {
-    canonical: "https://converterup.com/tools/exif-viewer",
-  },
-  openGraph: {
-    title: "Free EXIF Data Viewer & Remover — Check Photo Metadata",
-    description:
-      "View and remove EXIF metadata from your photos. See camera model, GPS coordinates, date taken, and more. 100% browser-based.",
-    url: "https://converterup.com/tools/exif-viewer",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free EXIF Data Viewer & Remover — Check Photo Metadata",
-    description:
-      "View and remove EXIF metadata from your photos. See camera model, GPS coordinates, date taken, and more. 100% browser-based.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/exif-viewer", locale);
+  const title = t("exif-viewer-title");
+  const description = t("exif-viewer-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function ExifViewerPage() {
   return (
     <>
+      <ToolJsonLd slug="exif-viewer" />
       <ExifViewer />
       <RelatedGuides toolHref="/tools/exif-viewer" />
     </>

@@ -1,33 +1,44 @@
 import type { Metadata } from "next";
-import { FaviconGenerator } from "./generator";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { FaviconGenerator } from "./generator";
 
-export const metadata: Metadata = {
-  title: "Free Favicon Generator — Create Favicons from Images | ConverterUp",
-  description:
-    "Generate favicons in all standard sizes from any PNG, JPG, WebP, or SVG image. Download individually or as a ZIP. 100% browser-based, free, no sign-up required.",
-  alternates: {
-    canonical: "https://converterup.com/tools/favicon-generator",
-  },
-  openGraph: {
-    title: "Free Favicon Generator — Create Favicons from Images",
-    description:
-      "Generate favicons in all standard sizes from any image. Free, fast, and works entirely in your browser.",
-    url: "https://converterup.com/tools/favicon-generator",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free Favicon Generator — Create Favicons from Images",
-    description:
-      "Generate favicons in all standard sizes from any image. Free, fast, and works entirely in your browser.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/favicon-generator", locale);
+  const title = t("favicon-generator-title");
+  const description = t("favicon-generator-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function FaviconGeneratorPage() {
   return (
     <>
+      <ToolJsonLd slug="favicon-generator" />
       <FaviconGenerator />
       <RelatedGuides toolHref="/tools/favicon-generator" />
     </>

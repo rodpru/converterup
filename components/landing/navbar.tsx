@@ -98,7 +98,11 @@ export function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="flex items-center justify-center w-10 h-10 min-h-[44px] min-w-[44px] text-foreground"
           >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
           </button>
         </div>
       </div>

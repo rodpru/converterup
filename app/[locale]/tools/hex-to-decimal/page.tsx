@@ -1,33 +1,44 @@
 import type { Metadata } from "next";
-import { HexToDecimalConverter } from "./converter";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { HexToDecimalConverter } from "./converter";
 
-export const metadata: Metadata = {
-  title: "Free Hex to Decimal Converter — Number Base Converter | ConverterUp",
-  description:
-    "Convert between hexadecimal, decimal, binary, and octal instantly. Supports color hex codes with RGB conversion. Free, fast, and 100% browser-based.",
-  alternates: {
-    canonical: "https://converterup.com/tools/hex-to-decimal",
-  },
-  openGraph: {
-    title: "Free Hex to Decimal Converter — Number Base Converter",
-    description:
-      "Convert between hexadecimal, decimal, binary, and octal instantly. Free, fast, and works entirely in your browser.",
-    url: "https://converterup.com/tools/hex-to-decimal",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free Hex to Decimal Converter — Number Base Converter",
-    description:
-      "Convert between hexadecimal, decimal, binary, and octal instantly. Free, fast, and works entirely in your browser.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/hex-to-decimal", locale);
+  const title = t("hex-to-decimal-title");
+  const description = t("hex-to-decimal-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function HexToDecimalPage() {
   return (
     <>
+      <ToolJsonLd slug="hex-to-decimal" />
       <HexToDecimalConverter />
       <RelatedGuides toolHref="/tools/hex-to-decimal" />
     </>

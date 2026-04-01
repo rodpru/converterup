@@ -1,33 +1,44 @@
 import type { Metadata } from "next";
-import { VttToSrtConverter } from "./converter";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { VttToSrtConverter } from "./converter";
 
-export const metadata: Metadata = {
-  title: "Free VTT to SRT Converter — Convert Subtitles Online | ConverterUp",
-  description:
-    "Convert WebVTT (.vtt) subtitle files to SRT format instantly. Upload a file or paste VTT content. Free, fast, and 100% browser-based.",
-  alternates: {
-    canonical: "https://converterup.com/tools/vtt-to-srt",
-  },
-  openGraph: {
-    title: "Free VTT to SRT Converter — Convert Subtitles Online",
-    description:
-      "Convert WebVTT (.vtt) subtitle files to SRT format instantly. Free, fast, and works entirely in your browser.",
-    url: "https://converterup.com/tools/vtt-to-srt",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free VTT to SRT Converter — Convert Subtitles Online",
-    description:
-      "Convert WebVTT (.vtt) subtitle files to SRT format instantly. Free, fast, and works entirely in your browser.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/vtt-to-srt", locale);
+  const title = t("vtt-to-srt-title");
+  const description = t("vtt-to-srt-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function VttToSrtPage() {
   return (
     <>
+      <ToolJsonLd slug="vtt-to-srt" />
       <VttToSrtConverter />
       <RelatedGuides toolHref="/tools/vtt-to-srt" />
     </>

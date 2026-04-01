@@ -5,8 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function OgImage() {
-	return generateOgImage({
-		title: "QR Code Generator",
-		badge: "Utility",
-	});
+  return generateOgImage({
+    title: "QR Code Generator",
+    badge: "Utility",
+  });
 }

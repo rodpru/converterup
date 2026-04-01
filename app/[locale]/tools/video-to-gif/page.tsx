@@ -1,34 +1,44 @@
 import type { Metadata } from "next";
-import { VideoToGifConverter } from "./converter";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { VideoToGifConverter } from "./converter";
 
-export const metadata: Metadata = {
-  title:
-    "Free Video to GIF Converter — Convert MP4 to GIF Online | ConverterUp",
-  description:
-    "Convert MP4, WebM, MOV, and AVI videos to high-quality GIF animations. Adjust frame rate and size. Free, fast, and 100% browser-based — no uploads required.",
-  alternates: {
-    canonical: "https://converterup.com/tools/video-to-gif",
-  },
-  openGraph: {
-    title: "Free Video to GIF Converter — Convert MP4 to GIF Online",
-    description:
-      "Convert videos to high-quality GIF animations right in your browser. No uploads, no servers.",
-    url: "https://converterup.com/tools/video-to-gif",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free Video to GIF Converter — Convert MP4 to GIF Online",
-    description:
-      "Convert videos to high-quality GIF animations right in your browser. No uploads, no servers.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/video-to-gif", locale);
+  const title = t("video-to-gif-title");
+  const description = t("video-to-gif-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function VideoToGifPage() {
   return (
     <>
+      <ToolJsonLd slug="video-to-gif" />
       <VideoToGifConverter />
       <RelatedGuides toolHref="/tools/video-to-gif" />
     </>

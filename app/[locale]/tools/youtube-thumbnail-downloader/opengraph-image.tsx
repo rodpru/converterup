@@ -5,8 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function OgImage() {
-	return generateOgImage({
-		title: "YouTube Thumbnail Downloader",
-		badge: "Video",
-	});
+  return generateOgImage({
+    title: "YouTube Thumbnail Downloader",
+    badge: "Video",
+  });
 }

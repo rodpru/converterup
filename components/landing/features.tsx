@@ -9,11 +9,41 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 const featureIcons = [ImageIcon, Video, Minimize2, Crop, Music, Lock];
 const featureKeys = [
-  { title: "imageConversion", desc: "imageConversionDesc", span: "sm:col-span-2 sm:row-span-2", large: true, href: "/tools/svg-to-png" },
-  { title: "videoConversion", desc: "videoConversionDesc", span: "", large: false, href: "/tools/video-to-gif" },
-  { title: "smartCompression", desc: "smartCompressionDesc", span: "", large: false, href: "/tools/image-compressor" },
-  { title: "resizeCrop", desc: "resizeCropDesc", span: "", large: false, href: "/tools/image-resizer" },
-  { title: "audioExtraction", desc: "audioExtractionDesc", span: "", large: false, href: "/tools/video-frame-extractor" },
+  {
+    title: "imageConversion",
+    desc: "imageConversionDesc",
+    span: "sm:col-span-2 sm:row-span-2",
+    large: true,
+    href: "/tools/svg-to-png",
+  },
+  {
+    title: "videoConversion",
+    desc: "videoConversionDesc",
+    span: "",
+    large: false,
+    href: "/tools/video-to-gif",
+  },
+  {
+    title: "smartCompression",
+    desc: "smartCompressionDesc",
+    span: "",
+    large: false,
+    href: "/tools/image-compressor",
+  },
+  {
+    title: "resizeCrop",
+    desc: "resizeCropDesc",
+    span: "",
+    large: false,
+    href: "/tools/image-resizer",
+  },
+  {
+    title: "audioExtraction",
+    desc: "audioExtractionDesc",
+    span: "",
+    large: false,
+    href: "/tools/video-frame-extractor",
+  },
   { title: "privacy", desc: "privacyDesc", span: "", large: false, href: null },
 ] as const;
 
@@ -127,10 +157,27 @@ export function Features() {
 
             return f.href ? (
               <Link key={f.title} href={f.href} className={`block ${f.span}`}>
-                <FeatureCard icon={Icon} title={title} description={description} large={f.large} span={f.span} href={f.href} index={i} />
+                <FeatureCard
+                  icon={Icon}
+                  title={title}
+                  description={description}
+                  large={f.large}
+                  span={f.span}
+                  href={f.href}
+                  index={i}
+                />
               </Link>
             ) : (
-              <FeatureCard key={f.title} icon={Icon} title={title} description={description} large={f.large} span={f.span} href={f.href} index={i} />
+              <FeatureCard
+                key={f.title}
+                icon={Icon}
+                title={title}
+                description={description}
+                large={f.large}
+                span={f.span}
+                href={f.href}
+                index={i}
+              />
             );
           })}
         </motion.div>

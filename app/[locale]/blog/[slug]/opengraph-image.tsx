@@ -6,17 +6,19 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export function generateStaticParams() {
-	return getArticleSlugs().map((slug) => ({ slug }));
+  return getArticleSlugs().map((slug) => ({ slug }));
 }
 
 export default async function OgImage({
-	params,
-}: { params: Promise<{ slug: string }> }) {
-	const { slug } = await params;
-	const article = getArticleBySlug(slug);
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
 
-	return generateOgImage({
-		title: article?.title ?? "ConverterUp Blog",
-		badge: `${article?.category?.toUpperCase() ?? "BLOG"} · ${article?.lang?.toUpperCase() ?? "EN"}`,
-	});
+  return generateOgImage({
+    title: article?.title ?? "ConverterUp Blog",
+    badge: `${article?.category?.toUpperCase() ?? "BLOG"} · ${article?.lang?.toUpperCase() ?? "EN"}`,
+  });
 }

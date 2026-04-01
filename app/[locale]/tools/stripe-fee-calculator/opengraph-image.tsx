@@ -5,8 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function OgImage() {
-	return generateOgImage({
-		title: "Stripe Fee Calculator",
-		badge: "Utility",
-	});
+  return generateOgImage({
+    title: "Stripe Fee Calculator",
+    badge: "Utility",
+  });
 }

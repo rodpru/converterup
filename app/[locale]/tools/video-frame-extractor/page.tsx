@@ -1,34 +1,44 @@
 import type { Metadata } from "next";
-import { VideoFrameExtractor } from "./extractor";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { VideoFrameExtractor } from "./extractor";
 
-export const metadata: Metadata = {
-  title:
-    "Free Video Frame Extractor — Capture Screenshots from Videos | ConverterUp",
-  description:
-    "Extract frames and screenshots from any video file. Supports MP4, WebM, and MOV. Capture, preview, and download frames as PNG or JPG. Free, fast, and 100% browser-based.",
-  alternates: {
-    canonical: "https://converterup.com/tools/video-frame-extractor",
-  },
-  openGraph: {
-    title: "Free Video Frame Extractor — Capture Screenshots from Videos",
-    description:
-      "Extract frames and screenshots from any video file. Supports MP4, WebM, and MOV. Free, fast, and works entirely in your browser.",
-    url: "https://converterup.com/tools/video-frame-extractor",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free Video Frame Extractor — Capture Screenshots from Videos",
-    description:
-      "Extract frames and screenshots from any video file. Supports MP4, WebM, and MOV. Free, fast, and works entirely in your browser.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/video-frame-extractor", locale);
+  const title = t("video-frame-extractor-title");
+  const description = t("video-frame-extractor-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function VideoFrameExtractorPage() {
   return (
     <>
+      <ToolJsonLd slug="video-frame-extractor" />
       <VideoFrameExtractor />
       <RelatedGuides toolHref="/tools/video-frame-extractor" />
     </>

@@ -5,8 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function OgImage() {
-	return generateOgImage({
-		title: "Video to GIF Converter",
-		badge: "Video",
-	});
+  return generateOgImage({
+    title: "Video to GIF Converter",
+    badge: "Video",
+  });
 }

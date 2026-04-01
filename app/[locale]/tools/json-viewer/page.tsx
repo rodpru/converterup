@@ -1,33 +1,44 @@
 import type { Metadata } from "next";
-import { JsonViewer } from "./viewer";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { JsonViewer } from "./viewer";
 
-export const metadata: Metadata = {
-  title: "Free JSON Viewer & Formatter — Format JSON Online | ConverterUp",
-  description:
-    "Format, validate, and explore JSON with syntax highlighting. Prettify or minify JSON instantly. Free, fast, and 100% browser-based.",
-  alternates: {
-    canonical: "https://converterup.com/tools/json-viewer",
-  },
-  openGraph: {
-    title: "Free JSON Viewer & Formatter — Format JSON Online",
-    description:
-      "Format, validate, and explore JSON with syntax highlighting. Free, fast, and works entirely in your browser.",
-    url: "https://converterup.com/tools/json-viewer",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free JSON Viewer & Formatter — Format JSON Online",
-    description:
-      "Format, validate, and explore JSON with syntax highlighting. Free, fast, and works entirely in your browser.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/json-viewer", locale);
+  const title = t("json-viewer-title");
+  const description = t("json-viewer-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function JsonViewerPage() {
   return (
     <>
+      <ToolJsonLd slug="json-viewer" />
       <JsonViewer />
       <RelatedGuides toolHref="/tools/json-viewer" />
     </>

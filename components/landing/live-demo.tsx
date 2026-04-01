@@ -99,7 +99,8 @@ export function LiveDemo() {
           className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            {t("title")} <span className="gradient-text">{t("titleGradient")}</span>
+            {t("title")}{" "}
+            <span className="gradient-text">{t("titleGradient")}</span>
           </h2>
           <p className="text-lg text-[#71717A] font-[Inter] max-w-lg mx-auto">
             {t("desc")}

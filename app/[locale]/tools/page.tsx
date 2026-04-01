@@ -1,29 +1,37 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/json-ld";
 import { ToolsGrid } from "./tools-grid";
+import { generateAlternates } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Free Online Tools | ConverterUp",
-  description:
-    "22 free browser-based tools for images, video, code, and more. 3 free uses per day. 100% private — files never leave your device.",
-  alternates: {
-    canonical: "https://converterup.com/tools",
-  },
-  openGraph: {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const alternates = generateAlternates("/tools", locale);
+
+  return {
     title: "Free Online Tools | ConverterUp",
     description:
-      "22 free browser-based tools for images, video, code, and more. 3 free uses per day.",
-    url: "https://converterup.com/tools",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free Online Tools | ConverterUp",
-    description:
-      "22 free browser-based tools for images, video, code, and more. 3 free uses per day.",
-  },
-};
+      "22 free browser-based tools for images, video, code, and more. 3 free uses per day. 100% private — files never leave your device.",
+    alternates,
+    openGraph: {
+      title: "Free Online Tools | ConverterUp",
+      description:
+        "22 free browser-based tools for images, video, code, and more. 3 free uses per day.",
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Free Online Tools | ConverterUp",
+      description:
+        "22 free browser-based tools for images, video, code, and more. 3 free uses per day.",
+    },
+  };
+}
 
 export default function ToolsPage() {
   return (

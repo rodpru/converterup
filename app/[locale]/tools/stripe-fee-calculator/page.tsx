@@ -1,34 +1,44 @@
 import type { Metadata } from "next";
-import { StripeFeeCalculator } from "./calculator";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { StripeFeeCalculator } from "./calculator";
 
-export const metadata: Metadata = {
-  title:
-    "Stripe Fee Calculator — Calculate Stripe Processing Fees | ConverterUp",
-  description:
-    "Calculate Stripe processing fees instantly. See exactly what you'll pay and receive for any transaction amount. Supports USD, EUR, GBP, and BRL. Free and 100% browser-based.",
-  alternates: {
-    canonical: "https://converterup.com/tools/stripe-fee-calculator",
-  },
-  openGraph: {
-    title: "Stripe Fee Calculator — Calculate Stripe Processing Fees",
-    description:
-      "Calculate Stripe processing fees instantly. See exactly what you'll pay and receive for any transaction amount.",
-    url: "https://converterup.com/tools/stripe-fee-calculator",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Stripe Fee Calculator — Calculate Stripe Processing Fees",
-    description:
-      "Calculate Stripe processing fees instantly. See exactly what you'll pay and receive for any transaction amount.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/stripe-fee-calculator", locale);
+  const title = t("stripe-fee-calculator-title");
+  const description = t("stripe-fee-calculator-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function StripeFeeCalculatorPage() {
   return (
     <>
+      <ToolJsonLd slug="stripe-fee-calculator" />
       <StripeFeeCalculator />
       <RelatedGuides toolHref="/tools/stripe-fee-calculator" />
     </>

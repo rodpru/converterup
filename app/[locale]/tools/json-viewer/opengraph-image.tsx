@@ -5,8 +5,8 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function OgImage() {
-	return generateOgImage({
-		title: "JSON Viewer & Formatter",
-		badge: "Developer",
-	});
+  return generateOgImage({
+    title: "JSON Viewer & Formatter",
+    badge: "Developer",
+  });
 }

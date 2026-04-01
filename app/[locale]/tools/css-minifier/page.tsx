@@ -1,33 +1,44 @@
 import type { Metadata } from "next";
-import { CssMinifier } from "./minifier";
 import { RelatedGuides } from "@/components/related-guides";
+import { ToolJsonLd } from "@/components/tool-json-ld";
+import { generateAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
+import { CssMinifier } from "./minifier";
 
-export const metadata: Metadata = {
-  title: "Free CSS Minifier — Minify CSS Online | ConverterUp",
-  description:
-    "Minify CSS code instantly. Remove comments, collapse whitespace, and reduce file size. Free, fast, and 100% browser-based.",
-  alternates: {
-    canonical: "https://converterup.com/tools/css-minifier",
-  },
-  openGraph: {
-    title: "Free CSS Minifier — Minify CSS Online",
-    description:
-      "Minify CSS code instantly. Remove comments, collapse whitespace, and reduce file size. Free, fast, and works entirely in your browser.",
-    url: "https://converterup.com/tools/css-minifier",
-    siteName: "ConverterUp",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free CSS Minifier — Minify CSS Online",
-    description:
-      "Minify CSS code instantly. Remove comments, collapse whitespace, and reduce file size. Free, fast, and works entirely in your browser.",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const alternates = generateAlternates("/tools/css-minifier", locale);
+  const title = t("css-minifier-title");
+  const description = t("css-minifier-desc");
+
+  return {
+    title,
+    description,
+    alternates,
+    openGraph: {
+      title,
+      description,
+      url: alternates.canonical,
+      siteName: "ConverterUp",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 export default function CssMinifierPage() {
   return (
     <>
+      <ToolJsonLd slug="css-minifier" />
       <CssMinifier />
       <RelatedGuides toolHref="/tools/css-minifier" />
     </>

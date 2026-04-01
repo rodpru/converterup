@@ -45,36 +45,52 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
+      alternates: {
+        languages: {
+          en: baseUrl,
+          pt: `${baseUrl}/pt`,
+          es: `${baseUrl}/es`,
+        },
+      },
     },
     {
       url: `${baseUrl}/tools`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
+      alternates: {
+        languages: {
+          en: `${baseUrl}/tools`,
+          pt: `${baseUrl}/pt/tools`,
+          es: `${baseUrl}/es/tools`,
+        },
+      },
     },
     ...toolPages.map((slug) => ({
       url: `${baseUrl}/tools/${slug}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
+      alternates: {
+        languages: {
+          en: `${baseUrl}/tools/${slug}`,
+          pt: `${baseUrl}/pt/tools/${slug}`,
+          es: `${baseUrl}/es/tools/${slug}`,
+        },
+      },
     })),
     {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/pt/blog`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/es/blog`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
+      alternates: {
+        languages: {
+          en: `${baseUrl}/blog`,
+          pt: `${baseUrl}/pt/blog`,
+          es: `${baseUrl}/es/blog`,
+        },
+      },
     },
     ...blogEntries,
   ];

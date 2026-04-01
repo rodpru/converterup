@@ -3,7 +3,7 @@ import { Link } from "@/i18n/routing";
 import { getAllArticles } from "@/lib/blog";
 import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import { routing } from "@/i18n/routing";
+import { generateAlternates } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -14,19 +14,15 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Blog" });
   const title = `${t("badge")} | ConverterUp`;
   const description = t("desc");
-  const canonical =
-    locale === routing.defaultLocale
-      ? "https://converterup.com/blog"
-      : `https://converterup.com/${locale}/blog`;
 
   return {
     title,
     description,
-    alternates: { canonical },
+    alternates: generateAlternates("/blog", locale),
     openGraph: {
       title,
       description,
-      url: canonical,
+      url: generateAlternates("/blog", locale).canonical,
       siteName: "ConverterUp",
       type: "website",
       locale,
@@ -35,13 +31,13 @@ export async function generateMetadata({
 }
 
 export default async function BlogIndex({
-  params
+  params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Blog" });
-  const articles = getAllArticles().filter(post => post.lang === locale);
+  const articles = getAllArticles().filter((post) => post.lang === locale);
 
   return (
     <>
@@ -51,7 +47,8 @@ export default async function BlogIndex({
             {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            {t("title")} <span className="gradient-text">{t("titleGradient")}</span>
+            {t("title")}{" "}
+            <span className="gradient-text">{t("titleGradient")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
             {t("desc")}
@@ -83,7 +80,7 @@ export default async function BlogIndex({
               <ArrowRight className="w-5 h-5 text-[#71717A] group-hover:text-[#2DD4BF] transition-colors shrink-0" />
             </Link>
           ))}
-          
+
           {articles.length === 0 && (
             <div className="text-center py-12 text-[#71717A]">
               {t("noArticles")}
