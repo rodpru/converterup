@@ -69,11 +69,10 @@ const ease = [0.16, 1, 0.3, 1] as const;
 export function ImageCompressor() {
   return (
     <ToolGate toolName="image-compressor">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <ImageCompressorContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -81,13 +80,11 @@ export function ImageCompressor() {
 }
 
 function ImageCompressorContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -224,15 +221,15 @@ function ImageCompressorContent({
 
   const handleDownload = useCallback(async () => {
     if (!result) return;
-    const a = document.createElement("a");
-    a.href = result.compressedUrl;
-    a.download = result.fileName;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    trackCompleted();
-    await deduct();
-  }, [result, deduct, trackCompleted]);
+    await gatedDownload(() => {
+      const a = document.createElement("a");
+      a.href = result.compressedUrl;
+      a.download = result.fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  }, [result, gatedDownload]);
 
   const reductionPercent =
     result && result.originalSize > 0

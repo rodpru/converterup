@@ -53,11 +53,10 @@ function formatUuid(
 export function UuidGenerator() {
   return (
     <ToolGate toolName="uuid-generator">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <UuidGeneratorContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -65,13 +64,11 @@ export function UuidGenerator() {
 }
 
 function UuidGeneratorContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [singleUuid, setSingleUuid] = useState("");
   const [bulkUuids, setBulkUuids] = useState("");
@@ -106,47 +103,43 @@ function UuidGeneratorContent({
 
   const handleCopySingle = useCallback(async () => {
     if (!singleUuid) return;
-    try {
-      await navigator.clipboard.writeText(singleUuid);
-      setCopiedSingle(true);
-      setTimeout(() => setCopiedSingle(false), 2000);
-      trackCompleted();
-      await deduct();
-    } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = singleUuid;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      setCopiedSingle(true);
-      setTimeout(() => setCopiedSingle(false), 2000);
-      trackCompleted();
-      await deduct();
-    }
-  }, [singleUuid, deduct, trackCompleted]);
+    await gatedDownload(async () => {
+      try {
+        await navigator.clipboard.writeText(singleUuid);
+        setCopiedSingle(true);
+        setTimeout(() => setCopiedSingle(false), 2000);
+      } catch {
+        const textarea = document.createElement("textarea");
+        textarea.value = singleUuid;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        setCopiedSingle(true);
+        setTimeout(() => setCopiedSingle(false), 2000);
+      }
+    });
+  }, [singleUuid, gatedDownload]);
 
   const handleCopyAll = useCallback(async () => {
     if (!bulkUuids) return;
-    try {
-      await navigator.clipboard.writeText(bulkUuids);
-      setCopiedAll(true);
-      setTimeout(() => setCopiedAll(false), 2000);
-      trackCompleted();
-      await deduct();
-    } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = bulkUuids;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      setCopiedAll(true);
-      setTimeout(() => setCopiedAll(false), 2000);
-      trackCompleted();
-      await deduct();
-    }
-  }, [bulkUuids, deduct, trackCompleted]);
+    await gatedDownload(async () => {
+      try {
+        await navigator.clipboard.writeText(bulkUuids);
+        setCopiedAll(true);
+        setTimeout(() => setCopiedAll(false), 2000);
+      } catch {
+        const textarea = document.createElement("textarea");
+        textarea.value = bulkUuids;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        setCopiedAll(true);
+        setTimeout(() => setCopiedAll(false), 2000);
+      }
+    });
+  }, [bulkUuids, gatedDownload]);
 
   const handleBulkCountChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

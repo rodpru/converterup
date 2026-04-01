@@ -94,11 +94,10 @@ function convertVttToSrt(vtt: string): string {
 export function VttToSrtConverter() {
   return (
     <ToolGate toolName="vtt-to-srt">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <VttToSrtConverterContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -106,13 +105,11 @@ export function VttToSrtConverter() {
 }
 
 function VttToSrtConverterContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [vttInput, setVttInput] = useState("");
   const [srtOutput, setSrtOutput] = useState("");
@@ -185,28 +182,28 @@ function VttToSrtConverterContent({
 
   const handleCopy = useCallback(async () => {
     if (!srtOutput) return;
-    await navigator.clipboard.writeText(srtOutput);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-    trackCompleted();
-    await deduct();
-  }, [srtOutput, deduct, trackCompleted]);
+    await gatedDownload(async () => {
+      await navigator.clipboard.writeText(srtOutput);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, [srtOutput, gatedDownload]);
 
   const handleDownload = useCallback(async () => {
     if (!srtOutput) return;
-    const blob = new Blob([srtOutput], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    const baseName = fileName ? fileName.replace(/\.vtt$/i, "") : "subtitles";
-    a.download = `${baseName}.srt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    trackCompleted();
-    await deduct();
-  }, [srtOutput, fileName, deduct, trackCompleted]);
+    await gatedDownload(() => {
+      const blob = new Blob([srtOutput], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      const baseName = fileName ? fileName.replace(/\.vtt$/i, "") : "subtitles";
+      a.download = `${baseName}.srt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  }, [srtOutput, fileName, gatedDownload]);
 
   return (
     <>

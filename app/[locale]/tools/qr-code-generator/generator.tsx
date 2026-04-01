@@ -57,11 +57,10 @@ const ease = [0.16, 1, 0.3, 1] as const;
 export function QRCodeGenerator() {
   return (
     <ToolGate toolName="qr-code-generator">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <QRCodeGeneratorContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -69,13 +68,11 @@ export function QRCodeGenerator() {
 }
 
 function QRCodeGeneratorContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
@@ -163,49 +160,50 @@ function QRCodeGeneratorContent({
 
     setDownloading(true);
     try {
-      // Create a final canvas with the "powered by" watermark
-      const srcCanvas = canvasRef.current;
-      const watermarkHeight = 24;
-      const finalCanvas = document.createElement("canvas");
-      finalCanvas.width = srcCanvas.width;
-      finalCanvas.height = srcCanvas.height + watermarkHeight;
+      await gatedDownload(() => {
+        // Create a final canvas with the "powered by" watermark
+        const srcCanvas = canvasRef.current;
+        if (!srcCanvas) return;
+        const watermarkHeight = 24;
+        const finalCanvas = document.createElement("canvas");
+        finalCanvas.width = srcCanvas.width;
+        finalCanvas.height = srcCanvas.height + watermarkHeight;
 
-      const ctx = finalCanvas.getContext("2d");
-      if (!ctx) return;
+        const ctx = finalCanvas.getContext("2d");
+        if (!ctx) return;
 
-      // Draw QR code
-      ctx.drawImage(srcCanvas, 0, 0);
+        // Draw QR code
+        ctx.drawImage(srcCanvas, 0, 0);
 
-      // Draw watermark bar
-      ctx.fillStyle = bgColor;
-      ctx.fillRect(0, srcCanvas.height, finalCanvas.width, watermarkHeight);
+        // Draw watermark bar
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, srcCanvas.height, finalCanvas.width, watermarkHeight);
 
-      // Draw watermark text
-      const fontSize = Math.max(10, size * 0.022);
-      ctx.fillStyle = "#999999";
-      ctx.font = `${fontSize}px Inter, system-ui, sans-serif`;
-      ctx.textAlign = "right";
-      ctx.textBaseline = "middle";
-      ctx.fillText(
-        "powered by ConverterUp.com",
-        finalCanvas.width - 8,
-        srcCanvas.height + watermarkHeight / 2,
-      );
+        // Draw watermark text
+        const fontSize = Math.max(10, size * 0.022);
+        ctx.fillStyle = "#999999";
+        ctx.font = `${fontSize}px Inter, system-ui, sans-serif`;
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+        ctx.fillText(
+          "powered by ConverterUp.com",
+          finalCanvas.width - 8,
+          srcCanvas.height + watermarkHeight / 2,
+        );
 
-      const dataUrl = finalCanvas.toDataURL("image/png");
-      const a = document.createElement("a");
-      a.href = dataUrl;
-      a.download = `qrcode-${size}px.png`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      trackCompleted();
-      await deduct();
+        const dataUrl = finalCanvas.toDataURL("image/png");
+        const a = document.createElement("a");
+        a.href = dataUrl;
+        a.download = `qrcode-${size}px.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
     } catch {
       setError("Failed to download QR code. Please try again.");
     }
     setDownloading(false);
-  }, [text, size, bgColor, deduct]);
+  }, [text, size, bgColor, gatedDownload]);
 
   return (
     <>

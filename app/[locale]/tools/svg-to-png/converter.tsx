@@ -48,11 +48,10 @@ type InputMode = "upload" | "paste";
 export function SvgToPngConverter() {
   return (
     <ToolGate toolName="svg-to-png">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <SvgToPngConverterContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -60,13 +59,11 @@ export function SvgToPngConverter() {
 }
 
 function SvgToPngConverterContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -209,16 +206,15 @@ function SvgToPngConverterContent({
 
   const handleDownload = useCallback(async () => {
     if (!pngUrl) return;
-
-    const a = document.createElement("a");
-    a.href = pngUrl;
-    a.download = `converted-${scale}x.png`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    trackCompleted();
-    await deduct();
-  }, [pngUrl, scale, deduct, trackCompleted]);
+    await gatedDownload(() => {
+      const a = document.createElement("a");
+      a.href = pngUrl;
+      a.download = `converted-${scale}x.png`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  }, [pngUrl, scale, gatedDownload]);
 
   return (
     <>

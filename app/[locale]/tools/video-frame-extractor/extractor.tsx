@@ -73,11 +73,10 @@ function formatFileSize(bytes: number): string {
 export function VideoFrameExtractor() {
   return (
     <ToolGate toolName="video-frame-extractor">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <VideoFrameExtractorContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -85,13 +84,11 @@ export function VideoFrameExtractor() {
 }
 
 function VideoFrameExtractorContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
@@ -220,17 +217,17 @@ function VideoFrameExtractorContent({
 
   const downloadFrame = useCallback(
     async (frame: CapturedFrame) => {
-      const ext = outputFormat === "jpg" ? "jpg" : "png";
-      const a = document.createElement("a");
-      a.href = frame.url;
-      a.download = `frame-${formatTimestamp(frame.timestamp).replace(/[:.]/g, "-")}.${ext}`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      trackCompleted();
-      await deduct();
+      await gatedDownload(() => {
+        const ext = outputFormat === "jpg" ? "jpg" : "png";
+        const a = document.createElement("a");
+        a.href = frame.url;
+        a.download = `frame-${formatTimestamp(frame.timestamp).replace(/[:.]/g, "-")}.${ext}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
     },
-    [outputFormat, deduct, trackCompleted],
+    [outputFormat, gatedDownload],
   );
 
   const downloadAllFrames = useCallback(async () => {
@@ -238,31 +235,31 @@ function VideoFrameExtractorContent({
 
     setDownloadingAll(true);
     try {
-      const zip = new JSZip();
-      const ext = outputFormat === "jpg" ? "jpg" : "png";
+      await gatedDownload(async () => {
+        const zip = new JSZip();
+        const ext = outputFormat === "jpg" ? "jpg" : "png";
 
-      for (let i = 0; i < frames.length; i++) {
-        const frame = frames[i];
-        const filename = `frame-${(i + 1).toString().padStart(3, "0")}-${formatTimestamp(frame.timestamp).replace(/[:.]/g, "-")}.${ext}`;
-        zip.file(filename, frame.blob);
-      }
+        for (let i = 0; i < frames.length; i++) {
+          const frame = frames[i];
+          const filename = `frame-${(i + 1).toString().padStart(3, "0")}-${formatTimestamp(frame.timestamp).replace(/[:.]/g, "-")}.${ext}`;
+          zip.file(filename, frame.blob);
+        }
 
-      const content = await zip.generateAsync({ type: "blob" });
-      const url = URL.createObjectURL(content);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `frames-${file?.name?.replace(/\.[^.]+$/, "") || "video"}.zip`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      trackCompleted();
-      await deduct();
+        const content = await zip.generateAsync({ type: "blob" });
+        const url = URL.createObjectURL(content);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `frames-${file?.name?.replace(/\.[^.]+$/, "") || "video"}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
     } catch {
       setError("Failed to create ZIP file. Please try again.");
     }
     setDownloadingAll(false);
-  }, [frames, outputFormat, file, deduct, trackCompleted]);
+  }, [frames, outputFormat, file, gatedDownload]);
 
   const seekBy = useCallback((seconds: number) => {
     const video = videoRef.current;

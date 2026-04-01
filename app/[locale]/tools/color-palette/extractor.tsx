@@ -289,11 +289,10 @@ const ease = [0.16, 1, 0.3, 1] as const;
 export function ColorPaletteExtractor() {
   return (
     <ToolGate toolName="color-palette">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <ColorPaletteExtractorContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -301,13 +300,11 @@ export function ColorPaletteExtractor() {
 }
 
 function ColorPaletteExtractorContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -449,22 +446,22 @@ function ColorPaletteExtractorContent({
     if (colors.length === 0) return;
     setDownloading(true);
     try {
-      const blob = await generatePalettePng(colors);
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "color-palette.png";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      trackCompleted();
-      await deduct();
+      await gatedDownload(async () => {
+        const blob = await generatePalettePng(colors);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "color-palette.png";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
     } catch {
       setError("Failed to generate palette image.");
     }
     setDownloading(false);
-  }, [colors, deduct, trackCompleted]);
+  }, [colors, gatedDownload]);
 
   return (
     <>

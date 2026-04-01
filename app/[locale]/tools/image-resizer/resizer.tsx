@@ -113,11 +113,10 @@ function formatFileSize(bytes: number): string {
 export function ImageResizer() {
   return (
     <ToolGate toolName="image-resizer">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <ImageResizerContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -125,13 +124,11 @@ export function ImageResizer() {
 }
 
 function ImageResizerContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [original, setOriginal] = useState<ImageInfo | null>(null);
   const [targetWidth, setTargetWidth] = useState<number>(0);
@@ -300,29 +297,22 @@ function ImageResizerContent({
 
   const handleDownload = useCallback(async () => {
     if (!resizedBlob || !original) return;
-    const mime = getMimeType(original.file);
-    const ext = getExtension(mime);
-    const baseName = original.file.name.replace(/\.[^.]+$/, "");
-    const filename = `${baseName}-${targetWidth}x${targetHeight}.${ext}`;
+    await gatedDownload(() => {
+      const mime = getMimeType(original.file);
+      const ext = getExtension(mime);
+      const baseName = original.file.name.replace(/\.[^.]+$/, "");
+      const filename = `${baseName}-${targetWidth}x${targetHeight}.${ext}`;
 
-    const url = URL.createObjectURL(resizedBlob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    trackCompleted();
-    await deduct();
-  }, [
-    resizedBlob,
-    original,
-    targetWidth,
-    targetHeight,
-    deduct,
-    trackCompleted,
-  ]);
+      const url = URL.createObjectURL(resizedBlob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  }, [resizedBlob, original, targetWidth, targetHeight, gatedDownload]);
 
   return (
     <>

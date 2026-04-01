@@ -144,11 +144,10 @@ function parseCsv(
 export function CsvToJsonConverter() {
   return (
     <ToolGate toolName="csv-to-json">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <CsvToJsonContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -156,13 +155,11 @@ export function CsvToJsonConverter() {
 }
 
 function CsvToJsonContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [input, setInput] = useState("");
   const [delimiterType, setDelimiterType] = useState<DelimiterType>("comma");
@@ -209,40 +206,38 @@ function CsvToJsonContent({
 
   const handleCopy = useCallback(async () => {
     if (!result.json) return;
-    try {
-      await navigator.clipboard.writeText(result.json);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-      trackCompleted();
-      await deduct();
-    } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = result.json;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-      trackCompleted();
-      await deduct();
-    }
-  }, [result.json, deduct, trackCompleted]);
+    await gatedDownload(async () => {
+      try {
+        await navigator.clipboard.writeText(result.json);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        const textarea = document.createElement("textarea");
+        textarea.value = result.json;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    });
+  }, [result.json, gatedDownload]);
 
   const handleDownload = useCallback(async () => {
     if (!result.json) return;
-    const blob = new Blob([result.json], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "converted.json";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-    trackCompleted();
-    await deduct();
-  }, [result.json, deduct, trackCompleted]);
+    await gatedDownload(() => {
+      const blob = new Blob([result.json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "converted.json";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+  }, [result.json, gatedDownload]);
 
   return (
     <>

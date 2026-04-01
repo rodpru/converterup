@@ -51,11 +51,10 @@ function formatBytes(bytes: number): string {
 export function HtmlMinifier() {
   return (
     <ToolGate toolName="html-minifier">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <HtmlMinifierContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -63,13 +62,11 @@ export function HtmlMinifier() {
 }
 
 function HtmlMinifierContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
@@ -90,40 +87,38 @@ function HtmlMinifierContent({
 
   const handleCopy = useCallback(async () => {
     if (!output) return;
-    try {
-      await navigator.clipboard.writeText(output);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-      trackCompleted();
-      await deduct();
-    } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = output;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-      trackCompleted();
-      await deduct();
-    }
-  }, [output, deduct, trackCompleted]);
+    await gatedDownload(async () => {
+      try {
+        await navigator.clipboard.writeText(output);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        const textarea = document.createElement("textarea");
+        textarea.value = output;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    });
+  }, [output, gatedDownload]);
 
   const handleDownload = useCallback(async () => {
     if (!output) return;
-    const blob = new Blob([output], { type: "text/html" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "minified.html";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    trackCompleted();
-    await deduct();
-  }, [output, deduct, trackCompleted]);
+    await gatedDownload(() => {
+      const blob = new Blob([output], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "minified.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  }, [output, gatedDownload]);
 
   return (
     <>

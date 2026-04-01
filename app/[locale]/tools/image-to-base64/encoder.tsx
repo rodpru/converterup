@@ -54,11 +54,10 @@ function formatBytes(bytes: number): string {
 export function ImageToBase64Encoder() {
   return (
     <ToolGate toolName="image-to-base64">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <ImageToBase64EncoderContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -66,13 +65,11 @@ export function ImageToBase64Encoder() {
 }
 
 function ImageToBase64EncoderContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const hasTrackedStarted = useRef(false);
@@ -142,17 +139,17 @@ function ImageToBase64EncoderContent({
 
   const copyToClipboard = useCallback(
     async (text: string, field: "base64" | "datauri") => {
-      try {
-        await navigator.clipboard.writeText(text);
-        setCopiedField(field);
-        trackCompleted();
-        await deduct();
-        setTimeout(() => setCopiedField(null), 2000);
-      } catch {
-        setError("Failed to copy to clipboard.");
-      }
+      await gatedDownload(async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+          setCopiedField(field);
+          setTimeout(() => setCopiedField(null), 2000);
+        } catch {
+          setError("Failed to copy to clipboard.");
+        }
+      });
     },
-    [deduct, trackCompleted],
+    [gatedDownload],
   );
 
   return (

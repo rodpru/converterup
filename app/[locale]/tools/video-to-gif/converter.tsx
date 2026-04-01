@@ -69,11 +69,10 @@ function getFileExtension(file: File): string {
 export function VideoToGifConverter() {
   return (
     <ToolGate toolName="video-to-gif">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <VideoToGifConverterContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -81,13 +80,11 @@ export function VideoToGifConverter() {
 }
 
 function VideoToGifConverterContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
@@ -241,15 +238,15 @@ function VideoToGifConverterContent({
 
   const handleDownload = useCallback(async () => {
     if (!gifUrl || !file) return;
-    const a = document.createElement("a");
-    a.href = gifUrl;
-    a.download = `${file.name.replace(/\.[^.]+$/, "")}-converted.gif`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    trackCompleted();
-    await deduct();
-  }, [gifUrl, file, deduct, trackCompleted]);
+    await gatedDownload(() => {
+      const a = document.createElement("a");
+      a.href = gifUrl;
+      a.download = `${file.name.replace(/\.[^.]+$/, "")}-converted.gif`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  }, [gifUrl, file, gatedDownload]);
 
   const handleReset = useCallback(() => {
     if (videoUrl) URL.revokeObjectURL(videoUrl);

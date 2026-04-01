@@ -163,11 +163,10 @@ const ease = [0.16, 1, 0.3, 1] as const;
 export function ExifViewer() {
   return (
     <ToolGate toolName="exif-viewer">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <ExifViewerContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -175,13 +174,11 @@ export function ExifViewer() {
 }
 
 function ExifViewerContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -345,18 +342,17 @@ function ExifViewerContent({
 
   const downloadClean = useCallback(async () => {
     if (!cleanedUrl || !file) return;
-
-    const ext = file.type === "image/png" ? ".png" : ".jpg";
-    const baseName = file.name.replace(/\.[^.]+$/, "");
-    const a = document.createElement("a");
-    a.href = cleanedUrl;
-    a.download = `${baseName}-no-exif${ext}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    trackCompleted();
-    await deduct();
-  }, [cleanedUrl, file, deduct, trackCompleted]);
+    await gatedDownload(() => {
+      const ext = file.type === "image/png" ? ".png" : ".jpg";
+      const baseName = file.name.replace(/\.[^.]+$/, "");
+      const a = document.createElement("a");
+      a.href = cleanedUrl;
+      a.download = `${baseName}-no-exif${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  }, [cleanedUrl, file, gatedDownload]);
 
   // Priority keys to show at the top of the table
   const priorityKeys = [

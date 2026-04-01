@@ -132,11 +132,10 @@ function decodeBase64(input: string): DecodeResult {
 export function Base64Decoder() {
   return (
     <ToolGate toolName="base64-decode">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <Base64DecoderContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -144,13 +143,11 @@ export function Base64Decoder() {
 }
 
 function Base64DecoderContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [input, setInput] = useState("");
   const hasTrackedStarted = useRef(false);
@@ -160,52 +157,49 @@ function Base64DecoderContent({
 
   const handleCopy = useCallback(async () => {
     if (result.type !== "text" || !result.text) return;
-    try {
-      await navigator.clipboard.writeText(result.text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-      trackCompleted();
-      await deduct();
-    } catch {
-      const textarea = document.createElement("textarea");
-      textarea.value = result.text;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-      trackCompleted();
-      await deduct();
-    }
-  }, [result, deduct, trackCompleted]);
+    await gatedDownload(async () => {
+      try {
+        await navigator.clipboard.writeText(result.text!);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        const textarea = document.createElement("textarea");
+        textarea.value = result.text!;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    });
+  }, [result, gatedDownload]);
 
   const handleDownload = useCallback(async () => {
     if (result.type === "error") return;
 
-    if (result.type === "image" && result.imageSrc) {
-      const link = document.createElement("a");
-      link.href = result.imageSrc;
-      const ext = result.imageMime?.split("/")[1] ?? "png";
-      link.download = `decoded-image.${ext}`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else if (result.type === "text" && result.text) {
-      const blob = new Blob([result.text], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "decoded-text.txt";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
-
-    trackCompleted();
-    await deduct();
-  }, [result, deduct, trackCompleted]);
+    await gatedDownload(() => {
+      if (result.type === "image" && result.imageSrc) {
+        const link = document.createElement("a");
+        link.href = result.imageSrc;
+        const ext = result.imageMime?.split("/")[1] ?? "png";
+        link.download = `decoded-image.${ext}`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else if (result.type === "text" && result.text) {
+        const blob = new Blob([result.text], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "decoded-text.txt";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+    });
+  }, [result, gatedDownload]);
 
   return (
     <>

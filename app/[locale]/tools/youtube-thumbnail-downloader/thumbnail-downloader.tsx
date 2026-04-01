@@ -94,11 +94,10 @@ const ease = [0.16, 1, 0.3, 1] as const;
 export function YouTubeThumbnailDownloader() {
   return (
     <ToolGate toolName="youtube-thumbnail-downloader">
-      {({ deduct, trackStarted, trackCompleted }) => (
+      {({ gatedDownload, trackStarted }) => (
         <YouTubeThumbnailDownloaderContent
-          deduct={deduct}
+          gatedDownload={gatedDownload}
           trackStarted={trackStarted}
-          trackCompleted={trackCompleted}
         />
       )}
     </ToolGate>
@@ -106,13 +105,11 @@ export function YouTubeThumbnailDownloader() {
 }
 
 function YouTubeThumbnailDownloaderContent({
-  deduct,
+  gatedDownload,
   trackStarted,
-  trackCompleted,
 }: {
-  deduct: () => Promise<void>;
+  gatedDownload: (downloadFn: () => void | Promise<void>) => Promise<void>;
   trackStarted: () => void;
-  trackCompleted: () => void;
 }) {
   const [url, setUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
@@ -174,18 +171,18 @@ function YouTubeThumbnailDownloaderContent({
     async (thumb: ThumbnailResult) => {
       setDownloadingKey(thumb.key);
       try {
-        await downloadThumbnail(
-          thumb.url,
-          `yt-thumbnail-${videoId}-${thumb.key}.jpg`,
-        );
-        trackCompleted();
-        await deduct();
+        await gatedDownload(async () => {
+          await downloadThumbnail(
+            thumb.url,
+            `yt-thumbnail-${videoId}-${thumb.key}.jpg`,
+          );
+        });
       } catch {
         setError("Failed to download thumbnail. Please try again.");
       }
       setDownloadingKey(null);
     },
-    [videoId, deduct, trackCompleted],
+    [videoId, gatedDownload],
   );
 
   const availableThumbnails = thumbnails.filter((t) => t.exists);
