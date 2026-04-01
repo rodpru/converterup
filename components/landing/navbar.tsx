@@ -1,14 +1,17 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { NavbarAnimation } from "./navbar-animation";
 import { AccountMenu } from "@/components/account-menu";
+import { LanguageSelector } from "./language-selector";
 import { createClient } from "@/lib/supabase/client";
+import { useTranslations } from "next-intl";
 
 export function Navbar() {
+  const t = useTranslations("Navigation");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -35,59 +38,54 @@ export function Navbar() {
             href="/#features"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
-            Features
+            {t("features")}
           </Link>
           <Link
             href="/#how-it-works"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
-            How It Works
+            {t("howItWorks")}
           </Link>
           <Link
             href="/#pricing"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
-            Pricing
+            {t("pricing")}
           </Link>
           <Link
             href="/tools"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
-            Tools
+            {t("tools")}
           </Link>
           <Link
             href="/blog"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
-            Blog
+            {t("blog")}
           </Link>
         </div>
 
         {/* Desktop actions */}
         <div className="hidden md:flex items-center gap-3">
+          <LanguageSelector />
           {isLoggedIn ? (
             <>
               <Link
                 href="/dashboard"
                 className="inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all duration-200 min-h-[44px]"
               >
-                Dashboard
+                {t("dashboard")}
               </Link>
               <AccountMenu />
             </>
           ) : (
             <>
               <Link
-                href="/login"
-                className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 h-10 inline-flex items-center px-4"
-              >
-                Sign In
-              </Link>
-              <Link
                 href="/dashboard"
                 className="inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all duration-200 min-h-[44px]"
               >
-                Start Converting
+                {t("startConverting")}
               </Link>
             </>
           )}
@@ -100,11 +98,7 @@ export function Navbar() {
             onClick={() => setMobileOpen(!mobileOpen)}
             className="flex items-center justify-center w-10 h-10 min-h-[44px] min-w-[44px] text-foreground"
           >
-            {mobileOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -118,37 +112,40 @@ export function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
-              Features
+              {t("features")}
             </Link>
             <Link
               href="/#how-it-works"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
-              How It Works
+              {t("howItWorks")}
             </Link>
             <Link
               href="/#pricing"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
-              Pricing
+              {t("pricing")}
             </Link>
             <Link
               href="/tools"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
-              Tools
+              {t("tools")}
             </Link>
             <Link
               href="/blog"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
             >
-              Blog
+              {t("blog")}
             </Link>
             <div className="pt-2 border-t border-[#2A2535]">
+              <div className="py-2 flex justify-start">
+                <LanguageSelector />
+              </div>
               {isLoggedIn ? (
                 <div className="flex flex-col gap-2">
                   <Link
@@ -156,25 +153,18 @@ export function Navbar() {
                     onClick={() => setMobileOpen(false)}
                     className="inline-flex items-center justify-center w-full h-12 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg min-h-[44px]"
                   >
-                    Dashboard
+                    {t("dashboard")}
                   </Link>
                   <AccountMenu inline />
                 </div>
               ) : (
                 <div className="flex flex-col gap-2">
                   <Link
-                    href="/login"
-                    onClick={() => setMobileOpen(false)}
-                    className="inline-flex items-center justify-center w-full h-12 border border-[#2A2535] text-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg min-h-[44px]"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
                     href="/dashboard"
                     onClick={() => setMobileOpen(false)}
                     className="inline-flex items-center justify-center w-full h-12 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg min-h-[44px]"
                   >
-                    Start Converting
+                    {t("startConverting")}
                   </Link>
                 </div>
               )}

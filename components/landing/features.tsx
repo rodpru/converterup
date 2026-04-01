@@ -2,62 +2,20 @@
 
 import { motion } from "framer-motion";
 import { Crop, ImageIcon, Lock, Minimize2, Music, Video } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const features = [
-  {
-    icon: ImageIcon,
-    title: "Image Conversion",
-    description:
-      "PNG, JPG, WebP, AVIF, GIF, TIFF, BMP. Convert between any image format instantly in your browser.",
-    span: "sm:col-span-2 sm:row-span-2",
-    large: true,
-    href: "/tools/svg-to-png",
-  },
-  {
-    icon: Video,
-    title: "Video Conversion",
-    description: "MP4, WebM, MKV, AVI, MOV. Transform formats client-side.",
-    span: "",
-    large: false,
-    href: "/tools/video-to-gif",
-  },
-  {
-    icon: Minimize2,
-    title: "Smart Compression",
-    description: "Reduce file sizes up to 80% with quality preservation.",
-    span: "",
-    large: false,
-    href: "/tools/image-compressor",
-  },
-  {
-    icon: Crop,
-    title: "Resize & Crop",
-    description: "Precise dimension control. Lock or override aspect ratios.",
-    span: "",
-    large: false,
-    href: "/tools/image-resizer",
-  },
-  {
-    icon: Music,
-    title: "Audio Extraction",
-    description: "Pull audio from any video. MP3, AAC, WAV, OGG.",
-    span: "",
-    large: false,
-    href: "/tools/video-frame-extractor",
-  },
-  {
-    icon: Lock,
-    title: "100% Private",
-    description:
-      "WebAssembly processing. Files never leave your device. No server, no tracking.",
-    span: "",
-    large: false,
-    href: null,
-  },
-];
+const featureIcons = [ImageIcon, Video, Minimize2, Crop, Music, Lock];
+const featureKeys = [
+  { title: "imageConversion", desc: "imageConversionDesc", span: "sm:col-span-2 sm:row-span-2", large: true, href: "/tools/svg-to-png" },
+  { title: "videoConversion", desc: "videoConversionDesc", span: "", large: false, href: "/tools/video-to-gif" },
+  { title: "smartCompression", desc: "smartCompressionDesc", span: "", large: false, href: "/tools/image-compressor" },
+  { title: "resizeCrop", desc: "resizeCropDesc", span: "", large: false, href: "/tools/image-resizer" },
+  { title: "audioExtraction", desc: "audioExtractionDesc", span: "", large: false, href: "/tools/video-frame-extractor" },
+  { title: "privacy", desc: "privacyDesc", span: "", large: false, href: null },
+] as const;
 
 const stagger = {
   hidden: {},
@@ -69,37 +27,47 @@ const item = {
 };
 
 function FeatureCard({
-  feature: f,
-  index: i,
+  icon: Icon,
+  title,
+  description,
+  large,
+  span,
+  href,
+  index,
 }: {
-  feature: (typeof features)[number];
+  icon: (typeof featureIcons)[number];
+  title: string;
+  description: string;
+  large: boolean;
+  span: string;
+  href: string | null;
   index: number;
 }) {
   return (
     <motion.div
       variants={item}
-      className={`group relative h-full bg-[#0C0A12] ${f.large ? "p-8 sm:p-10" : "p-6 sm:p-8"} hover:bg-card transition-all duration-500 ${f.href ? "" : f.span}`}
+      className={`group relative h-full bg-[#0C0A12] ${large ? "p-8 sm:p-10" : "p-6 sm:p-8"} hover:bg-card transition-all duration-500 ${href ? "" : span}`}
     >
       <div
-        className={`flex justify-between items-start ${f.large ? "mb-12 sm:mb-16" : "mb-8 sm:mb-10"}`}
+        className={`flex justify-between items-start ${large ? "mb-12 sm:mb-16" : "mb-8 sm:mb-10"}`}
       >
         <span className="font-mono text-[11px] tracking-widest text-muted-foreground/30">
-          0{i + 1}
+          0{index + 1}
         </span>
-        <f.icon
-          className={`${f.large ? "w-6 h-6" : "w-5 h-5"} stroke-[1.5] text-primary/60`}
+        <Icon
+          className={`${large ? "w-6 h-6" : "w-5 h-5"} stroke-[1.5] text-primary/60`}
         />
       </div>
 
       <h3
-        className={`font-[Syne] font-bold text-foreground mb-3 group-hover:translate-x-1 transition-transform duration-300 ${f.large ? "text-xl sm:text-2xl" : "text-lg"}`}
+        className={`font-[Syne] font-bold text-foreground mb-3 group-hover:translate-x-1 transition-transform duration-300 ${large ? "text-xl sm:text-2xl" : "text-lg"}`}
       >
-        {f.title}
+        {title}
       </h3>
       <p
-        className={`text-muted-foreground leading-relaxed ${f.large ? "text-sm sm:text-base" : "text-sm"}`}
+        className={`text-muted-foreground leading-relaxed ${large ? "text-sm sm:text-base" : "text-sm"}`}
       >
-        {f.description}
+        {description}
       </p>
 
       {/* Hover accent line */}
@@ -109,6 +77,8 @@ function FeatureCard({
 }
 
 export function Features() {
+  const t = useTranslations("Features");
+
   return (
     <section
       id="features"
@@ -125,9 +95,9 @@ export function Features() {
               className="font-[Syne] font-bold text-foreground leading-[1.05]"
               style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
             >
-              Powerful
+              {t("title")}
               <br />
-              <span className="gradient-text">conversions.</span>
+              <span className="gradient-text">{t("titleGradient")}</span>
             </motion.h2>
           </div>
           <div className="lg:col-span-7 flex items-end">
@@ -138,8 +108,7 @@ export function Features() {
               transition={{ duration: 0.6, delay: 0.1, ease }}
               className="text-base sm:text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              A complete media toolkit powered by WebAssembly. No servers, no
-              uploads, no compromises.
+              {t("desc")}
             </motion.p>
           </div>
         </div>
@@ -151,15 +120,19 @@ export function Features() {
           viewport={{ once: true, margin: "-80px" }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-[#2A2535]/50 rounded-2xl overflow-hidden border border-[#2A2535]"
         >
-          {features.map((f, i) =>
-            f.href ? (
+          {featureKeys.map((f, i) => {
+            const title = t(f.title);
+            const description = t(f.desc);
+            const Icon = featureIcons[i];
+
+            return f.href ? (
               <Link key={f.title} href={f.href} className={`block ${f.span}`}>
-                <FeatureCard feature={f} index={i} />
+                <FeatureCard icon={Icon} title={title} description={description} large={f.large} span={f.span} href={f.href} index={i} />
               </Link>
             ) : (
-              <FeatureCard key={f.title} feature={f} index={i} />
-            ),
-          )}
+              <FeatureCard key={f.title} icon={Icon} title={title} description={description} large={f.large} span={f.span} href={f.href} index={i} />
+            );
+          })}
         </motion.div>
       </div>
     </section>

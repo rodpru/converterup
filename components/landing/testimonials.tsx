@@ -1,37 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const testimonials = [
-  {
-    quote:
-      "Finally a converter that doesn't upload my files to some random server. Fast, private, and the UI is beautiful.",
-    name: "Sarah Chen",
-    role: "Product Designer",
-  },
-  {
-    quote:
-      "I convert dozens of images daily for my blog. ConverterUp saves me time and the quality is consistently excellent.",
-    name: "Marcus Rivera",
-    role: "Content Creator",
-  },
-  {
-    quote:
-      "The video conversion blew me away. Everything happens in the browser, no waiting for server queues. Game changer.",
-    name: "Aisha Patel",
-    role: "Video Editor",
-  },
-  {
-    quote:
-      "Clean, minimal, does exactly what it says. No ads, no dark patterns, no upsells. Just works.",
-    name: "Tom Andersen",
-    role: "Developer",
-  },
-];
-
 export function Testimonials() {
+  const t = useTranslations("Testimonials");
+
+  const testimonials = [
+    { quote: t("quote1"), name: t("name1"), role: t("role1") },
+    { quote: t("quote2"), name: t("name2"), role: t("role2") },
+    { quote: t("quote3"), name: t("name3"), role: t("role3") },
+    { quote: t("quote4"), name: t("name4"), role: t("role4") },
+  ];
+
   return (
     <section className="py-16 sm:py-24 md:py-32 bg-[#0C0A12] border-t border-[#2A2535]/50">
       <div className="container mx-auto px-4 sm:px-6">
@@ -43,7 +26,7 @@ export function Testimonials() {
           className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Loved by <span className="gradient-text">creators.</span>
+            {t("title")} <span className="gradient-text">{t("titleGradient")}</span>
           </h2>
         </motion.div>
 

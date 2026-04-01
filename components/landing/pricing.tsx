@@ -1,47 +1,50 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const plans = [
-  {
-    name: "Free",
-    price: "$0",
-    period: "forever",
-    description: "For casual use",
-    features: [
-      "3 conversions per day",
-      "All formats supported",
-      "Full quality control",
-      "No watermarks",
-      "No ads, ever",
-    ],
-    cta: "Get Started",
-    href: "/signup",
-    highlighted: false,
-  },
-  {
-    name: "Unlimited",
-    price: "$5",
-    period: "month",
-    description: "For creators & professionals",
-    features: [
-      "Unlimited conversions",
-      "All formats supported",
-      "Full quality control",
-      "Priority support",
-      "Cancel anytime",
-    ],
-    cta: "Go Unlimited",
-    href: "/signup",
-    highlighted: true,
-  },
-];
-
 export function Pricing() {
+  const t = useTranslations("Pricing");
+
+  const plans = [
+    {
+      name: t("freeName"),
+      price: t("freePrice"),
+      period: t("freePeriod"),
+      description: t("freeDescription"),
+      features: [
+        t("freeFeature1"),
+        t("freeFeature2"),
+        t("freeFeature3"),
+        t("freeFeature4"),
+        t("freeFeature5"),
+      ],
+      cta: t("freeCta"),
+      href: "/signup",
+      highlighted: false,
+    },
+    {
+      name: t("unlimitedName"),
+      price: t("unlimitedPrice"),
+      period: t("unlimitedPeriod"),
+      description: t("unlimitedDescription"),
+      features: [
+        t("unlimitedFeature1"),
+        t("unlimitedFeature2"),
+        t("unlimitedFeature3"),
+        t("unlimitedFeature4"),
+        t("unlimitedFeature5"),
+      ],
+      cta: t("unlimitedCta"),
+      href: "/signup",
+      highlighted: true,
+    },
+  ];
+
   return (
     <section
       id="pricing"
@@ -59,10 +62,10 @@ export function Pricing() {
             className="font-[Syne] font-bold text-foreground mb-4"
             style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
-            Simple <span className="gradient-text">pricing.</span>
+            {t("title")} <span className="gradient-text">{t("titleGradient")}</span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-md mx-auto">
-            No credits. No tiers. No confusion.
+            {t("desc")}
           </p>
         </motion.div>
 

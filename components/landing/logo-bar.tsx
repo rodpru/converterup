@@ -1,19 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
-const items = [
-  "100% Client-Side",
-  "No Upload Required",
-  "WASM Powered",
-  "Zero Data Collection",
-  "Works Offline",
-  "Private & Secure",
-  "No Ads Ever",
-  "Browser-Native",
-];
-
-function Marquee({ reverse = false }: { reverse?: boolean }) {
+function Marquee({
+  reverse = false,
+  items,
+}: {
+  reverse?: boolean;
+  items: string[];
+}) {
   const doubled = [...items, ...items];
   return (
     <div className="flex overflow-hidden">
@@ -36,11 +32,23 @@ function Marquee({ reverse = false }: { reverse?: boolean }) {
 }
 
 export function LogoBar() {
+  const t = useTranslations("LogoBar");
+  const items = [
+    t("clientSide"),
+    t("noUpload"),
+    t("wasm"),
+    t("zeroData"),
+    t("offline"),
+    t("private"),
+    t("noAds"),
+    t("browserNative"),
+  ];
+
   return (
     <section className="py-6 overflow-hidden border-t border-[#2A2535]/50">
       <div className="space-y-2.5">
-        <Marquee />
-        <Marquee reverse />
+        <Marquee items={items} />
+        <Marquee reverse items={items} />
       </div>
     </section>
   );

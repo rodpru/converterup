@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Lock, Loader2, Sparkles } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/routing";
 import { useToolAuth } from "@/lib/use-tool-auth";
 
 interface ToolGateProps {

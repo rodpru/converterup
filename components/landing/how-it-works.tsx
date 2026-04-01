@@ -2,33 +2,36 @@
 
 import { motion } from "framer-motion";
 import { Upload, SlidersHorizontal, Download } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const steps = [
-  {
-    number: "01",
-    title: "Upload",
-    description: "Drop your file. Images, videos, any supported format.",
-    icon: Upload,
-  },
-  {
-    number: "02",
-    title: "Choose",
-    description:
-      "Select your output format, quality, and size. Full control, zero complexity.",
-    icon: SlidersHorizontal,
-  },
-  {
-    number: "03",
-    title: "Download",
-    description:
-      "Get your converted file instantly. No waiting, no email, no signup required.",
-    icon: Download,
-  },
-];
+const stepIcons = [Upload, SlidersHorizontal, Download];
 
 export function HowItWorks() {
+  const t = useTranslations("HowItWorks");
+
+  const steps = [
+    {
+      number: "01",
+      title: t("step1Title"),
+      description: t("step1Desc"),
+      icon: stepIcons[0],
+    },
+    {
+      number: "02",
+      title: t("step2Title"),
+      description: t("step2Desc"),
+      icon: stepIcons[1],
+    },
+    {
+      number: "03",
+      title: t("step3Title"),
+      description: t("step3Desc"),
+      icon: stepIcons[2],
+    },
+  ];
+
   return (
     <section
       id="how-it-works"
@@ -43,10 +46,10 @@ export function HowItWorks() {
           className="text-center mb-12 sm:mb-16 md:mb-24"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Three steps. <span className="gradient-text">That&apos;s it.</span>
+            {t("title")} <span className="gradient-text">{t("titleGradient")}</span>
           </h2>
           <p className="text-lg sm:text-xl text-[#71717A] font-[Inter] max-w-lg mx-auto">
-            No accounts, no complex settings, no hidden fees.
+            {t("desc")}
           </p>
         </motion.div>
 

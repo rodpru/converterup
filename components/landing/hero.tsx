@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import {
   HeroReveal,
   FormatMorphCard,
@@ -7,6 +8,8 @@ import {
 } from "./hero-animations";
 
 export function Hero() {
+  const t = useTranslations("Hero");
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20 pb-16">
       {/* Mesh gradient background */}
@@ -34,7 +37,7 @@ export function Hero() {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#2A2535] bg-[#1C1825]/50 mb-8">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-                  Your files never leave your device
+                  {t("badge")}
                 </span>
               </div>
             </HeroReveal>
@@ -44,17 +47,15 @@ export function Hero() {
                 className="font-[Syne] font-extrabold tracking-tight leading-[0.95] mb-8"
                 style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)" }}
               >
-                Convert anything.
+                {t("title1")}
                 <br />
-                <span className="gradient-text">Upload nothing.</span>
+                <span className="gradient-text">{t("title2")}</span>
               </h1>
             </HeroReveal>
 
             <HeroReveal delay={0.2}>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed mb-10">
-                Images, videos, audio — transformed in{" "}
-                <span className="font-mono text-foreground">under 2s</span>.
-                100% browser-native. No servers. No tracking. No compromises.
+                {t("desc")}
               </p>
             </HeroReveal>
 
@@ -64,14 +65,14 @@ export function Hero() {
                   href="/dashboard"
                   className="group inline-flex items-center justify-center h-12 px-7 bg-primary text-primary-foreground font-medium text-sm uppercase tracking-wider rounded-lg hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(45,212,191,0.3)] transition-all duration-300 min-h-[44px]"
                 >
-                  Start Converting
+                  {t("cta1")}
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
                 </Link>
                 <Link
-                  href="#how-it-works"
+                  href="/#how-it-works"
                   className="inline-flex items-center justify-center h-12 px-7 border border-[#2A2535] text-foreground font-medium text-sm uppercase tracking-wider rounded-lg hover:bg-[#1C1825] hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-300 min-h-[44px]"
                 >
-                  See How It Works
+                  {t("cta2")}
                 </Link>
               </div>
             </HeroReveal>

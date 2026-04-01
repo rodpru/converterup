@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { motion } from "framer-motion";
 import { Logo } from "@/components/logo";
 import { ArrowUpRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const marqueeText = "CONVERTERUP \u2014 Transform Your Media";
-const marqueeItems = Array.from({ length: 12 }, () => marqueeText);
+// marqueeItems built inside Footer using translations
 
 const tools = [
   { name: "Image Compressor", href: "/tools/image-compressor" },
@@ -36,6 +36,10 @@ const tools = [
 ];
 
 export function Footer() {
+  const tNav = useTranslations("Navigation");
+  const tFooter = useTranslations("Footer");
+  const marqueeItems = Array.from({ length: 12 }, () => tFooter("marquee"));
+
   return (
     <footer className="bg-[#0C0A12] border-t border-[#2A2535]">
       {/* Marquee */}
@@ -77,8 +81,7 @@ export function Footer() {
                 </span>
               </div>
               <p className="text-[#71717A] font-[Inter] text-sm leading-relaxed">
-                Convert images and videos instantly in your browser. Private,
-                fast, and beautifully simple.
+                {tFooter("desc")}
               </p>
             </div>
 
@@ -87,37 +90,31 @@ export function Footer() {
                 href="/#features"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
-                Features
+                {tNav("features")}
               </Link>
               <Link
                 href="/#pricing"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
-                Pricing
+                {tNav("pricing")}
               </Link>
               <Link
                 href="/#how-it-works"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
-                How It Works
+                {tNav("howItWorks")}
               </Link>
               <Link
                 href="/dashboard"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
-                Dashboard
-              </Link>
-              <Link
-                href="/signup"
-                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
-              >
-                Sign Up
+                {tNav("dashboard")}
               </Link>
               <Link
                 href="/login"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
-                Sign In
+                {tNav("signIn")}
               </Link>
             </div>
           </div>
@@ -126,13 +123,13 @@ export function Footer() {
           <div className="border-t border-[#2A2535] pt-6 mb-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-mono text-[10px] uppercase tracking-wider text-[#71717A]/50">
-                Free Tools
+                {tNav("tools")}
               </h3>
               <Link
                 href="/tools"
                 className="flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider text-[#2DD4BF] hover:text-[#EDEDEF] transition-colors"
               >
-                View All
+                {tFooter("viewAll")}
                 <ArrowUpRight className="w-3 h-3" />
               </Link>
             </div>
@@ -152,11 +149,7 @@ export function Footer() {
           {/* Bottom */}
           <div className="border-t border-[#2A2535] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-[#71717A]/40 font-[Inter]">
-              &copy; {new Date().getFullYear()} ConverterUp. All rights
-              reserved.
-            </p>
-            <p className="text-xs text-[#71717A]/40 font-mono">
-              3 free uses/day &middot; Unlimited for $5/mo
+              &copy; {new Date().getFullYear()} ConverterUp. {tFooter("rights")}
             </p>
           </div>
         </motion.div>

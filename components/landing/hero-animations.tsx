@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { type ReactNode, useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -32,6 +33,7 @@ const PAIRS = [
 ];
 
 export function FormatMorphCard() {
+  const t = useTranslations("HeroAnimations");
   const [idx, setIdx] = useState(0);
   const [showOut, setShowOut] = useState(false);
 
@@ -71,7 +73,7 @@ export function FormatMorphCard() {
         {/* Input */}
         <div>
           <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/50 block mb-3">
-            Input
+            {t("input")}
           </span>
           <AnimatePresence mode="wait">
             <motion.div
@@ -121,7 +123,7 @@ export function FormatMorphCard() {
         {/* Output */}
         <div>
           <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/50 block mb-3">
-            Output
+            {t("output")}
           </span>
           <AnimatePresence mode="wait">
             {showOut ? (

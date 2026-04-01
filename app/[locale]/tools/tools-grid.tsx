@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
 import { useState, useMemo, Suspense } from "react";
 import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   ImageDown,
   Scaling,
@@ -190,6 +191,7 @@ function ToolsGridInner() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
   const [query, setQuery] = useState(initialQuery);
+  const t = useTranslations("Tools");
 
   const filtered = useMemo(() => {
     if (!query.trim()) return tools;
@@ -207,21 +209,20 @@ function ToolsGridInner() {
       <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
         <div className="max-w-3xl mx-auto text-center">
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            All Tools
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Free Online <span className="gradient-text">Tools</span>
+            {t("title1")} <span className="gradient-text">{t("title2")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto mb-6">
-            Browser-based utilities for images, video, code, and more. 100%
-            private — your files never leave your device.
+            {t("desc")}
           </p>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#2DD4BF]/20 bg-[#2DD4BF]/5 mb-8">
             <span className="text-[#2DD4BF] font-mono text-xs">
-              3 free uses per day
+              {t("freeUses")}
             </span>
             <span className="text-[#71717A] font-mono text-xs">
-              — sign up for free, or go unlimited for $5/mo
+              {t("unlimited")}
             </span>
           </div>
 
@@ -232,7 +233,7 @@ function ToolsGridInner() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search tools..."
+              placeholder={t("search")}
               className="w-full h-12 pl-11 pr-4 border border-[#2A2535] bg-[#16131E] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm min-h-[44px]"
             />
           </div>
@@ -243,7 +244,7 @@ function ToolsGridInner() {
         <div className="max-w-6xl mx-auto">
           {filtered.length === 0 ? (
             <p className="text-center text-[#71717A] font-[Inter] py-12">
-              No tools found for &quot;{query}&quot;
+              {t("noResults")} &quot;{query}&quot;
             </p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

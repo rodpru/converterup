@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -40,6 +41,7 @@ const DEMO_CONVERSIONS = [
 const formats = ["PNG", "JPG", "WEBP", "AVIF", "MP4", "WEBM"];
 
 export function LiveDemo() {
+  const t = useTranslations("LiveDemo");
   const [demoIndex, setDemoIndex] = useState(0);
   const [phase, setPhase] = useState<"idle" | "converting" | "done">("idle");
   const [progress, setProgress] = useState(0);
@@ -97,10 +99,10 @@ export function LiveDemo() {
           className="text-center mb-12 sm:mb-16"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            See it <span className="gradient-text">in action.</span>
+            {t("title")} <span className="gradient-text">{t("titleGradient")}</span>
           </h2>
           <p className="text-lg text-[#71717A] font-[Inter] max-w-lg mx-auto">
-            Watch how ConverterUp converts your files in real time.
+            {t("desc")}
           </p>
         </motion.div>
 
@@ -181,9 +183,9 @@ export function LiveDemo() {
               </div>
               <div className="flex justify-between mt-2">
                 <span className="font-mono text-[10px] text-[#71717A]">
-                  {phase === "idle" && "Ready"}
+                  {phase === "idle" && t("ready")}
                   {phase === "converting" && `${Math.round(progress)}%`}
-                  {phase === "done" && "Complete"}
+                  {phase === "done" && t("complete")}
                 </span>
               </div>
             </div>
@@ -199,7 +201,7 @@ export function LiveDemo() {
                 >
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-wider text-[#71717A] mb-1">
-                      Input
+                      {t("input")}
                     </p>
                     <p className="font-mono text-sm text-[#EDEDEF]">
                       {demo.inputSize}
@@ -207,7 +209,7 @@ export function LiveDemo() {
                   </div>
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-wider text-[#71717A] mb-1">
-                      Output
+                      {t("output")}
                     </p>
                     <p className="font-mono text-sm text-[#EDEDEF]">
                       {demo.outputSize}
@@ -215,7 +217,7 @@ export function LiveDemo() {
                   </div>
                   <div className="glow">
                     <p className="font-mono text-[10px] uppercase tracking-wider text-[#71717A] mb-1">
-                      Savings
+                      {t("savings")}
                     </p>
                     <p className="font-mono text-sm text-[#2DD4BF] font-bold">
                       {demo.savings}

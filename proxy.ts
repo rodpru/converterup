@@ -1,7 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 
-// Map old tool slugs to new tool paths
+const intlMiddleware = createMiddleware(routing);
+
+// Map old tool slugs to new tool paths (maintained from old middleware)
 const toolRedirects: Record<string, string> = {
   "stripe-fee-calculator": "/tools/stripe-fee-calculator",
   "youtube-thumbnail-downloader": "/tools/youtube-thumbnail-downloader",
@@ -31,22 +35,19 @@ const toolRedirects: Record<string, string> = {
   "word-to-number-converter": "/tools/text-repeater",
 };
 
-// Map old blog slugs to new blog paths
+// Map old blog slugs...
 const blogRedirects: Record<string, string> = {
   "how-to-use-stripe-fee-calculator": "/blog/stripe-fees-explained",
   "stripe-processing-fees-calculator-guide": "/blog/stripe-fees-explained",
-  "how-to-use-youtube-thumbnail-downloader":
-    "/blog/how-to-download-youtube-thumbnail",
-  "how-to-download-youtube-thumbnails-online-in-3-simple-steps":
-    "/blog/how-to-download-youtube-thumbnail",
+  "how-to-use-youtube-thumbnail-downloader": "/blog/how-to-download-youtube-thumbnail",
+  "how-to-download-youtube-thumbnails-online-in-3-simple-steps": "/blog/how-to-download-youtube-thumbnail",
   "how-to-use-json-editor-online": "/blog/json-formatting-validation-guide",
   "how-to-use-json-minify-online": "/blog/json-formatting-validation-guide",
   "how-to-use-webp-to-jpg-converter": "/blog/png-vs-jpg-vs-webp",
   "how-to-use-jpg-converter": "/blog/png-vs-jpg-vs-webp",
   "how-to-use-png-to-ico-converter": "/blog/how-to-create-favicon",
   "how-to-use-hex-to-octal-converter": "/blog/hex-to-decimal-conversion",
-  "how-to-use-decimal-to-octal-converter-tool":
-    "/blog/hex-to-decimal-conversion",
+  "how-to-use-decimal-to-octal-converter-tool": "/blog/hex-to-decimal-conversion",
   "how-to-use-octal-to-binary": "/blog/hex-to-decimal-conversion",
   "how-to-use-csv-to-json-converter": "/tools/csv-to-json",
   "how-to-use-base64-to-image-online": "/tools/base64-decode",
@@ -57,67 +58,47 @@ const blogRedirects: Record<string, string> = {
   "how-to-use-paypal-fee-calculator": "/tools/stripe-fee-calculator",
 };
 
-const LANG_PREFIXES = [
-  "en",
-  "fr",
-  "de",
-  "es",
-  "pt",
-  "ar",
-  "ru",
-  "tr",
-  "it",
-  "vi",
-];
+// Legacy locale prefixes that are NOT handled by next-intl (unsupported locales only).
+// Supported locales (en, pt, es) are handled exclusively by next-intl.
+const LEGACY_LANG_PREFIXES = ["fr", "de", "ar", "ru", "tr", "it", "vi"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // Strip language prefix: /en/foo → foo, /fr/bar → bar
+  // Skip static files and assets (anything with a file extension)
+  if (/\.\w+$/.test(pathname)) {
+    return NextResponse.next();
+  }
+
+  // 1. Handle explicit old hardcoded redirects (preserving old behavior)
   let slug = pathname;
-  for (const lang of LANG_PREFIXES) {
+  for (const lang of LEGACY_LANG_PREFIXES) {
     if (pathname.startsWith(`/${lang}/`) || pathname === `/${lang}`) {
       slug = pathname.slice(lang.length + 1) || "/";
       break;
     }
   }
 
-  // Root language pages (/fr, /de, etc.) → homepage
-  if (slug === "/" && pathname !== "/") {
-    return NextResponse.redirect(new URL("/", request.url), 301);
-  }
-
-  // Tool redirects: /{lang}/tool-slug → /tools/tool-slug
+  // Tool redirects
   const toolSlug = slug.startsWith("/") ? slug.slice(1) : slug;
   if (toolRedirects[toolSlug]) {
-    return NextResponse.redirect(
-      new URL(toolRedirects[toolSlug], request.url),
-      301,
-    );
+    return NextResponse.redirect(new URL(toolRedirects[toolSlug], request.url), 301);
   }
 
-  // Blog redirects: /{lang}/blog/slug → /blog/new-slug
+  // Blog Redirects
   if (toolSlug.startsWith("blog/")) {
     const blogSlug = toolSlug.replace("blog/", "");
     if (blogRedirects[blogSlug]) {
-      return NextResponse.redirect(
-        new URL(blogRedirects[blogSlug], request.url),
-        301,
-      );
+      return NextResponse.redirect(new URL(blogRedirects[blogSlug], request.url), 301);
     }
-    // Unknown blog → blog index
-    return NextResponse.redirect(new URL("/blog", request.url), 301);
   }
 
   // Direct path redirects (without lang prefix)
   if (toolRedirects[pathname.slice(1)]) {
-    return NextResponse.redirect(
-      new URL(toolRedirects[pathname.slice(1)], request.url),
-      301,
-    );
+    return NextResponse.redirect(new URL(toolRedirects[pathname.slice(1)], request.url), 301);
   }
 
-  // Static page redirects
+  // Static redirects
   const staticRedirects: Record<string, string> = {
     "/contact": "/",
     "/report": "/",
@@ -127,18 +108,16 @@ export async function middleware(request: NextRequest) {
   };
   const staticSlug = slug.startsWith("/") ? slug : `/${slug}`;
   if (staticRedirects[staticSlug]) {
-    return NextResponse.redirect(
-      new URL(staticRedirects[staticSlug], request.url),
-      301,
-    );
+    return NextResponse.redirect(new URL(staticRedirects[staticSlug], request.url), 301);
   }
 
-  const response = await updateSession(request);
-  return response;
+  // 2. Run next-intl middleware, then merge Supabase auth cookies onto its response
+  const intlResponse = intlMiddleware(request);
+  return await updateSession(request, intlResponse);
 }
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
+    '/((?!api|_next|_vercel|monitoring|.*\\..*).*)'
+  ]
 };
