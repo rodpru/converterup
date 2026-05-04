@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { type ReactNode, useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { type ReactNode, useEffect, useState } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 

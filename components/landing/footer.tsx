@@ -1,10 +1,10 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
 import { motion } from "framer-motion";
-import { Logo } from "@/components/logo";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Logo } from "@/components/logo";
+import { Link } from "@/i18n/routing";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -93,28 +93,46 @@ export function Footer() {
                 {tNav("features")}
               </Link>
               <Link
-                href="/#pricing"
-                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
-              >
-                {tNav("pricing")}
-              </Link>
-              <Link
                 href="/#how-it-works"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
                 {tNav("howItWorks")}
               </Link>
               <Link
-                href="/dashboard"
+                href="/tools"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
-                {tNav("dashboard")}
+                {tNav("tools")}
               </Link>
               <Link
-                href="/login"
+                href="/blog"
                 className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
               >
-                {tNav("signIn")}
+                {tNav("blog")}
+              </Link>
+              <Link
+                href="/about"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                About
+              </Link>
+              <Link
+                href="/contact"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                Contact
+              </Link>
+              <Link
+                href="/privacy"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                Privacy
+              </Link>
+              <Link
+                href="/terms"
+                className="text-[#71717A] hover:text-[#EDEDEF] transition-colors"
+              >
+                Terms
               </Link>
             </div>
           </div>

@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Download, RotateCcw, Share2 } from "lucide-react";
 import { FormatBadge } from "@/components/format-badge";
 import { formatFileSize, getFileCategory } from "@/lib/media-utils";
-import { Download, Share2, RotateCcw } from "lucide-react";
-import { downloadFile, shareFile, canShare } from "@/lib/mobile-utils";
+import { canShare, downloadFile, shareFile } from "@/lib/mobile-utils";
 
 interface ConversionResultProps {
   originalFile: File;

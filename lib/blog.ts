@@ -1,5 +1,5 @@
-import type { Article, ArticleLang, FaqBlock } from "./blog-types";
 import articlesData from "@/data/articles.json";
+import type { Article, ArticleLang, FaqBlock } from "./blog-types";
 
 const articles: Article[] = articlesData as Article[];
 

@@ -1,5 +1,6 @@
 "use client";
 
+import exifr from "exifr";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   AlertCircle,
@@ -11,10 +12,8 @@ import {
   ShieldOff,
   Upload,
 } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import exifr from "exifr";
+import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/tiff"];
 const ACCEPTED_EXTENSIONS = ".jpg,.jpeg,.png,.webp,.tiff,.tif";
@@ -161,25 +160,6 @@ function getStaticMapUrl(coords: GpsCoordinates): string {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ExifViewer() {
-  return (
-    <ToolGate toolName="exif-viewer">
-      {({ gatedDownload, trackStarted }) => (
-        <ExifViewerContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function ExifViewerContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [exifData, setExifData] = useState<ExifData | null>(null);
@@ -187,12 +167,10 @@ function ExifViewerContent({
   const [loading, setLoading] = useState(false);
   const [stripping, setStripping] = useState(false);
   const [cleanedUrl, setCleanedUrl] = useState<string | null>(null);
-  const [cleanedBlob, setCleanedBlob] = useState<Blob | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const hasTrackedStarted = useRef(false);
 
   const resetState = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -202,7 +180,6 @@ function ExifViewerContent({
     setExifData(null);
     setGps(null);
     setCleanedUrl(null);
-    setCleanedBlob(null);
     setError(null);
   }, [previewUrl, cleanedUrl]);
 
@@ -212,7 +189,6 @@ function ExifViewerContent({
     setExifData(null);
     setGps(null);
     setCleanedUrl(null);
-    setCleanedBlob(null);
 
     try {
       const data = await exifr.parse(imageFile, {
@@ -254,12 +230,8 @@ function ExifViewerContent({
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
       parseExif(selectedFile);
-      if (!hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
     },
-    [resetState, parseExif, trackStarted],
+    [resetState, parseExif],
   );
 
   const handleDrop = useCallback(
@@ -335,7 +307,6 @@ function ExifViewerContent({
 
       if (cleanedUrl) URL.revokeObjectURL(cleanedUrl);
       const url = URL.createObjectURL(blob);
-      setCleanedBlob(blob);
       setCleanedUrl(url);
     } catch {
       setError("Failed to strip EXIF data. Please try again.");
@@ -349,15 +320,13 @@ function ExifViewerContent({
     const ext = file.type === "image/png" ? ".png" : ".jpg";
     const baseName = file.name.replace(/\.[^.]+$/, "");
     const filename = `${baseName}-no-exif${ext}`;
-    await gatedDownload(() => {
-      const a = document.createElement("a");
-      a.href = cleanedUrl;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }, cleanedBlob ? { data: cleanedBlob, filename } : undefined);
-  }, [cleanedUrl, cleanedBlob, file, gatedDownload]);
+    const a = document.createElement("a");
+    a.href = cleanedUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }, [cleanedUrl, file]);
 
   // Priority keys to show at the top of the table
   const priorityKeys = [

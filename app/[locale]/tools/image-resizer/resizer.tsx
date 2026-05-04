@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const ACCEPTED_TYPES = [
   "image/png",
@@ -111,25 +110,6 @@ function formatFileSize(bytes: number): string {
 }
 
 export function ImageResizer() {
-  return (
-    <ToolGate toolName="image-resizer">
-      {({ gatedDownload, trackStarted }) => (
-        <ImageResizerContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function ImageResizerContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [original, setOriginal] = useState<ImageInfo | null>(null);
   const [targetWidth, setTargetWidth] = useState<number>(0);
   const [targetHeight, setTargetHeight] = useState<number>(0);
@@ -140,7 +120,6 @@ function ImageResizerContent({
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const aspectRatio = useRef<number>(1);
-  const hasTrackedStarted = useRef(false);
 
   const loadImage = useCallback((file: File) => {
     setError(null);
@@ -166,10 +145,6 @@ function ImageResizerContent({
       setTargetWidth(img.naturalWidth);
       setTargetHeight(img.naturalHeight);
       aspectRatio.current = img.naturalWidth / img.naturalHeight;
-      if (!hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
     };
     img.onerror = () => {
       setError("Failed to load image. The file may be corrupted.");
@@ -302,17 +277,15 @@ function ImageResizerContent({
     const baseName = original.file.name.replace(/\.[^.]+$/, "");
     const filename = `${baseName}-${targetWidth}x${targetHeight}.${ext}`;
 
-    await gatedDownload(() => {
-      const url = URL.createObjectURL(resizedBlob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }, { data: resizedBlob, filename });
-  }, [resizedBlob, original, targetWidth, targetHeight, gatedDownload]);
+    const url = URL.createObjectURL(resizedBlob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [resizedBlob, original, targetWidth, targetHeight]);
 
   return (
     <>

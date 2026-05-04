@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { conversions } from "@/data/conversions";
 import { getAllArticles } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -92,6 +93,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    ...["about", "contact", "privacy", "terms"].map((slug) => ({
+      url: `${baseUrl}/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
+    ...conversions.map((c) => ({
+      url: `${baseUrl}/convert/${c.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+      alternates: {
+        languages: {
+          en: `${baseUrl}/convert/${c.slug}`,
+          pt: `${baseUrl}/pt/convert/${c.slug}`,
+          es: `${baseUrl}/es/convert/${c.slug}`,
+        },
+      },
+    })),
     ...blogEntries,
   ];
 }

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getArticleBySlug, getAllArticles, extractFaqItems } from "@/lib/blog";
-import { JsonLd } from "@/components/json-ld";
 import { ArticlePageContent } from "@/components/blog/article-page-content";
+import { JsonLd } from "@/components/json-ld";
+import { extractFaqItems, getAllArticles, getArticleBySlug } from "@/lib/blog";
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;

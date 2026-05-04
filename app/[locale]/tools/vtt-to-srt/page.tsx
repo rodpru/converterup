@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { RelatedConversions } from "@/components/related-conversions";
 import { RelatedGuides } from "@/components/related-guides";
 import { ToolJsonLd } from "@/components/tool-json-ld";
+import { ToolSeoContent } from "@/components/tool-seo-content";
 import { generateAlternates } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
 import { VttToSrtConverter } from "./converter";
 
 export async function generateMetadata({
@@ -35,12 +37,19 @@ export async function generateMetadata({
   };
 }
 
-export default function VttToSrtPage() {
+export default async function VttToSrtPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <>
-      <ToolJsonLd slug="vtt-to-srt" />
+      <ToolJsonLd slug="vtt-to-srt" locale={locale} />
       <VttToSrtConverter />
-      <RelatedGuides toolHref="/tools/vtt-to-srt" />
+      <ToolSeoContent slug="vtt-to-srt" locale={locale} />
+      <RelatedGuides toolHref="/tools/vtt-to-srt" locale={locale} />
+      <RelatedConversions toolSlug="vtt-to-srt" locale={locale} />
     </>
   );
 }

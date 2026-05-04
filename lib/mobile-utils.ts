@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Detects if the current device is a mobile device
@@ -151,7 +151,7 @@ export function useIsStandalone(): boolean {
 
   useEffect(() => {
     const checkStandalone = () => {
-      // @ts-ignore - standalone is not in TypeScript types
+      // @ts-expect-error - standalone is not in TypeScript types
       const standalone = window.navigator.standalone;
       const matchMedia = window.matchMedia(
         "(display-mode: standalone)",

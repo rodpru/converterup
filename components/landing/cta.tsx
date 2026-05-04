@@ -1,10 +1,10 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
-import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/routing";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { RelatedConversions } from "@/components/related-conversions";
 import { RelatedGuides } from "@/components/related-guides";
 import { ToolJsonLd } from "@/components/tool-json-ld";
+import { ToolSeoContent } from "@/components/tool-seo-content";
 import { generateAlternates } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
 import { ImageToBase64Encoder } from "./encoder";
 
 export async function generateMetadata({
@@ -35,12 +37,19 @@ export async function generateMetadata({
   };
 }
 
-export default function ImageToBase64Page() {
+export default async function ImageToBase64Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <>
-      <ToolJsonLd slug="image-to-base64" />
+      <ToolJsonLd slug="image-to-base64" locale={locale} />
       <ImageToBase64Encoder />
-      <RelatedGuides toolHref="/tools/image-to-base64" />
+      <ToolSeoContent slug="image-to-base64" locale={locale} />
+      <RelatedGuides toolHref="/tools/image-to-base64" locale={locale} />
+      <RelatedConversions toolSlug="image-to-base64" locale={locale} />
     </>
   );
 }

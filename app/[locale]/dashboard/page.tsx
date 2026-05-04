@@ -1,20 +1,17 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
-import { Navbar } from "@/components/landing/navbar";
-import { FileUploader } from "@/components/file-uploader";
+import { AnimatePresence, motion } from "framer-motion";
+import { useCallback, useState } from "react";
+import { ConversionError } from "@/components/conversion-error";
 import { ConversionOptions } from "@/components/conversion-options";
 import { ConversionProgress } from "@/components/conversion-progress";
 import { ConversionResult } from "@/components/conversion-result";
-import { ConversionError } from "@/components/conversion-error";
-import { CreditBadge } from "@/components/credit-badge";
-import { UpgradeModal } from "@/components/upgrade-modal";
+import { FileUploader } from "@/components/file-uploader";
+import { Navbar } from "@/components/landing/navbar";
 import {
-  convertMedia,
   type ConversionResult as ConversionResultType,
+  convertMedia,
 } from "@/lib/conversion";
-import { getFileCategory } from "@/lib/media-utils";
-import { motion, AnimatePresence } from "framer-motion";
 import { usePrefersReducedMotion } from "@/lib/mobile-utils";
 
 type DashboardStep = "upload" | "configure" | "converting" | "result" | "error";
@@ -25,24 +22,11 @@ export default function DashboardPage() {
   const [result, setResult] = useState<ConversionResultType | null>(null);
   const [progress, setProgress] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
-  const [errorIsCredits, setErrorIsCredits] = useState(false);
-  const [showUpgrade, setShowUpgrade] = useState(false);
   const [conversionOptions, setConversionOptions] = useState<Record<
     string,
     unknown
   > | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-
-  // Sync subscription status when returning from Stripe checkout
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("upgraded") === "true") {
-      fetch("/api/subscription/sync", { method: "POST" }).then(() => {
-        window.dispatchEvent(new Event("credits-updated"));
-        window.history.replaceState({}, "", "/dashboard");
-      });
-    }
-  }, []);
 
   const fadeInUp = prefersReducedMotion
     ? {}
@@ -74,27 +58,6 @@ export default function DashboardPage() {
       setProgress(0);
 
       try {
-        // Check credits before converting
-        const creditCheck = await fetch("/api/credits");
-        if (creditCheck.ok) {
-          const status = await creditCheck.json();
-          if (!status.canConvert) {
-            setErrorMessage(
-              "You've used all 3 free conversions today. Go unlimited for non-stop converting.",
-            );
-            setErrorIsCredits(true);
-            setStep("error");
-            return;
-          }
-        } else {
-          const data = await creditCheck.json();
-          if (data.error === "Unauthorized") {
-            setErrorMessage("Please sign in to convert files.");
-            setStep("error");
-            return;
-          }
-        }
-
         const conversionResult = await convertMedia(
           {
             inputFile: selectedFile,
@@ -133,7 +96,6 @@ export default function DashboardPage() {
     setResult(null);
     setProgress(0);
     setErrorMessage("");
-    setErrorIsCredits(false);
     setConversionOptions(null);
     setStep("upload");
   };
@@ -143,11 +105,6 @@ export default function DashboardPage() {
       <Navbar />
 
       <div className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16">
-        {/* Credit Badge */}
-        <div className="flex justify-end mb-6">
-          <CreditBadge onUpgradeClick={() => setShowUpgrade(true)} />
-        </div>
-
         <AnimatePresence mode="wait">
           {step === "upload" && (
             <motion.div
@@ -201,12 +158,6 @@ export default function DashboardPage() {
                 originalFile={selectedFile}
                 result={result}
                 onConvertAnother={handleReset}
-                onDownload={() => {
-                  fetch("/api/credits/deduct", { method: "POST" }).then(() => {
-                    // Trigger re-render to update credit badge
-                    window.dispatchEvent(new Event("credits-updated"));
-                  });
-                }}
               />
             </motion.div>
           )}
@@ -221,14 +172,11 @@ export default function DashboardPage() {
                 message={errorMessage}
                 onRetry={handleRetry}
                 onBack={handleReset}
-                showUpgrade={errorIsCredits}
               />
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-
-      <UpgradeModal open={showUpgrade} onClose={() => setShowUpgrade(false)} />
     </main>
   );
 }

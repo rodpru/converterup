@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { ArrowRight, Lock, Music, Unlock } from "lucide-react";
+import { useMemo, useState } from "react";
 import { FormatBadge } from "@/components/format-badge";
 import {
-  getFileCategory,
-  getAvailableOutputFormats,
-  getFileExtension,
-  formatFileSize,
   createPreviewUrl,
   type FileCategory,
+  formatFileSize,
+  getAvailableOutputFormats,
+  getFileCategory,
+  getFileExtension,
 } from "@/lib/media-utils";
-import { ArrowRight, Lock, Unlock, Music } from "lucide-react";
 
 interface ConversionOptionsProps {
   file: File;

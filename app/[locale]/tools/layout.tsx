@@ -1,6 +1,6 @@
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
-import { Breadcrumbs } from "@/components/breadcrumbs";
 import { RelatedTools } from "@/components/related-tools";
 
 export default function ToolsLayout({

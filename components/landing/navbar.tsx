@@ -1,26 +1,16 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
-import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Logo } from "@/components/logo";
-import { NavbarAnimation } from "./navbar-animation";
-import { AccountMenu } from "@/components/account-menu";
-import { LanguageSelector } from "./language-selector";
-import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { Logo } from "@/components/logo";
+import { Link } from "@/i18n/routing";
+import { LanguageSelector } from "./language-selector";
+import { NavbarAnimation } from "./navbar-animation";
 
 export function Navbar() {
   const t = useTranslations("Navigation");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setIsLoggedIn(!!user);
-    });
-  }, []);
 
   return (
     <NavbarAnimation>
@@ -47,12 +37,6 @@ export function Navbar() {
             {t("howItWorks")}
           </Link>
           <Link
-            href="/#pricing"
-            className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-          >
-            {t("pricing")}
-          </Link>
-          <Link
             href="/tools"
             className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
@@ -69,26 +53,12 @@ export function Navbar() {
         {/* Desktop actions */}
         <div className="hidden md:flex items-center gap-3">
           <LanguageSelector />
-          {isLoggedIn ? (
-            <>
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all duration-200 min-h-[44px]"
-              >
-                {t("dashboard")}
-              </Link>
-              <AccountMenu />
-            </>
-          ) : (
-            <>
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all duration-200 min-h-[44px]"
-              >
-                {t("startConverting")}
-              </Link>
-            </>
-          )}
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all duration-200 min-h-[44px]"
+          >
+            {t("startConverting")}
+          </Link>
         </div>
 
         {/* Mobile actions */}
@@ -126,13 +96,6 @@ export function Navbar() {
               {t("howItWorks")}
             </Link>
             <Link
-              href="/#pricing"
-              onClick={() => setMobileOpen(false)}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-            >
-              {t("pricing")}
-            </Link>
-            <Link
               href="/tools"
               onClick={() => setMobileOpen(false)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
@@ -150,28 +113,13 @@ export function Navbar() {
               <div className="py-2 flex justify-start">
                 <LanguageSelector />
               </div>
-              {isLoggedIn ? (
-                <div className="flex flex-col gap-2">
-                  <Link
-                    href="/dashboard"
-                    onClick={() => setMobileOpen(false)}
-                    className="inline-flex items-center justify-center w-full h-12 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg min-h-[44px]"
-                  >
-                    {t("dashboard")}
-                  </Link>
-                  <AccountMenu inline />
-                </div>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  <Link
-                    href="/dashboard"
-                    onClick={() => setMobileOpen(false)}
-                    className="inline-flex items-center justify-center w-full h-12 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg min-h-[44px]"
-                  >
-                    {t("startConverting")}
-                  </Link>
-                </div>
-              )}
+              <Link
+                href="/dashboard"
+                onClick={() => setMobileOpen(false)}
+                className="inline-flex items-center justify-center w-full h-12 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg min-h-[44px]"
+              >
+                {t("startConverting")}
+              </Link>
             </div>
           </div>
         </div>

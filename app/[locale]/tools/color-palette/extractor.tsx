@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/webp"];
 const ACCEPTED_EXTENSIONS = ".png,.jpg,.jpeg,.webp";
@@ -287,25 +286,6 @@ function generatePalettePng(colors: ExtractedColor[]): Promise<Blob> {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ColorPaletteExtractor() {
-  return (
-    <ToolGate toolName="color-palette">
-      {({ gatedDownload, trackStarted }) => (
-        <ColorPaletteExtractorContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function ColorPaletteExtractorContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [colors, setColors] = useState<ExtractedColor[]>([]);
@@ -317,7 +297,6 @@ function ColorPaletteExtractorContent({
   const [downloading, setDownloading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const hasTrackedStarted = useRef(false);
 
   const resetState = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -340,12 +319,8 @@ function ColorPaletteExtractorContent({
 
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
-      if (!hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
     },
-    [resetState, trackStarted],
+    [resetState],
   );
 
   const handleDrop = useCallback(
@@ -447,21 +422,19 @@ function ColorPaletteExtractorContent({
     setDownloading(true);
     try {
       const blob = await generatePalettePng(colors);
-      await gatedDownload(() => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "color-palette.png";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }, { data: blob, filename: "color-palette.png" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "color-palette.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     } catch {
       setError("Failed to generate palette image.");
     }
     setDownloading(false);
-  }, [colors, gatedDownload]);
+  }, [colors]);
 
   return (
     <>

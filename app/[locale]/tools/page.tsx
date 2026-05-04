@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/json-ld";
-import { ToolsGrid } from "./tools-grid";
 import { generateAlternates } from "@/lib/seo";
+import { ToolsGrid } from "./tools-grid";
 
 export async function generateMetadata({
   params,

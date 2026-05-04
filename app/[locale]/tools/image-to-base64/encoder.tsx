@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const ACCEPTED_TYPES = [
   "image/png",
@@ -52,27 +51,7 @@ function formatBytes(bytes: number): string {
 }
 
 export function ImageToBase64Encoder() {
-  return (
-    <ToolGate toolName="image-to-base64">
-      {({ gatedDownload, trackStarted }) => (
-        <ImageToBase64EncoderContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function ImageToBase64EncoderContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const hasTrackedStarted = useRef(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [dataUri, setDataUri] = useState<string | null>(null);
@@ -104,11 +83,6 @@ function ImageToBase64EncoderContent({
       const objectUrl = URL.createObjectURL(file);
       setPreviewUrl(objectUrl);
 
-      if (!hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
-
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result as string;
@@ -120,7 +94,7 @@ function ImageToBase64EncoderContent({
         setError("Failed to read the file. Please try again.");
       reader.readAsDataURL(file);
     },
-    [trackStarted],
+    [],
   );
 
   const handleDrop = useCallback(
@@ -139,17 +113,15 @@ function ImageToBase64EncoderContent({
 
   const copyToClipboard = useCallback(
     async (text: string, field: "base64" | "datauri") => {
-      await gatedDownload(async () => {
-        try {
-          await navigator.clipboard.writeText(text);
-          setCopiedField(field);
-          setTimeout(() => setCopiedField(null), 2000);
-        } catch {
-          setError("Failed to copy to clipboard.");
-        }
-      });
+      try {
+        await navigator.clipboard.writeText(text);
+        setCopiedField(field);
+        setTimeout(() => setCopiedField(null), 2000);
+      } catch {
+        setError("Failed to copy to clipboard.");
+      }
     },
-    [gatedDownload],
+    [],
   );
 
   return (

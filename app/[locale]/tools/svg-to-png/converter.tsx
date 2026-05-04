@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const SCALE_OPTIONS = [
   { value: 1, label: "1x" },
@@ -46,28 +45,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 type InputMode = "upload" | "paste";
 
 export function SvgToPngConverter() {
-  return (
-    <ToolGate toolName="svg-to-png">
-      {({ gatedDownload, trackStarted }) => (
-        <SvgToPngConverterContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function SvgToPngConverterContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const hasTrackedStarted = useRef(false);
   const [inputMode, setInputMode] = useState<InputMode>("upload");
   const [svgCode, setSvgCode] = useState("");
   const [svgBlobUrl, setSvgBlobUrl] = useState<string | null>(null);
@@ -79,7 +57,6 @@ function SvgToPngConverterContent({
   const [bgMode, setBgMode] = useState<"transparent" | "custom">("transparent");
   const [bgColor, setBgColor] = useState("#FFFFFF");
   const [pngUrl, setPngUrl] = useState<string | null>(null);
-  const [pngBlob, setPngBlob] = useState<Blob | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [converting, setConverting] = useState(false);
 
@@ -132,27 +109,19 @@ function SvgToPngConverterContent({
         const text = reader.result as string;
         setSvgCode(text);
         processSvg(text);
-        if (!hasTrackedStarted.current) {
-          trackStarted();
-          hasTrackedStarted.current = true;
-        }
       };
       reader.onerror = () => setError("Failed to read the file.");
       reader.readAsText(file);
     },
-    [processSvg, trackStarted],
+    [processSvg],
   );
 
   const handlePaste = useCallback(
     (value: string) => {
       setSvgCode(value);
       processSvg(value);
-      if (value.trim() && !hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
     },
-    [processSvg, trackStarted],
+    [processSvg],
   );
 
   const handleConvert = useCallback(async () => {
@@ -197,7 +166,6 @@ function SvgToPngConverterContent({
       if (!pngBlob) throw new Error("Failed to generate PNG");
 
       const pngObjUrl = URL.createObjectURL(pngBlob);
-      setPngBlob(pngBlob);
       setPngUrl(pngObjUrl);
     } catch {
       setError("Failed to convert SVG to PNG. Please check your SVG content.");
@@ -209,15 +177,13 @@ function SvgToPngConverterContent({
   const handleDownload = useCallback(async () => {
     if (!pngUrl) return;
     const filename = `converted-${scale}x.png`;
-    await gatedDownload(() => {
-      const a = document.createElement("a");
-      a.href = pngUrl;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }, pngBlob ? { data: pngBlob, filename } : undefined);
-  }, [pngUrl, pngBlob, scale, gatedDownload]);
+    const a = document.createElement("a");
+    a.href = pngUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }, [pngUrl, scale]);
 
   return (
     <>

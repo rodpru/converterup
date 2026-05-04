@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const FAVICON_SIZES = [
   { size: 16, label: "16x16", description: "Browser tab" },
@@ -109,25 +108,6 @@ function downloadBlob(blob: Blob, filename: string) {
 }
 
 export function FaviconGenerator() {
-  return (
-    <ToolGate toolName="favicon-generator">
-      {({ gatedDownload, trackStarted }) => (
-        <FaviconGeneratorContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function FaviconGeneratorContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [sourcePreview, setSourcePreview] = useState<string | null>(null);
   const [favicons, setFavicons] = useState<GeneratedFavicon[]>([]);
@@ -137,7 +117,6 @@ function FaviconGeneratorContent({
   const [error, setError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const hasTrackedStarted = useRef(false);
 
   const resetState = useCallback(() => {
     if (sourcePreview) URL.revokeObjectURL(sourcePreview);
@@ -161,12 +140,8 @@ function FaviconGeneratorContent({
 
       setSourceFile(file);
       setSourcePreview(URL.createObjectURL(file));
-      if (!hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
     },
-    [resetState, trackStarted],
+    [resetState],
   );
 
   const generateFavicons = useCallback(async () => {
@@ -198,20 +173,15 @@ function FaviconGeneratorContent({
     }
   }, [sourcePreview]);
 
-  const handleDownloadSingle = useCallback(
-    async (fav: GeneratedFavicon) => {
-      setDownloadingSize(fav.size);
-      const name =
-        fav.size === 180
-          ? "apple-touch-icon.png"
-          : `favicon-${fav.size}x${fav.size}.png`;
-      await gatedDownload(() => {
-        downloadBlob(fav.blob, name);
-      }, { data: fav.blob, filename: name });
-      setDownloadingSize(null);
-    },
-    [gatedDownload],
-  );
+  const handleDownloadSingle = useCallback(async (fav: GeneratedFavicon) => {
+    setDownloadingSize(fav.size);
+    const name =
+      fav.size === 180
+        ? "apple-touch-icon.png"
+        : `favicon-${fav.size}x${fav.size}.png`;
+    downloadBlob(fav.blob, name);
+    setDownloadingSize(null);
+  }, []);
 
   const handleDownloadAll = useCallback(async () => {
     if (favicons.length === 0) return;
@@ -238,15 +208,13 @@ function FaviconGeneratorContent({
       zip.file("favicon-tags.html", htmlSnippet);
 
       const content = await zip.generateAsync({ type: "blob" });
-      await gatedDownload(() => {
-        downloadBlob(content, "favicons.zip");
-      }, { data: content, filename: "favicons.zip" });
+      downloadBlob(content, "favicons.zip");
     } catch {
       setError("Failed to create ZIP file. Please try again.");
     } finally {
       setDownloadingAll(false);
     }
-  }, [favicons, gatedDownload]);
+  }, [favicons]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {

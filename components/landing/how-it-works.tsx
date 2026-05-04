@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Upload, SlidersHorizontal, Download } from "lucide-react";
+import { Download, SlidersHorizontal, Upload } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const ease = [0.16, 1, 0.3, 1] as const;

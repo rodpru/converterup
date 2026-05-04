@@ -1,7 +1,5 @@
 "use client";
 
-import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 import { AnimatePresence, motion } from "framer-motion";
 import JSZip from "jszip";
 import {
@@ -18,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { JsonLd } from "@/components/json-ld";
 
 const ACCEPTED_FORMATS = ".mp4,.webm,.mov";
 const MAX_FILE_SIZE_MB = 500;
@@ -71,25 +70,6 @@ function formatFileSize(bytes: number): string {
 }
 
 export function VideoFrameExtractor() {
-  return (
-    <ToolGate toolName="video-frame-extractor">
-      {({ gatedDownload, trackStarted }) => (
-        <VideoFrameExtractorContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function VideoFrameExtractorContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [file, setFile] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [frames, setFrames] = useState<CapturedFrame[]>([]);
@@ -103,7 +83,6 @@ function VideoFrameExtractorContent({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const hasTrackedStarted = useRef(false);
 
   // Cleanup object URLs on unmount
   useEffect(() => {
@@ -143,12 +122,8 @@ function VideoFrameExtractorContent({
       setVideoUrl(url);
       setFrames([]);
       setLightboxFrame(null);
-      if (!hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
     },
-    [videoUrl, frames, trackStarted],
+    [videoUrl, frames],
   );
 
   const captureFrame = useCallback(() => {
@@ -219,16 +194,14 @@ function VideoFrameExtractorContent({
     async (frame: CapturedFrame) => {
       const ext = outputFormat === "jpg" ? "jpg" : "png";
       const filename = `frame-${formatTimestamp(frame.timestamp).replace(/[:.]/g, "-")}.${ext}`;
-      await gatedDownload(() => {
-        const a = document.createElement("a");
-        a.href = frame.url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, { data: frame.blob, filename });
+      const a = document.createElement("a");
+      a.href = frame.url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     },
-    [outputFormat, gatedDownload],
+    [outputFormat],
   );
 
   const downloadAllFrames = useCallback(async () => {
@@ -247,21 +220,19 @@ function VideoFrameExtractorContent({
 
       const content = await zip.generateAsync({ type: "blob" });
       const downloadFilename = `frames-${file?.name?.replace(/\.[^.]+$/, "") || "video"}.zip`;
-      await gatedDownload(() => {
-        const url = URL.createObjectURL(content);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = downloadFilename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }, { data: content, filename: downloadFilename });
+      const url = URL.createObjectURL(content);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = downloadFilename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     } catch {
       setError("Failed to create ZIP file. Please try again.");
     }
     setDownloadingAll(false);
-  }, [frames, outputFormat, file, gatedDownload]);
+  }, [frames, outputFormat, file]);
 
   const seekBy = useCallback((seconds: number) => {
     const video = videoRef.current;

@@ -24,7 +24,8 @@ export interface ConversionResult {
 }
 
 const VIDEO_FORMATS = ["mp4", "webm", "mkv", "avi", "mov"];
-const SERVER_THRESHOLD = 20 * 1024 * 1024; // 20MB
+const MAX_VIDEO_SIZE = 500 * 1024 * 1024;
+const MAX_IMAGE_SIZE = 50 * 1024 * 1024;
 
 function getInputExtension(file: File): string {
   const parts = file.name.split(".");
@@ -147,98 +148,6 @@ function buildAudioExtractionArgs(
   return args;
 }
 
-async function convertViaServer(
-  options: ConversionOptions,
-  onProgress?: (progress: number) => void,
-): Promise<ConversionResult> {
-  const startTime = Date.now();
-
-  // Step 1: Create job (server-side, keeps API key secret)
-  onProgress?.(0);
-  const createRes = await fetch("/api/convert", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      outputFormat: options.outputFormat,
-      quality: options.quality,
-    }),
-  });
-
-  if (!createRes.ok) {
-    const data = await createRes.json();
-    throw new Error(data.error || "Failed to create conversion job");
-  }
-
-  const { jobId, uploadUrl, uploadParams } = await createRes.json();
-
-  // Step 2: Upload file directly from browser to CloudConvert (no server proxy)
-  onProgress?.(5);
-  const formData = new FormData();
-  for (const [key, value] of Object.entries(uploadParams)) {
-    formData.append(key, value as string);
-  }
-  formData.append("file", options.inputFile);
-
-  const uploadRes = await fetch(uploadUrl, {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!uploadRes.ok) {
-    throw new Error("Failed to upload file for conversion");
-  }
-
-  // Step 3: Poll job status
-  onProgress?.(20);
-  const POLL_INTERVAL = 2000;
-  const MAX_POLL_TIME = 900_000; // 15 minutes
-  const pollStart = Date.now();
-  let progress = 20;
-
-  while (Date.now() - pollStart < MAX_POLL_TIME) {
-    await new Promise((resolve) => setTimeout(resolve, POLL_INTERVAL));
-
-    const statusRes = await fetch(`/api/convert?jobId=${jobId}`);
-    if (!statusRes.ok) {
-      throw new Error("Failed to check conversion status");
-    }
-
-    const status = await statusRes.json();
-
-    if (status.status === "finished" && status.url) {
-      onProgress?.(90);
-
-      // Step 4: Download converted file
-      const fileRes = await fetch(status.url);
-      if (!fileRes.ok) {
-        throw new Error("Failed to download converted file");
-      }
-
-      const blob = await fileRes.blob();
-      const baseName = options.inputFile.name.replace(/\.[^.]+$/, "");
-
-      onProgress?.(100);
-
-      return {
-        blob,
-        filename: `${baseName}.${options.outputFormat}`,
-        size: blob.size,
-        duration: Date.now() - startTime,
-      };
-    }
-
-    if (status.status === "error") {
-      throw new Error(status.error || "Conversion failed");
-    }
-
-    // Ease progress toward 90%
-    progress += (90 - progress) * 0.08;
-    onProgress?.(Math.round(progress));
-  }
-
-  throw new Error("Conversion timed out after 15 minutes");
-}
-
 export async function convertMedia(
   options: ConversionOptions,
   onProgress?: (progress: number) => void,
@@ -247,10 +156,14 @@ export async function convertMedia(
   const isInputVideo = VIDEO_FORMATS.includes(
     getInputExtension(options.inputFile),
   );
+  const treatAsVideo = isVideo || isInputVideo;
+  const sizeLimit = treatAsVideo ? MAX_VIDEO_SIZE : MAX_IMAGE_SIZE;
 
-  // Route large videos to server-side CloudConvert
-  if ((isVideo || isInputVideo) && options.inputFile.size >= SERVER_THRESHOLD) {
-    return convertViaServer(options, onProgress);
+  if (options.inputFile.size > sizeLimit) {
+    const limitMB = Math.round(sizeLimit / (1024 * 1024));
+    throw new Error(
+      `File too large for browser conversion (max ${limitMB} MB). Try compressing or splitting the file first.`,
+    );
   }
 
   const startTime = Date.now();

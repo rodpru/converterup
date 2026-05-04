@@ -1,17 +1,28 @@
-import Link from "next/link";
-import { getAllArticles } from "@/lib/blog";
 import { ArrowRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
+import { getAllArticles } from "@/lib/blog";
 
-export function RelatedGuides({ toolHref }: { toolHref: string }) {
-  const articles = getAllArticles().filter((a) => a.toolHref === toolHref);
+export async function RelatedGuides({
+  toolHref,
+  locale,
+}: {
+  toolHref: string;
+  locale: string;
+}) {
+  const articles = getAllArticles().filter(
+    (a) => a.toolHref === toolHref && a.lang === locale,
+  );
 
   if (articles.length === 0) return null;
+
+  const t = await getTranslations({ locale, namespace: "Internal" });
 
   return (
     <section className="border-t border-[#2A2535] mt-12 pt-10 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <h2 className="font-[Syne] text-xl font-bold text-[#EDEDEF] mb-6">
-          Related Guides
+          {t("relatedGuides")}
         </h2>
         <div className="grid grid-cols-1 gap-3">
           {articles.map((article) => (
@@ -24,9 +35,6 @@ export function RelatedGuides({ toolHref }: { toolHref: string }) {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="font-mono text-[10px] uppercase tracking-wider text-[#2DD4BF]">
                     {article.category}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-[#71717A] border border-[#2A2535] rounded px-1.5 py-0.5">
-                    {article.lang.toUpperCase()}
                   </span>
                 </div>
                 <p className="text-sm font-medium text-[#EDEDEF] group-hover:text-[#2DD4BF] transition-colors truncate">

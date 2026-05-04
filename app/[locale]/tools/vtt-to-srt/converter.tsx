@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -92,32 +91,12 @@ function convertVttToSrt(vtt: string): string {
 }
 
 export function VttToSrtConverter() {
-  return (
-    <ToolGate toolName="vtt-to-srt">
-      {({ gatedDownload, trackStarted }) => (
-        <VttToSrtConverterContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function VttToSrtConverterContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [vttInput, setVttInput] = useState("");
   const [srtOutput, setSrtOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const hasTrackedStarted = useRef(false);
 
   const handleConvert = useCallback((input: string) => {
     setError(null);
@@ -147,16 +126,12 @@ function VttToSrtConverterContent({
       setVttInput(value);
       if (value.trim()) {
         handleConvert(value);
-        if (!hasTrackedStarted.current) {
-          trackStarted();
-          hasTrackedStarted.current = true;
-        }
       } else {
         setSrtOutput("");
         setError(null);
       }
     },
-    [handleConvert, trackStarted],
+    [handleConvert],
   );
 
   const handleFileUpload = useCallback(
@@ -170,41 +145,33 @@ function VttToSrtConverterContent({
         const text = ev.target?.result as string;
         setVttInput(text);
         handleConvert(text);
-        if (!hasTrackedStarted.current) {
-          trackStarted();
-          hasTrackedStarted.current = true;
-        }
       };
       reader.readAsText(file);
     },
-    [handleConvert, trackStarted],
+    [handleConvert],
   );
 
   const handleCopy = useCallback(async () => {
     if (!srtOutput) return;
-    await gatedDownload(async () => {
-      await navigator.clipboard.writeText(srtOutput);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  }, [srtOutput, gatedDownload]);
+    await navigator.clipboard.writeText(srtOutput);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, [srtOutput]);
 
   const handleDownload = useCallback(async () => {
     if (!srtOutput) return;
     const baseName = fileName ? fileName.replace(/\.vtt$/i, "") : "subtitles";
     const downloadFilename = `${baseName}.srt`;
-    await gatedDownload(() => {
-      const blob = new Blob([srtOutput], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = downloadFilename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }, { data: new Blob([srtOutput], { type: "text/plain;charset=utf-8" }), filename: downloadFilename });
-  }, [srtOutput, fileName, gatedDownload]);
+    const blob = new Blob([srtOutput], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = downloadFilename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [srtOutput, fileName]);
 
   return (
     <>

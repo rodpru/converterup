@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { RelatedConversions } from "@/components/related-conversions";
 import { RelatedGuides } from "@/components/related-guides";
 import { ToolJsonLd } from "@/components/tool-json-ld";
+import { ToolSeoContent } from "@/components/tool-seo-content";
 import { generateAlternates } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
 import { ImageCompressor } from "./compressor";
 
 export async function generateMetadata({
@@ -35,12 +37,19 @@ export async function generateMetadata({
   };
 }
 
-export default function ImageCompressorPage() {
+export default async function ImageCompressorPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <>
-      <ToolJsonLd slug="image-compressor" />
+      <ToolJsonLd slug="image-compressor" locale={locale} />
       <ImageCompressor />
-      <RelatedGuides toolHref="/tools/image-compressor" />
+      <ToolSeoContent slug="image-compressor" locale={locale} />
+      <RelatedGuides toolHref="/tools/image-compressor" locale={locale} />
+      <RelatedConversions toolSlug="image-compressor" locale={locale} />
     </>
   );
 }
