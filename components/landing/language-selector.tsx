@@ -1,9 +1,9 @@
 "use client";
 
-import { useTransition, useState, useRef, useEffect } from "react";
-import { usePathname, useRouter } from "@/i18n/routing";
+import { Check, ChevronDown, Globe } from "lucide-react";
 import { useLocale } from "next-intl";
-import { Globe, ChevronDown, Check } from "lucide-react";
+import { useEffect, useRef, useState, useTransition } from "react";
+import { usePathname, useRouter } from "@/i18n/routing";
 
 export function LanguageSelector() {
   const [isPending, startTransition] = useTransition();

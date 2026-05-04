@@ -1,18 +1,18 @@
 "use client";
 
-import { useCallback, useState, useMemo } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ImageIcon, Upload, Video, X } from "lucide-react";
+import { useCallback, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Upload, X, ImageIcon, Video } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FormatBadge } from "@/components/format-badge";
-import { cn } from "@/lib/utils";
 import {
+  createPreviewUrl,
+  formatFileSize,
   getAcceptedFileTypes,
   getFileCategory,
   getFileExtension,
-  formatFileSize,
-  createPreviewUrl,
 } from "@/lib/media-utils";
+import { cn } from "@/lib/utils";
 
 interface FileUploaderProps {
   onFileSelect: (file: File) => void;

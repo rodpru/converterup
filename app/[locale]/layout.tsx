@@ -1,8 +1,9 @@
-import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono, Syne } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { Syne, Inter, JetBrains_Mono } from "next/font/google";
+import { CookieConsent } from "@/components/cookie-consent";
 import "../globals.css";
 
 const syne = Syne({
@@ -118,10 +119,15 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html
+      lang={locale}
+      className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <body className="antialiased" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           {children}
+          <CookieConsent />
           <Analytics />
         </NextIntlClientProvider>
       </body>

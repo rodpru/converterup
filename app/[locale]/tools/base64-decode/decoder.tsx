@@ -1,16 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Check,
-  ClipboardCopy,
-  Download,
-  FileCode2,
-  Image as ImageIcon,
-} from "lucide-react";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { Check, ClipboardCopy, Download, FileCode2 } from "lucide-react";
+import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -130,82 +123,52 @@ function decodeBase64(input: string): DecodeResult {
 }
 
 export function Base64Decoder() {
-  return (
-    <ToolGate toolName="base64-decode">
-      {({ gatedDownload, trackStarted }) => (
-        <Base64DecoderContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function Base64DecoderContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [input, setInput] = useState("");
-  const hasTrackedStarted = useRef(false);
   const [copied, setCopied] = useState(false);
 
   const result = useMemo(() => decodeBase64(input), [input]);
 
   const handleCopy = useCallback(async () => {
     if (result.type !== "text" || !result.text) return;
-    await gatedDownload(async () => {
-      try {
-        await navigator.clipboard.writeText(result.text!);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      } catch {
-        const textarea = document.createElement("textarea");
-        textarea.value = result.text!;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      }
-    });
-  }, [result, gatedDownload]);
+    try {
+      await navigator.clipboard.writeText(result.text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = result.text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }, [result]);
 
   const handleDownload = useCallback(async () => {
     if (result.type === "error") return;
 
-    const persistable = result.type === "image" && result.imageSrc
-      ? { data: result.imageSrc, filename: `decoded-image.${result.imageMime?.split("/")[1] ?? "png"}` }
-      : result.type === "text" && result.text
-        ? { data: new Blob([result.text], { type: "text/plain" }), filename: "decoded-text.txt" }
-        : undefined;
-
-    await gatedDownload(() => {
-      if (result.type === "image" && result.imageSrc) {
-        const link = document.createElement("a");
-        link.href = result.imageSrc;
-        const ext = result.imageMime?.split("/")[1] ?? "png";
-        link.download = `decoded-image.${ext}`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else if (result.type === "text" && result.text) {
-        const blob = new Blob([result.text], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "decoded-text.txt";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      }
-    }, persistable);
-  }, [result, gatedDownload]);
+    if (result.type === "image" && result.imageSrc) {
+      const link = document.createElement("a");
+      link.href = result.imageSrc;
+      const ext = result.imageMime?.split("/")[1] ?? "png";
+      link.download = `decoded-image.${ext}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else if (result.type === "text" && result.text) {
+      const blob = new Blob([result.text], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "decoded-text.txt";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+  }, [result]);
 
   return (
     <>
@@ -253,14 +216,7 @@ function Base64DecoderContent({
               <textarea
                 id="base64-input"
                 value={input}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setInput(val);
-                  if (val.length > 0 && !hasTrackedStarted.current) {
-                    trackStarted();
-                    hasTrackedStarted.current = true;
-                  }
-                }}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Paste a Base64 string or data URI..."
                 rows={6}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-mono text-sm resize-y min-h-[44px]"

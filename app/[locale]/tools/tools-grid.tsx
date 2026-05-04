@@ -1,34 +1,34 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
-import { useSearchParams } from "next/navigation";
-import { useState, useMemo, Suspense } from "react";
-import { Search } from "lucide-react";
-import { useTranslations } from "next-intl";
 import {
-  ImageDown,
-  Scaling,
-  Film,
-  QrCode,
-  Youtube,
-  FileSearch,
-  Palette,
   AppWindow,
-  FileImage,
   Binary,
-  Clapperboard,
-  Calculator,
-  Repeat,
-  Subtitles,
   Braces,
-  Hash,
-  FileCode,
-  Paintbrush,
-  Fingerprint,
-  Unlock,
+  Calculator,
   CaseSensitive,
+  Clapperboard,
+  FileCode,
+  FileImage,
+  FileSearch,
+  Film,
+  Fingerprint,
+  Hash,
+  ImageDown,
+  Paintbrush,
+  Palette,
+  QrCode,
+  Repeat,
+  Scaling,
+  Search,
+  Subtitles,
   Table,
+  Unlock,
+  Youtube,
 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Suspense, useMemo, useState } from "react";
+import { Link } from "@/i18n/routing";
 
 export const tools = [
   {
@@ -220,9 +220,6 @@ function ToolsGridInner() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#2DD4BF]/20 bg-[#2DD4BF]/5 mb-8">
             <span className="text-[#2DD4BF] font-mono text-xs">
               {t("freeUses")}
-            </span>
-            <span className="text-[#71717A] font-mono text-xs">
-              {t("unlimited")}
             </span>
           </div>
 

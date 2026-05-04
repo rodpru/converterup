@@ -8,9 +8,8 @@ import {
   Hash,
   RefreshCw,
 } from "lucide-react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -51,25 +50,6 @@ function formatUuid(
 }
 
 export function UuidGenerator() {
-  return (
-    <ToolGate toolName="uuid-generator">
-      {({ gatedDownload, trackStarted }) => (
-        <UuidGeneratorContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function UuidGeneratorContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [singleUuid, setSingleUuid] = useState("");
   const [bulkUuids, setBulkUuids] = useState("");
   const [bulkCount, setBulkCount] = useState(10);
@@ -77,69 +57,55 @@ function UuidGeneratorContent({
   const [hyphens, setHyphens] = useState(true);
   const [copiedSingle, setCopiedSingle] = useState(false);
   const [copiedAll, setCopiedAll] = useState(false);
-  const hasTrackedStarted = useRef(false);
-
-  const trackFirstGenerate = useCallback(() => {
-    if (!hasTrackedStarted.current) {
-      trackStarted();
-      hasTrackedStarted.current = true;
-    }
-  }, [trackStarted]);
 
   const handleGenerate = useCallback(() => {
-    trackFirstGenerate();
     const uuid = crypto.randomUUID();
     setSingleUuid(formatUuid(uuid, uppercase, hyphens));
-  }, [uppercase, hyphens, trackFirstGenerate]);
+  }, [uppercase, hyphens]);
 
   const handleGenerateBulk = useCallback(() => {
-    trackFirstGenerate();
     const count = Math.max(1, Math.min(100, bulkCount));
     const uuids = Array.from({ length: count }, () =>
       formatUuid(crypto.randomUUID(), uppercase, hyphens),
     );
     setBulkUuids(uuids.join("\n"));
-  }, [bulkCount, uppercase, hyphens, trackFirstGenerate]);
+  }, [bulkCount, uppercase, hyphens]);
 
   const handleCopySingle = useCallback(async () => {
     if (!singleUuid) return;
-    await gatedDownload(async () => {
-      try {
-        await navigator.clipboard.writeText(singleUuid);
-        setCopiedSingle(true);
-        setTimeout(() => setCopiedSingle(false), 2000);
-      } catch {
-        const textarea = document.createElement("textarea");
-        textarea.value = singleUuid;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        setCopiedSingle(true);
-        setTimeout(() => setCopiedSingle(false), 2000);
-      }
-    });
-  }, [singleUuid, gatedDownload]);
+    try {
+      await navigator.clipboard.writeText(singleUuid);
+      setCopiedSingle(true);
+      setTimeout(() => setCopiedSingle(false), 2000);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = singleUuid;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopiedSingle(true);
+      setTimeout(() => setCopiedSingle(false), 2000);
+    }
+  }, [singleUuid]);
 
   const handleCopyAll = useCallback(async () => {
     if (!bulkUuids) return;
-    await gatedDownload(async () => {
-      try {
-        await navigator.clipboard.writeText(bulkUuids);
-        setCopiedAll(true);
-        setTimeout(() => setCopiedAll(false), 2000);
-      } catch {
-        const textarea = document.createElement("textarea");
-        textarea.value = bulkUuids;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        setCopiedAll(true);
-        setTimeout(() => setCopiedAll(false), 2000);
-      }
-    });
-  }, [bulkUuids, gatedDownload]);
+    try {
+      await navigator.clipboard.writeText(bulkUuids);
+      setCopiedAll(true);
+      setTimeout(() => setCopiedAll(false), 2000);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = bulkUuids;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopiedAll(true);
+      setTimeout(() => setCopiedAll(false), 2000);
+    }
+  }, [bulkUuids]);
 
   const handleBulkCountChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -6,8 +6,6 @@
     "pricing": "Pricing",
     "tools": "Tools",
     "blog": "Blog",
-    "dashboard": "Dashboard",
-    "signIn": "Sign In",
     "startConverting": "Start Converting"
   },
   "Hero": {
@@ -25,7 +23,7 @@
     "zeroData": "Zero Data Collection",
     "offline": "Works Offline",
     "private": "Private & Secure",
-    "noAds": "No Ads Ever",
+    "noAds": "100% Free",
     "browserNative": "Browser-Native"
   },
   "Features": {
@@ -79,7 +77,7 @@
     "noUpload": "No file upload",
     "freeTier": "Free tier",
     "videoSupport": "Video support",
-    "noAds": "No ads",
+    "noAds": "Free forever",
     "private": "100% private",
     "noInstall": "No install required",
     "modernUI": "Modern UI"
@@ -91,23 +89,13 @@
     "freeName": "Free",
     "freePrice": "$0",
     "freePeriod": "forever",
-    "freeDescription": "For casual use",
-    "freeFeature1": "3 conversions per day",
-    "freeFeature2": "All formats supported",
-    "freeFeature3": "Full quality control",
-    "freeFeature4": "No watermarks",
-    "freeFeature5": "No ads, ever",
-    "freeCta": "Get Started",
-    "unlimitedName": "Unlimited",
-    "unlimitedPrice": "$5",
-    "unlimitedPeriod": "month",
-    "unlimitedDescription": "For creators & professionals",
-    "unlimitedFeature1": "Unlimited conversions",
-    "unlimitedFeature2": "All formats supported",
-    "unlimitedFeature3": "Full quality control",
-    "unlimitedFeature4": "Priority support",
-    "unlimitedFeature5": "Cancel anytime",
-    "unlimitedCta": "Go Unlimited"
+    "freeDescription": "For everyone",
+    "freeFeature1": "All formats supported",
+    "freeFeature2": "Full quality control",
+    "freeFeature3": "No watermarks",
+    "freeFeature4": "100% browser-based",
+    "freeFeature5": "Always free",
+    "freeCta": "Get Started"
   },
   "Testimonials": {
     "title": "Loved by",
@@ -121,7 +109,7 @@
     "quote3": "The video conversion blew me away. Everything happens in the browser, no waiting for server queues. Game changer.",
     "name3": "Aisha Patel",
     "role3": "Video Editor",
-    "quote4": "Clean, minimal, does exactly what it says. No ads, no dark patterns, no upsells. Just works.",
+    "quote4": "Clean, minimal, does exactly what it says. No dark patterns, no upsells, no nonsense. Just works.",
     "name4": "Tom Andersen",
     "role4": "Developer"
   },
@@ -134,13 +122,13 @@
     "q2": "What formats are supported?",
     "a2": "Images: PNG, JPG, WebP, AVIF, GIF, TIFF, BMP. Videos: MP4, WebM, MKV, AVI, MOV. Audio extraction: MP3, AAC, WAV, OGG. We're constantly adding more formats.",
     "q3": "How does pricing work?",
-    "a3": "Free users get 3 conversions per day — images, videos, or audio. For unlimited conversions, you can upgrade to the Unlimited plan at $5/month. Cancel anytime.",
+    "a3": "ConverterUp is completely free. There's a soft daily limit of around 3 conversions to keep things fast for everyone, but no payment, no account, and no signup required.",
     "q4": "Is there a file size limit?",
     "a4": "Since processing happens in your browser, the limit depends on your device's memory. Most modern devices handle files up to 500MB for images and 1-2GB for videos without issues.",
     "q5": "Can I use it on mobile?",
     "a5": "Yes! ConverterUp is fully responsive and optimized for mobile devices. All conversion features work on smartphones and tablets, though very large files may perform better on desktop.",
     "q6": "Do I need to create an account?",
-    "a6": "You can use ConverterUp without an account for basic conversions. Creating a free account unlocks daily conversion tracking and the ability to upgrade to unlimited."
+    "a6": "No. ConverterUp works without any account or signup. All conversions happen entirely in your browser — just open the tool and start."
   },
   "CTA": {
     "title": "Ready to convert",
@@ -178,7 +166,6 @@
     "title2": "Tools",
     "desc": "Browser-based utilities for images, video, code, and more. 100% private — your files never leave your device.",
     "freeUses": "3 free uses per day",
-    "unlimited": "— sign up for free, or go unlimited for $5/mo",
     "search": "Search tools...",
     "noResults": "No tools found for"
   },
@@ -227,5 +214,463 @@
     "case-converter-desc": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more. Free and instant.",
     "csv-to-json-title": "Free CSV to JSON Converter — Convert CSV Online",
     "csv-to-json-desc": "Convert CSV data to JSON instantly. Supports custom delimiters, quoted fields, and header rows. Free, fast, and 100% browser-based."
+  },
+  "ToolHowTo": {
+    "image-compressor": {
+      "name": "How to Compress Images Online",
+      "description": "Compress PNG, JPG, WebP, and AVIF images to reduce file size while preserving quality.",
+      "step1": { "name": "Upload your image", "text": "Drag and drop or click to select a PNG, JPG, WebP, or AVIF image from your device." },
+      "step2": { "name": "Adjust compression quality", "text": "Use the quality slider to set your desired compression level. Preview the result in real time." },
+      "step3": { "name": "Download the compressed image", "text": "Click download to save the compressed image. The file never leaves your browser." }
+    },
+    "image-resizer": {
+      "name": "How to Resize Images Online",
+      "description": "Resize images to exact dimensions or percentages with aspect ratio control.",
+      "step1": { "name": "Upload your image", "text": "Drag and drop or click to select an image from your device." },
+      "step2": { "name": "Set the desired dimensions", "text": "Enter width and height in pixels or percentage. Toggle aspect ratio lock as needed." },
+      "step3": { "name": "Download the resized image", "text": "Click download to save the resized image to your device." }
+    },
+    "video-to-gif": {
+      "name": "How to Convert Video to GIF Online",
+      "description": "Convert MP4, WebM, MOV, and AVI videos to animated GIF format.",
+      "step1": { "name": "Upload your video", "text": "Drag and drop or select an MP4, WebM, MOV, or AVI video file." },
+      "step2": { "name": "Configure GIF settings", "text": "Adjust frame rate, width, and select the portion of the video to convert." },
+      "step3": { "name": "Download the GIF", "text": "Click convert and download your animated GIF file." }
+    },
+    "qr-code-generator": {
+      "name": "How to Generate a QR Code Online",
+      "description": "Create custom QR codes with custom colors, sizes, and error correction levels.",
+      "step1": { "name": "Enter your content", "text": "Type or paste a URL, text, or any data you want to encode in the QR code." },
+      "step2": { "name": "Customize the QR code", "text": "Choose colors, size, and error correction level for your QR code." },
+      "step3": { "name": "Download the QR code", "text": "Click download to save the QR code as a PNG image." }
+    },
+    "youtube-thumbnail-downloader": {
+      "name": "How to Download YouTube Thumbnails",
+      "description": "Download YouTube video thumbnails in all available resolutions.",
+      "step1": { "name": "Paste the YouTube URL", "text": "Copy and paste the YouTube video URL into the input field." },
+      "step2": { "name": "Choose a resolution", "text": "Select from available thumbnail resolutions: HD, SD, HQ, or MQ." },
+      "step3": { "name": "Download the thumbnail", "text": "Click download to save the thumbnail image to your device." }
+    },
+    "exif-viewer": {
+      "name": "How to View and Remove EXIF Data from Photos",
+      "description": "View and strip metadata from JPEG, PNG, WebP, and TIFF photos.",
+      "step1": { "name": "Upload your photo", "text": "Drag and drop or select a JPEG, PNG, WebP, or TIFF image." },
+      "step2": { "name": "View the EXIF metadata", "text": "Review all metadata including camera model, GPS coordinates, date, and exposure settings." },
+      "step3": { "name": "Remove EXIF data", "text": "Click remove to strip all metadata and download a clean copy of your photo." }
+    },
+    "color-palette": {
+      "name": "How to Extract Colors from an Image",
+      "description": "Extract dominant colors and generate a color palette from any image.",
+      "step1": { "name": "Upload your image", "text": "Drag and drop or select an image to analyze." },
+      "step2": { "name": "View extracted colors", "text": "See the dominant colors extracted from your image with HEX, RGB, and HSL values." },
+      "step3": { "name": "Copy color values", "text": "Click any color to copy its HEX, RGB, or HSL value to your clipboard." }
+    },
+    "favicon-generator": {
+      "name": "How to Create a Favicon from an Image",
+      "description": "Generate favicons in all standard sizes from a single source image.",
+      "step1": { "name": "Upload a source image", "text": "Drag and drop or select a PNG, JPG, WebP, or SVG image to use as your favicon." },
+      "step2": { "name": "Preview all sizes", "text": "Preview your favicon in all standard sizes from 16x16 to 512x512 pixels." },
+      "step3": { "name": "Download the favicon package", "text": "Download all favicon sizes as a ZIP file ready to add to your website." }
+    },
+    "svg-to-png": {
+      "name": "How to Convert SVG to PNG Online",
+      "description": "Convert SVG vector files to PNG raster images with custom scale options.",
+      "step1": { "name": "Upload your SVG file", "text": "Drag and drop or select an SVG file from your device." },
+      "step2": { "name": "Choose scale and options", "text": "Select the output scale (1x, 2x, 3x, 4x) and background color." },
+      "step3": { "name": "Download the PNG", "text": "Click download to save the converted PNG image." }
+    },
+    "image-to-base64": {
+      "name": "How to Convert an Image to Base64",
+      "description": "Encode images as Base64 data URIs for embedding in HTML, CSS, or JSON.",
+      "step1": { "name": "Upload your image", "text": "Drag and drop or select a PNG, JPG, WebP, GIF, or SVG image." },
+      "step2": { "name": "Get the Base64 output", "text": "View the generated Base64 string or data URI for your image." },
+      "step3": { "name": "Copy the result", "text": "Click copy to add the Base64 string to your clipboard for use in your code." }
+    },
+    "video-frame-extractor": {
+      "name": "How to Extract Frames from a Video",
+      "description": "Capture individual frames from MP4, WebM, and MOV video files.",
+      "step1": { "name": "Upload your video", "text": "Drag and drop or select an MP4, WebM, or MOV video file." },
+      "step2": { "name": "Navigate to the desired frame", "text": "Use the timeline to find the exact frame you want to capture." },
+      "step3": { "name": "Save the frame", "text": "Click capture to save the frame as a PNG or JPG image." }
+    },
+    "stripe-fee-calculator": {
+      "name": "How to Calculate Stripe Processing Fees",
+      "description": "Calculate Stripe fees for any transaction amount in multiple currencies.",
+      "step1": { "name": "Enter the transaction amount", "text": "Type the amount you want to charge or receive." },
+      "step2": { "name": "Select your currency", "text": "Choose from USD, EUR, GBP, or BRL to see the correct fee rates." },
+      "step3": { "name": "View the fee breakdown", "text": "See the Stripe fee, net amount, and what to charge to receive a specific amount." }
+    },
+    "text-repeater": {
+      "name": "How to Repeat Text Multiple Times",
+      "description": "Repeat any text string multiple times with custom separators.",
+      "step1": { "name": "Enter your text", "text": "Type or paste the text you want to repeat." },
+      "step2": { "name": "Set repetitions and separator", "text": "Choose how many times to repeat and what separator to use between repetitions." },
+      "step3": { "name": "Copy the result", "text": "Click copy to add the repeated text to your clipboard." }
+    },
+    "vtt-to-srt": {
+      "name": "How to Convert VTT Subtitles to SRT",
+      "description": "Convert WebVTT subtitle files to SRT format instantly.",
+      "step1": { "name": "Upload your VTT file", "text": "Drag and drop or select a WebVTT (.vtt) subtitle file." },
+      "step2": { "name": "Preview the conversion", "text": "Review the converted subtitles to ensure they are correct." },
+      "step3": { "name": "Download the SRT file", "text": "Click download to save the converted SRT subtitle file." }
+    },
+    "json-viewer": {
+      "name": "How to Format and Validate JSON Online",
+      "description": "Format, validate, and explore JSON data with syntax highlighting.",
+      "step1": { "name": "Paste your JSON", "text": "Paste or type your JSON data into the editor." },
+      "step2": { "name": "Format or minify", "text": "Click format to beautify the JSON or minify to compress it. Validation errors are highlighted." },
+      "step3": { "name": "Copy the result", "text": "Click copy to add the formatted JSON to your clipboard." }
+    },
+    "hex-to-decimal": {
+      "name": "How to Convert Hexadecimal to Decimal",
+      "description": "Convert between hex, decimal, binary, and octal number systems.",
+      "step1": { "name": "Enter a number", "text": "Type a hexadecimal, decimal, binary, or octal number." },
+      "step2": { "name": "View all conversions", "text": "See the number converted to all four bases simultaneously." },
+      "step3": { "name": "Copy any result", "text": "Click copy next to any conversion to add it to your clipboard." }
+    },
+    "html-minifier": {
+      "name": "How to Minify HTML Code Online",
+      "description": "Minify HTML to reduce file size and improve page loading speed.",
+      "step1": { "name": "Paste your HTML", "text": "Paste or type your HTML code into the editor." },
+      "step2": { "name": "Click minify", "text": "Press the minify button to remove whitespace, comments, and optimize the code." },
+      "step3": { "name": "Copy the minified HTML", "text": "Click copy to add the minified HTML to your clipboard." }
+    },
+    "css-minifier": {
+      "name": "How to Minify CSS Stylesheets Online",
+      "description": "Minify CSS to remove whitespace, comments, and optimize selectors.",
+      "step1": { "name": "Paste your CSS", "text": "Paste or type your CSS code into the editor." },
+      "step2": { "name": "Click minify", "text": "Press the minify button to compress the CSS code." },
+      "step3": { "name": "Copy the minified CSS", "text": "Click copy to add the minified CSS to your clipboard." }
+    },
+    "uuid-generator": {
+      "name": "How to Generate UUID v4 Identifiers",
+      "description": "Generate single or bulk UUID v4 identifiers instantly.",
+      "step1": { "name": "Choose generation mode", "text": "Select single UUID or bulk generation and set the quantity." },
+      "step2": { "name": "Generate UUIDs", "text": "Click generate to create new UUID v4 identifiers." },
+      "step3": { "name": "Copy the UUIDs", "text": "Click copy to add the generated UUIDs to your clipboard." }
+    },
+    "base64-decode": {
+      "name": "How to Decode Base64 Strings",
+      "description": "Decode Base64 encoded strings back to plain text or images.",
+      "step1": { "name": "Paste the Base64 string", "text": "Paste your Base64 encoded string or data URI into the input field." },
+      "step2": { "name": "View the decoded output", "text": "See the decoded text or image preview instantly." },
+      "step3": { "name": "Copy or download", "text": "Copy the decoded text or download the decoded image." }
+    },
+    "case-converter": {
+      "name": "How to Convert Text Case Online",
+      "description": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, and more.",
+      "step1": { "name": "Enter your text", "text": "Type or paste the text you want to convert." },
+      "step2": { "name": "Choose a case format", "text": "Select from UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, PascalCase, and more." },
+      "step3": { "name": "Copy the result", "text": "Click copy to add the converted text to your clipboard." }
+    },
+    "csv-to-json": {
+      "name": "How to Convert CSV to JSON Online",
+      "description": "Convert CSV data to JSON format with support for custom delimiters.",
+      "step1": { "name": "Paste or upload CSV data", "text": "Paste your CSV data or upload a CSV file. Configure the delimiter if needed." },
+      "step2": { "name": "Preview the JSON output", "text": "Review the converted JSON data with syntax highlighting." },
+      "step3": { "name": "Copy or download the JSON", "text": "Click copy to clipboard or download as a .json file." }
+    }
+  },
+  "ToolSeo": {
+    "image-compressor": {
+      "intro": "Compress PNG, JPG, WebP, and AVIF images directly in your browser without losing visible quality. ConverterUp's image compressor is built for designers, developers, and anyone who needs to reduce image file sizes for faster websites, smaller email attachments, or social media uploads. Adjust the quality slider to find the right balance between size and clarity, preview the result in real time, and download the compressed file. Files never leave your device, everything happens client-side using WebAssembly, so the originals stay private and there is no upload queue or wait.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How much can I compress an image without visible quality loss?",
+      "a1": "JPG and WebP usually compress to 60-80 % quality with no visible difference for photographs. PNG benefits less from quality changes because it is lossless. Convert to WebP or JPG for the largest savings.",
+      "q2": "Is there a file size limit?",
+      "a2": "The hard cap is 50 MB per image. Practical performance depends on your device's RAM, but most modern phones and laptops handle 20-30 MB images without issues.",
+      "q3": "Are my images uploaded to a server?",
+      "a3": "No. Compression happens entirely inside your browser using WebAssembly. The image bytes never leave your device, and ConverterUp has no upload endpoint at all.",
+      "q4": "Which formats are supported?",
+      "a4": "Input: PNG, JPG/JPEG, WebP, AVIF, BMP, TIFF. Output: PNG, JPG, WebP, AVIF. You can also use the compressor as a format converter by changing the output format."
+    },
+    "image-resizer": {
+      "intro": "Resize images online to exact pixel dimensions or by percentage, with optional aspect ratio lock to prevent distortion. ConverterUp's image resizer is useful for preparing photos for blog posts, e-commerce listings, profile pictures, or printable assets that require a specific size. Drop a PNG, JPG, WebP, or AVIF file, type your target width and height, and download the result in seconds. The resizing runs entirely in your browser, so original photos and any sensitive content never leave your device or get queued on a remote server.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How does aspect ratio lock work?",
+      "a1": "When the lock icon is active, changing width updates height proportionally and vice versa, preserving the original aspect ratio. Disable it when you intentionally want to stretch or squash the image to non-proportional dimensions.",
+      "q2": "What is the maximum image size I can resize?",
+      "a2": "Up to 50 MB per file. Very high-resolution images (above 8000 pixels on either side) may be slow on low-end mobile devices because resampling runs on the CPU.",
+      "q3": "Will my image lose quality when resized?",
+      "a3": "Downscaling is lossy by nature, but ConverterUp uses high-quality bicubic resampling to keep the result sharp. Upscaling cannot add detail that isn't there, so increase dimensions only when strictly needed.",
+      "q4": "Which formats are supported?",
+      "a4": "Input and output formats include PNG, JPG/JPEG, WebP, and AVIF. The output format defaults to the input format but can be changed to convert and resize in a single step."
+    },
+    "video-to-gif": {
+      "intro": "Convert video to GIF online from MP4, WebM, MOV, and AVI files without uploading anything. ConverterUp's video to GIF tool is ideal for creating short loops for documentation, product demos, social media reactions, and chat platforms like WhatsApp, Slack, or Discord. Trim the segment you need, choose a frame rate and width, and download the animated GIF directly to your device. Conversion runs in the browser using FFmpeg compiled to WebAssembly, so even private clips and screen recordings stay on your machine.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How long can the source video be?",
+      "a1": "There is no fixed duration limit, but GIFs above 10-15 seconds tend to grow very large. For longer clips consider lowering the width to 320-480 pixels and the frame rate to 10-12 fps.",
+      "q2": "What is the maximum upload size?",
+      "a2": "ConverterUp accepts source files up to 200 MB. The actual processing speed depends on your device's CPU and available memory because FFmpeg runs locally.",
+      "q3": "Why is my GIF file so big?",
+      "a3": "GIF is an old format with poor compression. To reduce size, lower the frame rate, shrink the width, or trim a shorter segment. For modern use cases, exporting to WebP or MP4 yields much smaller files.",
+      "q4": "Which video formats are supported?",
+      "a4": "Input: MP4, WebM, MOV, AVI, MKV. Output: animated GIF. Audio tracks are dropped automatically since GIF does not support sound."
+    },
+    "qr-code-generator": {
+      "intro": "Generate QR codes online for URLs, plain text, Wi-Fi credentials, contact cards, and more. ConverterUp's QR code generator lets marketers, restaurant owners, and developers create scannable codes with custom foreground and background colors, adjustable size, and four error correction levels. Type or paste your content, tweak the appearance, preview in real time, and download a high-resolution PNG ready for print or web. Everything is generated locally in your browser, so the URLs and personal data you encode are never logged or sent anywhere.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How does error correction level affect the QR code?",
+      "a1": "Higher levels (Q, H) make the code readable even when partially damaged or covered by a logo, at the cost of denser modules. Use L or M for clean digital displays and H for printed codes that may get scratched.",
+      "q2": "What is the maximum amount of data I can encode?",
+      "a2": "QR codes can hold up to about 4,296 alphanumeric characters or 2,953 bytes. ConverterUp picks the smallest version that fits your data; for long URLs, consider a URL shortener to keep the code readable.",
+      "q3": "Are the QR codes I generate tracked?",
+      "a3": "No. Codes are rendered entirely client-side and never sent to a server. ConverterUp does not insert tracking redirects, so the URL you scan is exactly the URL you typed.",
+      "q4": "Which output formats are available?",
+      "a4": "PNG is the default and works for both web and print. SVG export is supported for vector use cases such as logo overlays and large posters where quality must scale without pixelation."
+    },
+    "youtube-thumbnail-downloader": {
+      "intro": "Download YouTube thumbnails in every available resolution with a single video URL. ConverterUp's YouTube thumbnail downloader is useful for content creators, journalists, and educators who need to reuse cover art for blog posts, podcast notes, video reactions, or TikTok and Reels edits. Paste the link, pick from HD, SD, HQ, or MQ versions, and save the JPG image directly to your device. The tool only requests YouTube's public thumbnail URL, so no personal data, login, or API key is ever required to grab the image.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "Which thumbnail resolutions are available?",
+      "a1": "HD (1280x720), SD (640x480), HQ (480x360), MQ (320x180), and the default 120x90. Not every video has the HD version, especially older or low-resolution uploads, in which case the next best size is offered.",
+      "q2": "Can I use these thumbnails in my own videos or articles?",
+      "a2": "Thumbnails are protected by copyright and belong to the original uploader. Use them under fair use rules for commentary, news, or reviews, or ask the creator for permission before reusing as your own cover.",
+      "q3": "Does this work for unlisted or private videos?",
+      "a3": "No. The downloader only fetches thumbnails that YouTube exposes publicly. Unlisted videos with a known URL usually still work, but private and age-restricted videos do not return a thumbnail.",
+      "q4": "Why is the thumbnail blurry?",
+      "a4": "If only the lower-resolution images appear, the uploader did not provide an HD thumbnail. Try the HQ version (480x360) which is available for almost every video, or upscale the image with the image resizer."
+    },
+    "exif-viewer": {
+      "intro": "View and remove EXIF metadata from photos online to protect your privacy before sharing images. ConverterUp's EXIF viewer reads JPEG, PNG, WebP, and TIFF files and shows camera model, lens, exposure settings, timestamps, and GPS coordinates that may have been embedded automatically. Photographers can audit their workflow while regular users can strip sensitive data with one click before posting on social networks or sending photos by email. The original file is read locally and the cleaned copy is generated in the browser, so your photo never reaches an external server.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "What kind of metadata is stored in EXIF?",
+      "a1": "EXIF can include the camera make and model, lens, ISO, shutter speed, aperture, focal length, capture date, software used, and precise GPS coordinates. Smartphones often add the location automatically unless you disable it in system settings.",
+      "q2": "Are large RAW files supported?",
+      "a2": "RAW formats are not supported because they require vendor-specific decoders. Stick to JPEG, PNG, WebP, and TIFF up to 50 MB per file. Convert RAW to JPEG first if needed.",
+      "q3": "Does removing EXIF affect image quality?",
+      "a3": "No. Stripping metadata only rewrites the file header and leaves pixel data untouched, so the visual quality is identical to the original.",
+      "q4": "Will the cleaned photo still display correctly on social media?",
+      "a4": "Yes. Most networks ignore EXIF anyway, but they keep orientation flags. ConverterUp preserves orientation while removing GPS, timestamps, and camera info so photos still appear right-side up."
+    },
+    "color-palette": {
+      "intro": "Extract color palettes from images online to find dominant colors for branding, web design, or moodboards. ConverterUp's color palette tool analyzes any uploaded photo and returns the most representative colors with HEX, RGB, and HSL values ready to copy. Designers can build a swatch from a product photo, illustrators can sample from reference art, and developers can pull theme colors from a screenshot. The image is processed entirely in the browser using a quantization algorithm, so private screenshots and unreleased artwork never get uploaded to a remote service.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How does the tool pick the dominant colors?",
+      "a1": "It uses a median cut quantization algorithm that groups similar pixels into clusters and returns the centroid of each cluster. The result emphasizes coverage rather than vibrancy, so muted backgrounds may rank above accent colors.",
+      "q2": "How many colors does it return?",
+      "a2": "By default the palette includes the top six colors. You can adjust the count between three and twelve depending on whether you want a tight brand swatch or a richer mood palette.",
+      "q3": "Are my images sent anywhere?",
+      "a3": "No. The image is decoded by the browser, downsampled in memory, and analyzed locally. ConverterUp never receives the file or the resulting palette.",
+      "q4": "Which image formats can I analyze?",
+      "a4": "PNG, JPG/JPEG, WebP, AVIF, GIF, and BMP. For best results use a clean image without heavy watermarks, since text overlays can be picked up as their own color cluster."
+    },
+    "favicon-generator": {
+      "intro": "Generate a favicon package online from a single source image, ready to drop into any website or web app. ConverterUp's favicon generator produces every standard size from 16x16 up to 512x512, including Apple touch icons, Android home screen icons, and a manifest snippet you can paste into your HTML. Designers and developers save time by skipping multiple manual exports in image editors. Conversion runs in the browser, so unreleased logos and brand assets remain private and are never stored on a remote server.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "What sizes are included in the favicon package?",
+      "a1": "The ZIP contains 16x16, 32x32, 48x48, 96x96, 144x144, 152x152, 180x180, 192x192, 256x256, 384x384, and 512x512 PNG icons, plus a multi-resolution favicon.ico for legacy browsers.",
+      "q2": "What is the recommended source image size?",
+      "a2": "Use a square image of at least 512x512 pixels, ideally as PNG or SVG with a transparent background. Smaller sources can be enlarged but will look blurry at the largest sizes.",
+      "q3": "Are SVG sources supported?",
+      "a3": "Yes. Upload an SVG and the generator will rasterize it at each target size for crisp results without anti-aliasing artifacts. PNG and JPG are also accepted.",
+      "q4": "How do I install the favicon on my site?",
+      "a4": "Extract the ZIP, copy the files to your site's root or assets folder, and paste the provided link tags into the head section of your HTML. The included manifest file enables installation as a Progressive Web App."
+    },
+    "svg-to-png": {
+      "intro": "Convert SVG to PNG online and turn vector graphics into raster images for use anywhere PNG is needed. ConverterUp's SVG to PNG converter is ideal for exporting icons to design tools, generating social media previews, embedding logos in PDFs, or feeding artwork into platforms that do not accept SVG. Pick the output scale at 1x, 2x, 3x, or 4x for retina-ready exports, set a transparent or solid background, and download the result instantly. Conversion happens in your browser, keeping unreleased designs and proprietary icons completely private.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How does the scale option work?",
+      "a1": "Scale multiplies the SVG's intrinsic dimensions: a 100x100 SVG at 4x becomes a 400x400 PNG. Higher scale produces sharper results on retina displays at the cost of file size.",
+      "q2": "Can I keep transparency?",
+      "a2": "Yes. Leave the background option set to transparent and the PNG will keep the SVG's alpha channel. Switch to a solid color when exporting for platforms that flatten transparency.",
+      "q3": "Are external assets in the SVG supported?",
+      "a3": "External images and remote fonts referenced via http URLs may be blocked by browser security. For reliable output, embed images as data URIs and convert text to outlines before exporting from your SVG editor.",
+      "q4": "What is the maximum SVG size I can convert?",
+      "a4": "Up to 10 MB per SVG. Very complex documents with thousands of nodes may render slowly on mobile, but typical icons and illustrations convert in under a second."
+    },
+    "image-to-base64": {
+      "intro": "Convert images to Base64 strings online to embed them directly in HTML, CSS, JSON, or email templates. ConverterUp's image to Base64 tool generates a clean encoded string or a full data URI ready to paste into a stylesheet, an SVG sprite, or a markdown document. It is useful for offline-first apps, transactional emails that must work without external requests, and inlining tiny icons to save HTTP requests. The encoding runs entirely in the browser, so confidential mockups and internal screenshots never leave your machine.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "When should I inline an image as Base64?",
+      "a1": "Base64 makes sense for very small assets (under 4 KB) where a separate HTTP request would cost more than the size overhead. For larger images keep regular files because Base64 inflates size by about 33 %.",
+      "q2": "Is there a file size limit?",
+      "a2": "ConverterUp accepts images up to 25 MB. Encoded strings can become extremely long, so most editors and email clients struggle past a few megabytes.",
+      "q3": "What is the difference between a Base64 string and a data URI?",
+      "a3": "A Base64 string is just the encoded bytes, while a data URI prepends the MIME type, like data:image/png;base64,.... Use the full data URI in src or url() and the raw string when you provide the type elsewhere.",
+      "q4": "Which image formats are supported?",
+      "a4": "PNG, JPG/JPEG, WebP, AVIF, GIF, and SVG. The MIME type in the data URI is set automatically based on the file you upload."
+    },
+    "video-frame-extractor": {
+      "intro": "Extract frames from a video online to grab thumbnails, b-roll stills, or freeze frames for slides and articles. ConverterUp's video frame extractor reads MP4, WebM, and MOV files, lets you scrub through the timeline, and saves the current frame as a PNG or JPG. It is handy for journalists pulling stills from press footage, designers capturing reference frames, and content creators preparing thumbnails for YouTube, TikTok, or Reels. The video is decoded in the browser, so source clips and unreleased footage stay on your device throughout the process.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "What is the maximum video size?",
+      "a1": "Up to 500 MB per file. Larger videos technically work but may take longer to seek because the browser has to demux the container in memory.",
+      "q2": "How accurate is the frame selection?",
+      "a2": "Seeking is frame-accurate within the limits of the codec's keyframe interval. Use the arrow keys to step one frame at a time forward or backward for precise selection.",
+      "q3": "Can I export multiple frames at once?",
+      "a3": "Yes. Switch to interval mode and the tool will sample frames at a fixed rate (for example one frame per second) and export them as a ZIP archive of PNGs.",
+      "q4": "Which video formats are supported?",
+      "a4": "MP4 (H.264, H.265), WebM (VP8, VP9, AV1), and MOV. Output is PNG by default for lossless quality, with JPG available when you need a smaller file."
+    },
+    "stripe-fee-calculator": {
+      "intro": "Calculate Stripe fees online for any transaction amount and currency before you charge a customer or refund an order. ConverterUp's Stripe fee calculator helps freelancers, SaaS founders, and online stores see the exact processing cost, the net amount they will receive, and the gross amount needed to net a target sum. Enter the amount, pick USD, EUR, GBP, or BRL, and review the breakdown instantly. All math runs in your browser using the public Stripe pricing tables, so no transaction or customer information is ever logged.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "Which Stripe pricing tiers does the calculator cover?",
+      "a1": "Standard online card pricing: 2.9 % + $0.30 in the US, 1.5 % + €0.25 for European cards in the EU, 1.4 % + 20 p in the UK, and 3.99 % + R$0.39 in Brazil. International card surcharges can be toggled on.",
+      "q2": "Does it support reverse calculations?",
+      "a2": "Yes. Switch to receive mode, enter the amount you want to land in your account, and the tool will tell you exactly how much to charge so the net matches your target after fees.",
+      "q3": "Are subscription or invoice fees included?",
+      "a3": "The default view shows one-time card payments. You can enable Stripe Billing's extra 0.5 % fee on recurring charges or invoice fees in the advanced options.",
+      "q4": "Are my transaction amounts stored anywhere?",
+      "a4": "No. Calculations happen client-side in your browser. ConverterUp does not log inputs and there is no server endpoint receiving the values you type."
+    },
+    "text-repeater": {
+      "intro": "Repeat text online to generate placeholder content, fill forms in bulk, or stress-test layouts with long strings. ConverterUp's text repeater accepts any input and duplicates it the number of times you specify, with optional separators such as space, comma, newline, or a custom delimiter. It is useful for QA engineers checking input limits, developers seeding databases, and writers creating long-form drafts. The text is processed entirely in your browser, so confidential prompts, internal copy, or test data never leave your machine.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "Is there a maximum number of repetitions?",
+      "a1": "The interface allows up to 100,000 repetitions. Beyond that, browsers may struggle to render the result. For very large outputs, copy in batches or paste directly into a text editor.",
+      "q2": "Which separators are available?",
+      "a2": "Space, comma, semicolon, newline, tab, and a custom field where you can type any character or string. Leave the separator empty to concatenate without any divider.",
+      "q3": "Can I include line breaks in the input?",
+      "a3": "Yes. Multi-line input is preserved exactly as typed and each repetition reproduces the full block. Combined with the newline separator, this creates well-formatted lists or paragraphs.",
+      "q4": "Does it work with non-Latin characters?",
+      "a4": "Yes. The repeater is Unicode-safe and handles Portuguese accents, Spanish characters, Cyrillic, CJK, emoji, and right-to-left scripts without corruption."
+    },
+    "vtt-to-srt": {
+      "intro": "Convert VTT to SRT subtitles online to make captions compatible with media players, editors, and platforms that reject WebVTT. ConverterUp's VTT to SRT converter parses cue numbers, timestamps, and styling, then rewrites them in the SRT format used by tools like VLC, Premiere Pro, and most TV media players. It is helpful for video editors importing browser-recorded captions and for translators delivering subtitle files to clients. Conversion runs locally in your browser, so dialogue from unreleased videos never gets uploaded.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "What are the main differences between VTT and SRT?",
+      "a1": "VTT uses a dot before milliseconds (00:00:01.500) while SRT uses a comma (00:00:01,500). VTT also supports inline styling and a WEBVTT header which SRT does not, so styling is stripped during conversion.",
+      "q2": "Will my cue styling and positioning be preserved?",
+      "a2": "Plain text is kept intact, but VTT-specific cues such as line position, alignment, and CSS classes are removed because SRT does not support them. The result is clean, universally compatible subtitles.",
+      "q3": "Can I convert multiple files at once?",
+      "a3": "Yes. Drop several .vtt files together and the tool will produce a ZIP archive containing each converted .srt with the same base name.",
+      "q4": "Is there a file size limit?",
+      "a4": "Up to 10 MB per VTT file, which is enough for a 4-hour film with hundreds of cues. Most subtitle files are well under 1 MB."
+    },
+    "json-viewer": {
+      "intro": "Format and validate JSON online with syntax highlighting, expandable trees, and instant error reporting. ConverterUp's JSON viewer is built for backend developers, API consumers, and data analysts who need to inspect responses, beautify minified payloads, or quickly minify JSON before pasting it into a config file. Drop a file or paste the text, expand and collapse nested objects, and copy the prettified or compact result. The JSON is parsed locally in your browser, so private API responses, tokens, and customer data never reach a remote server.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How are JSON errors reported?",
+      "a1": "Invalid JSON is highlighted at the exact line and column where the parser failed, with a short description such as unexpected token or trailing comma. Fix the issue and the tree view updates automatically.",
+      "q2": "What is the maximum JSON size?",
+      "a2": "Files up to 25 MB parse smoothly on most laptops. Above that, the tree view may become slow because the browser has to render thousands of nodes. Use minify mode for very large payloads.",
+      "q3": "Does it support JSON5 or comments?",
+      "a3": "No. The viewer enforces strict JSON per RFC 8259, so trailing commas, single quotes, and comments are flagged as errors. Use a JSON5 converter first if you need that flexibility.",
+      "q4": "Is my JSON sent to a server?",
+      "a4": "No. Parsing, formatting, and minification all run client-side. ConverterUp has no logging endpoint for JSON content, which is critical when debugging payloads with credentials or PII."
+    },
+    "hex-to-decimal": {
+      "intro": "Convert hex to decimal online and switch between hexadecimal, decimal, binary, and octal in a single view. ConverterUp's number base converter is a quick reference for embedded developers, low-level programmers, and students working through assembly or networking exercises. Type a value in any base and the other three update instantly, with optional support for color hex codes that also display the matching RGB triplet. Calculations run in your browser, so values never leave your machine and the tool works offline once the page is cached.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "Does the converter handle negative numbers?",
+      "a1": "Yes. Negative decimals are converted using two's complement at 8, 16, 32, or 64 bits, which you can pick in the options. This matches how negative integers appear in C, Go, and most low-level languages.",
+      "q2": "What is the maximum value supported?",
+      "a2": "JavaScript safely handles integers up to 2^53 - 1. For larger values switch to BigInt mode, which supports arbitrary precision but rounds floating-point input to the nearest integer.",
+      "q3": "Can I convert color codes?",
+      "a3": "Yes. Enter a hex like #2E5C55 and the tool shows the matching RGB(46, 92, 85) and HSL values, plus a color preview swatch. The reverse direction also works from RGB to hex.",
+      "q4": "Are floating-point numbers supported?",
+      "a4": "Yes. Floats convert across decimal, binary scientific notation, and IEEE-754 hex representation, useful for debugging serialized numbers in network protocols or shaders."
+    },
+    "html-minifier": {
+      "intro": "Minify HTML online to reduce page weight, save bandwidth, and improve Core Web Vitals scores. ConverterUp's HTML minifier removes whitespace, comments, redundant attributes, and unnecessary quotes while keeping the document structurally valid. Front-end developers and static-site builders can paste their template, click minify, and ship a smaller payload to production. Minification runs in your browser using a deterministic parser, so proprietary markup, internal templates, and unreleased landing pages stay completely private.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How much can HTML usually be minified?",
+      "a1": "Typical reductions are 15-30 % for hand-written HTML and up to 50 % for documents with heavy whitespace and HTML comments. Combine with gzip or brotli compression for additional savings on the wire.",
+      "q2": "Does minification break inline JavaScript or CSS?",
+      "a2": "No. Inline scripts and styles are preserved verbatim by default. Enable the aggressive option to also minify them, which collapses whitespace inside script and style tags.",
+      "q3": "Will conditional comments and IE hacks be kept?",
+      "a3": "Yes. Conditional comments such as <!--[if IE]> are detected and preserved because they carry browser-specific logic. Standard comments without semantic meaning are stripped.",
+      "q4": "What is the maximum HTML size?",
+      "a4": "Documents up to 5 MB are processed in well under a second. Larger files still work but the editor may feel sluggish; consider minifying as part of your build pipeline for production sites."
+    },
+    "css-minifier": {
+      "intro": "Minify CSS online to ship smaller stylesheets, reduce render-blocking time, and improve Lighthouse performance scores. ConverterUp's CSS minifier strips whitespace, removes comments, shortens hex colors, merges duplicate rules, and produces a compact output ready to deploy. Front-end developers, theme authors, and WordPress users can paste a stylesheet, copy the minified result, and serve it from their site or CDN. The processing happens entirely in your browser, so internal design systems and client stylesheets are never uploaded to a third party.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How much can CSS usually be reduced?",
+      "a1": "Expect 20-40 % size reduction on typical stylesheets. Combined with gzip or brotli compression on the server, most sites end up serving CSS under 30 KB even for full design systems.",
+      "q2": "Are CSS variables and modern features supported?",
+      "a2": "Yes. Custom properties, calc(), nested at-rules, container queries, and CSS Layers are all preserved. Vendor prefixes are kept untouched so cross-browser compatibility is not affected.",
+      "q3": "Does it remove unused selectors?",
+      "a3": "No. The minifier focuses on safe size reduction. Removing unused selectors requires knowing which HTML actually uses them, which only a tool like PurgeCSS can do during build time.",
+      "q4": "What is the maximum stylesheet size?",
+      "a4": "Up to 10 MB per file, which covers any realistic design system. Most production stylesheets are under 200 KB before minification."
+    },
+    "uuid-generator": {
+      "intro": "Generate UUID v4 identifiers online for database keys, idempotency tokens, request IDs, and session tracking. ConverterUp's UUID generator produces single or bulk identifiers using the browser's cryptographically secure random source, so collisions are statistically impossible. Backend developers, QA engineers, and devops teams can grab a fresh batch in seconds and paste them into seed data or configuration files. Generation runs locally with no server round-trip, which guarantees that the IDs you receive are not logged, replayed, or reused anywhere outside your machine.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "Are these UUIDs safe to use as primary keys?",
+      "a1": "Yes. UUID v4 has 122 bits of randomness from a cryptographically secure source, giving a collision probability low enough to be ignored at internet scale. They are widely used as primary keys in PostgreSQL, MongoDB, and DynamoDB.",
+      "q2": "How many UUIDs can I generate at once?",
+      "a2": "Up to 10,000 per batch, which is enough for most seeding tasks. The output appears as a list you can copy with one click or download as a TXT or CSV file.",
+      "q3": "Can I generate other UUID versions?",
+      "a3": "The tool focuses on v4 because it is the most common in application code. Switch the format option to lowercase or uppercase, with or without hyphens, depending on your storage requirements.",
+      "q4": "Are the UUIDs cryptographically secure?",
+      "a4": "Yes. They come from the browser's crypto.getRandomValues API, which is suitable for security tokens, session identifiers, and any case where guessability matters."
+    },
+    "base64-decode": {
+      "intro": "Decode Base64 strings online back to plain text, JSON, or images, with automatic detection of data URIs. ConverterUp's Base64 decoder is useful for inspecting JWT payloads, debugging API responses, decoding email attachments, and extracting embedded images from CSS or HTML. Paste the encoded string, see the result instantly, and copy the text or download the decoded image. The decoding runs entirely in your browser, so sensitive tokens, customer payloads, and private images never get logged or transmitted to a remote server.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "Does it decode JWT tokens?",
+      "a1": "It decodes the Base64URL parts, which is exactly what JWT uses for header and payload. Paste the full token and ConverterUp displays the JSON header, JSON payload, and signature segment for inspection.",
+      "q2": "What is the maximum input size?",
+      "a2": "Up to 25 MB of encoded text. Decoded output is roughly 75 % of that size since Base64 inflates content by about a third.",
+      "q3": "Can it detect images automatically?",
+      "a3": "Yes. If the decoded bytes start with a known image header (PNG, JPG, GIF, WebP) or the input is a data URI, the tool shows a preview and offers a download button alongside the raw text view.",
+      "q4": "Is the input sent to a server?",
+      "a4": "No. All decoding happens client-side using the browser's atob and TextDecoder APIs. ConverterUp does not have an endpoint that receives Base64 strings, which matters when the encoded data contains credentials."
+    },
+    "case-converter": {
+      "intro": "Convert text case online between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, PascalCase, CONSTANT_CASE, and dot.case. ConverterUp's case converter is a fast helper for developers renaming variables, copywriters cleaning headlines, and SEO specialists normalizing slugs. Paste your input, click the format you need, and copy the result with one tap. The text is processed entirely in your browser, so blog drafts, code snippets, and internal product names never leave your device or get logged on a third-party server.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "How does Title Case differ from Sentence case?",
+      "a1": "Title Case capitalizes the first letter of each significant word, like in book titles. Sentence case capitalizes only the first letter of the sentence and proper nouns, which is the standard for body copy.",
+      "q2": "Does case conversion preserve numbers and punctuation?",
+      "a2": "Yes. Digits, punctuation, and emoji are kept untouched. The tool only changes letter casing and adjusts separators (underscore, hyphen, dot) when converting to programmer-friendly cases.",
+      "q3": "Does it handle Portuguese and Spanish accents correctly?",
+      "a3": "Yes. The converter is fully Unicode-aware, so accented letters such as á, ã, ç, ñ, and ü keep their diacritics and convert their case correctly in either direction.",
+      "q4": "Is there a maximum text length?",
+      "a4": "Up to 1 MB of plain text, which equals roughly 200,000 words. The transformation is instant for any realistic input thanks to native browser string APIs."
+    },
+    "csv-to-json": {
+      "intro": "Convert CSV to JSON online with support for custom delimiters, quoted fields, and configurable headers. ConverterUp's CSV to JSON converter is built for analysts importing spreadsheets into APIs, developers seeding databases, and product managers turning exports from Notion or Google Sheets into structured data. Paste a CSV or upload a file, pick the delimiter and header options, and download the resulting JSON array or copy it to the clipboard. Parsing runs in your browser using a streaming RFC 4180 parser, so customer lists and confidential exports never reach a third-party server.",
+      "faqHeading": "Frequently asked questions",
+      "q1": "Which delimiters are supported?",
+      "a1": "Comma, semicolon, tab, pipe, and a custom field where you can type any single character. Auto-detect inspects the first lines and picks the delimiter that produces the most consistent column count.",
+      "q2": "How are quoted fields and escaped quotes handled?",
+      "a2": "ConverterUp follows RFC 4180: fields wrapped in double quotes can contain commas and newlines, and a literal double quote inside a quoted field is escaped as two double quotes. Excel and Google Sheets use the same rules.",
+      "q3": "What is the maximum CSV size?",
+      "a3": "Up to 50 MB per file. The streaming parser keeps memory usage low, so even files with hundreds of thousands of rows convert without crashing the browser tab.",
+      "q4": "Can I get an array of objects instead of arrays?",
+      "a4": "Yes. Enable the header option and the first row is used as JSON keys, producing an array of objects. Disable it to get an array of arrays, useful when the source has no header or you want positional access."
+    }
+  },
+  "Convert": {
+    "badge": "Free Converter",
+    "metaTitle": "Convert {from} to {to} Online — Free, Private, No Upload",
+    "metaDescription": "Convert {from} files to {to} instantly in your browser. 100% private, no upload, no signup. Free online {from} to {to} converter.",
+    "h1": "Convert {from} to {to} Online",
+    "intro": "Turn {from} files into {to} directly in your browser using ConverterUp. There is no upload, no waiting in a queue, and no account required — your files stay on your device while WebAssembly does the work locally. Adjust quality and dimensions where supported, then download the result. The output keeps the visual fidelity you'd expect from a desktop app while running entirely in the browser tab.",
+    "cta": "Convert {from} to {to} now",
+    "ctaHeading": "Ready to convert {from} to {to}?",
+    "ctaDesc": "Open the tool, drop your file, and download the result. No upload, no signup, no watermarks.",
+    "howToHeading": "How to convert {from} to {to}",
+    "stepLabel": "Step",
+    "step1Title": "Open the converter",
+    "step1Text": "Click the button to open the {from} to {to} tool. It loads instantly — no install, no signup.",
+    "step2Title": "Drop your {from} file",
+    "step2Text": "Drag your {from} file into the upload area or click to browse. The file stays in your browser memory only.",
+    "step3Title": "Download {to}",
+    "step3Text": "The conversion runs locally and finishes in seconds. Click download to save the {to} file to your device.",
+    "faqHeading": "Frequently asked questions",
+    "q1": "Is the {from} to {to} conversion really free?",
+    "a1": "Yes. ConverterUp is fully free, with no signup, no watermarks, and no daily quota for the {from} to {to} converter. We support the project through unobtrusive ads.",
+    "q2": "Are my {from} files uploaded to a server?",
+    "a2": "No. Conversion runs in your browser using WebAssembly. The {from} bytes never leave your device, and we have no upload endpoint at all.",
+    "q3": "What is the maximum file size?",
+    "a3": "For {from} input, the soft cap is 50 MB for images and 500 MB for video. Practical performance depends on your device's RAM.",
+    "relatedHeading": "Related conversions",
+    "trust1": "100% private",
+    "trust2": "No upload",
+    "trust3": "No signup",
+    "trust4": "Free forever"
+  },
+  "Internal": {
+    "relatedGuides": "Related Guides",
+    "moreTools": "More Tools",
+    "popularConversions": "Popular Conversions",
+    "viewAll": "View All"
   }
 }

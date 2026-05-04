@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Crop, ImageIcon, Lock, Minimize2, Music, Video } from "lucide-react";
-import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 

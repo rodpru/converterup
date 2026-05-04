@@ -1,5 +1,4 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { updateSession } from "@/lib/supabase/middleware";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
@@ -112,11 +111,12 @@ export async function proxy(request: NextRequest) {
 
   // Static redirects
   const staticRedirects: Record<string, string> = {
-    "/contact": "/",
-    "/report": "/",
-    "/terms-and-conditions": "/",
-    "/data-deletion-policy": "/",
-    "/dmca-of-converterup": "/",
+    "/report": "/contact",
+    "/terms-and-conditions": "/terms",
+    "/data-deletion-policy": "/privacy",
+    "/dmca-of-converterup": "/contact",
+    "/login": "/",
+    "/signup": "/",
   };
   const staticSlug = slug.startsWith("/") ? slug : `/${slug}`;
   if (staticRedirects[staticSlug]) {
@@ -133,9 +133,7 @@ export async function proxy(request: NextRequest) {
     request.cookies.set("NEXT_LOCALE", "en");
   }
 
-  // 3. Run next-intl middleware, then merge Supabase auth cookies onto its response
-  const intlResponse = intlMiddleware(request);
-  return await updateSession(request, intlResponse);
+  return intlMiddleware(request);
 }
 
 export const config = {

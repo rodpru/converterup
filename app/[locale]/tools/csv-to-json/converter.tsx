@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -142,30 +141,10 @@ function parseCsv(
 }
 
 export function CsvToJsonConverter() {
-  return (
-    <ToolGate toolName="csv-to-json">
-      {({ gatedDownload, trackStarted }) => (
-        <CsvToJsonContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function CsvToJsonContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [input, setInput] = useState("");
   const [delimiterType, setDelimiterType] = useState<DelimiterType>("comma");
   const [customDelimiter, setCustomDelimiter] = useState("");
   const [firstRowIsHeader, setFirstRowIsHeader] = useState(true);
-  const hasTrackedStarted = useRef(false);
   const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -174,13 +153,6 @@ function CsvToJsonContent({
     () => parseCsv(input, delimiter, firstRowIsHeader),
     [input, delimiter, firstRowIsHeader],
   );
-
-  const trackStart = useCallback(() => {
-    if (!hasTrackedStarted.current) {
-      trackStarted();
-      hasTrackedStarted.current = true;
-    }
-  }, [trackStarted]);
 
   const handleFileUpload = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -192,7 +164,6 @@ function CsvToJsonContent({
         const text = ev.target?.result;
         if (typeof text === "string") {
           setInput(text);
-          trackStart();
         }
       };
       reader.readAsText(file);
@@ -201,43 +172,39 @@ function CsvToJsonContent({
         fileInputRef.current.value = "";
       }
     },
-    [trackStart],
+    [],
   );
 
   const handleCopy = useCallback(async () => {
     if (!result.json) return;
-    await gatedDownload(async () => {
-      try {
-        await navigator.clipboard.writeText(result.json);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      } catch {
-        const textarea = document.createElement("textarea");
-        textarea.value = result.json;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      }
-    });
-  }, [result.json, gatedDownload]);
+    try {
+      await navigator.clipboard.writeText(result.json);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = result.json;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }, [result.json]);
 
   const handleDownload = useCallback(async () => {
     if (!result.json) return;
-    await gatedDownload(() => {
-      const blob = new Blob([result.json], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "converted.json";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }, { data: new Blob([result.json], { type: "application/json" }), filename: "converted.json" });
-  }, [result.json, gatedDownload]);
+    const blob = new Blob([result.json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "converted.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }, [result.json]);
 
   return (
     <>
@@ -308,10 +275,7 @@ function CsvToJsonContent({
               <textarea
                 id="csv-input"
                 value={input}
-                onChange={(e) => {
-                  setInput(e.target.value);
-                  trackStart();
-                }}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="name,email,age&#10;John,john@example.com,30&#10;Jane,jane@example.com,25"
                 rows={6}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-mono text-sm resize-y min-h-[44px]"

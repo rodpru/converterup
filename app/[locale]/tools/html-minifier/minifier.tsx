@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Check, ClipboardCopy, Code, Download, Minimize2 } from "lucide-react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const jsonLdSchema = {
   "@context": "https://schema.org",
@@ -49,29 +48,9 @@ function formatBytes(bytes: number): string {
 }
 
 export function HtmlMinifier() {
-  return (
-    <ToolGate toolName="html-minifier">
-      {({ gatedDownload, trackStarted }) => (
-        <HtmlMinifierContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function HtmlMinifierContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [copied, setCopied] = useState(false);
-  const hasTrackedStarted = useRef(false);
 
   const originalSize = new Blob([input]).size;
   const minifiedSize = new Blob([output]).size;
@@ -87,38 +66,34 @@ function HtmlMinifierContent({
 
   const handleCopy = useCallback(async () => {
     if (!output) return;
-    await gatedDownload(async () => {
-      try {
-        await navigator.clipboard.writeText(output);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      } catch {
-        const textarea = document.createElement("textarea");
-        textarea.value = output;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      }
-    });
-  }, [output, gatedDownload]);
+    try {
+      await navigator.clipboard.writeText(output);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = output;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }, [output]);
 
   const handleDownload = useCallback(async () => {
     if (!output) return;
-    await gatedDownload(() => {
-      const blob = new Blob([output], { type: "text/html" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "minified.html";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }, { data: new Blob([output], { type: "text/html" }), filename: "minified.html" });
-  }, [output, gatedDownload]);
+    const blob = new Blob([output], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "minified.html";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, [output]);
 
   return (
     <>
@@ -166,20 +141,7 @@ function HtmlMinifierContent({
               <textarea
                 id="html-input"
                 value={input}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setInput(val);
-                  if (val.length === 1 && !hasTrackedStarted.current) {
-                    trackStarted();
-                    hasTrackedStarted.current = true;
-                  }
-                }}
-                onPaste={() => {
-                  if (!hasTrackedStarted.current) {
-                    trackStarted();
-                    hasTrackedStarted.current = true;
-                  }
-                }}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Paste your HTML code here..."
                 rows={8}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-mono text-sm resize-y min-h-[44px]"

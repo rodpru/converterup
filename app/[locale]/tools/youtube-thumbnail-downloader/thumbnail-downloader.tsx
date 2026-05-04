@@ -2,9 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, Download, ImageIcon, Link2, Loader2 } from "lucide-react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const THUMBNAIL_QUALITIES = [
   { key: "maxresdefault", label: "Max Resolution", width: 1280, height: 720 },
@@ -76,48 +75,15 @@ async function checkImageExists(url: string): Promise<boolean> {
   });
 }
 
-async function downloadThumbnail(url: string, filename: string) {
-  const response = await fetch(url);
-  const blob = await response.blob();
-  const blobUrl = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = blobUrl;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(blobUrl);
-}
-
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function YouTubeThumbnailDownloader() {
-  return (
-    <ToolGate toolName="youtube-thumbnail-downloader">
-      {({ gatedDownload, trackStarted }) => (
-        <YouTubeThumbnailDownloaderContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function YouTubeThumbnailDownloaderContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [url, setUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
   const [thumbnails, setThumbnails] = useState<ThumbnailResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [downloadingKey, setDownloadingKey] = useState<string | null>(null);
-  const hasTrackedStarted = useRef(false);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -135,10 +101,6 @@ function YouTubeThumbnailDownloaderContent({
 
       setVideoId(id);
       setLoading(true);
-      if (!hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
 
       const results: ThumbnailResult[] = [];
 
@@ -164,7 +126,7 @@ function YouTubeThumbnailDownloaderContent({
       setThumbnails(ordered);
       setLoading(false);
     },
-    [url, trackStarted],
+    [url],
   );
 
   const handleDownload = useCallback(
@@ -174,22 +136,20 @@ function YouTubeThumbnailDownloaderContent({
         const filename = `yt-thumbnail-${videoId}-${thumb.key}.jpg`;
         const response = await fetch(thumb.url);
         const blob = await response.blob();
-        await gatedDownload(() => {
-          const blobUrl = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = blobUrl;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(blobUrl);
-        }, { data: blob, filename });
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(blobUrl);
       } catch {
         setError("Failed to download thumbnail. Please try again.");
       }
       setDownloadingKey(null);
     },
-    [videoId, gatedDownload],
+    [videoId],
   );
 
   const availableThumbnails = thumbnails.filter((t) => t.exists);

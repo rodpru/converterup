@@ -1,8 +1,8 @@
+import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { getAllArticles } from "@/lib/blog";
-import { ArrowRight } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 import { generateAlternates } from "@/lib/seo";
 
 export async function generateMetadata({

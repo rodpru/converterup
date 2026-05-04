@@ -11,7 +11,6 @@ import {
 import { useCallback, useRef, useState } from "react";
 
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/webp", "image/avif"];
 const ACCEPTED_EXTENSIONS = ".png,.jpg,.jpeg,.webp,.avif";
@@ -67,25 +66,6 @@ function getFileExtension(mimeType: string): string {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ImageCompressor() {
-  return (
-    <ToolGate toolName="image-compressor">
-      {({ gatedDownload, trackStarted }) => (
-        <ImageCompressorContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function ImageCompressorContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [quality, setQuality] = useState(75);
@@ -95,7 +75,6 @@ function ImageCompressorContent({
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const hasTrackedStarted = useRef(false);
 
   const resetState = useCallback(() => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -119,12 +98,8 @@ function ImageCompressorContent({
 
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
-      if (!hasTrackedStarted.current) {
-        trackStarted();
-        hasTrackedStarted.current = true;
-      }
     },
-    [resetState, trackStarted],
+    [resetState],
   );
 
   const handleDrop = useCallback(
@@ -221,15 +196,13 @@ function ImageCompressorContent({
 
   const handleDownload = useCallback(async () => {
     if (!result) return;
-    await gatedDownload(() => {
-      const a = document.createElement("a");
-      a.href = result.compressedUrl;
-      a.download = result.fileName;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }, { data: result.compressedBlob, filename: result.fileName });
-  }, [result, gatedDownload]);
+    const a = document.createElement("a");
+    a.href = result.compressedUrl;
+    a.download = result.fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }, [result]);
 
   const reductionPercent =
     result && result.originalSize > 0

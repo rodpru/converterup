@@ -13,7 +13,6 @@ import {
 import QRCode from "qrcode";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
-import { ToolGate } from "@/components/tool-gate";
 
 const SIZE_OPTIONS = [
   { value: 256, label: "256px" },
@@ -55,28 +54,8 @@ const jsonLdSchema = {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function QRCodeGenerator() {
-  return (
-    <ToolGate toolName="qr-code-generator">
-      {({ gatedDownload, trackStarted }) => (
-        <QRCodeGeneratorContent
-          gatedDownload={gatedDownload}
-          trackStarted={trackStarted}
-        />
-      )}
-    </ToolGate>
-  );
-}
-
-function QRCodeGeneratorContent({
-  gatedDownload,
-  trackStarted,
-}: {
-  gatedDownload: (downloadFn: () => void | Promise<void>, persistable?: { data: Blob | string; filename: string }) => Promise<void>;
-  trackStarted: () => void;
-}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
-  const hasTrackedStarted = useRef(false);
   const [text, setText] = useState("");
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#FFFFFF");
@@ -192,19 +171,17 @@ function QRCodeGeneratorContent({
 
       const dataUrl = finalCanvas.toDataURL("image/png");
       const filename = `qrcode-${size}px.png`;
-      await gatedDownload(() => {
-        const a = document.createElement("a");
-        a.href = dataUrl;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, { data: dataUrl, filename });
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     } catch {
       setError("Failed to download QR code. Please try again.");
     }
     setDownloading(false);
-  }, [text, size, bgColor, gatedDownload]);
+  }, [text, size, bgColor]);
 
   return (
     <>
@@ -251,14 +228,7 @@ function QRCodeGeneratorContent({
                   <Type className="absolute left-4 top-4 w-4 h-4 text-[#71717A]" />
                   <textarea
                     value={text}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      setText(val);
-                      if (val.length === 1 && !hasTrackedStarted.current) {
-                        trackStarted();
-                        hasTrackedStarted.current = true;
-                      }
-                    }}
+                    onChange={(e) => setText(e.target.value)}
                     placeholder="Enter text or URL to encode..."
                     rows={3}
                     className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm resize-none"

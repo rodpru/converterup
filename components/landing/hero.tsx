@@ -1,10 +1,10 @@
 import { ArrowRight } from "lucide-react";
-import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import {
-  HeroReveal,
-  FormatMorphCard,
   FloatingFormats,
+  FormatMorphCard,
+  HeroReveal,
 } from "./hero-animations";
 
 export function Hero() {

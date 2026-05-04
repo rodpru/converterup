@@ -1,5 +1,5 @@
 import { getArticleBySlug, getArticleSlugs } from "@/lib/blog";
-import { generateOgImage, ogSize, ogContentType } from "@/lib/og-image";
+import { generateOgImage, ogContentType, ogSize } from "@/lib/og-image";
 
 export const alt = "ConverterUp Blog";
 export const size = ogSize;

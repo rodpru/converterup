@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { getArticleBySlug, getRelatedArticles } from "@/lib/blog";
 import { ArticleRenderer } from "./article-renderer";
 

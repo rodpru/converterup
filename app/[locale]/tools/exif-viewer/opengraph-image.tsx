@@ -1,4 +1,4 @@
-import { generateOgImage, ogSize, ogContentType } from "@/lib/og-image";
+import { generateOgImage, ogContentType, ogSize } from "@/lib/og-image";
 
 export const alt = "EXIF Data Viewer & Remover — ConverterUp";
 export const size = ogSize;

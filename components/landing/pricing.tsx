@@ -1,48 +1,21 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function Pricing() {
   const t = useTranslations("Pricing");
 
-  const plans = [
-    {
-      name: t("freeName"),
-      price: t("freePrice"),
-      period: t("freePeriod"),
-      description: t("freeDescription"),
-      features: [
-        t("freeFeature1"),
-        t("freeFeature2"),
-        t("freeFeature3"),
-        t("freeFeature4"),
-        t("freeFeature5"),
-      ],
-      cta: t("freeCta"),
-      href: "/signup",
-      highlighted: false,
-    },
-    {
-      name: t("unlimitedName"),
-      price: t("unlimitedPrice"),
-      period: t("unlimitedPeriod"),
-      description: t("unlimitedDescription"),
-      features: [
-        t("unlimitedFeature1"),
-        t("unlimitedFeature2"),
-        t("unlimitedFeature3"),
-        t("unlimitedFeature4"),
-        t("unlimitedFeature5"),
-      ],
-      cta: t("unlimitedCta"),
-      href: "/signup",
-      highlighted: true,
-    },
+  const features = [
+    t("freeFeature1"),
+    t("freeFeature2"),
+    t("freeFeature3"),
+    t("freeFeature4"),
+    t("freeFeature5"),
   ];
 
   return (
@@ -70,69 +43,52 @@ export function Pricing() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.12, ease }}
-              className={`relative p-8 sm:p-10 rounded-2xl border transition-all duration-300 ${
-                plan.highlighted
-                  ? "border-primary/20 bg-card hover:border-primary/40 hover:shadow-[0_0_40px_rgba(45,212,191,0.08)]"
-                  : "border-[#2A2535] bg-card hover:border-[#2A2535]/80"
-              }`}
-            >
-              {plan.highlighted && (
-                <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-[#0D9488] via-[#7C3AED] to-[#F43F5E] rounded-full" />
-              )}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease }}
+          className="relative max-w-md mx-auto p-8 sm:p-10 rounded-2xl border border-primary/20 bg-card hover:border-primary/40 hover:shadow-[0_0_40px_rgba(45,212,191,0.08)] transition-all duration-300"
+        >
+          <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-[#0D9488] via-[#7C3AED] to-[#F43F5E] rounded-full" />
 
-              <div className="mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-                    {plan.name}
-                  </span>
-                  {plan.highlighted && (
-                    <Sparkles className="w-3.5 h-3.5 text-primary" />
-                  )}
-                </div>
-                <div className="flex items-baseline gap-1.5 mb-2">
-                  <span className="font-mono text-5xl sm:text-6xl font-bold text-foreground">
-                    {plan.price}
-                  </span>
-                  <span className="font-mono text-sm text-muted-foreground">
-                    / {plan.period}
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {plan.description}
-                </p>
-              </div>
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                {t("freeName")}
+              </span>
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+            </div>
+            <div className="flex items-baseline gap-1.5 mb-2">
+              <span className="font-mono text-5xl sm:text-6xl font-bold text-foreground">
+                {t("freePrice")}
+              </span>
+              <span className="font-mono text-sm text-muted-foreground">
+                / {t("freePeriod")}
+              </span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              {t("freeDescription")}
+            </p>
+          </div>
 
-              <ul className="space-y-3 mb-10">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5">
-                    <Check className="w-4 h-4 mt-0.5 shrink-0 text-primary/70" />
-                    <span className="text-sm text-foreground/70">{f}</span>
-                  </li>
-                ))}
-              </ul>
+          <ul className="space-y-3 mb-10">
+            {features.map((f) => (
+              <li key={f} className="flex items-start gap-2.5">
+                <Check className="w-4 h-4 mt-0.5 shrink-0 text-primary/70" />
+                <span className="text-sm text-foreground/70">{f}</span>
+              </li>
+            ))}
+          </ul>
 
-              <Link
-                href={plan.href}
-                className={`flex items-center justify-center w-full h-12 rounded-lg font-medium text-sm uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 min-h-[44px] ${
-                  plan.highlighted
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)]"
-                    : "border border-[#2A2535] text-foreground hover:bg-[#1C1825] hover:border-primary/20"
-                }`}
-              >
-                {plan.cta}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+          <Link
+            href="/tools"
+            className="flex items-center justify-center w-full h-12 rounded-lg font-medium text-sm uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 min-h-[44px] bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)]"
+          >
+            {t("freeCta")}
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

@@ -6,8 +6,6 @@
     "pricing": "Preços",
     "tools": "Ferramentas",
     "blog": "Blog",
-    "dashboard": "Painel",
-    "signIn": "Entrar",
     "startConverting": "Começar a Converter"
   },
   "Hero": {
@@ -25,7 +23,7 @@
     "zeroData": "Zero Recolha de Dados",
     "offline": "Funciona Offline",
     "private": "Privado e Seguro",
-    "noAds": "Sem Anúncios",
+    "noAds": "100% Grátis",
     "browserNative": "Nativo do Browser"
   },
   "Features": {
@@ -79,7 +77,7 @@
     "noUpload": "Sem upload de ficheiros",
     "freeTier": "Plano gratuito",
     "videoSupport": "Suporte a vídeo",
-    "noAds": "Sem anúncios",
+    "noAds": "Grátis para sempre",
     "private": "100% privado",
     "noInstall": "Sem instalação",
     "modernUI": "Interface moderna"
@@ -91,23 +89,13 @@
     "freeName": "Gratuito",
     "freePrice": "$0",
     "freePeriod": "para sempre",
-    "freeDescription": "Para uso casual",
-    "freeFeature1": "3 conversões por dia",
-    "freeFeature2": "Todos os formatos suportados",
-    "freeFeature3": "Controlo total de qualidade",
-    "freeFeature4": "Sem marcas de água",
-    "freeFeature5": "Sem anúncios, nunca",
-    "freeCta": "Começar",
-    "unlimitedName": "Ilimitado",
-    "unlimitedPrice": "$5",
-    "unlimitedPeriod": "mês",
-    "unlimitedDescription": "Para criadores e profissionais",
-    "unlimitedFeature1": "Conversões ilimitadas",
-    "unlimitedFeature2": "Todos os formatos suportados",
-    "unlimitedFeature3": "Controlo total de qualidade",
-    "unlimitedFeature4": "Suporte prioritário",
-    "unlimitedFeature5": "Cancele a qualquer momento",
-    "unlimitedCta": "Ser Ilimitado"
+    "freeDescription": "Para todos",
+    "freeFeature1": "Todos os formatos suportados",
+    "freeFeature2": "Controlo total de qualidade",
+    "freeFeature3": "Sem marcas de água",
+    "freeFeature4": "100% no navegador",
+    "freeFeature5": "Sempre grátis",
+    "freeCta": "Começar"
   },
   "Testimonials": {
     "title": "Adorado por",
@@ -121,7 +109,7 @@
     "quote3": "A conversão de vídeo surpreendeu-me. Tudo acontece no browser, sem esperar por filas de servidor. Revolucionário.",
     "name3": "Aisha Patel",
     "role3": "Editora de Vídeo",
-    "quote4": "Limpo, minimalista, faz exatamente o que diz. Sem anúncios, sem padrões obscuros, sem upsells. Simplesmente funciona.",
+    "quote4": "Limpo, minimalista, faz exatamente o que diz. Sem padrões obscuros, sem upsells, sem tretas. Simplesmente funciona.",
     "name4": "Tom Andersen",
     "role4": "Programador"
   },
@@ -134,13 +122,13 @@
     "q2": "Que formatos são suportados?",
     "a2": "Imagens: PNG, JPG, WebP, AVIF, GIF, TIFF, BMP. Vídeos: MP4, WebM, MKV, AVI, MOV. Extração de áudio: MP3, AAC, WAV, OGG. Estamos constantemente a adicionar mais formatos.",
     "q3": "Como funcionam os preços?",
-    "a3": "Utilizadores gratuitos têm 3 conversões por dia — imagens, vídeos ou áudio. Para conversões ilimitadas, pode fazer upgrade para o plano Ilimitado por $5/mês. Cancele a qualquer momento.",
+    "a3": "O ConverterUp é totalmente gratuito. Existe um limite suave de cerca de 3 conversões por dia para manter tudo rápido, mas sem pagamentos, sem conta e sem registo.",
     "q4": "Existe um limite de tamanho de ficheiro?",
     "a4": "Como o processamento acontece no browser, o limite depende da memória do seu dispositivo. A maioria dos dispositivos modernos suporta ficheiros até 500MB para imagens e 1-2GB para vídeos sem problemas.",
     "q5": "Posso usar no telemóvel?",
     "a5": "Sim! O ConverterUp é totalmente responsivo e otimizado para dispositivos móveis. Todas as funcionalidades de conversão funcionam em smartphones e tablets, embora ficheiros muito grandes possam ter melhor desempenho no desktop.",
     "q6": "Preciso de criar uma conta?",
-    "a6": "Pode usar o ConverterUp sem conta para conversões básicas. Criar uma conta gratuita desbloqueia o acompanhamento diário de conversões e a possibilidade de fazer upgrade para ilimitado."
+    "a6": "Não. O ConverterUp funciona sem qualquer conta ou registo. Todas as conversões acontecem inteiramente no seu browser — basta abrir a ferramenta e começar."
   },
   "CTA": {
     "title": "Pronto para converter",
@@ -178,7 +166,6 @@
     "title2": "Gratuitas",
     "desc": "Utilitários no navegador para imagens, vídeos, código. 100% privado — os arquivos não saem do dispositivo.",
     "freeUses": "3 usos grátis por dia",
-    "unlimited": "— registe-se grátis, ou obtenha ilimitado por $5/mês",
     "search": "Procurar ferramentas...",
     "noResults": "Nenhuma ferramenta encontrada para"
   },
@@ -227,5 +214,463 @@
     "case-converter-desc": "Converta texto entre MAIÚSCULAS, minúsculas, Primeira Maiúscula, camelCase, snake_case, kebab-case e mais. Grátis e instantâneo.",
     "csv-to-json-title": "Converter CSV para JSON Grátis — Converter CSV Online",
     "csv-to-json-desc": "Converta dados CSV para JSON instantaneamente. Suporta delimitadores personalizados, campos entre aspas e linhas de cabeçalho. Grátis e 100% no browser."
+  },
+  "ToolHowTo": {
+    "image-compressor": {
+      "name": "Como Comprimir Imagens Online",
+      "description": "Comprima imagens PNG, JPG, WebP e AVIF para reduzir o tamanho do ficheiro mantendo a qualidade.",
+      "step1": { "name": "Carregue a sua imagem", "text": "Arraste e largue ou clique para selecionar uma imagem PNG, JPG, WebP ou AVIF do seu dispositivo." },
+      "step2": { "name": "Ajuste a qualidade da compressão", "text": "Use o controlo de qualidade para definir o nível de compressão pretendido. Veja o resultado em tempo real." },
+      "step3": { "name": "Descarregue a imagem comprimida", "text": "Clique em descarregar para guardar a imagem comprimida. O ficheiro nunca sai do seu browser." }
+    },
+    "image-resizer": {
+      "name": "Como Redimensionar Imagens Online",
+      "description": "Redimensione imagens para dimensões exatas ou percentagens com controlo da proporção.",
+      "step1": { "name": "Carregue a sua imagem", "text": "Arraste e largue ou clique para selecionar uma imagem do seu dispositivo." },
+      "step2": { "name": "Defina as dimensões pretendidas", "text": "Introduza largura e altura em pixels ou percentagem. Ative ou desative o bloqueio da proporção conforme necessário." },
+      "step3": { "name": "Descarregue a imagem redimensionada", "text": "Clique em descarregar para guardar a imagem redimensionada no seu dispositivo." }
+    },
+    "video-to-gif": {
+      "name": "Como Converter Vídeo para GIF Online",
+      "description": "Converta vídeos MP4, WebM, MOV e AVI para o formato GIF animado.",
+      "step1": { "name": "Carregue o seu vídeo", "text": "Arraste e largue ou selecione um ficheiro de vídeo MP4, WebM, MOV ou AVI." },
+      "step2": { "name": "Configure as opções do GIF", "text": "Ajuste a taxa de fotogramas, largura e selecione a parte do vídeo a converter." },
+      "step3": { "name": "Descarregue o GIF", "text": "Clique em converter e descarregue o seu ficheiro GIF animado." }
+    },
+    "qr-code-generator": {
+      "name": "Como Gerar um Código QR Online",
+      "description": "Crie códigos QR personalizados com cores, tamanhos e níveis de correção de erros à escolha.",
+      "step1": { "name": "Introduza o conteúdo", "text": "Escreva ou cole um URL, texto ou outros dados que pretenda codificar no código QR." },
+      "step2": { "name": "Personalize o código QR", "text": "Escolha cores, tamanho e nível de correção de erros para o seu código QR." },
+      "step3": { "name": "Descarregue o código QR", "text": "Clique em descarregar para guardar o código QR como imagem PNG." }
+    },
+    "youtube-thumbnail-downloader": {
+      "name": "Como Descarregar Miniaturas do YouTube",
+      "description": "Descarregue miniaturas de vídeos do YouTube em todas as resoluções disponíveis.",
+      "step1": { "name": "Cole o URL do YouTube", "text": "Copie e cole o URL do vídeo do YouTube no campo de entrada." },
+      "step2": { "name": "Escolha a resolução", "text": "Selecione entre as resoluções disponíveis: HD, SD, HQ ou MQ." },
+      "step3": { "name": "Descarregue a miniatura", "text": "Clique em descarregar para guardar a imagem da miniatura no seu dispositivo." }
+    },
+    "exif-viewer": {
+      "name": "Como Ver e Remover Dados EXIF de Fotos",
+      "description": "Veja e remova metadados de fotos JPEG, PNG, WebP e TIFF.",
+      "step1": { "name": "Carregue a sua foto", "text": "Arraste e largue ou selecione uma imagem JPEG, PNG, WebP ou TIFF." },
+      "step2": { "name": "Veja os metadados EXIF", "text": "Reveja todos os metadados, incluindo modelo da câmara, coordenadas GPS, data e definições de exposição." },
+      "step3": { "name": "Remova os dados EXIF", "text": "Clique em remover para limpar todos os metadados e descarregar uma cópia limpa da sua foto." }
+    },
+    "color-palette": {
+      "name": "Como Extrair Cores de uma Imagem",
+      "description": "Extraia as cores dominantes e gere uma paleta a partir de qualquer imagem.",
+      "step1": { "name": "Carregue a sua imagem", "text": "Arraste e largue ou selecione uma imagem para analisar." },
+      "step2": { "name": "Veja as cores extraídas", "text": "Veja as cores dominantes extraídas da sua imagem com valores HEX, RGB e HSL." },
+      "step3": { "name": "Copie os valores das cores", "text": "Clique em qualquer cor para copiar o valor HEX, RGB ou HSL para a área de transferência." }
+    },
+    "favicon-generator": {
+      "name": "Como Criar um Favicon a Partir de uma Imagem",
+      "description": "Gere favicons em todos os tamanhos padrão a partir de uma única imagem.",
+      "step1": { "name": "Carregue a imagem de origem", "text": "Arraste e largue ou selecione uma imagem PNG, JPG, WebP ou SVG para usar como favicon." },
+      "step2": { "name": "Pré-visualize todos os tamanhos", "text": "Pré-visualize o seu favicon em todos os tamanhos padrão, de 16x16 a 512x512 pixels." },
+      "step3": { "name": "Descarregue o pacote de favicons", "text": "Descarregue todos os tamanhos do favicon num ficheiro ZIP pronto a adicionar ao seu site." }
+    },
+    "svg-to-png": {
+      "name": "Como Converter SVG para PNG Online",
+      "description": "Converta ficheiros SVG vetoriais em imagens PNG com opções de escala personalizadas.",
+      "step1": { "name": "Carregue o seu ficheiro SVG", "text": "Arraste e largue ou selecione um ficheiro SVG do seu dispositivo." },
+      "step2": { "name": "Escolha a escala e opções", "text": "Selecione a escala de saída (1x, 2x, 3x, 4x) e a cor de fundo." },
+      "step3": { "name": "Descarregue o PNG", "text": "Clique em descarregar para guardar a imagem PNG convertida." }
+    },
+    "image-to-base64": {
+      "name": "Como Converter uma Imagem para Base64",
+      "description": "Codifique imagens como data URIs Base64 para incorporar em HTML, CSS ou JSON.",
+      "step1": { "name": "Carregue a sua imagem", "text": "Arraste e largue ou selecione uma imagem PNG, JPG, WebP, GIF ou SVG." },
+      "step2": { "name": "Obtenha o resultado em Base64", "text": "Veja a string Base64 gerada ou o data URI para a sua imagem." },
+      "step3": { "name": "Copie o resultado", "text": "Clique em copiar para adicionar a string Base64 à área de transferência e usar no seu código." }
+    },
+    "video-frame-extractor": {
+      "name": "Como Extrair Fotogramas de um Vídeo",
+      "description": "Capture fotogramas individuais de ficheiros de vídeo MP4, WebM e MOV.",
+      "step1": { "name": "Carregue o seu vídeo", "text": "Arraste e largue ou selecione um ficheiro de vídeo MP4, WebM ou MOV." },
+      "step2": { "name": "Vá até ao fotograma desejado", "text": "Use a linha temporal para encontrar o fotograma exato que pretende capturar." },
+      "step3": { "name": "Guarde o fotograma", "text": "Clique em capturar para guardar o fotograma como imagem PNG ou JPG." }
+    },
+    "stripe-fee-calculator": {
+      "name": "Como Calcular as Taxas do Stripe",
+      "description": "Calcule as taxas do Stripe para qualquer valor de transação em várias moedas.",
+      "step1": { "name": "Introduza o valor da transação", "text": "Escreva o valor que pretende cobrar ou receber." },
+      "step2": { "name": "Selecione a moeda", "text": "Escolha entre USD, EUR, GBP ou BRL para ver as taxas corretas." },
+      "step3": { "name": "Veja o detalhe das taxas", "text": "Veja a taxa do Stripe, o valor líquido e quanto cobrar para receber um valor específico." }
+    },
+    "text-repeater": {
+      "name": "Como Repetir Texto Várias Vezes",
+      "description": "Repita qualquer texto várias vezes com separadores personalizados.",
+      "step1": { "name": "Introduza o seu texto", "text": "Escreva ou cole o texto que pretende repetir." },
+      "step2": { "name": "Defina repetições e separador", "text": "Escolha quantas vezes repetir e que separador usar entre repetições." },
+      "step3": { "name": "Copie o resultado", "text": "Clique em copiar para adicionar o texto repetido à área de transferência." }
+    },
+    "vtt-to-srt": {
+      "name": "Como Converter Legendas VTT para SRT",
+      "description": "Converta ficheiros de legendas WebVTT para o formato SRT instantaneamente.",
+      "step1": { "name": "Carregue o seu ficheiro VTT", "text": "Arraste e largue ou selecione um ficheiro de legendas WebVTT (.vtt)." },
+      "step2": { "name": "Pré-visualize a conversão", "text": "Reveja as legendas convertidas para garantir que estão corretas." },
+      "step3": { "name": "Descarregue o ficheiro SRT", "text": "Clique em descarregar para guardar o ficheiro de legendas SRT convertido." }
+    },
+    "json-viewer": {
+      "name": "Como Formatar e Validar JSON Online",
+      "description": "Formate, valide e explore dados JSON com destaque de sintaxe.",
+      "step1": { "name": "Cole o seu JSON", "text": "Cole ou escreva os seus dados JSON no editor." },
+      "step2": { "name": "Formate ou minifique", "text": "Clique em formatar para embelezar o JSON ou em minificar para o comprimir. Os erros de validação são destacados." },
+      "step3": { "name": "Copie o resultado", "text": "Clique em copiar para adicionar o JSON formatado à área de transferência." }
+    },
+    "hex-to-decimal": {
+      "name": "Como Converter Hexadecimal para Decimal",
+      "description": "Converta entre hexadecimal, decimal, binário e octal.",
+      "step1": { "name": "Introduza um número", "text": "Escreva um número hexadecimal, decimal, binário ou octal." },
+      "step2": { "name": "Veja todas as conversões", "text": "Veja o número convertido para as quatro bases em simultâneo." },
+      "step3": { "name": "Copie qualquer resultado", "text": "Clique em copiar junto a qualquer conversão para a adicionar à área de transferência." }
+    },
+    "html-minifier": {
+      "name": "Como Minificar Código HTML Online",
+      "description": "Minifique HTML para reduzir o tamanho do ficheiro e melhorar a velocidade da página.",
+      "step1": { "name": "Cole o seu HTML", "text": "Cole ou escreva o seu código HTML no editor." },
+      "step2": { "name": "Clique em minificar", "text": "Carregue no botão minificar para remover espaços, comentários e otimizar o código." },
+      "step3": { "name": "Copie o HTML minificado", "text": "Clique em copiar para adicionar o HTML minificado à área de transferência." }
+    },
+    "css-minifier": {
+      "name": "Como Minificar Folhas de Estilo CSS Online",
+      "description": "Minifique CSS para remover espaços, comentários e otimizar seletores.",
+      "step1": { "name": "Cole o seu CSS", "text": "Cole ou escreva o seu código CSS no editor." },
+      "step2": { "name": "Clique em minificar", "text": "Carregue no botão minificar para comprimir o código CSS." },
+      "step3": { "name": "Copie o CSS minificado", "text": "Clique em copiar para adicionar o CSS minificado à área de transferência." }
+    },
+    "uuid-generator": {
+      "name": "Como Gerar Identificadores UUID v4",
+      "description": "Gere UUIDs v4 individuais ou em massa instantaneamente.",
+      "step1": { "name": "Escolha o modo de geração", "text": "Selecione UUID único ou geração em massa e defina a quantidade." },
+      "step2": { "name": "Gere os UUIDs", "text": "Clique em gerar para criar novos identificadores UUID v4." },
+      "step3": { "name": "Copie os UUIDs", "text": "Clique em copiar para adicionar os UUIDs gerados à área de transferência." }
+    },
+    "base64-decode": {
+      "name": "Como Descodificar Strings Base64",
+      "description": "Descodifique strings Base64 de volta para texto simples ou imagens.",
+      "step1": { "name": "Cole a string Base64", "text": "Cole a sua string codificada em Base64 ou data URI no campo de entrada." },
+      "step2": { "name": "Veja o resultado descodificado", "text": "Veja instantaneamente o texto descodificado ou a pré-visualização da imagem." },
+      "step3": { "name": "Copie ou descarregue", "text": "Copie o texto descodificado ou descarregue a imagem descodificada." }
+    },
+    "case-converter": {
+      "name": "Como Converter Maiúsculas e Minúsculas Online",
+      "description": "Converta texto entre MAIÚSCULAS, minúsculas, Primeira Maiúscula, camelCase, snake_case e mais.",
+      "step1": { "name": "Introduza o seu texto", "text": "Escreva ou cole o texto que pretende converter." },
+      "step2": { "name": "Escolha o formato", "text": "Selecione entre MAIÚSCULAS, minúsculas, Primeira Maiúscula, camelCase, snake_case, kebab-case, PascalCase e mais." },
+      "step3": { "name": "Copie o resultado", "text": "Clique em copiar para adicionar o texto convertido à área de transferência." }
+    },
+    "csv-to-json": {
+      "name": "Como Converter CSV para JSON Online",
+      "description": "Converta dados CSV para o formato JSON com suporte para delimitadores personalizados.",
+      "step1": { "name": "Cole ou carregue dados CSV", "text": "Cole os seus dados CSV ou carregue um ficheiro CSV. Configure o delimitador, se necessário." },
+      "step2": { "name": "Pré-visualize o JSON", "text": "Reveja os dados JSON convertidos com destaque de sintaxe." },
+      "step3": { "name": "Copie ou descarregue o JSON", "text": "Clique em copiar para a área de transferência ou descarregue como ficheiro .json." }
+    }
+  },
+  "ToolSeo": {
+    "image-compressor": {
+      "intro": "Comprima imagens PNG, JPG, WebP e AVIF diretamente no browser sem perda de qualidade visível. O compressor de imagens da ConverterUp foi pensado para designers, programadores e qualquer pessoa que precise de reduzir o tamanho de imagens para sites mais rápidos, anexos de email mais leves ou publicações em redes sociais. Ajuste o controlo de qualidade para encontrar o equilíbrio ideal entre tamanho e nitidez, veja o resultado em tempo real e descarregue o ficheiro comprimido. Os ficheiros nunca saem do seu dispositivo, tudo acontece no browser com WebAssembly, mantendo os originais privados sem filas de upload.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Quanto posso comprimir uma imagem sem perda visível de qualidade?",
+      "a1": "JPG e WebP costumam comprimir entre 60 % e 80 % de qualidade sem diferença visível em fotografias. PNG beneficia menos da alteração de qualidade por ser sem perdas, por isso converta para WebP ou JPG para maiores poupanças.",
+      "q2": "Existe um limite de tamanho de ficheiro?",
+      "a2": "O limite é de 50 MB por imagem. O desempenho prático depende da memória RAM do dispositivo, mas a maioria dos telemóveis e computadores modernos processa imagens de 20 a 30 MB sem problemas.",
+      "q3": "As minhas imagens são enviadas para um servidor?",
+      "a3": "Não. A compressão acontece inteiramente dentro do browser usando WebAssembly. Os bytes da imagem nunca saem do dispositivo e a ConverterUp não tem qualquer endpoint de upload.",
+      "q4": "Que formatos são suportados?",
+      "a4": "Entrada: PNG, JPG/JPEG, WebP, AVIF, BMP, TIFF. Saída: PNG, JPG, WebP, AVIF. Também pode usar o compressor como conversor de formato alterando o formato de saída."
+    },
+    "image-resizer": {
+      "intro": "Redimensione imagens online para dimensões exatas em pixels ou por percentagem, com bloqueio opcional da proporção para evitar distorções. O redimensionador de imagens da ConverterUp é útil para preparar fotografias para artigos de blog, listagens de e-commerce, fotos de perfil ou materiais para impressão que exigem um tamanho específico. Carregue um ficheiro PNG, JPG, WebP ou AVIF, escreva a largura e altura pretendidas e descarregue o resultado em segundos. O redimensionamento corre inteiramente no browser, por isso fotos originais e conteúdos sensíveis nunca saem do seu dispositivo nem entram numa fila de servidor.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Como funciona o bloqueio da proporção?",
+      "a1": "Quando o cadeado está ativo, alterar a largura atualiza a altura proporcionalmente e vice-versa, mantendo a proporção original. Desative-o quando quiser propositadamente esticar ou achatar a imagem para dimensões não proporcionais.",
+      "q2": "Qual é o tamanho máximo que posso redimensionar?",
+      "a2": "Até 50 MB por ficheiro. Imagens de muito alta resolução (acima de 8000 pixels num dos lados) podem ser lentas em telemóveis modestos porque a reamostragem corre no CPU.",
+      "q3": "A imagem perde qualidade ao ser redimensionada?",
+      "a3": "A redução é por natureza com perdas, mas a ConverterUp usa reamostragem bicúbica de alta qualidade para manter o resultado nítido. Aumentar a resolução não cria detalhe que não exista, por isso só amplie quando for mesmo necessário.",
+      "q4": "Que formatos são suportados?",
+      "a4": "Entrada e saída incluem PNG, JPG/JPEG, WebP e AVIF. O formato de saída assume por defeito o do original mas pode ser alterado para converter e redimensionar num único passo."
+    },
+    "video-to-gif": {
+      "intro": "Converta vídeo para GIF online a partir de ficheiros MP4, WebM, MOV e AVI sem qualquer upload. A ferramenta de vídeo para GIF da ConverterUp é ideal para criar loops curtos para documentação, demonstrações de produto, reações para redes sociais e plataformas de chat como WhatsApp, Slack ou Discord, incluindo TikTok e Reels. Recorte o segmento que precisa, escolha a taxa de fotogramas e a largura, e descarregue o GIF animado diretamente para o dispositivo. A conversão corre no browser usando FFmpeg compilado para WebAssembly, por isso até clipes privados e gravações de ecrã ficam na sua máquina.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Qual a duração máxima do vídeo de origem?",
+      "a1": "Não há limite fixo, mas GIFs acima dos 10 a 15 segundos tendem a ficar muito grandes. Para clipes mais longos, considere reduzir a largura para 320 a 480 pixels e a taxa de fotogramas para 10 a 12 fps.",
+      "q2": "Qual o tamanho máximo de upload?",
+      "a2": "A ConverterUp aceita ficheiros até 200 MB. A velocidade de processamento depende do CPU e memória do dispositivo, já que o FFmpeg corre localmente.",
+      "q3": "Porque é que o meu GIF fica tão grande?",
+      "a3": "GIF é um formato antigo com compressão fraca. Para reduzir tamanho, baixe a taxa de fotogramas, reduza a largura ou recorte um segmento mais curto. Para usos modernos, exportar em WebP ou MP4 dá ficheiros muito mais pequenos.",
+      "q4": "Que formatos de vídeo são suportados?",
+      "a4": "Entrada: MP4, WebM, MOV, AVI, MKV. Saída: GIF animado. As faixas de áudio são removidas automaticamente porque o GIF não suporta som."
+    },
+    "qr-code-generator": {
+      "intro": "Gere códigos QR online para URLs, texto, credenciais Wi-Fi, cartões de contacto e muito mais. O gerador de códigos QR da ConverterUp permite a profissionais de marketing, donos de restaurantes e programadores criar códigos com cores de fundo e primeiro plano personalizadas, tamanho ajustável e quatro níveis de correção de erros. Escreva ou cole o conteúdo, ajuste a aparência, veja o resultado em tempo real e descarregue um PNG de alta resolução pronto para impressão ou web. Tudo é gerado localmente no browser, por isso URLs e dados pessoais que codifica nunca são registados nem enviados para fora.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Como afeta o nível de correção de erros o código QR?",
+      "a1": "Níveis mais elevados (Q, H) tornam o código legível mesmo quando parcialmente danificado ou tapado por um logótipo, à custa de módulos mais densos. Use L ou M em ecrãs digitais limpos e H para códigos impressos sujeitos a desgaste.",
+      "q2": "Qual a quantidade máxima de dados que posso codificar?",
+      "a2": "Os códigos QR aceitam cerca de 4296 caracteres alfanuméricos ou 2953 bytes. A ConverterUp escolhe a versão mais pequena que acomoda os seus dados; para URLs longos use um encurtador para manter o código legível.",
+      "q3": "Os códigos QR gerados são monitorizados?",
+      "a3": "Não. Os códigos são desenhados inteiramente no browser e nunca são enviados para um servidor. A ConverterUp não insere redirecionamentos de rastreio, por isso o URL lido é exatamente o URL que escreveu.",
+      "q4": "Que formatos de saída estão disponíveis?",
+      "a4": "PNG é o predefinido e funciona em web e impressão. SVG está disponível para casos vetoriais como sobreposição de logótipos e cartazes grandes onde a qualidade tem de escalar sem pixelização."
+    },
+    "youtube-thumbnail-downloader": {
+      "intro": "Descarregue miniaturas do YouTube em todas as resoluções disponíveis a partir de um único URL de vídeo. O descarregador de miniaturas do YouTube da ConverterUp é útil para criadores de conteúdo, jornalistas e formadores que precisam de reutilizar capas para artigos de blog, notas de podcast, vídeos de reação ou edições para TikTok, Reels e WhatsApp. Cole o link, escolha entre HD, SD, HQ ou MQ, e guarde a imagem JPG diretamente no dispositivo. A ferramenta apenas pede o URL público da miniatura ao YouTube, por isso não são necessários dados pessoais, login nem chaves de API.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Que resoluções de miniatura estão disponíveis?",
+      "a1": "HD (1280x720), SD (640x480), HQ (480x360), MQ (320x180) e a predefinida 120x90. Nem todos os vídeos têm a versão HD, sobretudo uploads antigos ou de baixa resolução, e nesses casos é apresentado o tamanho mais próximo.",
+      "q2": "Posso usar estas miniaturas nos meus vídeos ou artigos?",
+      "a2": "As miniaturas estão protegidas por direitos de autor e pertencem a quem as carregou. Use-as ao abrigo de uso legítimo para comentário, notícia ou crítica, ou peça autorização ao criador antes de as reutilizar como capa própria.",
+      "q3": "Funciona com vídeos não listados ou privados?",
+      "a3": "Não. O descarregador apenas obtém miniaturas que o YouTube expõe publicamente. Vídeos não listados com o URL conhecido normalmente funcionam, mas vídeos privados e com restrição de idade não devolvem miniatura.",
+      "q4": "Porque é que a miniatura está desfocada?",
+      "a4": "Se só aparecerem as imagens de menor resolução, é porque quem fez o upload não forneceu uma miniatura HD. Tente a versão HQ (480x360), disponível para quase todos os vídeos, ou amplie a imagem com o redimensionador."
+    },
+    "exif-viewer": {
+      "intro": "Veja e remova metadados EXIF de fotografias online para proteger a sua privacidade antes de partilhar imagens. O visualizador EXIF da ConverterUp lê ficheiros JPEG, PNG, WebP e TIFF e mostra modelo da câmara, lente, definições de exposição, datas e coordenadas GPS que possam ter sido adicionadas automaticamente. Fotógrafos podem auditar o seu fluxo de trabalho e utilizadores comuns podem remover dados sensíveis com um clique antes de publicar em redes sociais ou enviar fotos por email. O ficheiro original é lido localmente e a cópia limpa é gerada no browser, por isso a sua foto nunca chega a um servidor externo.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Que tipo de metadados estão guardados em EXIF?",
+      "a1": "EXIF pode incluir marca e modelo da câmara, lente, ISO, velocidade do obturador, abertura, distância focal, data de captura, software usado e coordenadas GPS exatas. Os smartphones costumam adicionar a localização automaticamente, exceto se a desativar nas definições do sistema.",
+      "q2": "Os ficheiros RAW de grande dimensão são suportados?",
+      "a2": "Os formatos RAW não são suportados porque exigem descodificadores específicos de cada fabricante. Use JPEG, PNG, WebP e TIFF até 50 MB por ficheiro. Converta o RAW para JPEG primeiro, se necessário.",
+      "q3": "Remover EXIF afeta a qualidade da imagem?",
+      "a3": "Não. Limpar metadados apenas reescreve o cabeçalho do ficheiro e deixa os dados de pixel intactos, por isso a qualidade visual é idêntica à original.",
+      "q4": "A foto limpa continua a aparecer corretamente nas redes sociais?",
+      "a4": "Sim. A maioria das redes ignora o EXIF, mas mantém a marca de orientação. A ConverterUp preserva a orientação e remove GPS, datas e dados da câmara, mantendo as fotos com a posição correta."
+    },
+    "color-palette": {
+      "intro": "Extraia paletas de cores de imagens online para encontrar cores dominantes para branding, design web ou moodboards. A ferramenta de paleta de cores da ConverterUp analisa qualquer foto carregada e devolve as cores mais representativas com valores HEX, RGB e HSL prontos a copiar. Designers podem montar uma paleta a partir de uma foto de produto, ilustradores podem amostrar arte de referência e programadores podem extrair cores de tema a partir de uma captura de ecrã. A imagem é processada inteiramente no browser com um algoritmo de quantização, por isso capturas privadas e ilustrações inéditas nunca são carregadas para um serviço remoto.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Como é que a ferramenta escolhe as cores dominantes?",
+      "a1": "Usa um algoritmo de quantização median cut que agrupa pixels semelhantes em conjuntos e devolve o centroide de cada conjunto. O resultado dá ênfase à cobertura mais do que à vivacidade, por isso fundos esbatidos podem aparecer acima de cores de destaque.",
+      "q2": "Quantas cores devolve?",
+      "a2": "Por defeito a paleta inclui as seis cores principais. Pode ajustar entre três e doze conforme queira uma paleta de marca compacta ou um mood mais rico.",
+      "q3": "As minhas imagens são enviadas para algum lado?",
+      "a3": "Não. A imagem é descodificada pelo browser, reduzida em memória e analisada localmente. A ConverterUp nunca recebe o ficheiro nem a paleta resultante.",
+      "q4": "Que formatos de imagem posso analisar?",
+      "a4": "PNG, JPG/JPEG, WebP, AVIF, GIF e BMP. Para melhores resultados use uma imagem limpa sem marcas de água pesadas, já que sobreposições de texto podem ser captadas como uma cor à parte."
+    },
+    "favicon-generator": {
+      "intro": "Gere um pacote de favicons online a partir de uma única imagem de origem, pronto a colocar em qualquer site ou web app. O gerador de favicons da ConverterUp produz todos os tamanhos padrão de 16x16 a 512x512, incluindo ícones para Apple touch, ícones de ecrã inicial Android e um trecho de manifesto que pode colar no seu HTML. Designers e programadores poupam tempo ao evitar várias exportações manuais em editores de imagem. A conversão corre no browser, por isso logótipos inéditos e ativos de marca permanecem privados e nunca são guardados num servidor remoto.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Que tamanhos vêm no pacote de favicons?",
+      "a1": "O ZIP contém ícones PNG de 16x16, 32x32, 48x48, 96x96, 144x144, 152x152, 180x180, 192x192, 256x256, 384x384 e 512x512, mais um favicon.ico multi-resolução para browsers antigos.",
+      "q2": "Qual o tamanho recomendado da imagem de origem?",
+      "a2": "Use uma imagem quadrada com pelo menos 512x512 pixels, idealmente PNG ou SVG com fundo transparente. Origens mais pequenas podem ser ampliadas mas ficam desfocadas nos tamanhos maiores.",
+      "q3": "Os ficheiros SVG são suportados como origem?",
+      "a3": "Sim. Carregue um SVG e o gerador rasteriza-o em cada tamanho de destino para resultados nítidos sem artefactos de antialiasing. PNG e JPG também são aceites.",
+      "q4": "Como instalo o favicon no meu site?",
+      "a4": "Extraia o ZIP, copie os ficheiros para a raiz ou pasta de assets do seu site e cole as tags link no head do HTML. O ficheiro de manifesto incluído permite a instalação como Progressive Web App."
+    },
+    "svg-to-png": {
+      "intro": "Converta SVG para PNG online e transforme gráficos vetoriais em imagens raster para usar onde for preciso PNG. O conversor SVG para PNG da ConverterUp é ideal para exportar ícones para ferramentas de design, gerar pré-visualizações para redes sociais, incorporar logótipos em PDFs ou alimentar arte para plataformas que não aceitam SVG. Escolha a escala de saída em 1x, 2x, 3x ou 4x para exportações prontas para retina, defina fundo transparente ou sólido, e descarregue o resultado de imediato. A conversão acontece no browser, mantendo designs inéditos e ícones proprietários completamente privados.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Como funciona a opção de escala?",
+      "a1": "A escala multiplica as dimensões intrínsecas do SVG: um SVG de 100x100 a 4x torna-se um PNG de 400x400. Escalas maiores produzem resultados mais nítidos em ecrãs retina à custa de mais tamanho de ficheiro.",
+      "q2": "Posso manter a transparência?",
+      "a2": "Sim. Deixe a opção de fundo como transparente e o PNG mantém o canal alfa do SVG. Mude para uma cor sólida ao exportar para plataformas que achatam transparência.",
+      "q3": "Os recursos externos no SVG são suportados?",
+      "a3": "Imagens externas e fontes remotas referenciadas por URLs http podem ser bloqueadas por segurança do browser. Para garantir o resultado, incorpore imagens como data URIs e converta texto em contornos antes de exportar do seu editor SVG.",
+      "q4": "Qual o tamanho máximo de SVG que posso converter?",
+      "a4": "Até 10 MB por SVG. Documentos muito complexos com milhares de nós podem ser lentos em telemóveis, mas ícones e ilustrações típicos convertem em menos de um segundo."
+    },
+    "image-to-base64": {
+      "intro": "Converta imagens em strings Base64 online para as incorporar diretamente em HTML, CSS, JSON ou modelos de email. A ferramenta de imagem para Base64 da ConverterUp gera uma string codificada limpa ou um data URI completo pronto a colar numa folha de estilos, num sprite SVG ou num documento markdown. É útil para apps offline-first, emails transacionais que têm de funcionar sem pedidos externos e para incorporar ícones pequenos, poupando pedidos HTTP. A codificação corre inteiramente no browser, por isso mockups confidenciais e capturas internas nunca saem da sua máquina.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Quando devo incorporar uma imagem em Base64?",
+      "a1": "Base64 faz sentido para ativos muito pequenos (abaixo de 4 KB) onde um pedido HTTP separado custa mais do que o overhead de tamanho. Para imagens maiores mantenha ficheiros normais, já que Base64 aumenta o tamanho cerca de 33 %.",
+      "q2": "Existe um limite de tamanho de ficheiro?",
+      "a2": "A ConverterUp aceita imagens até 25 MB. Strings codificadas podem ficar muito longas, por isso a maioria dos editores e clientes de email tem dificuldade a partir de alguns megabytes.",
+      "q3": "Qual a diferença entre uma string Base64 e um data URI?",
+      "a3": "Uma string Base64 são apenas os bytes codificados, enquanto um data URI prefixa o tipo MIME, como data:image/png;base64,.... Use o data URI completo em src ou url() e a string crua quando indicar o tipo separadamente.",
+      "q4": "Que formatos de imagem são suportados?",
+      "a4": "PNG, JPG/JPEG, WebP, AVIF, GIF e SVG. O tipo MIME no data URI é definido automaticamente com base no ficheiro carregado."
+    },
+    "video-frame-extractor": {
+      "intro": "Extraia fotogramas de um vídeo online para obter miniaturas, capturas de b-roll ou frames congelados para slides e artigos. O extrator de fotogramas da ConverterUp lê ficheiros MP4, WebM e MOV, permite percorrer a linha temporal e guarda o fotograma atual como PNG ou JPG. É prático para jornalistas a tirar imagens de imagens de imprensa, designers a captar frames de referência e criadores de conteúdo a preparar miniaturas para YouTube, TikTok ou Reels. O vídeo é descodificado no browser, por isso clipes originais e imagens inéditas ficam no seu dispositivo durante todo o processo.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Qual o tamanho máximo de vídeo?",
+      "a1": "Até 500 MB por ficheiro. Vídeos maiores tecnicamente funcionam mas podem demorar a procurar porque o browser tem de fazer demux do contentor em memória.",
+      "q2": "Qual a precisão da seleção de fotogramas?",
+      "a2": "A procura é precisa ao nível do fotograma dentro dos limites do intervalo de keyframes do codec. Use as setas para avançar ou recuar um fotograma de cada vez para uma seleção exata.",
+      "q3": "Posso exportar vários fotogramas ao mesmo tempo?",
+      "a3": "Sim. Mude para o modo de intervalo e a ferramenta amostra fotogramas a uma taxa fixa (por exemplo um por segundo) e exporta-os num ficheiro ZIP de PNGs.",
+      "q4": "Que formatos de vídeo são suportados?",
+      "a4": "MP4 (H.264, H.265), WebM (VP8, VP9, AV1) e MOV. A saída é PNG por defeito para qualidade sem perdas, com JPG disponível quando precisa de um ficheiro mais pequeno."
+    },
+    "stripe-fee-calculator": {
+      "intro": "Calcule taxas do Stripe online para qualquer valor de transação e moeda antes de cobrar a um cliente ou reembolsar uma encomenda, uma alternativa a calculadoras de taxas Stripe ou MB Way. A calculadora de taxas Stripe da ConverterUp ajuda freelancers, fundadores de SaaS e lojas online a ver o custo exato de processamento, o valor líquido a receber e o valor bruto necessário para receber uma quantia objetivo. Introduza o valor, escolha USD, EUR, GBP ou BRL, e veja o detalhe ao instante. Toda a matemática corre no browser usando as tabelas públicas de preços do Stripe, por isso nenhuma transação ou dado de cliente é registado.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Que escalões de preço do Stripe são abrangidos?",
+      "a1": "Pagamento online padrão com cartão: 2,9 % + 0,30 USD nos EUA, 1,5 % + 0,25 EUR para cartões europeus na UE, 1,4 % + 20 p no Reino Unido e 3,99 % + 0,39 BRL no Brasil. Sobretaxas de cartão internacional podem ser ativadas.",
+      "q2": "Suporta cálculos inversos?",
+      "a2": "Sim. Mude para o modo receber, introduza o valor que quer ter na conta, e a ferramenta indica quanto deve cobrar para que o líquido corresponda ao seu objetivo após taxas.",
+      "q3": "Estão incluídas taxas de subscrição ou faturação?",
+      "a3": "A vista predefinida mostra pagamentos únicos com cartão. Pode ativar a taxa adicional de 0,5 % do Stripe Billing em cobranças recorrentes ou taxas de fatura nas opções avançadas.",
+      "q4": "Os valores de transação são guardados em algum lado?",
+      "a4": "Não. Os cálculos acontecem no lado do cliente, dentro do browser. A ConverterUp não regista entradas nem existe qualquer endpoint de servidor a receber os valores que escreve."
+    },
+    "text-repeater": {
+      "intro": "Repita texto online para gerar conteúdo de placeholder, preencher formulários em massa ou testar layouts com strings longas. O repetidor de texto da ConverterUp aceita qualquer entrada e duplica-a o número de vezes que indicar, com separadores opcionais como espaço, vírgula, nova linha ou um delimitador personalizado. É útil para engenheiros de QA a verificar limites de input, programadores a alimentar bases de dados e redatores a criar rascunhos longos. O texto é processado inteiramente no browser, por isso prompts confidenciais, copy interno ou dados de teste nunca saem da sua máquina.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Existe um número máximo de repetições?",
+      "a1": "A interface permite até 100000 repetições. Acima disso, o browser pode ter dificuldade a renderizar o resultado. Para saídas muito grandes, copie em lotes ou cole diretamente num editor de texto.",
+      "q2": "Que separadores estão disponíveis?",
+      "a2": "Espaço, vírgula, ponto e vírgula, nova linha, tabulação e um campo personalizado onde pode escrever qualquer caractere ou texto. Deixe o separador vazio para concatenar sem qualquer divisor.",
+      "q3": "Posso incluir quebras de linha na entrada?",
+      "a3": "Sim. A entrada multi-linha é preservada exatamente como escrita e cada repetição reproduz o bloco completo. Combinado com o separador de nova linha, cria listas ou parágrafos bem formatados.",
+      "q4": "Funciona com caracteres não-latinos?",
+      "a4": "Sim. O repetidor é seguro em Unicode e processa acentos portugueses, caracteres espanhóis, cirílico, CJK, emoji e escritas da direita para a esquerda sem corrupção."
+    },
+    "vtt-to-srt": {
+      "intro": "Converta VTT para SRT online para tornar legendas compatíveis com leitores multimédia, editores e plataformas que não aceitam WebVTT. O conversor VTT para SRT da ConverterUp interpreta números de cue, marcações temporais e estilos, e reescreve-os no formato SRT usado por ferramentas como VLC, Premiere Pro e a maioria dos leitores de TV. É prático para editores de vídeo a importar legendas gravadas no browser e para tradutores a entregar ficheiros de legendas a clientes. A conversão corre localmente no browser, por isso diálogos de vídeos inéditos nunca são enviados.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Quais as principais diferenças entre VTT e SRT?",
+      "a1": "VTT usa um ponto antes dos milissegundos (00:00:01.500), enquanto SRT usa vírgula (00:00:01,500). VTT também suporta estilos inline e um cabeçalho WEBVTT que SRT não tem, por isso os estilos são removidos durante a conversão.",
+      "q2": "Os meus estilos e posicionamento de cue são preservados?",
+      "a2": "O texto simples é mantido intacto, mas cues específicos do VTT como posição de linha, alinhamento e classes CSS são removidos porque o SRT não os suporta. O resultado são legendas limpas e universalmente compatíveis.",
+      "q3": "Posso converter vários ficheiros de uma vez?",
+      "a3": "Sim. Largue vários ficheiros .vtt em conjunto e a ferramenta produz um ZIP com cada .srt convertido com o mesmo nome base.",
+      "q4": "Existe um limite de tamanho de ficheiro?",
+      "a4": "Até 10 MB por ficheiro VTT, o que chega para um filme de 4 horas com centenas de cues. A maioria dos ficheiros de legendas fica bem abaixo de 1 MB."
+    },
+    "json-viewer": {
+      "intro": "Formate e valide JSON online com destaque de sintaxe, árvores expansíveis e relatórios de erro instantâneos. O visualizador JSON da ConverterUp foi pensado para programadores backend, consumidores de APIs e analistas de dados que precisam de inspecionar respostas, embelezar payloads minificados ou rapidamente minificar JSON antes de o colar num ficheiro de configuração. Largue um ficheiro ou cole o texto, expanda e colapse objetos aninhados e copie o resultado bonito ou compacto. O JSON é interpretado localmente no browser, por isso respostas privadas de API, tokens e dados de clientes nunca chegam a um servidor remoto.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Como são reportados os erros de JSON?",
+      "a1": "JSON inválido é destacado na linha e coluna exatas onde o parser falhou, com uma descrição curta como token inesperado ou vírgula sobrante. Corrija o problema e a vista em árvore atualiza automaticamente.",
+      "q2": "Qual o tamanho máximo de JSON?",
+      "a2": "Ficheiros até 25 MB são interpretados sem problemas na maioria dos portáteis. Acima disso, a vista em árvore pode ficar lenta porque o browser tem de renderizar milhares de nós. Use o modo minify para payloads muito grandes.",
+      "q3": "Suporta JSON5 ou comentários?",
+      "a3": "Não. O visualizador segue JSON estrito de acordo com o RFC 8259, por isso vírgulas sobrantes, plicas e comentários são marcados como erro. Use primeiro um conversor JSON5 se precisar dessa flexibilidade.",
+      "q4": "O meu JSON é enviado para um servidor?",
+      "a4": "Não. Interpretação, formatação e minificação correm todas no lado do cliente. A ConverterUp não tem endpoint de log para conteúdo JSON, o que é crítico ao depurar payloads com credenciais ou PII."
+    },
+    "hex-to-decimal": {
+      "intro": "Converta hex para decimal online e alterne entre hexadecimal, decimal, binário e octal numa única vista. O conversor de bases numéricas da ConverterUp é uma referência rápida para programadores embebidos, profissionais de baixo nível e estudantes a fazer exercícios de assembly ou redes. Escreva um valor em qualquer base e os outros três atualizam-se ao instante, com suporte opcional para códigos de cor hex que mostram também o triplo RGB correspondente. Os cálculos correm no browser, por isso os valores nunca saem da sua máquina e a ferramenta funciona offline depois de a página estar em cache.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "O conversor lida com números negativos?",
+      "a1": "Sim. Decimais negativos são convertidos usando complemento para 2 a 8, 16, 32 ou 64 bits, à sua escolha nas opções. Corresponde à forma como inteiros negativos aparecem em C, Go e na maioria das linguagens de baixo nível.",
+      "q2": "Qual o valor máximo suportado?",
+      "a2": "JavaScript lida em segurança com inteiros até 2^53 - 1. Para valores maiores mude para o modo BigInt, que suporta precisão arbitrária mas arredonda inputs em vírgula flutuante para o inteiro mais próximo.",
+      "q3": "Posso converter códigos de cor?",
+      "a3": "Sim. Introduza um hex como #2E5C55 e a ferramenta mostra o RGB(46, 92, 85) correspondente, valores HSL e uma amostra da cor. O sentido inverso, de RGB para hex, também funciona.",
+      "q4": "Números em vírgula flutuante são suportados?",
+      "a4": "Sim. Floats são convertidos entre decimal, notação científica binária e a representação hex IEEE-754, útil para depurar números serializados em protocolos de rede ou shaders."
+    },
+    "html-minifier": {
+      "intro": "Minifique HTML online para reduzir o peso da página, poupar largura de banda e melhorar resultados de Core Web Vitals. O minificador de HTML da ConverterUp remove espaços, comentários, atributos redundantes e aspas desnecessárias mantendo o documento estruturalmente válido. Programadores front-end e criadores de sites estáticos podem colar o template, clicar em minificar e enviar um payload mais pequeno para produção. A minificação corre no browser com um parser determinístico, por isso markup proprietário, templates internos e landing pages inéditas ficam totalmente privados.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Quanto pode normalmente reduzir-se o HTML?",
+      "a1": "Reduções típicas vão de 15 % a 30 % em HTML escrito à mão e até 50 % em documentos com muito espaço em branco e comentários. Combine com gzip ou brotli para poupanças adicionais na rede.",
+      "q2": "A minificação pode partir o JavaScript ou CSS inline?",
+      "a2": "Não. Scripts e estilos inline são preservados como estão por defeito. Ative a opção agressiva para também os minificar, comprimindo o espaço em branco dentro de tags script e style.",
+      "q3": "Comentários condicionais e hacks IE são mantidos?",
+      "a3": "Sim. Comentários condicionais como <!--[if IE]> são detetados e preservados porque carregam lógica específica de browser. Comentários comuns sem significado semântico são removidos.",
+      "q4": "Qual o tamanho máximo de HTML?",
+      "a4": "Documentos até 5 MB são processados em bem menos de um segundo. Ficheiros maiores ainda funcionam mas o editor pode ficar lento; considere minificar como parte do seu pipeline de build em produção."
+    },
+    "css-minifier": {
+      "intro": "Minifique CSS online para entregar folhas de estilo mais pequenas, reduzir o tempo de bloqueio de renderização e melhorar resultados de Lighthouse. O minificador de CSS da ConverterUp retira espaços, remove comentários, encurta cores hex, junta regras duplicadas e produz uma saída compacta pronta a publicar. Programadores front-end, autores de temas e utilizadores de WordPress podem colar uma folha de estilos, copiar o resultado minificado e servi-lo do site ou de uma CDN. O processamento acontece inteiramente no browser, por isso design systems internos e folhas de estilo de cliente nunca são enviadas para terceiros.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Quanto pode normalmente reduzir-se o CSS?",
+      "a1": "Espere uma redução de 20 % a 40 % em folhas de estilo típicas. Combinado com gzip ou brotli no servidor, a maioria dos sites acaba a servir CSS abaixo de 30 KB mesmo com design systems completos.",
+      "q2": "Variáveis CSS e funcionalidades modernas são suportadas?",
+      "a2": "Sim. Custom properties, calc(), at-rules aninhadas, container queries e CSS Layers são preservados. Prefixos de fornecedor não são tocados, por isso a compatibilidade entre browsers não é afetada.",
+      "q3": "Remove seletores não utilizados?",
+      "a3": "Não. O minificador foca-se em redução de tamanho segura. Remover seletores não utilizados exige saber que HTML os usa de facto, o que apenas uma ferramenta como o PurgeCSS consegue durante o build.",
+      "q4": "Qual o tamanho máximo de folha de estilos?",
+      "a4": "Até 10 MB por ficheiro, o que cobre qualquer design system realista. A maioria das folhas de estilo em produção fica abaixo de 200 KB antes da minificação."
+    },
+    "uuid-generator": {
+      "intro": "Gere identificadores UUID v4 online para chaves de base de dados, tokens de idempotência, IDs de pedido e seguimento de sessão. O gerador de UUID da ConverterUp produz identificadores únicos ou em massa usando a fonte aleatória criptograficamente segura do browser, tornando colisões estatisticamente impossíveis. Programadores backend, engenheiros de QA e equipas de devops podem obter um lote em segundos e colá-lo em dados de seed ou ficheiros de configuração. A geração corre localmente sem ida ao servidor, o que garante que os IDs recebidos não são registados, repetidos nem reutilizados fora da sua máquina.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Estes UUIDs são seguros para usar como chaves primárias?",
+      "a1": "Sim. UUID v4 tem 122 bits de aleatoriedade vinda de uma fonte criptograficamente segura, o que torna a probabilidade de colisão desprezável à escala da internet. São muito usados como chaves primárias em PostgreSQL, MongoDB e DynamoDB.",
+      "q2": "Quantos UUIDs posso gerar de uma vez?",
+      "a2": "Até 10000 por lote, suficiente para a maioria das tarefas de seeding. O resultado aparece como uma lista que pode copiar com um clique ou descarregar como TXT ou CSV.",
+      "q3": "Posso gerar outras versões de UUID?",
+      "a3": "A ferramenta foca-se na v4 por ser a mais comum em código de aplicação. Mude a opção de formato para minúsculas ou maiúsculas, com ou sem hífenes, conforme as exigências de armazenamento.",
+      "q4": "Os UUIDs são criptograficamente seguros?",
+      "a4": "Sim. Vêm da API crypto.getRandomValues do browser, adequada para tokens de segurança, identificadores de sessão e qualquer caso onde a previsibilidade importa."
+    },
+    "base64-decode": {
+      "intro": "Descodifique strings Base64 online de volta para texto simples, JSON ou imagens, com deteção automática de data URIs. O descodificador Base64 da ConverterUp é útil para inspecionar payloads JWT, depurar respostas de API, descodificar anexos de email e extrair imagens incorporadas em CSS ou HTML. Cole a string codificada, veja o resultado ao instante e copie o texto ou descarregue a imagem descodificada. A descodificação corre inteiramente no browser, por isso tokens sensíveis, payloads de cliente e imagens privadas nunca são registados ou transmitidos para um servidor remoto.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Descodifica tokens JWT?",
+      "a1": "Descodifica as partes em Base64URL, que é exatamente o que o JWT usa para cabeçalho e payload. Cole o token completo e a ConverterUp mostra o cabeçalho JSON, o payload JSON e o segmento da assinatura para inspeção.",
+      "q2": "Qual o tamanho máximo de entrada?",
+      "a2": "Até 25 MB de texto codificado. A saída descodificada é cerca de 75 % desse tamanho, já que o Base64 aumenta o conteúdo em cerca de um terço.",
+      "q3": "Deteta imagens automaticamente?",
+      "a3": "Sim. Se os bytes descodificados começarem com um cabeçalho de imagem conhecido (PNG, JPG, GIF, WebP) ou se a entrada for um data URI, a ferramenta mostra uma pré-visualização e oferece um botão de download junto à vista de texto cru.",
+      "q4": "A entrada é enviada para um servidor?",
+      "a4": "Não. Toda a descodificação acontece no lado do cliente usando as APIs atob e TextDecoder do browser. A ConverterUp não tem endpoint que receba strings Base64, o que importa quando os dados codificados contêm credenciais."
+    },
+    "case-converter": {
+      "intro": "Converta texto entre maiúsculas e minúsculas online entre MAIÚSCULAS, minúsculas, Primeira Maiúscula, primeira do parágrafo, camelCase, snake_case, kebab-case, PascalCase, CONSTANT_CASE e dot.case. O conversor de capitalização da ConverterUp é um auxiliar rápido para programadores a renomear variáveis, redatores a limpar títulos e especialistas de SEO a normalizar slugs. Cole a entrada, clique no formato pretendido e copie o resultado com um toque. O texto é processado inteiramente no browser, por isso rascunhos de blog, excertos de código e nomes internos de produto nunca saem do dispositivo nem ficam registados em servidores de terceiros.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Qual a diferença entre Primeira Maiúscula e primeira do parágrafo?",
+      "a1": "Primeira Maiúscula coloca a primeira letra de cada palavra significativa em maiúscula, como em títulos de livros. Primeira do parágrafo coloca em maiúscula apenas a primeira letra da frase e nomes próprios, sendo o padrão para corpo de texto.",
+      "q2": "A conversão preserva números e pontuação?",
+      "a2": "Sim. Dígitos, pontuação e emoji ficam intactos. A ferramenta apenas altera maiúsculas e minúsculas das letras e ajusta separadores (sublinhado, hífen, ponto) ao converter para casos amigos do programador.",
+      "q3": "Lida corretamente com acentos portugueses e espanhóis?",
+      "a3": "Sim. O conversor é totalmente Unicode-aware, por isso letras com acentos como á, ã, ç, ñ e ü mantêm os diacríticos e convertem o caso corretamente em qualquer direção.",
+      "q4": "Existe um limite de comprimento de texto?",
+      "a4": "Até 1 MB de texto simples, o equivalente a cerca de 200000 palavras. A transformação é instantânea para qualquer entrada realista graças às APIs nativas de strings do browser."
+    },
+    "csv-to-json": {
+      "intro": "Converta CSV para JSON online com suporte para delimitadores personalizados, campos entre aspas e cabeçalhos configuráveis. O conversor CSV para JSON da ConverterUp foi pensado para analistas a importar folhas de cálculo para APIs, programadores a alimentar bases de dados e gestores de produto a transformar exportações do Notion ou do Google Sheets em dados estruturados. Cole um CSV ou carregue um ficheiro, escolha as opções de delimitador e cabeçalho e descarregue o array JSON resultante ou copie-o para a área de transferência. A interpretação corre no browser com um parser RFC 4180 em streaming, por isso listas de clientes e exportações confidenciais nunca chegam a servidores de terceiros.",
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Que delimitadores são suportados?",
+      "a1": "Vírgula, ponto e vírgula, tabulação, barra vertical e um campo personalizado onde pode escrever qualquer caractere. A deteção automática inspeciona as primeiras linhas e escolhe o delimitador que produz a contagem de colunas mais consistente.",
+      "q2": "Como são tratados os campos entre aspas e aspas escapadas?",
+      "a2": "A ConverterUp segue o RFC 4180: campos entre aspas duplas podem conter vírgulas e novas linhas, e uma aspa dupla literal dentro de um campo entre aspas escapa-se com duas aspas duplas. Excel e Google Sheets seguem as mesmas regras.",
+      "q3": "Qual o tamanho máximo de CSV?",
+      "a3": "Até 50 MB por ficheiro. O parser em streaming mantém o uso de memória baixo, por isso até ficheiros com centenas de milhares de linhas convertem sem rebentar com o separador do browser.",
+      "q4": "Posso obter um array de objetos em vez de arrays?",
+      "a4": "Sim. Ative a opção de cabeçalho e a primeira linha é usada como chaves JSON, produzindo um array de objetos. Desative-a para obter um array de arrays, útil quando a origem não tem cabeçalho ou quando quer acesso por posição."
+    }
+  },
+  "Convert": {
+    "badge": "Conversor grátis",
+    "metaTitle": "Converter {from} para {to} online, grátis, privado e sem envio",
+    "metaDescription": "Converta ficheiros {from} para {to} instantaneamente no seu navegador. 100% privado, sem envio, sem registo. Conversor online de {from} para {to} gratuito.",
+    "h1": "Converter {from} para {to} online",
+    "intro": "Transforme ficheiros {from} em {to} diretamente no seu navegador com a ConverterUp. Não há envio, não há filas de espera, e não é preciso conta. Os seus ficheiros ficam no dispositivo enquanto o WebAssembly faz o trabalho localmente. Ajuste a qualidade e as dimensões quando suportado e depois transfira o resultado. A saída mantém a fidelidade visual que esperaria de uma aplicação para computador, mas a correr inteiramente no separador do navegador.",
+    "cta": "Converter {from} para {to} agora",
+    "ctaHeading": "Pronto para converter {from} para {to}?",
+    "ctaDesc": "Abra a ferramenta, largue o ficheiro e transfira o resultado. Sem envio, sem registo, sem marcas de água.",
+    "howToHeading": "Como converter {from} para {to}",
+    "stepLabel": "Passo",
+    "step1Title": "Abrir o conversor",
+    "step1Text": "Clique no botão para abrir a ferramenta {from} para {to}. Carrega instantaneamente, sem instalação e sem registo.",
+    "step2Title": "Largar o ficheiro {from}",
+    "step2Text": "Arraste o seu ficheiro {from} para a área de upload ou clique para procurar. O ficheiro fica apenas na memória do navegador.",
+    "step3Title": "Transferir {to}",
+    "step3Text": "A conversão corre localmente e termina em segundos. Clique em transferir para guardar o ficheiro {to} no seu dispositivo.",
+    "faqHeading": "Perguntas frequentes",
+    "q1": "A conversão de {from} para {to} é mesmo gratuita?",
+    "a1": "Sim. A ConverterUp é totalmente gratuita, sem registo, sem marcas de água e sem quota diária no conversor de {from} para {to}. Sustentamos o projeto através de publicidade discreta.",
+    "q2": "Os meus ficheiros {from} são enviados para um servidor?",
+    "a2": "Não. A conversão corre no seu navegador através de WebAssembly. Os bytes do {from} nunca saem do seu dispositivo, e nem sequer existe um endpoint de upload.",
+    "q3": "Qual é o tamanho máximo de ficheiro?",
+    "a3": "Para entrada em {from}, o limite recomendado é 50 MB em imagens e 500 MB em vídeo. O desempenho real depende da RAM do seu dispositivo.",
+    "relatedHeading": "Conversões relacionadas",
+    "trust1": "100% privado",
+    "trust2": "Sem envio",
+    "trust3": "Sem registo",
+    "trust4": "Sempre grátis"
+  },
+  "Internal": {
+    "relatedGuides": "Guias Relacionados",
+    "moreTools": "Mais Ferramentas",
+    "popularConversions": "Conversões Populares",
+    "viewAll": "Ver Todas"
   }
 }
