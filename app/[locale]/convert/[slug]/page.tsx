@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { JsonLd } from "@/components/json-ld";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
@@ -14,7 +14,10 @@ import { generateAlternates } from "@/lib/seo";
 import { ArrowRight, Check } from "lucide-react";
 
 export function generateStaticParams() {
-  return conversions.map((c) => ({ slug: c.slug }));
+  const locales = ["en", "pt", "es"];
+  return locales.flatMap((locale) =>
+    conversions.map((c) => ({ locale, slug: c.slug })),
+  );
 }
 
 export async function generateMetadata({
@@ -23,6 +26,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const conversion = getConversion(slug);
   if (!conversion) return {};
 
@@ -63,6 +67,7 @@ export default async function ConvertPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const conversion = getConversion(slug);
   if (!conversion) notFound();
 
