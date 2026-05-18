@@ -35,9 +35,9 @@ export default function AboutPage() {
         >
           ffmpeg.wasm
         </a>{" "}
-        for video and image conversion, and standard browser APIs (Canvas,
-        Web Crypto, FileReader) for everything else. Performance is bound by
-        your hardware, not by our servers.
+        for video and image conversion, and standard browser APIs (Canvas, Web
+        Crypto, FileReader) for everything else. Performance is bound by your
+        hardware, not by our servers.
       </p>
 
       <h2>How we keep it free</h2>

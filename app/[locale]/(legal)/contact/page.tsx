@@ -32,7 +32,9 @@ export default function ContactPage() {
       <ul>
         <li>The page or tool you were using.</li>
         <li>Your browser and operating system.</li>
-        <li>For bug reports: the file type/size and what you expected to happen.</li>
+        <li>
+          For bug reports: the file type/size and what you expected to happen.
+        </li>
       </ul>
     </>
   );

@@ -6,18 +6,46 @@ import { useParams, usePathname } from "next/navigation";
 import { Link } from "@/i18n/routing";
 
 const allTools = [
-  { name: "Image Compressor", href: "/tools/image-compressor", category: "image" },
+  {
+    name: "Image Compressor",
+    href: "/tools/image-compressor",
+    category: "image",
+  },
   { name: "Image Resizer", href: "/tools/image-resizer", category: "image" },
   { name: "Video to GIF", href: "/tools/video-to-gif", category: "video" },
-  { name: "QR Code Generator", href: "/tools/qr-code-generator", category: "utility" },
-  { name: "YouTube Thumbnails", href: "/tools/youtube-thumbnail-downloader", category: "video" },
+  {
+    name: "QR Code Generator",
+    href: "/tools/qr-code-generator",
+    category: "utility",
+  },
+  {
+    name: "YouTube Thumbnails",
+    href: "/tools/youtube-thumbnail-downloader",
+    category: "video",
+  },
   { name: "EXIF Viewer", href: "/tools/exif-viewer", category: "image" },
   { name: "Color Palette", href: "/tools/color-palette", category: "image" },
-  { name: "Favicon Generator", href: "/tools/favicon-generator", category: "image" },
+  {
+    name: "Favicon Generator",
+    href: "/tools/favicon-generator",
+    category: "image",
+  },
   { name: "SVG to PNG", href: "/tools/svg-to-png", category: "image" },
-  { name: "Image to Base64", href: "/tools/image-to-base64", category: "image" },
-  { name: "Frame Extractor", href: "/tools/video-frame-extractor", category: "video" },
-  { name: "Stripe Fees", href: "/tools/stripe-fee-calculator", category: "utility" },
+  {
+    name: "Image to Base64",
+    href: "/tools/image-to-base64",
+    category: "image",
+  },
+  {
+    name: "Frame Extractor",
+    href: "/tools/video-frame-extractor",
+    category: "video",
+  },
+  {
+    name: "Stripe Fees",
+    href: "/tools/stripe-fee-calculator",
+    category: "utility",
+  },
   { name: "Text Repeater", href: "/tools/text-repeater", category: "utility" },
   { name: "VTT to SRT", href: "/tools/vtt-to-srt", category: "utility" },
   { name: "JSON Viewer", href: "/tools/json-viewer", category: "code" },
@@ -26,7 +54,11 @@ const allTools = [
   { name: "CSS Minifier", href: "/tools/css-minifier", category: "code" },
   { name: "UUID Generator", href: "/tools/uuid-generator", category: "code" },
   { name: "Base64 Decoder", href: "/tools/base64-decode", category: "code" },
-  { name: "Case Converter", href: "/tools/case-converter", category: "utility" },
+  {
+    name: "Case Converter",
+    href: "/tools/case-converter",
+    category: "utility",
+  },
   { name: "CSV to JSON", href: "/tools/csv-to-json", category: "code" },
 ];
 
@@ -37,7 +69,8 @@ export function RelatedTools() {
   const locale = (params?.locale as string) ?? "en";
   const localePrefix = locale === "en" ? "" : `/${locale}`;
 
-  if (pathname === "/tools" || pathname === `${localePrefix}/tools`) return null;
+  if (pathname === "/tools" || pathname === `${localePrefix}/tools`)
+    return null;
 
   const stripped = pathname.startsWith(localePrefix)
     ? pathname.slice(localePrefix.length) || "/"

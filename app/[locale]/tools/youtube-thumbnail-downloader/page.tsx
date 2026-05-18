@@ -51,8 +51,14 @@ export default async function YouTubeThumbnailDownloaderPage({
       <ToolJsonLd slug="youtube-thumbnail-downloader" locale={locale} />
       <YouTubeThumbnailDownloader />
       <ToolSeoContent slug="youtube-thumbnail-downloader" locale={locale} />
-      <RelatedGuides toolHref="/tools/youtube-thumbnail-downloader" locale={locale} />
-      <RelatedConversions toolSlug="youtube-thumbnail-downloader" locale={locale} />
+      <RelatedGuides
+        toolHref="/tools/youtube-thumbnail-downloader"
+        locale={locale}
+      />
+      <RelatedConversions
+        toolSlug="youtube-thumbnail-downloader"
+        locale={locale}
+      />
     </>
   );
 }

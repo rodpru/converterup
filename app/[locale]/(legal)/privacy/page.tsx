@@ -88,9 +88,8 @@ export default function PrivacyPage() {
         Because we do not store personal data on our servers, there is nothing
         for us to delete or export. You can disable analytics and personalized
         ads at any time through the cookie banner or your browser settings.
-        Contact us at{" "}
-        <a href="mailto:rgp.prt@gmail.com">rgp.prt@gmail.com</a> for any
-        privacy-related question.
+        Contact us at <a href="mailto:rgp.prt@gmail.com">rgp.prt@gmail.com</a>{" "}
+        for any privacy-related question.
       </p>
 
       <h2>6. Children</h2>

@@ -34,31 +34,25 @@ export default function TermsPage() {
       <p>You agree not to:</p>
       <ul>
         <li>Use the Service for unlawful purposes.</li>
-        <li>
-          Process content you do not have the right to use or distribute.
-        </li>
+        <li>Process content you do not have the right to use or distribute.</li>
         <li>
           Attempt to disrupt the Service, scrape it at scale, or circumvent
           security controls.
         </li>
-        <li>
-          Misrepresent your identity or impersonate ConverterUp.
-        </li>
+        <li>Misrepresent your identity or impersonate ConverterUp.</li>
       </ul>
 
       <h2>4. Intellectual property</h2>
       <p>
         The Service&apos;s code, design, copy and brand belong to ConverterUp.
-        Content you process belongs to you; we never claim rights to your
-        files.
+        Content you process belongs to you; we never claim rights to your files.
       </p>
 
       <h2>5. No warranty</h2>
       <p>
         The Service is provided &quot;as is&quot; without warranty of any kind.
         We do not guarantee that conversions will be lossless, that the Service
-        will be available without interruption, or that it will be free of
-        bugs.
+        will be available without interruption, or that it will be free of bugs.
       </p>
 
       <h2>6. Limitation of liability</h2>
