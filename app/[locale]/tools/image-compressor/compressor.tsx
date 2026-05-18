@@ -11,9 +11,19 @@ import {
 import { useCallback, useRef, useState } from "react";
 
 import { JsonLd } from "@/components/json-ld";
+import { decodeHeic, isHeicFile } from "@/lib/heic";
 
-const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/webp", "image/avif"];
-const ACCEPTED_EXTENSIONS = ".png,.jpg,.jpeg,.webp,.avif";
+const ACCEPTED_TYPES = [
+  "image/png",
+  "image/jpeg",
+  "image/webp",
+  "image/avif",
+  "image/heic",
+  "image/heif",
+  "image/heic-sequence",
+  "image/heif-sequence",
+];
+const ACCEPTED_EXTENSIONS = ".png,.jpg,.jpeg,.webp,.avif,.heic,.heif";
 
 type CompressionResult = {
   originalSize: number;
@@ -89,15 +99,19 @@ export function ImageCompressor() {
     (selectedFile: File) => {
       resetState();
 
-      if (!ACCEPTED_TYPES.includes(selectedFile.type)) {
+      const accepted =
+        ACCEPTED_TYPES.includes(selectedFile.type) || isHeicFile(selectedFile);
+      if (!accepted) {
         setError(
-          "Unsupported format. Please upload a PNG, JPG, WebP, or AVIF image.",
+          "Unsupported format. Please upload a PNG, JPG, WebP, AVIF, or HEIC image.",
         );
         return;
       }
 
       setFile(selectedFile);
-      setPreviewUrl(URL.createObjectURL(selectedFile));
+      if (!isHeicFile(selectedFile)) {
+        setPreviewUrl(URL.createObjectURL(selectedFile));
+      }
     },
     [resetState],
   );
@@ -138,27 +152,32 @@ export function ImageCompressor() {
     setResult(null);
 
     try {
-      const img = new Image();
-      const loadPromise = new Promise<void>((resolve, reject) => {
-        img.onload = () => resolve();
-        img.onerror = () => reject(new Error("Failed to load image."));
-      });
-
-      const objectUrl = URL.createObjectURL(file);
-      img.src = objectUrl;
-      await loadPromise;
-
       const canvas = canvasRef.current;
       if (!canvas) throw new Error("Canvas not available.");
-
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-
       const ctx = canvas.getContext("2d");
       if (!ctx) throw new Error("Canvas context not available.");
 
-      ctx.drawImage(img, 0, 0);
-      URL.revokeObjectURL(objectUrl);
+      if (isHeicFile(file)) {
+        const { canvas: srcCanvas, width, height } = await decodeHeic(file);
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(srcCanvas, 0, 0);
+      } else {
+        const img = new Image();
+        const loadPromise = new Promise<void>((resolve, reject) => {
+          img.onload = () => resolve();
+          img.onerror = () => reject(new Error("Failed to load image."));
+        });
+
+        const objectUrl = URL.createObjectURL(file);
+        img.src = objectUrl;
+        await loadPromise;
+
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        ctx.drawImage(img, 0, 0);
+        URL.revokeObjectURL(objectUrl);
+      }
 
       const outputMimeType = getOutputMimeType(file);
       const qualityParam = quality / 100;
@@ -280,12 +299,12 @@ export function ImageCompressor() {
             </div>
           ) : (
             <div className="space-y-6">
-              {previewUrl && (
+              {previewUrl || result ? (
                 <div className="bg-[#16131E] border border-[#2A2535] rounded-xl overflow-hidden">
                   <div className="relative aspect-video bg-[#0C0A12] flex items-center justify-center">
                     {/* biome-ignore lint/a11y/useAltText: User-uploaded image preview */}
                     <img
-                      src={result?.compressedUrl ?? previewUrl}
+                      src={result?.compressedUrl ?? previewUrl ?? ""}
                       alt=""
                       className="max-w-full max-h-full object-contain"
                     />
@@ -314,6 +333,27 @@ export function ImageCompressor() {
                       Remove
                     </button>
                   </div>
+                </div>
+              ) : (
+                <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5 flex items-center justify-between">
+                  <div className="min-w-0">
+                    <p className="text-sm font-[Inter] font-medium text-[#EDEDEF] truncate">
+                      {file.name}
+                    </p>
+                    <p className="font-mono text-[11px] text-[#71717A] mt-1">
+                      {formatFileSize(file.size)} · HEIC preview after compress
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      resetState();
+                      if (fileInputRef.current) fileInputRef.current.value = "";
+                    }}
+                    className="font-mono text-[11px] uppercase tracking-wider text-[#71717A] hover:text-[#FB7185] transition-colors min-h-[44px] px-3 shrink-0"
+                  >
+                    Remove
+                  </button>
                 </div>
               )}
 

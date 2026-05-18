@@ -213,7 +213,9 @@
     "case-converter-title": "Case Converter — camelCase, snake_case, kebab-case",
     "case-converter-desc": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, PascalCase, and CONSTANT_CASE. Free, instant, no signup.",
     "csv-to-json-title": "CSV to JSON Converter — Free Online, No Upload",
-    "csv-to-json-desc": "Convert CSV to JSON in your browser with custom delimiters, quoted fields, and header detection. Free, instant, files never leave your device."
+    "csv-to-json-desc": "Convert CSV to JSON in your browser with custom delimiters, quoted fields, and header detection. Free, instant, files never leave your device.",
+    "heic-to-jpg-title": "HEIC to JPG Converter — Free iPhone Photo Converter",
+    "heic-to-jpg-desc": "Convert iPhone HEIC photos to JPG, PNG, or WebP free online. No upload, no signup, no watermark — files stay on your device. Works on Windows, Mac, Linux."
   },
   "ToolHowTo": {
     "image-compressor": {
@@ -566,6 +568,22 @@
       "step3": {
         "name": "Copy or download the JSON",
         "text": "Click copy to clipboard or download as a .json file."
+      }
+    },
+    "heic-to-jpg": {
+      "name": "How to Convert HEIC to JPG Online",
+      "description": "Convert iPhone HEIC photos to JPG, PNG, or WebP directly in your browser without uploading.",
+      "step1": {
+        "name": "Drop your HEIC file",
+        "text": "Drag and drop or click to select a .heic or .heif photo from your iPhone, Mac, or camera."
+      },
+      "step2": {
+        "name": "Choose output format and quality",
+        "text": "Pick JPG, PNG, or WebP. Adjust the quality slider for lossy formats. PNG keeps full quality."
+      },
+      "step3": {
+        "name": "Download the converted image",
+        "text": "Click download to save the converted photo. The decode and re-encode happen entirely in your browser."
       }
     }
   },
@@ -1165,6 +1183,42 @@
       "a5": "An empty field becomes an empty string (<code>\"\"</code>) by default. Enable <em>Empty as null</em> to map <code>,,</code> to JSON <code>null</code> — preferred when feeding a database that distinguishes empty string from NULL. A row with fewer columns than the header gets missing trailing keys set to either <code>\"\"</code> or <code>null</code> depending on the same toggle.",
       "q6": "Why does Excel break my CSV when I save it back?",
       "a6": "Excel re-encodes to the system default (Windows-1252 on Windows in many locales), strips the UTF-8 BOM, and reformats numbers and dates aggressively — a leading zero in a ZIP code becomes <code>00501</code> → <code>501</code>, an ISO date becomes a US date string. For round-tripping CSV through Excel safely, import via <em>Data → From Text</em> and explicitly set each column to <em>Text</em>."
+    },
+    "heic-to-jpg": {
+      "intro": "Convert HEIC photos to JPG, PNG, or WebP directly in your browser. ConverterUp's HEIC converter is built for iPhone and iPad owners who need to share or upload photos to apps and websites that do not yet accept Apple's HEIC format — Windows photo viewers, older versions of Photoshop, most CMS dashboards, and many email clients. Drop the .heic file, pick the target format, and download the converted image in seconds. The decode happens locally using a WebAssembly build of libheif, so the original photo never leaves your device or gets uploaded to a third-party server.",
+      "section1": {
+        "heading": "Why iPhones save HEIC instead of JPG",
+        "p1": "Since iOS 11 (2017), iPhones default to <strong>HEIC</strong> (High Efficiency Image Coding), an Apple-branded variant of the HEIF container. The reason is storage: HEIC compresses photos roughly <strong>50 % smaller</strong> than JPG at the same visual quality, thanks to the modern HEVC codec underneath. A 12 MP iPhone photo lands at around 2 MB instead of 4 MB.",
+        "p2": "The catch is compatibility. Only Apple platforms and a handful of newer apps decode HEIC natively. Open the file on a Windows 10 PC, drop it into a Notion page, attach it to a Gmail message, or upload it to an older WordPress install, and you typically get a generic preview, an error, or nothing at all.",
+        "p3": "Converting HEIC to JPG (or PNG, WebP) restores universal compatibility. You lose the storage savings, but you gain the ability to share, embed, edit, and back up the photo anywhere — including services that have not updated their image pipeline for the past decade.",
+        "p4": "If you want to skip the conversion step entirely for future photos, open iPhone <em>Settings → Camera → Formats</em> and switch from <strong>High Efficiency</strong> to <strong>Most Compatible</strong>. The iPhone will save JPG directly. Existing HEIC photos in your library still need conversion."
+      },
+      "section2": {
+        "heading": "JPG vs PNG vs WebP — which output to pick",
+        "p1": "<strong>JPG</strong> is the safe default. Every browser, OS, CMS, social network, and email client handles it. Use 90–95 % quality for visual results indistinguishable from the HEIC source, with a file size roughly 1.5–2× larger than the original. Pick JPG when you do not know where the photo will end up.",
+        "p2": "<strong>PNG</strong> is lossless — every pixel from the decoded HEIC is preserved exactly. Use it when you plan to edit the photo further, when the image contains text or graphics, or when you need transparency (rare for camera photos). File sizes are typically 5–10× larger than the HEIC source.",
+        "p3": "<strong>WebP</strong> at 90 % quality lands close to HEIC's size while being readable by every modern browser (Chrome, Firefox, Safari 14+, Edge). Pick it when the photo is destined for the web and you control the platform. For email attachments and offline sharing, stick with JPG — older clients still mishandle WebP.",
+        "p4": "All three outputs strip the HEIC's encoded HDR information down to standard sRGB / 8-bit. If you need to preserve HDR for professional editing, export from Photos.app on macOS with the original encoding intact instead — this tool optimizes for sharing, not archival."
+      },
+      "section3": {
+        "heading": "Privacy, batch conversion, and EXIF",
+        "p1": "ConverterUp's HEIC converter is <strong>100 % client-side</strong>. The libheif WebAssembly binary (~1 MB) is loaded lazily from a public CDN on the first conversion, then cached by your browser. Your photos are decoded in memory and re-encoded by the browser's native canvas — at no point does any image data reach a ConverterUp server. Compare this to most online HEIC converters which require an upload.",
+        "p2": "<strong>EXIF metadata</strong> (camera model, GPS coordinates, capture date) is stripped during conversion by default, because canvas.toBlob does not preserve it. For most photo-sharing use cases this is the privacy-friendly default. If you specifically need to keep EXIF, edit the photo in Apple Photos before exporting as JPG/PNG instead.",
+        "p3": "For <strong>batch conversion</strong>, drop your HEIC photos one at a time today; multi-file batching is on the roadmap. For Live Photos (HEIC + paired MOV), the tool converts the still image only — the motion / audio track is part of the .MOV companion file and is not embedded in the HEIC."
+      },
+      "faqHeading": "Frequently asked questions",
+      "q1": "Why won't Windows open my iPhone HEIC photos?",
+      "a1": "Windows 10 and 11 can open HEIC, but only after installing Microsoft's <em>HEIF Image Extensions</em> (free) AND <em>HEVC Video Extensions</em> (paid in some regions). If you don't want to pay or install extensions, convert HEIC to JPG once and view normally.",
+      "q2": "Is the converted JPG smaller or larger than the HEIC?",
+      "a2": "Larger, typically 1.5–2× bigger at 92 % JPG quality. HEIC's HEVC codec is more efficient than JPG's DCT. If file size matters more than universal compatibility, choose WebP at 85–90 % — it stays close to the HEIC source size.",
+      "q3": "Are my photos uploaded to a server?",
+      "a3": "No. Decoding runs in your browser via a WebAssembly build of libheif loaded from a CDN. The browser then re-encodes to JPG / PNG / WebP using its native canvas API. ConverterUp has no upload endpoint for image data and cannot see your photos.",
+      "q4": "What is the maximum file size?",
+      "a4": "50 MB per file. A typical iPhone HEIC is 2–5 MB, so this covers everything from standard photos to high-resolution 48 MP iPhone Pro shots. Larger files may work but will be slow on low-end mobile devices because libheif runs single-threaded.",
+      "q5": "Does this work for HEIC Live Photos and burst shots?",
+      "a5": "It converts the primary (first) image inside the HEIC container. Live Photos store the motion as a separate <code>.MOV</code> file that iOS pairs in the Photos library — that motion track is not inside the HEIC and is not converted. Burst HEICs typically contain a single representative frame.",
+      "q6": "Does the tool support HEIF and HEIC sequences?",
+      "a6": "Yes. The <code>.heif</code> and <code>.heic</code> extensions are decoded by the same libheif pipeline. Multi-image HEIC sequences are detected, but the converter exports the first image only. If you need every frame from a sequence, an &quot;export all frames&quot; option is planned for a future release."
     }
   },
   "Convert": {
@@ -1207,7 +1261,7 @@
     "badge": "All free, no signup",
     "heading": "Popular free online tools",
     "subheading": "Compress, convert, format, and clean — every tool runs in your browser. Your files never leave your device.",
-    "viewAll": "Browse all 22 tools",
+    "viewAll": "Browse all 23 tools",
     "categoryImage": "Image & Photo",
     "categoryConvert": "Conversion",
     "categoryDev": "Developer & Text"

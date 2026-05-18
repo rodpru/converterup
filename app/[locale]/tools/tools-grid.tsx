@@ -20,6 +20,7 @@ import {
   Repeat,
   Scaling,
   Search,
+  Smartphone,
   Subtitles,
   Table,
   Unlock,
@@ -184,6 +185,13 @@ export const tools = [
     href: "/tools/csv-to-json",
     icon: Table,
     tags: ["csv", "json", "convert", "data", "spreadsheet"],
+  },
+  {
+    name: "HEIC to JPG",
+    description: "Convert iPhone HEIC photos to JPG, PNG, or WebP.",
+    href: "/tools/heic-to-jpg",
+    icon: Smartphone,
+    tags: ["heic", "heif", "jpg", "iphone", "ios", "apple", "convert"],
   },
 ];
 

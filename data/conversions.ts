@@ -106,6 +106,34 @@ export const conversions: Conversion[] = [
     toolSlug: "svg-to-png",
     category: "image",
   },
+  {
+    slug: "heic-to-jpg",
+    fromFormat: "HEIC",
+    toFormat: "JPG",
+    toolSlug: "heic-to-jpg",
+    category: "image",
+  },
+  {
+    slug: "heic-to-png",
+    fromFormat: "HEIC",
+    toFormat: "PNG",
+    toolSlug: "heic-to-jpg",
+    category: "image",
+  },
+  {
+    slug: "heic-to-webp",
+    fromFormat: "HEIC",
+    toFormat: "WebP",
+    toolSlug: "heic-to-jpg",
+    category: "image",
+  },
+  {
+    slug: "heif-to-jpg",
+    fromFormat: "HEIF",
+    toFormat: "JPG",
+    toolSlug: "heic-to-jpg",
+    category: "image",
+  },
   // Video format conversions
   {
     slug: "mp4-to-gif",
@@ -226,10 +254,7 @@ export function getConversion(slug: string): Conversion | undefined {
   return conversions.find((c) => c.slug === slug);
 }
 
-export function getRelatedConversions(
-  slug: string,
-  limit = 4,
-): Conversion[] {
+export function getRelatedConversions(slug: string, limit = 4): Conversion[] {
   const target = getConversion(slug);
   if (!target) return [];
   return conversions

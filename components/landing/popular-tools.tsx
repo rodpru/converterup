@@ -9,10 +9,10 @@ const TOOLS: { slug: string; category: Category }[] = [
   { slug: "image-resizer", category: "image" },
   { slug: "color-palette", category: "image" },
   { slug: "exif-viewer", category: "image" },
+  { slug: "heic-to-jpg", category: "convert" },
   { slug: "video-to-gif", category: "convert" },
   { slug: "svg-to-png", category: "convert" },
   { slug: "favicon-generator", category: "convert" },
-  { slug: "image-to-base64", category: "convert" },
   { slug: "json-viewer", category: "dev" },
   { slug: "uuid-generator", category: "dev" },
   { slug: "hex-to-decimal", category: "dev" },
@@ -40,7 +40,10 @@ function toolDisplayName(slug: string) {
     .replace("Uuid", "UUID")
     .replace("Svg", "SVG")
     .replace("Png", "PNG")
+    .replace("Jpg", "JPG")
     .replace("Exif", "EXIF")
+    .replace("Heic", "HEIC")
+    .replace("Heif", "HEIF")
     .replace("Hex", "Hex");
 }
 

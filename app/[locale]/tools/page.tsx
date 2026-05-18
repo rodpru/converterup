@@ -11,9 +11,9 @@ export async function generateMetadata({
   const { locale } = await params;
   const alternates = generateAlternates("/tools", locale);
 
-  const title = "22 Free Online Tools — Image, Video, Code, Text";
+  const title = "23 Free Online Tools — Image, Video, Code, Text";
   const description =
-    "Compress, resize, convert, format. 22 free browser-based tools for images, video, code, and text — 100% private, no upload, no signup.";
+    "Compress, resize, convert, format. 23 free browser-based tools for images, video, code, and text — 100% private, no upload, no signup.";
 
   return {
     title,
@@ -43,8 +43,8 @@ export default function ToolsPage() {
           "@type": "ItemList",
           name: "ConverterUp Free Online Tools",
           description:
-            "22 free browser-based tools for images, video, code, and more.",
-          numberOfItems: 22,
+            "23 free browser-based tools for images, video, code, and more.",
+          numberOfItems: 23,
           itemListElement: [
             {
               name: "Image Compressor",
@@ -159,6 +159,12 @@ export default function ToolsPage() {
               name: "CSV to JSON",
               href: "/tools/csv-to-json",
               description: "Convert CSV files to JSON format instantly.",
+            },
+            {
+              name: "HEIC to JPG",
+              href: "/tools/heic-to-jpg",
+              description:
+                "Convert iPhone HEIC photos to JPG, PNG, or WebP free.",
             },
           ].map((tool, i) => ({
             "@type": "ListItem",

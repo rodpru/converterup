@@ -213,7 +213,9 @@
     "case-converter-title": "Conversor de Texto — camelCase, snake_case, kebab",
     "case-converter-desc": "Convierte texto entre MAYÚSCULAS, minúsculas, Título, camelCase, snake_case, kebab-case, PascalCase y CONSTANT_CASE. Gratis e instantáneo.",
     "csv-to-json-title": "Convertir CSV a JSON — Gratis, Sin Subida",
-    "csv-to-json-desc": "Convierte CSV a JSON en el navegador con delimitadores personalizados, campos entre comillas y detección de encabezado. Gratis, instantáneo, archivos quedan en tu dispositivo."
+    "csv-to-json-desc": "Convierte CSV a JSON en el navegador con delimitadores personalizados, campos entre comillas y detección de encabezado. Gratis, instantáneo, archivos quedan en tu dispositivo.",
+    "heic-to-jpg-title": "Convertir HEIC a JPG — Conversor iPhone Gratis",
+    "heic-to-jpg-desc": "Convierte fotos HEIC del iPhone a JPG, PNG o WebP gratis online. Sin subida, sin registro, sin marca de agua — los archivos quedan en tu dispositivo. Funciona en Windows, Mac y Linux."
   },
   "ToolHowTo": {
     "image-compressor": {
@@ -567,6 +569,22 @@
         "name": "Copia o descarga el JSON",
         "text": "Haz clic en copiar al portapapeles o descarga como archivo .json."
       }
+    },
+    "heic-to-jpg": {
+      "name": "Cómo Convertir HEIC a JPG Online",
+      "description": "Convierte fotos HEIC del iPhone a JPG, PNG o WebP directamente en el navegador, sin subir nada.",
+      "step1": {
+        "name": "Suelta tu archivo HEIC",
+        "text": "Arrastra y suelta o haz clic para seleccionar una foto .heic o .heif desde el iPhone, Mac o cámara."
+      },
+      "step2": {
+        "name": "Elige formato y calidad",
+        "text": "Elige JPG, PNG o WebP. Ajusta el slider de calidad para formatos con pérdida. PNG mantiene la calidad total."
+      },
+      "step3": {
+        "name": "Descarga la imagen convertida",
+        "text": "Haz clic en descargar para guardar la foto convertida. El decode y re-encode ocurren totalmente en el navegador."
+      }
     }
   },
   "ToolSeo": {
@@ -901,6 +919,42 @@
       "a3": "Hasta 50 MB por archivo. El parser en streaming mantiene un uso de memoria bajo, así que incluso archivos con cientos de miles de filas convierten sin colgar la pestaña del navegador.",
       "q4": "¿Puedo obtener un array de objetos en lugar de arrays?",
       "a4": "Sí. Activa la opción de cabecera y la primera fila se usa como claves JSON, produciendo un array de objetos. Desactívala para obtener un array de arrays, útil cuando el origen no tiene cabecera o quieres acceso por posición."
+    },
+    "heic-to-jpg": {
+      "intro": "Convierte fotos HEIC a JPG, PNG o WebP directamente en tu navegador. El conversor HEIC de ConverterUp está pensado para usuarios de iPhone y iPad que necesitan compartir o subir fotos a apps y webs que aún no aceptan el formato HEIC de Apple — visores de fotos de Windows, versiones antiguas de Photoshop, la mayoría de dashboards CMS y muchos clientes de correo. Suelta el archivo .heic, elige el formato de destino y descarga la imagen en segundos. El decode ocurre localmente con una build WebAssembly de libheif, así que la foto original nunca sale de tu dispositivo ni se sube a servidores de terceros.",
+      "section1": {
+        "heading": "Por qué el iPhone guarda en HEIC en lugar de JPG",
+        "p1": "Desde iOS 11 (2017), los iPhones graban por defecto en <strong>HEIC</strong> (High Efficiency Image Coding), una variante de Apple del contenedor HEIF. El motivo es el espacio: HEIC comprime fotos aproximadamente <strong>50 % más pequeñas</strong> que JPG con la misma calidad visual, gracias al códec HEVC moderno por debajo. Una foto de 12 MP ocupa unos 2 MB en lugar de 4 MB.",
+        "p2": "El problema es la compatibilidad. Solo las plataformas Apple y algunas apps recientes decodifican HEIC de forma nativa. Abre el archivo en un PC con Windows 10, suéltalo en una página de Notion, adjúntalo a Gmail o súbelo a un WordPress antiguo, y normalmente recibes una previsualización genérica, un error, o nada.",
+        "p3": "Convertir HEIC a JPG (o PNG, WebP) restaura la compatibilidad universal. Pierdes el ahorro de espacio, pero ganas la capacidad de compartir, embeber, editar y hacer copia de seguridad de la foto en cualquier lugar — incluyendo servicios que no han actualizado su pipeline de imagen en la última década.",
+        "p4": "Si quieres saltarte la conversión para fotos futuras, abre en el iPhone <em>Ajustes → Cámara → Formatos</em> y cambia de <strong>Alta eficiencia</strong> a <strong>Más compatible</strong>. El iPhone pasará a guardar en JPG directamente. Las fotos HEIC ya existentes en tu biblioteca aún necesitan conversión."
+      },
+      "section2": {
+        "heading": "JPG vs PNG vs WebP — qué formato elegir",
+        "p1": "<strong>JPG</strong> es la opción segura. Todo navegador, sistema operativo, CMS, red social y cliente de correo lo acepta. Usa 90–95 % de calidad para un resultado visual indistinguible del HEIC, con un archivo 1,5–2× más grande que el original. Elige JPG cuando no sabes dónde acabará la foto.",
+        "p2": "<strong>PNG</strong> es sin pérdida — cada píxel decodificado del HEIC se preserva exactamente. Úsalo cuando vas a editar la foto después, cuando la imagen tiene texto o gráficos, o cuando necesitas transparencia (poco común en fotos de cámara). Los archivos suelen ser 5–10× más grandes que el HEIC.",
+        "p3": "<strong>WebP</strong> al 90 % de calidad se acerca al tamaño del HEIC y es legible por todos los navegadores modernos (Chrome, Firefox, Safari 14+, Edge). Elígelo cuando la foto va destinada a la web y controlas la plataforma. Para adjuntos de correo y compartir offline, mejor JPG — los clientes más antiguos aún tienen problemas con WebP.",
+        "p4": "Las tres salidas reducen la información HDR codificada en el HEIC a sRGB / 8 bits estándar. Si necesitas preservar HDR para edición profesional, exporta desde la app Fotos de macOS manteniendo la codificación original — esta herramienta optimiza el compartir, no el archivado."
+      },
+      "section3": {
+        "heading": "Privacidad, conversión por lotes y EXIF",
+        "p1": "El conversor HEIC de ConverterUp es <strong>100 % en el navegador</strong>. El binario WebAssembly de libheif (~1 MB) se carga en modo lazy desde un CDN público en la primera conversión, luego queda en la caché del navegador. Tus fotos se decodifican en memoria y el navegador las re-codifica usando su canvas nativo — en ningún momento llegan datos de imagen a un servidor de ConverterUp. Compáralo con la mayoría de conversores HEIC online, que obligan a subir.",
+        "p2": "Los <strong>metadatos EXIF</strong> (modelo de cámara, coordenadas GPS, fecha de captura) se eliminan durante la conversión por defecto, porque canvas.toBlob no los preserva. Para la mayoría de casos de uso al compartir esta es la opción amiga de la privacidad. Si necesitas conservar el EXIF, edita la foto en la app Fotos de Apple y expórtala como JPG/PNG en su lugar.",
+        "p3": "Para <strong>conversión por lotes</strong>, suelta tus fotos HEIC de una en una por ahora; el procesado multi-archivo está en el roadmap. Para Live Photos (HEIC + .MOV emparejado), la herramienta convierte solo la imagen estática — el vídeo/audio está en el archivo .MOV acompañante, no en el HEIC, y no se convierte."
+      },
+      "faqHeading": "Preguntas frecuentes",
+      "q1": "¿Por qué Windows no abre mis fotos HEIC del iPhone?",
+      "a1": "Windows 10 y 11 pueden abrir HEIC, pero solo tras instalar las <em>HEIF Image Extensions</em> de Microsoft (gratis) Y las <em>HEVC Video Extensions</em> (de pago en algunas regiones). Si no quieres pagar ni instalar extensiones, convierte HEIC a JPG una vez y míralo con normalidad.",
+      "q2": "¿El JPG convertido es más pequeño o más grande que el HEIC?",
+      "a2": "Más grande, normalmente 1,5–2× más al 92 % de calidad JPG. El códec HEVC del HEIC es más eficiente que el DCT del JPG. Si el tamaño te importa más que la compatibilidad universal, elige WebP al 85–90 % — se queda cerca del tamaño del HEIC original.",
+      "q3": "¿Mis fotos se suben a un servidor?",
+      "a3": "No. El decode corre en el navegador vía build WebAssembly de libheif cargada desde CDN. El navegador luego re-codifica a JPG / PNG / WebP usando la API canvas nativa. ConverterUp no tiene endpoint de subida para imágenes y no ve tus fotos.",
+      "q4": "¿Cuál es el tamaño máximo de archivo?",
+      "a4": "50 MB por archivo. Un HEIC típico de iPhone es de 2–5 MB, así que esto cubre desde fotos estándar hasta disparos de alta resolución de 48 MP del iPhone Pro. Archivos más grandes pueden funcionar pero serán lentos en móviles antiguos porque libheif corre en un único hilo.",
+      "q5": "¿Funciona con Live Photos y bursts HEIC?",
+      "a5": "Convierte la imagen principal (primera) dentro del contenedor HEIC. Las Live Photos guardan el movimiento en un archivo <code>.MOV</code> aparte que iOS empareja en la biblioteca Fotos — ese vídeo no está dentro del HEIC y no se convierte. Los bursts HEIC suelen contener una única imagen representativa.",
+      "q6": "¿La herramienta soporta HEIF y secuencias HEIC?",
+      "a6": "Sí. Las extensiones <code>.heif</code> y <code>.heic</code> se decodifican con el mismo pipeline de libheif. Las secuencias HEIC multi-imagen se detectan, pero el conversor exporta solo la primera imagen. Si necesitas todos los frames de una secuencia, una opción para &quot;exportar todos los frames&quot; está planeada para una versión futura."
     }
   },
   "Convert": {
@@ -943,7 +997,7 @@
     "badge": "Todo gratis, sin registro",
     "heading": "Herramientas online gratis populares",
     "subheading": "Comprime, convierte, formatea y limpia — todas las herramientas corren en tu navegador. Tus archivos nunca salen del dispositivo.",
-    "viewAll": "Ver las 22 herramientas",
+    "viewAll": "Ver las 23 herramientas",
     "categoryImage": "Imagen y Foto",
     "categoryConvert": "Conversión",
     "categoryDev": "Desarrollador y Texto"

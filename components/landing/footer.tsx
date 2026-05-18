@@ -33,6 +33,7 @@ const tools = [
   { name: "Base64 Decoder", href: "/tools/base64-decode" },
   { name: "Case Converter", href: "/tools/case-converter" },
   { name: "CSV to JSON", href: "/tools/csv-to-json" },
+  { name: "HEIC to JPG", href: "/tools/heic-to-jpg" },
 ];
 
 export function Footer() {
