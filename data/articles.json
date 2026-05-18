@@ -318,8 +318,8 @@
   {
     "articleId": "image-formats",
     "slug": "png-vs-jpg-vs-webp",
-    "title": "PNG vs JPG vs WebP: Which Image Format Is Best?",
-    "description": "A clear comparison of PNG, JPG, and WebP formats. When to use each, file size differences, and how to convert between them.",
+    "title": "PNG vs JPG vs WebP: Differences, File Size, and When to Use Each",
+    "description": "PNG vs JPG vs WebP compared: lossy vs lossless, real file size benchmarks, transparency support, browser compatibility, and exactly which format to use for photos, graphics, and the web.",
     "keyword": "png vs jpg vs webp",
     "toolHref": "/dashboard",
     "toolName": "Media Converter",
@@ -3942,8 +3942,8 @@
   {
     "articleId": "create-favicon",
     "slug": "como-criar-favicon-para-site",
-    "title": "Como Criar um Favicon para Seu Site",
-    "description": "Gere todos os tamanhos de favicon a partir de uma única imagem. Inclui apple-touch-icon, ícones PWA e o código HTML para adicioná-los.",
+    "title": "Como Criar um Favicon para Site: Gerador Online + Código HTML",
+    "description": "Como criar um favicon para o seu site: gere todos os tamanhos (ICO, PNG 16x16, 32x32, Apple Touch, Android) a partir de uma imagem e copie o código HTML pronto para adicionar ao <head>.",
     "keyword": "como criar favicon",
     "toolHref": "/tools/favicon-generator",
     "toolName": "Gerador de Favicon",
@@ -5813,8 +5813,8 @@
   {
     "articleId": "create-favicon",
     "slug": "como-crear-favicon-para-tu-sitio-web",
-    "title": "Cómo Crear un Favicon para Tu Sitio Web: Guía Completa",
-    "description": "Genera todos los tamaños de favicon necesarios para navegadores, móviles y apps. Desde una sola imagen, gratis y al instante.",
+    "title": "Cómo Crear un Favicon Web: Generador Online + Código HTML (Guía)",
+    "description": "Cómo crear un favicon para tu sitio web: genera todos los tamaños (ICO, PNG 16x16, 32x32, Apple Touch, Android) desde una imagen y copia el código HTML listo para añadir al <head>.",
     "keyword": "como crear favicon",
     "toolHref": "/tools/favicon-generator",
     "toolName": "Generador de Favicon",

@@ -170,205 +170,403 @@
     "noResults": "No se encontraron herramientas para"
   },
   "ToolMeta": {
-    "image-compressor-title": "Compresor de Imágenes Gratis — Reducir Tamaño Online",
-    "image-compressor-desc": "Comprime imágenes PNG, JPG, WebP y AVIF directamente en el navegador. Ajusta la calidad, previsualiza y descarga archivos más pequeños. Sin subidas, 100% en el navegador.",
-    "image-resizer-title": "Redimensionar Imágenes Gratis — Cambiar Tamaño Online",
-    "image-resizer-desc": "Redimensiona imágenes a dimensiones exactas o porcentajes. Compatible con PNG, JPG, WebP y más. Gratis, rápido y 100% en el navegador.",
-    "video-to-gif-title": "Convertir Video a GIF Gratis — MP4 a GIF Online",
-    "video-to-gif-desc": "Convierte videos MP4, WebM, MOV y AVI en GIFs animados de alta calidad. Ajusta frame rate y tamaño. Gratis y 100% en el navegador.",
-    "qr-code-generator-title": "Generador de Código QR Gratis — Colores y Tamaños Personalizados",
-    "qr-code-generator-desc": "Genera códigos QR personalizados con colores, tamaños y niveles de corrección. Descarga como PNG. Gratis, rápido y 100% en el navegador.",
-    "youtube-thumbnail-downloader-title": "Descargar Miniatura de YouTube Gratis — Todas las Resoluciones",
-    "youtube-thumbnail-downloader-desc": "Descarga miniaturas de videos de YouTube en HD, SD, HQ y MQ. Gratis, instantáneo y sin registro.",
-    "exif-viewer-title": "Visor EXIF Gratis — Ver Metadatos de Fotos",
-    "exif-viewer-desc": "Visualiza y elimina metadatos EXIF de tus fotos. Compatible con JPEG, PNG, WebP y TIFF. 100% en el navegador, tus fotos se mantienen privadas.",
-    "color-palette-title": "Extractor de Paleta de Colores Gratis — Extraer Colores de Imágenes",
-    "color-palette-desc": "Extrae los colores dominantes de cualquier imagen. Obtén valores HEX, RGB y HSL. Gratis, instantáneo y 100% en el navegador.",
-    "favicon-generator-title": "Generador de Favicon Gratis — Crear Favicons desde Imágenes",
-    "favicon-generator-desc": "Genera favicons en todos los tamaños estándar desde una sola imagen. Descarga como ZIP. Gratis, rápido y 100% en el navegador.",
-    "svg-to-png-title": "Convertir SVG a PNG Gratis — Convertir Archivos SVG Online",
-    "svg-to-png-desc": "Convierte archivos SVG a imágenes PNG con opciones de escala y fondo. Gratis, rápido y 100% en el navegador. Sin subidas.",
-    "image-to-base64-title": "Convertir Imagen a Base64 Gratis — Generar Data URIs",
-    "image-to-base64-desc": "Codifica imágenes como Base64 data URIs para incrustar en HTML, CSS o JSON. Compatible con PNG, JPG, WebP, GIF y SVG. 100% en el navegador.",
-    "video-frame-extractor-title": "Extractor de Fotogramas Gratis — Capturar Frames de Video",
-    "video-frame-extractor-desc": "Extrae fotogramas individuales de videos MP4, WebM y MOV. Guarda como PNG o JPG. Gratis, rápido y 100% en el navegador.",
-    "stripe-fee-calculator-title": "Calculadora de Comisiones Stripe Gratis — Calcular Tarifas",
-    "stripe-fee-calculator-desc": "Calcula las comisiones de procesamiento de Stripe para cualquier monto. Compatible con USD, EUR, GBP y BRL. Gratis e instantáneo.",
-    "text-repeater-title": "Repetidor de Texto Gratis — Repetir Texto Múltiples Veces",
-    "text-repeater-desc": "Repite cualquier texto múltiples veces con separadores personalizados. Gratis, instantáneo y 100% en el navegador.",
-    "vtt-to-srt-title": "Convertir VTT a SRT Gratis — Convertir Subtítulos Online",
-    "vtt-to-srt-desc": "Convierte subtítulos WebVTT a formato SRT instantáneamente. Gratis, rápido y 100% en el navegador. Sin subidas.",
-    "json-viewer-title": "Visor JSON Gratis — Formatear y Validar JSON Online",
-    "json-viewer-desc": "Formatea, valida y explora JSON con resaltado de sintaxis. Minifica o embellece datos JSON. Gratis, rápido y 100% en el navegador.",
-    "hex-to-decimal-title": "Convertir Hex a Decimal Gratis — Convertir Bases Numéricas",
-    "hex-to-decimal-desc": "Convierte entre hexadecimal, decimal, binario y octal. Compatible con códigos de color hex con conversión RGB. Gratis e instantáneo.",
-    "html-minifier-title": "Minificador HTML Gratis — Minificar Código HTML Online",
-    "html-minifier-desc": "Minifica código HTML para reducir el tamaño del archivo y mejorar la velocidad de carga. Gratis, rápido y 100% en el navegador.",
-    "css-minifier-title": "Minificador CSS Gratis — Minificar Hojas de Estilo Online",
-    "css-minifier-desc": "Minifica hojas de estilo CSS para carga más rápida. Elimina espacios, comentarios y optimiza selectores. Gratis y en el navegador.",
-    "uuid-generator-title": "Generador de UUID Gratis — Generar UUID v4 al Instante",
-    "uuid-generator-desc": "Genera identificadores UUID v4 instantáneamente. Generación individual o masiva. Gratis, rápido y 100% en el navegador.",
-    "base64-decode-title": "Decodificador Base64 Gratis — Decodificar Base64 a Texto",
-    "base64-decode-desc": "Decodifica cadenas Base64 a texto o imágenes. Compatible con data URIs. Gratis, instantáneo y 100% en el navegador.",
-    "case-converter-title": "Conversor de Mayúsculas/Minúsculas Gratis — Convertir Texto Online",
-    "case-converter-desc": "Convierte texto entre MAYÚSCULAS, minúsculas, Título, camelCase, snake_case, kebab-case y más. Gratis e instantáneo.",
-    "csv-to-json-title": "Convertir CSV a JSON Gratis — Convertir CSV Online",
-    "csv-to-json-desc": "Convierte datos CSV a JSON instantáneamente. Compatible con delimitadores personalizados, campos entre comillas y filas de encabezado. Gratis y 100% en el navegador."
+    "image-compressor-title": "Comprimir Imágenes Online — Gratis, Sin Subida",
+    "image-compressor-desc": "Comprime imágenes JPG, PNG, WebP y AVIF sin perder calidad. Ajusta el slider, previsualiza el resultado y descarga en segundos. 100% en el navegador — los archivos nunca salen de tu dispositivo.",
+    "image-resizer-title": "Redimensionar Imágenes — Gratis y Preciso",
+    "image-resizer-desc": "Redimensiona imágenes JPG, PNG y WebP a píxeles exactos o porcentajes. Mantén la proporción, procesa en lote, descarga al instante. 100% en el navegador — sin registro, sin subida.",
+    "video-to-gif-title": "Video a GIF — MP4, MOV, WebM Online Gratis",
+    "video-to-gif-desc": "Convierte videos MP4, MOV, WebM y AVI a GIFs animados gratis. Elige el clip, ajusta frame rate y tamaño. Powered by FFmpeg.wasm — corre localmente en tu navegador.",
+    "qr-code-generator-title": "Generador de QR — Colores, Logo, Gratis",
+    "qr-code-generator-desc": "Genera códigos QR personalizados con colores, logo y nivel de corrección. Descarga como PNG en alta resolución. Gratis, sin marca de agua, sin registro, 100% en el navegador.",
+    "youtube-thumbnail-downloader-title": "Descargar Miniatura YouTube — HD, Max-Res Gratis",
+    "youtube-thumbnail-downloader-desc": "Descarga cualquier miniatura de YouTube en Max-Res HD, SD, HQ y MQ. Pega la URL, elige el tamaño, guarda. Gratis, instantáneo, sin registro.",
+    "exif-viewer-title": "Visor EXIF — Ver y Eliminar Metadatos Gratis",
+    "exif-viewer-desc": "Visualiza datos EXIF ocultos — cámara, GPS, fecha, exposición — de fotos JPEG, PNG, WebP y TIFF. Elimina metadatos con un clic. 100% en el navegador, tus fotos quedan privadas.",
+    "color-palette-title": "Paleta de Colores de Imagen — HEX, RGB, HSL",
+    "color-palette-desc": "Sube cualquier imagen y extrae su paleta de colores dominantes con valores HEX, RGB y HSL. Copia con un clic, gratis, instantáneo, 100% en el navegador.",
+    "favicon-generator-title": "Generador de Favicon — Todos los Tamaños + ICO",
+    "favicon-generator-desc": "Genera un pack completo de favicon desde una imagen: ICO, PNG, Apple Touch, Android y manifest. Descarga en ZIP, listo para tu sitio. Gratis, sin subida.",
+    "svg-to-png-title": "Convertir SVG a PNG — Gratis, Sin Pérdidas",
+    "svg-to-png-desc": "Convierte vectores SVG a PNG raster en 1x, 2x, 3x o 4x con fondo transparente o color personalizado. Gratis, rápido, 100% en el navegador, sin subida.",
+    "image-to-base64-title": "Imagen a Base64 — Data URI para HTML y CSS",
+    "image-to-base64-desc": "Codifica PNG, JPG, WebP, GIF y SVG como Base64 data URIs para inline en HTML, CSS o JSON. Copia con un clic. Gratis, instantáneo, 100% en el navegador.",
+    "video-frame-extractor-title": "Extractor de Fotogramas — Guardar como PNG / JPG",
+    "video-frame-extractor-desc": "Extrae fotogramas individuales de videos MP4, WebM y MOV. Avanza al momento exacto, guarda como PNG o JPG. Gratis y client-side — sin subida.",
+    "stripe-fee-calculator-title": "Calculadora Comisiones Stripe — USD, EUR, GBP, BRL",
+    "stripe-fee-calculator-desc": "Calcula las comisiones Stripe y tu monto neto en USD, EUR, GBP y BRL. Incluye tarifas de tarjeta, internacionales y conversión de moneda. Gratis e instantáneo.",
+    "text-repeater-title": "Repetidor de Texto — Repetir X Veces Online",
+    "text-repeater-desc": "Repite cualquier texto de 1 a 10.000 veces con separadores personalizados, saltos de línea o numeración. Gratis, instantáneo, 100% en el navegador.",
+    "vtt-to-srt-title": "Convertir VTT a SRT — Subtítulos Online Gratis",
+    "vtt-to-srt-desc": "Convierte subtítulos WebVTT a SRT en un clic. Mantiene timestamps y formato. Gratis, instantáneo, 100% en el navegador. Sin subida.",
+    "json-viewer-title": "Visor JSON — Formatear y Validar Online",
+    "json-viewer-desc": "Formatea, valida, embellece y minifica JSON con resaltado de sintaxis y árbol. Gratis, instantáneo, en el navegador — tu JSON nunca sale del dispositivo.",
+    "hex-to-decimal-title": "Convertir Hex a Decimal — Base 2 / 8 / 10 / 16",
+    "hex-to-decimal-desc": "Convierte entre hexadecimal, decimal, binario y octal en un solo lugar. Compatible con códigos de color hex con conversión RGB. Gratis, instantáneo, sin registro.",
+    "html-minifier-title": "Minificador HTML — Comprimir HTML Online Gratis",
+    "html-minifier-desc": "Minifica HTML para reducir el tamaño y acelerar la carga. Elimina espacios, comentarios y tags opcionales. Gratis, rápido, 100% en el navegador.",
+    "css-minifier-title": "Minificador CSS — Comprimir Stylesheets Online",
+    "css-minifier-desc": "Minifica CSS para sitios más ligeros y rápidos. Elimina espacios, comentarios y optimiza selectores. Gratis, instantáneo, corre localmente en tu navegador.",
+    "uuid-generator-title": "Generador UUID — v4, v7, NIL, en Masa, Gratis",
+    "uuid-generator-desc": "Genera identificadores UUID v4 y v7 individualmente o en masa (hasta 10.000). Copia como JSON, CSV o lista simple. Gratis, instantáneo, 100% en el navegador.",
+    "base64-decode-title": "Decodificador Base64 — Texto e Imágenes Online",
+    "base64-decode-desc": "Decodifica cadenas Base64 a texto o imágenes, incluyendo data URIs. Codifica de vuelta en un clic. Gratis, instantáneo, en el navegador.",
+    "case-converter-title": "Conversor de Texto — camelCase, snake_case, kebab",
+    "case-converter-desc": "Convierte texto entre MAYÚSCULAS, minúsculas, Título, camelCase, snake_case, kebab-case, PascalCase y CONSTANT_CASE. Gratis e instantáneo.",
+    "csv-to-json-title": "Convertir CSV a JSON — Gratis, Sin Subida",
+    "csv-to-json-desc": "Convierte CSV a JSON en el navegador con delimitadores personalizados, campos entre comillas y detección de encabezado. Gratis, instantáneo, archivos quedan en tu dispositivo."
   },
   "ToolHowTo": {
     "image-compressor": {
       "name": "Cómo Comprimir Imágenes Online",
       "description": "Comprime imágenes PNG, JPG, WebP y AVIF para reducir el tamaño del archivo manteniendo la calidad.",
-      "step1": { "name": "Sube tu imagen", "text": "Arrastra y suelta o haz clic para seleccionar una imagen PNG, JPG, WebP o AVIF desde tu dispositivo." },
-      "step2": { "name": "Ajusta la calidad de compresión", "text": "Usa el control de calidad para fijar el nivel de compresión deseado. Visualiza el resultado en tiempo real." },
-      "step3": { "name": "Descarga la imagen comprimida", "text": "Haz clic en descargar para guardar la imagen comprimida. El archivo nunca sale de tu navegador." }
+      "step1": {
+        "name": "Sube tu imagen",
+        "text": "Arrastra y suelta o haz clic para seleccionar una imagen PNG, JPG, WebP o AVIF desde tu dispositivo."
+      },
+      "step2": {
+        "name": "Ajusta la calidad de compresión",
+        "text": "Usa el control de calidad para fijar el nivel de compresión deseado. Visualiza el resultado en tiempo real."
+      },
+      "step3": {
+        "name": "Descarga la imagen comprimida",
+        "text": "Haz clic en descargar para guardar la imagen comprimida. El archivo nunca sale de tu navegador."
+      }
     },
     "image-resizer": {
       "name": "Cómo Redimensionar Imágenes Online",
       "description": "Redimensiona imágenes a dimensiones exactas o a porcentajes con control de proporción.",
-      "step1": { "name": "Sube tu imagen", "text": "Arrastra y suelta o haz clic para seleccionar una imagen desde tu dispositivo." },
-      "step2": { "name": "Define las dimensiones", "text": "Introduce ancho y alto en píxeles o porcentaje. Activa o desactiva el bloqueo de proporción según necesites." },
-      "step3": { "name": "Descarga la imagen redimensionada", "text": "Haz clic en descargar para guardar la imagen redimensionada en tu dispositivo." }
+      "step1": {
+        "name": "Sube tu imagen",
+        "text": "Arrastra y suelta o haz clic para seleccionar una imagen desde tu dispositivo."
+      },
+      "step2": {
+        "name": "Define las dimensiones",
+        "text": "Introduce ancho y alto en píxeles o porcentaje. Activa o desactiva el bloqueo de proporción según necesites."
+      },
+      "step3": {
+        "name": "Descarga la imagen redimensionada",
+        "text": "Haz clic en descargar para guardar la imagen redimensionada en tu dispositivo."
+      }
     },
     "video-to-gif": {
       "name": "Cómo Convertir Vídeo a GIF Online",
       "description": "Convierte vídeos MP4, WebM, MOV y AVI a formato GIF animado.",
-      "step1": { "name": "Sube tu vídeo", "text": "Arrastra y suelta o selecciona un archivo de vídeo MP4, WebM, MOV o AVI." },
-      "step2": { "name": "Configura las opciones del GIF", "text": "Ajusta la tasa de fotogramas, el ancho y selecciona el segmento del vídeo que quieras convertir." },
-      "step3": { "name": "Descarga el GIF", "text": "Haz clic en convertir y descarga tu archivo GIF animado." }
+      "step1": {
+        "name": "Sube tu vídeo",
+        "text": "Arrastra y suelta o selecciona un archivo de vídeo MP4, WebM, MOV o AVI."
+      },
+      "step2": {
+        "name": "Configura las opciones del GIF",
+        "text": "Ajusta la tasa de fotogramas, el ancho y selecciona el segmento del vídeo que quieras convertir."
+      },
+      "step3": {
+        "name": "Descarga el GIF",
+        "text": "Haz clic en convertir y descarga tu archivo GIF animado."
+      }
     },
     "qr-code-generator": {
       "name": "Cómo Generar un Código QR Online",
       "description": "Crea códigos QR personalizados con colores, tamaños y niveles de corrección de errores a tu medida.",
-      "step1": { "name": "Introduce el contenido", "text": "Escribe o pega una URL, texto o cualquier dato que quieras codificar en el código QR." },
-      "step2": { "name": "Personaliza el código QR", "text": "Elige colores, tamaño y nivel de corrección de errores para tu código QR." },
-      "step3": { "name": "Descarga el código QR", "text": "Haz clic en descargar para guardar el código QR como imagen PNG." }
+      "step1": {
+        "name": "Introduce el contenido",
+        "text": "Escribe o pega una URL, texto o cualquier dato que quieras codificar en el código QR."
+      },
+      "step2": {
+        "name": "Personaliza el código QR",
+        "text": "Elige colores, tamaño y nivel de corrección de errores para tu código QR."
+      },
+      "step3": {
+        "name": "Descarga el código QR",
+        "text": "Haz clic en descargar para guardar el código QR como imagen PNG."
+      }
     },
     "youtube-thumbnail-downloader": {
       "name": "Cómo Descargar Miniaturas de YouTube",
       "description": "Descarga miniaturas de vídeos de YouTube en todas las resoluciones disponibles.",
-      "step1": { "name": "Pega la URL de YouTube", "text": "Copia y pega la URL del vídeo de YouTube en el campo de entrada." },
-      "step2": { "name": "Elige una resolución", "text": "Selecciona entre las resoluciones disponibles: HD, SD, HQ o MQ." },
-      "step3": { "name": "Descarga la miniatura", "text": "Haz clic en descargar para guardar la imagen de la miniatura en tu dispositivo." }
+      "step1": {
+        "name": "Pega la URL de YouTube",
+        "text": "Copia y pega la URL del vídeo de YouTube en el campo de entrada."
+      },
+      "step2": {
+        "name": "Elige una resolución",
+        "text": "Selecciona entre las resoluciones disponibles: HD, SD, HQ o MQ."
+      },
+      "step3": {
+        "name": "Descarga la miniatura",
+        "text": "Haz clic en descargar para guardar la imagen de la miniatura en tu dispositivo."
+      }
     },
     "exif-viewer": {
       "name": "Cómo Ver y Eliminar Datos EXIF de Fotos",
       "description": "Consulta y elimina metadatos de fotos JPEG, PNG, WebP y TIFF.",
-      "step1": { "name": "Sube tu foto", "text": "Arrastra y suelta o selecciona una imagen JPEG, PNG, WebP o TIFF." },
-      "step2": { "name": "Consulta los metadatos EXIF", "text": "Revisa todos los metadatos, incluido modelo de cámara, coordenadas GPS, fecha y ajustes de exposición." },
-      "step3": { "name": "Elimina los datos EXIF", "text": "Haz clic en eliminar para borrar todos los metadatos y descargar una copia limpia de tu foto." }
+      "step1": {
+        "name": "Sube tu foto",
+        "text": "Arrastra y suelta o selecciona una imagen JPEG, PNG, WebP o TIFF."
+      },
+      "step2": {
+        "name": "Consulta los metadatos EXIF",
+        "text": "Revisa todos los metadatos, incluido modelo de cámara, coordenadas GPS, fecha y ajustes de exposición."
+      },
+      "step3": {
+        "name": "Elimina los datos EXIF",
+        "text": "Haz clic en eliminar para borrar todos los metadatos y descargar una copia limpia de tu foto."
+      }
     },
     "color-palette": {
       "name": "Cómo Extraer Colores de una Imagen",
       "description": "Extrae los colores dominantes y genera una paleta a partir de cualquier imagen.",
-      "step1": { "name": "Sube tu imagen", "text": "Arrastra y suelta o selecciona una imagen para analizar." },
-      "step2": { "name": "Visualiza los colores extraídos", "text": "Consulta los colores dominantes extraídos de tu imagen con valores HEX, RGB y HSL." },
-      "step3": { "name": "Copia los valores de color", "text": "Haz clic en cualquier color para copiar su valor HEX, RGB o HSL al portapapeles." }
+      "step1": {
+        "name": "Sube tu imagen",
+        "text": "Arrastra y suelta o selecciona una imagen para analizar."
+      },
+      "step2": {
+        "name": "Visualiza los colores extraídos",
+        "text": "Consulta los colores dominantes extraídos de tu imagen con valores HEX, RGB y HSL."
+      },
+      "step3": {
+        "name": "Copia los valores de color",
+        "text": "Haz clic en cualquier color para copiar su valor HEX, RGB o HSL al portapapeles."
+      }
     },
     "favicon-generator": {
       "name": "Cómo Crear un Favicon a Partir de una Imagen",
       "description": "Genera favicons en todos los tamaños estándar a partir de una sola imagen de origen.",
-      "step1": { "name": "Sube una imagen de origen", "text": "Arrastra y suelta o selecciona una imagen PNG, JPG, WebP o SVG para usarla como favicon." },
-      "step2": { "name": "Previsualiza todos los tamaños", "text": "Previsualiza tu favicon en todos los tamaños estándar, de 16x16 a 512x512 píxeles." },
-      "step3": { "name": "Descarga el paquete de favicons", "text": "Descarga todos los tamaños del favicon en un archivo ZIP listo para añadir a tu sitio web." }
+      "step1": {
+        "name": "Sube una imagen de origen",
+        "text": "Arrastra y suelta o selecciona una imagen PNG, JPG, WebP o SVG para usarla como favicon."
+      },
+      "step2": {
+        "name": "Previsualiza todos los tamaños",
+        "text": "Previsualiza tu favicon en todos los tamaños estándar, de 16x16 a 512x512 píxeles."
+      },
+      "step3": {
+        "name": "Descarga el paquete de favicons",
+        "text": "Descarga todos los tamaños del favicon en un archivo ZIP listo para añadir a tu sitio web."
+      }
     },
     "svg-to-png": {
       "name": "Cómo Convertir SVG a PNG Online",
       "description": "Convierte archivos SVG vectoriales en imágenes PNG con opciones de escala personalizadas.",
-      "step1": { "name": "Sube tu archivo SVG", "text": "Arrastra y suelta o selecciona un archivo SVG desde tu dispositivo." },
-      "step2": { "name": "Elige escala y opciones", "text": "Selecciona la escala de salida (1x, 2x, 3x, 4x) y el color de fondo." },
-      "step3": { "name": "Descarga el PNG", "text": "Haz clic en descargar para guardar la imagen PNG convertida." }
+      "step1": {
+        "name": "Sube tu archivo SVG",
+        "text": "Arrastra y suelta o selecciona un archivo SVG desde tu dispositivo."
+      },
+      "step2": {
+        "name": "Elige escala y opciones",
+        "text": "Selecciona la escala de salida (1x, 2x, 3x, 4x) y el color de fondo."
+      },
+      "step3": {
+        "name": "Descarga el PNG",
+        "text": "Haz clic en descargar para guardar la imagen PNG convertida."
+      }
     },
     "image-to-base64": {
       "name": "Cómo Convertir una Imagen a Base64",
       "description": "Codifica imágenes como data URIs Base64 para incrustarlas en HTML, CSS o JSON.",
-      "step1": { "name": "Sube tu imagen", "text": "Arrastra y suelta o selecciona una imagen PNG, JPG, WebP, GIF o SVG." },
-      "step2": { "name": "Obtén la salida Base64", "text": "Visualiza la cadena Base64 generada o el data URI de tu imagen." },
-      "step3": { "name": "Copia el resultado", "text": "Haz clic en copiar para añadir la cadena Base64 al portapapeles y usarla en tu código." }
+      "step1": {
+        "name": "Sube tu imagen",
+        "text": "Arrastra y suelta o selecciona una imagen PNG, JPG, WebP, GIF o SVG."
+      },
+      "step2": {
+        "name": "Obtén la salida Base64",
+        "text": "Visualiza la cadena Base64 generada o el data URI de tu imagen."
+      },
+      "step3": {
+        "name": "Copia el resultado",
+        "text": "Haz clic en copiar para añadir la cadena Base64 al portapapeles y usarla en tu código."
+      }
     },
     "video-frame-extractor": {
       "name": "Cómo Extraer Fotogramas de un Vídeo",
       "description": "Captura fotogramas individuales de archivos de vídeo MP4, WebM y MOV.",
-      "step1": { "name": "Sube tu vídeo", "text": "Arrastra y suelta o selecciona un archivo de vídeo MP4, WebM o MOV." },
-      "step2": { "name": "Ve al fotograma deseado", "text": "Usa la línea de tiempo para encontrar el fotograma exacto que quieras capturar." },
-      "step3": { "name": "Guarda el fotograma", "text": "Haz clic en capturar para guardar el fotograma como imagen PNG o JPG." }
+      "step1": {
+        "name": "Sube tu vídeo",
+        "text": "Arrastra y suelta o selecciona un archivo de vídeo MP4, WebM o MOV."
+      },
+      "step2": {
+        "name": "Ve al fotograma deseado",
+        "text": "Usa la línea de tiempo para encontrar el fotograma exacto que quieras capturar."
+      },
+      "step3": {
+        "name": "Guarda el fotograma",
+        "text": "Haz clic en capturar para guardar el fotograma como imagen PNG o JPG."
+      }
     },
     "stripe-fee-calculator": {
       "name": "Cómo Calcular las Comisiones de Stripe",
       "description": "Calcula las comisiones de Stripe para cualquier importe de transacción en varias monedas.",
-      "step1": { "name": "Introduce el importe de la transacción", "text": "Escribe el importe que quieras cobrar o recibir." },
-      "step2": { "name": "Selecciona la moneda", "text": "Elige entre USD, EUR, GBP o BRL para ver las comisiones correctas." },
-      "step3": { "name": "Consulta el desglose", "text": "Visualiza la comisión de Stripe, el importe neto y cuánto cobrar para recibir un valor concreto." }
+      "step1": {
+        "name": "Introduce el importe de la transacción",
+        "text": "Escribe el importe que quieras cobrar o recibir."
+      },
+      "step2": {
+        "name": "Selecciona la moneda",
+        "text": "Elige entre USD, EUR, GBP o BRL para ver las comisiones correctas."
+      },
+      "step3": {
+        "name": "Consulta el desglose",
+        "text": "Visualiza la comisión de Stripe, el importe neto y cuánto cobrar para recibir un valor concreto."
+      }
     },
     "text-repeater": {
       "name": "Cómo Repetir Texto Varias Veces",
       "description": "Repite cualquier cadena de texto varias veces con separadores personalizados.",
-      "step1": { "name": "Introduce tu texto", "text": "Escribe o pega el texto que quieras repetir." },
-      "step2": { "name": "Define repeticiones y separador", "text": "Elige cuántas veces repetir y qué separador usar entre repeticiones." },
-      "step3": { "name": "Copia el resultado", "text": "Haz clic en copiar para añadir el texto repetido al portapapeles." }
+      "step1": {
+        "name": "Introduce tu texto",
+        "text": "Escribe o pega el texto que quieras repetir."
+      },
+      "step2": {
+        "name": "Define repeticiones y separador",
+        "text": "Elige cuántas veces repetir y qué separador usar entre repeticiones."
+      },
+      "step3": {
+        "name": "Copia el resultado",
+        "text": "Haz clic en copiar para añadir el texto repetido al portapapeles."
+      }
     },
     "vtt-to-srt": {
       "name": "Cómo Convertir Subtítulos VTT a SRT",
       "description": "Convierte archivos de subtítulos WebVTT a formato SRT al instante.",
-      "step1": { "name": "Sube tu archivo VTT", "text": "Arrastra y suelta o selecciona un archivo de subtítulos WebVTT (.vtt)." },
-      "step2": { "name": "Previsualiza la conversión", "text": "Revisa los subtítulos convertidos para asegurarte de que son correctos." },
-      "step3": { "name": "Descarga el archivo SRT", "text": "Haz clic en descargar para guardar el archivo de subtítulos SRT convertido." }
+      "step1": {
+        "name": "Sube tu archivo VTT",
+        "text": "Arrastra y suelta o selecciona un archivo de subtítulos WebVTT (.vtt)."
+      },
+      "step2": {
+        "name": "Previsualiza la conversión",
+        "text": "Revisa los subtítulos convertidos para asegurarte de que son correctos."
+      },
+      "step3": {
+        "name": "Descarga el archivo SRT",
+        "text": "Haz clic en descargar para guardar el archivo de subtítulos SRT convertido."
+      }
     },
     "json-viewer": {
       "name": "Cómo Formatear y Validar JSON Online",
       "description": "Formatea, valida y explora datos JSON con resaltado de sintaxis.",
-      "step1": { "name": "Pega tu JSON", "text": "Pega o escribe tus datos JSON en el editor." },
-      "step2": { "name": "Formatea o minifica", "text": "Haz clic en formatear para embellecer el JSON o en minificar para comprimirlo. Los errores de validación se resaltan." },
-      "step3": { "name": "Copia el resultado", "text": "Haz clic en copiar para añadir el JSON formateado al portapapeles." }
+      "step1": {
+        "name": "Pega tu JSON",
+        "text": "Pega o escribe tus datos JSON en el editor."
+      },
+      "step2": {
+        "name": "Formatea o minifica",
+        "text": "Haz clic en formatear para embellecer el JSON o en minificar para comprimirlo. Los errores de validación se resaltan."
+      },
+      "step3": {
+        "name": "Copia el resultado",
+        "text": "Haz clic en copiar para añadir el JSON formateado al portapapeles."
+      }
     },
     "hex-to-decimal": {
       "name": "Cómo Convertir Hexadecimal a Decimal",
       "description": "Convierte entre hexadecimal, decimal, binario y octal.",
-      "step1": { "name": "Introduce un número", "text": "Escribe un número hexadecimal, decimal, binario u octal." },
-      "step2": { "name": "Consulta todas las conversiones", "text": "Visualiza el número convertido a las cuatro bases simultáneamente." },
-      "step3": { "name": "Copia cualquier resultado", "text": "Haz clic en copiar junto a cualquier conversión para añadirla al portapapeles." }
+      "step1": {
+        "name": "Introduce un número",
+        "text": "Escribe un número hexadecimal, decimal, binario u octal."
+      },
+      "step2": {
+        "name": "Consulta todas las conversiones",
+        "text": "Visualiza el número convertido a las cuatro bases simultáneamente."
+      },
+      "step3": {
+        "name": "Copia cualquier resultado",
+        "text": "Haz clic en copiar junto a cualquier conversión para añadirla al portapapeles."
+      }
     },
     "html-minifier": {
       "name": "Cómo Minificar Código HTML Online",
       "description": "Minifica HTML para reducir el tamaño del archivo y mejorar la velocidad de carga.",
-      "step1": { "name": "Pega tu HTML", "text": "Pega o escribe tu código HTML en el editor." },
-      "step2": { "name": "Haz clic en minificar", "text": "Pulsa el botón minificar para eliminar espacios, comentarios y optimizar el código." },
-      "step3": { "name": "Copia el HTML minificado", "text": "Haz clic en copiar para añadir el HTML minificado al portapapeles." }
+      "step1": {
+        "name": "Pega tu HTML",
+        "text": "Pega o escribe tu código HTML en el editor."
+      },
+      "step2": {
+        "name": "Haz clic en minificar",
+        "text": "Pulsa el botón minificar para eliminar espacios, comentarios y optimizar el código."
+      },
+      "step3": {
+        "name": "Copia el HTML minificado",
+        "text": "Haz clic en copiar para añadir el HTML minificado al portapapeles."
+      }
     },
     "css-minifier": {
       "name": "Cómo Minificar Hojas de Estilo CSS Online",
       "description": "Minifica CSS para eliminar espacios, comentarios y optimizar selectores.",
-      "step1": { "name": "Pega tu CSS", "text": "Pega o escribe tu código CSS en el editor." },
-      "step2": { "name": "Haz clic en minificar", "text": "Pulsa el botón minificar para comprimir el código CSS." },
-      "step3": { "name": "Copia el CSS minificado", "text": "Haz clic en copiar para añadir el CSS minificado al portapapeles." }
+      "step1": {
+        "name": "Pega tu CSS",
+        "text": "Pega o escribe tu código CSS en el editor."
+      },
+      "step2": {
+        "name": "Haz clic en minificar",
+        "text": "Pulsa el botón minificar para comprimir el código CSS."
+      },
+      "step3": {
+        "name": "Copia el CSS minificado",
+        "text": "Haz clic en copiar para añadir el CSS minificado al portapapeles."
+      }
     },
     "uuid-generator": {
       "name": "Cómo Generar Identificadores UUID v4",
       "description": "Genera UUIDs v4 individuales o en masa al instante.",
-      "step1": { "name": "Elige el modo de generación", "text": "Selecciona UUID único o generación en masa y define la cantidad." },
-      "step2": { "name": "Genera los UUIDs", "text": "Haz clic en generar para crear nuevos identificadores UUID v4." },
-      "step3": { "name": "Copia los UUIDs", "text": "Haz clic en copiar para añadir los UUIDs generados al portapapeles." }
+      "step1": {
+        "name": "Elige el modo de generación",
+        "text": "Selecciona UUID único o generación en masa y define la cantidad."
+      },
+      "step2": {
+        "name": "Genera los UUIDs",
+        "text": "Haz clic en generar para crear nuevos identificadores UUID v4."
+      },
+      "step3": {
+        "name": "Copia los UUIDs",
+        "text": "Haz clic en copiar para añadir los UUIDs generados al portapapeles."
+      }
     },
     "base64-decode": {
       "name": "Cómo Decodificar Cadenas Base64",
       "description": "Decodifica cadenas Base64 a texto plano o imágenes.",
-      "step1": { "name": "Pega la cadena Base64", "text": "Pega tu cadena codificada en Base64 o data URI en el campo de entrada." },
-      "step2": { "name": "Consulta la salida decodificada", "text": "Visualiza al instante el texto decodificado o la previsualización de la imagen." },
-      "step3": { "name": "Copia o descarga", "text": "Copia el texto decodificado o descarga la imagen decodificada." }
+      "step1": {
+        "name": "Pega la cadena Base64",
+        "text": "Pega tu cadena codificada en Base64 o data URI en el campo de entrada."
+      },
+      "step2": {
+        "name": "Consulta la salida decodificada",
+        "text": "Visualiza al instante el texto decodificado o la previsualización de la imagen."
+      },
+      "step3": {
+        "name": "Copia o descarga",
+        "text": "Copia el texto decodificado o descarga la imagen decodificada."
+      }
     },
     "case-converter": {
       "name": "Cómo Convertir Mayúsculas y Minúsculas Online",
       "description": "Convierte texto entre MAYÚSCULAS, minúsculas, Tipo Título, camelCase, snake_case y más.",
-      "step1": { "name": "Introduce tu texto", "text": "Escribe o pega el texto que quieras convertir." },
-      "step2": { "name": "Elige un formato", "text": "Selecciona entre MAYÚSCULAS, minúsculas, Tipo Título, camelCase, snake_case, kebab-case, PascalCase y más." },
-      "step3": { "name": "Copia el resultado", "text": "Haz clic en copiar para añadir el texto convertido al portapapeles." }
+      "step1": {
+        "name": "Introduce tu texto",
+        "text": "Escribe o pega el texto que quieras convertir."
+      },
+      "step2": {
+        "name": "Elige un formato",
+        "text": "Selecciona entre MAYÚSCULAS, minúsculas, Tipo Título, camelCase, snake_case, kebab-case, PascalCase y más."
+      },
+      "step3": {
+        "name": "Copia el resultado",
+        "text": "Haz clic en copiar para añadir el texto convertido al portapapeles."
+      }
     },
     "csv-to-json": {
       "name": "Cómo Convertir CSV a JSON Online",
       "description": "Convierte datos CSV a formato JSON con soporte para delimitadores personalizados.",
-      "step1": { "name": "Pega o sube datos CSV", "text": "Pega tus datos CSV o sube un archivo CSV. Configura el delimitador si es necesario." },
-      "step2": { "name": "Previsualiza el JSON", "text": "Revisa los datos JSON convertidos con resaltado de sintaxis." },
-      "step3": { "name": "Copia o descarga el JSON", "text": "Haz clic en copiar al portapapeles o descarga como archivo .json." }
+      "step1": {
+        "name": "Pega o sube datos CSV",
+        "text": "Pega tus datos CSV o sube un archivo CSV. Configura el delimitador si es necesario."
+      },
+      "step2": {
+        "name": "Previsualiza el JSON",
+        "text": "Revisa los datos JSON convertidos con resaltado de sintaxis."
+      },
+      "step3": {
+        "name": "Copia o descarga el JSON",
+        "text": "Haz clic en copiar al portapapeles o descarga como archivo .json."
+      }
     }
   },
   "ToolSeo": {

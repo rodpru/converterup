@@ -1,3 +1,4 @@
+import { ArrowRight, Check } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -11,7 +12,6 @@ import {
 } from "@/data/conversions";
 import { Link } from "@/i18n/routing";
 import { generateAlternates } from "@/lib/seo";
-import { ArrowRight, Check } from "lucide-react";
 
 export function generateStaticParams() {
   const locales = ["en", "pt", "es"];

@@ -11,24 +11,25 @@ export async function generateMetadata({
   const { locale } = await params;
   const alternates = generateAlternates("/tools", locale);
 
+  const title = "22 Free Online Tools — Image, Video, Code, Text";
+  const description =
+    "Compress, resize, convert, format. 22 free browser-based tools for images, video, code, and text — 100% private, no upload, no signup.";
+
   return {
-    title: "Free Online Tools | ConverterUp",
-    description:
-      "22 free browser-based tools for images, video, code, and more. 3 free uses per day. 100% private — files never leave your device.",
+    title,
+    description,
     alternates,
     openGraph: {
-      title: "Free Online Tools | ConverterUp",
-      description:
-        "22 free browser-based tools for images, video, code, and more. 3 free uses per day.",
+      title,
+      description,
       url: alternates.canonical,
       siteName: "ConverterUp",
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: "Free Online Tools | ConverterUp",
-      description:
-        "22 free browser-based tools for images, video, code, and more. 3 free uses per day.",
+      title,
+      description,
     },
   };
 }

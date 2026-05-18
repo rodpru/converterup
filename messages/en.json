@@ -170,205 +170,403 @@
     "noResults": "No tools found for"
   },
   "ToolMeta": {
-    "image-compressor-title": "Free Image Compressor — Reduce File Size Online",
-    "image-compressor-desc": "Compress PNG, JPG, WebP, and AVIF images directly in your browser. Adjust quality, preview results, and download smaller files instantly. No uploads, 100% client-side.",
-    "image-resizer-title": "Free Image Resizer — Resize Images Online",
-    "image-resizer-desc": "Resize images to exact dimensions or percentages. Supports PNG, JPG, WebP, and more. Free, fast, and 100% browser-based.",
-    "video-to-gif-title": "Free Video to GIF Converter — Convert MP4 to GIF Online",
-    "video-to-gif-desc": "Convert MP4, WebM, MOV, and AVI videos to high-quality GIF animations. Adjust frame rate and size. Free, fast, and 100% browser-based.",
-    "qr-code-generator-title": "Free QR Code Generator — Custom Colors & Sizes",
-    "qr-code-generator-desc": "Generate custom QR codes with custom colors, sizes, and error correction levels. Download as PNG instantly. Free, fast, and 100% browser-based.",
-    "youtube-thumbnail-downloader-title": "Free YouTube Thumbnail Downloader — All Resolutions",
-    "youtube-thumbnail-downloader-desc": "Download YouTube video thumbnails in HD, SD, HQ, and MQ resolutions. Free, instant, and no signup required.",
-    "exif-viewer-title": "Free EXIF Viewer & Remover — View Photo Metadata",
-    "exif-viewer-desc": "View and remove EXIF metadata from your photos. Supports JPEG, PNG, WebP, and TIFF. 100% browser-based, your photos stay private.",
-    "color-palette-title": "Free Color Palette Extractor — Extract Colors from Images",
-    "color-palette-desc": "Extract dominant colors from any image. Get HEX, RGB, and HSL values. Free, instant, and 100% browser-based.",
-    "favicon-generator-title": "Free Favicon Generator — Create Favicons from Images",
-    "favicon-generator-desc": "Generate favicons in all standard sizes from a single image. Download as ZIP. Free, fast, and 100% browser-based.",
-    "svg-to-png-title": "Free SVG to PNG Converter — Convert SVG Files Online",
-    "svg-to-png-desc": "Convert SVG files to PNG images with custom scale and background options. Free, fast, and 100% browser-based. No uploads required.",
-    "image-to-base64-title": "Free Image to Base64 Encoder — Convert Images to Data URIs",
-    "image-to-base64-desc": "Encode images as Base64 data URIs for embedding in HTML, CSS, or JSON. Supports PNG, JPG, WebP, GIF, and SVG. 100% browser-based.",
-    "video-frame-extractor-title": "Free Video Frame Extractor — Capture Frames from Video",
-    "video-frame-extractor-desc": "Extract individual frames from MP4, WebM, and MOV videos. Save as PNG or JPG. Free, fast, and 100% browser-based.",
-    "stripe-fee-calculator-title": "Free Stripe Fee Calculator — Calculate Processing Fees",
-    "stripe-fee-calculator-desc": "Calculate Stripe processing fees for any transaction amount. Supports USD, EUR, GBP, and BRL. Free and instant.",
-    "text-repeater-title": "Free Text Repeater — Repeat Text Multiple Times",
-    "text-repeater-desc": "Repeat any text multiple times with custom separators. Free, instant, and works entirely in your browser.",
-    "vtt-to-srt-title": "Free VTT to SRT Converter — Convert Subtitles Online",
-    "vtt-to-srt-desc": "Convert WebVTT subtitles to SRT format instantly. Free, fast, and 100% browser-based. No uploads required.",
-    "json-viewer-title": "Free JSON Viewer — Format & Validate JSON Online",
-    "json-viewer-desc": "Format, validate, and explore JSON with syntax highlighting. Minify or beautify JSON data. Free, fast, and 100% browser-based.",
-    "hex-to-decimal-title": "Free Hex to Decimal Converter — Convert Number Bases",
-    "hex-to-decimal-desc": "Convert between hexadecimal, decimal, binary, and octal. Supports color hex codes with RGB conversion. Free and instant.",
-    "html-minifier-title": "Free HTML Minifier — Minify HTML Code Online",
-    "html-minifier-desc": "Minify HTML code to reduce file size and improve loading speed. Free, fast, and 100% browser-based.",
-    "css-minifier-title": "Free CSS Minifier — Minify CSS Stylesheets Online",
-    "css-minifier-desc": "Minify CSS stylesheets for faster loading. Remove whitespace, comments, and optimize selectors. Free and browser-based.",
-    "uuid-generator-title": "Free UUID Generator — Generate UUID v4 Instantly",
-    "uuid-generator-desc": "Generate UUID v4 identifiers instantly. Single or bulk generation with format options. Free, fast, and 100% browser-based.",
-    "base64-decode-title": "Free Base64 Decoder — Decode Base64 to Text or Image",
-    "base64-decode-desc": "Decode Base64 strings to text or images. Supports data URIs. Free, instant, and works entirely in your browser.",
-    "case-converter-title": "Free Case Converter — Convert Text Case Online",
-    "case-converter-desc": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more. Free and instant.",
-    "csv-to-json-title": "Free CSV to JSON Converter — Convert CSV Online",
-    "csv-to-json-desc": "Convert CSV data to JSON instantly. Supports custom delimiters, quoted fields, and header rows. Free, fast, and 100% browser-based."
+    "image-compressor-title": "Compress Images Online — Free, No Upload",
+    "image-compressor-desc": "Compress JPG, PNG, WebP, and AVIF images without losing quality. Adjust the slider, preview the result, download in seconds. Runs 100% in your browser — files never leave your device.",
+    "image-resizer-title": "Resize Images Online — Free, Pixel-Perfect",
+    "image-resizer-desc": "Resize JPG, PNG, and WebP images to exact pixels or percentages. Keep aspect ratio, batch-process, and download instantly. 100% browser-based — no signup, no upload.",
+    "video-to-gif-title": "Video to GIF Converter — MP4, MOV, WebM Online",
+    "video-to-gif-desc": "Convert MP4, MOV, WebM, and AVI videos to animated GIFs free. Pick the clip, tweak frame rate and size, download. Powered by FFmpeg.wasm — runs locally in your browser.",
+    "qr-code-generator-title": "QR Code Generator — Custom Colors, Logo, Free",
+    "qr-code-generator-desc": "Generate custom QR codes with your colors, logo, and error correction level. Download as high-res PNG instantly. Free, no watermark, no signup, 100% in your browser.",
+    "youtube-thumbnail-downloader-title": "YouTube Thumbnail Downloader — HD & Max-Res Free",
+    "youtube-thumbnail-downloader-desc": "Download any YouTube video thumbnail in Max-Res HD, SD, HQ, and MQ. Paste the URL, pick a size, save the image. Free, instant, no signup needed.",
+    "exif-viewer-title": "EXIF Viewer & Remover — Read Photo Metadata Free",
+    "exif-viewer-desc": "View hidden EXIF data — camera, GPS, date, exposure — from JPEG, PNG, WebP, and TIFF photos. Strip metadata with one click. 100% browser-based, photos stay private.",
+    "color-palette-title": "Color Palette from Image — Extract HEX, RGB, HSL",
+    "color-palette-desc": "Upload any image and extract its dominant color palette with HEX, RGB, and HSL values. One-click copy, free, instant, runs entirely in your browser.",
+    "favicon-generator-title": "Favicon Generator — All Sizes + ICO + Apple Touch",
+    "favicon-generator-desc": "Generate a complete favicon pack from one image: ICO, PNG, Apple Touch, Android, and manifest. Download as ZIP, ready to drop into your site. Free, no upload.",
+    "svg-to-png-title": "SVG to PNG Converter — Free, Lossless, Online",
+    "svg-to-png-desc": "Convert SVG vectors to PNG raster images at 1x, 2x, 3x, or 4x scale with transparent or custom background. Free, fast, 100% browser-based, no upload.",
+    "image-to-base64-title": "Image to Base64 Encoder — Data URI for HTML & CSS",
+    "image-to-base64-desc": "Encode PNG, JPG, WebP, GIF, and SVG as Base64 data URIs for inline HTML, CSS, or JSON. Copy with one click. Free, instant, 100% in your browser.",
+    "video-frame-extractor-title": "Video Frame Extractor — Save Frames as PNG / JPG",
+    "video-frame-extractor-desc": "Extract individual frames from MP4, WebM, and MOV videos. Scrub to the exact moment, save as PNG or JPG. Free and fully client-side — no upload.",
+    "stripe-fee-calculator-title": "Stripe Fee Calculator — USD, EUR, GBP, BRL",
+    "stripe-fee-calculator-desc": "Calculate Stripe processing fees and your net amount in USD, EUR, GBP, and BRL. Includes card, international, and currency conversion fees. Free and instant.",
+    "text-repeater-title": "Text Repeater — Repeat Any Text X Times Online",
+    "text-repeater-desc": "Repeat any text 1 to 10,000 times with custom separators, line breaks, or numbering. Free, instant, runs entirely in your browser. No signup needed.",
+    "vtt-to-srt-title": "VTT to SRT Converter — Subtitles Online, Free",
+    "vtt-to-srt-desc": "Convert WebVTT subtitles to SRT format in one click. Preserves timestamps and formatting. Free, instant, 100% in your browser. No upload required.",
+    "json-viewer-title": "JSON Viewer & Formatter — Validate JSON Online",
+    "json-viewer-desc": "Format, validate, beautify, and minify JSON with syntax highlighting and tree view. Free, instant, browser-based — your JSON never leaves your device.",
+    "hex-to-decimal-title": "Hex to Decimal Converter — Base 2 / 8 / 10 / 16",
+    "hex-to-decimal-desc": "Convert between hexadecimal, decimal, binary, and octal in one place. Supports color hex codes with RGB conversion. Free, instant, no signup.",
+    "html-minifier-title": "HTML Minifier — Compress HTML Code Online Free",
+    "html-minifier-desc": "Minify HTML code to reduce file size and speed up page loading. Removes whitespace, comments, and optional tags. Free, fast, 100% in your browser.",
+    "css-minifier-title": "CSS Minifier — Compress Stylesheets Online Free",
+    "css-minifier-desc": "Minify CSS stylesheets to ship smaller, faster sites. Strips whitespace, comments, and optimizes selectors. Free, instant, runs locally in your browser.",
+    "uuid-generator-title": "UUID Generator — v4, v7, NIL, Bulk, Free",
+    "uuid-generator-desc": "Generate UUID v4 and v7 identifiers single or in bulk (up to 10,000). Copy as JSON, CSV, or plain list. Free, instant, 100% browser-based.",
+    "base64-decode-title": "Base64 Decoder — Decode Text & Images Online",
+    "base64-decode-desc": "Decode Base64 strings to text or images, including data URIs. Reverse encode in one click. Free, instant, runs entirely in your browser.",
+    "case-converter-title": "Case Converter — camelCase, snake_case, kebab-case",
+    "case-converter-desc": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, PascalCase, and CONSTANT_CASE. Free, instant, no signup.",
+    "csv-to-json-title": "CSV to JSON Converter — Free Online, No Upload",
+    "csv-to-json-desc": "Convert CSV to JSON in your browser with custom delimiters, quoted fields, and header detection. Free, instant, files never leave your device."
   },
   "ToolHowTo": {
     "image-compressor": {
       "name": "How to Compress Images Online",
       "description": "Compress PNG, JPG, WebP, and AVIF images to reduce file size while preserving quality.",
-      "step1": { "name": "Upload your image", "text": "Drag and drop or click to select a PNG, JPG, WebP, or AVIF image from your device." },
-      "step2": { "name": "Adjust compression quality", "text": "Use the quality slider to set your desired compression level. Preview the result in real time." },
-      "step3": { "name": "Download the compressed image", "text": "Click download to save the compressed image. The file never leaves your browser." }
+      "step1": {
+        "name": "Upload your image",
+        "text": "Drag and drop or click to select a PNG, JPG, WebP, or AVIF image from your device."
+      },
+      "step2": {
+        "name": "Adjust compression quality",
+        "text": "Use the quality slider to set your desired compression level. Preview the result in real time."
+      },
+      "step3": {
+        "name": "Download the compressed image",
+        "text": "Click download to save the compressed image. The file never leaves your browser."
+      }
     },
     "image-resizer": {
       "name": "How to Resize Images Online",
       "description": "Resize images to exact dimensions or percentages with aspect ratio control.",
-      "step1": { "name": "Upload your image", "text": "Drag and drop or click to select an image from your device." },
-      "step2": { "name": "Set the desired dimensions", "text": "Enter width and height in pixels or percentage. Toggle aspect ratio lock as needed." },
-      "step3": { "name": "Download the resized image", "text": "Click download to save the resized image to your device." }
+      "step1": {
+        "name": "Upload your image",
+        "text": "Drag and drop or click to select an image from your device."
+      },
+      "step2": {
+        "name": "Set the desired dimensions",
+        "text": "Enter width and height in pixels or percentage. Toggle aspect ratio lock as needed."
+      },
+      "step3": {
+        "name": "Download the resized image",
+        "text": "Click download to save the resized image to your device."
+      }
     },
     "video-to-gif": {
       "name": "How to Convert Video to GIF Online",
       "description": "Convert MP4, WebM, MOV, and AVI videos to animated GIF format.",
-      "step1": { "name": "Upload your video", "text": "Drag and drop or select an MP4, WebM, MOV, or AVI video file." },
-      "step2": { "name": "Configure GIF settings", "text": "Adjust frame rate, width, and select the portion of the video to convert." },
-      "step3": { "name": "Download the GIF", "text": "Click convert and download your animated GIF file." }
+      "step1": {
+        "name": "Upload your video",
+        "text": "Drag and drop or select an MP4, WebM, MOV, or AVI video file."
+      },
+      "step2": {
+        "name": "Configure GIF settings",
+        "text": "Adjust frame rate, width, and select the portion of the video to convert."
+      },
+      "step3": {
+        "name": "Download the GIF",
+        "text": "Click convert and download your animated GIF file."
+      }
     },
     "qr-code-generator": {
       "name": "How to Generate a QR Code Online",
       "description": "Create custom QR codes with custom colors, sizes, and error correction levels.",
-      "step1": { "name": "Enter your content", "text": "Type or paste a URL, text, or any data you want to encode in the QR code." },
-      "step2": { "name": "Customize the QR code", "text": "Choose colors, size, and error correction level for your QR code." },
-      "step3": { "name": "Download the QR code", "text": "Click download to save the QR code as a PNG image." }
+      "step1": {
+        "name": "Enter your content",
+        "text": "Type or paste a URL, text, or any data you want to encode in the QR code."
+      },
+      "step2": {
+        "name": "Customize the QR code",
+        "text": "Choose colors, size, and error correction level for your QR code."
+      },
+      "step3": {
+        "name": "Download the QR code",
+        "text": "Click download to save the QR code as a PNG image."
+      }
     },
     "youtube-thumbnail-downloader": {
       "name": "How to Download YouTube Thumbnails",
       "description": "Download YouTube video thumbnails in all available resolutions.",
-      "step1": { "name": "Paste the YouTube URL", "text": "Copy and paste the YouTube video URL into the input field." },
-      "step2": { "name": "Choose a resolution", "text": "Select from available thumbnail resolutions: HD, SD, HQ, or MQ." },
-      "step3": { "name": "Download the thumbnail", "text": "Click download to save the thumbnail image to your device." }
+      "step1": {
+        "name": "Paste the YouTube URL",
+        "text": "Copy and paste the YouTube video URL into the input field."
+      },
+      "step2": {
+        "name": "Choose a resolution",
+        "text": "Select from available thumbnail resolutions: HD, SD, HQ, or MQ."
+      },
+      "step3": {
+        "name": "Download the thumbnail",
+        "text": "Click download to save the thumbnail image to your device."
+      }
     },
     "exif-viewer": {
       "name": "How to View and Remove EXIF Data from Photos",
       "description": "View and strip metadata from JPEG, PNG, WebP, and TIFF photos.",
-      "step1": { "name": "Upload your photo", "text": "Drag and drop or select a JPEG, PNG, WebP, or TIFF image." },
-      "step2": { "name": "View the EXIF metadata", "text": "Review all metadata including camera model, GPS coordinates, date, and exposure settings." },
-      "step3": { "name": "Remove EXIF data", "text": "Click remove to strip all metadata and download a clean copy of your photo." }
+      "step1": {
+        "name": "Upload your photo",
+        "text": "Drag and drop or select a JPEG, PNG, WebP, or TIFF image."
+      },
+      "step2": {
+        "name": "View the EXIF metadata",
+        "text": "Review all metadata including camera model, GPS coordinates, date, and exposure settings."
+      },
+      "step3": {
+        "name": "Remove EXIF data",
+        "text": "Click remove to strip all metadata and download a clean copy of your photo."
+      }
     },
     "color-palette": {
       "name": "How to Extract Colors from an Image",
       "description": "Extract dominant colors and generate a color palette from any image.",
-      "step1": { "name": "Upload your image", "text": "Drag and drop or select an image to analyze." },
-      "step2": { "name": "View extracted colors", "text": "See the dominant colors extracted from your image with HEX, RGB, and HSL values." },
-      "step3": { "name": "Copy color values", "text": "Click any color to copy its HEX, RGB, or HSL value to your clipboard." }
+      "step1": {
+        "name": "Upload your image",
+        "text": "Drag and drop or select an image to analyze."
+      },
+      "step2": {
+        "name": "View extracted colors",
+        "text": "See the dominant colors extracted from your image with HEX, RGB, and HSL values."
+      },
+      "step3": {
+        "name": "Copy color values",
+        "text": "Click any color to copy its HEX, RGB, or HSL value to your clipboard."
+      }
     },
     "favicon-generator": {
       "name": "How to Create a Favicon from an Image",
       "description": "Generate favicons in all standard sizes from a single source image.",
-      "step1": { "name": "Upload a source image", "text": "Drag and drop or select a PNG, JPG, WebP, or SVG image to use as your favicon." },
-      "step2": { "name": "Preview all sizes", "text": "Preview your favicon in all standard sizes from 16x16 to 512x512 pixels." },
-      "step3": { "name": "Download the favicon package", "text": "Download all favicon sizes as a ZIP file ready to add to your website." }
+      "step1": {
+        "name": "Upload a source image",
+        "text": "Drag and drop or select a PNG, JPG, WebP, or SVG image to use as your favicon."
+      },
+      "step2": {
+        "name": "Preview all sizes",
+        "text": "Preview your favicon in all standard sizes from 16x16 to 512x512 pixels."
+      },
+      "step3": {
+        "name": "Download the favicon package",
+        "text": "Download all favicon sizes as a ZIP file ready to add to your website."
+      }
     },
     "svg-to-png": {
       "name": "How to Convert SVG to PNG Online",
       "description": "Convert SVG vector files to PNG raster images with custom scale options.",
-      "step1": { "name": "Upload your SVG file", "text": "Drag and drop or select an SVG file from your device." },
-      "step2": { "name": "Choose scale and options", "text": "Select the output scale (1x, 2x, 3x, 4x) and background color." },
-      "step3": { "name": "Download the PNG", "text": "Click download to save the converted PNG image." }
+      "step1": {
+        "name": "Upload your SVG file",
+        "text": "Drag and drop or select an SVG file from your device."
+      },
+      "step2": {
+        "name": "Choose scale and options",
+        "text": "Select the output scale (1x, 2x, 3x, 4x) and background color."
+      },
+      "step3": {
+        "name": "Download the PNG",
+        "text": "Click download to save the converted PNG image."
+      }
     },
     "image-to-base64": {
       "name": "How to Convert an Image to Base64",
       "description": "Encode images as Base64 data URIs for embedding in HTML, CSS, or JSON.",
-      "step1": { "name": "Upload your image", "text": "Drag and drop or select a PNG, JPG, WebP, GIF, or SVG image." },
-      "step2": { "name": "Get the Base64 output", "text": "View the generated Base64 string or data URI for your image." },
-      "step3": { "name": "Copy the result", "text": "Click copy to add the Base64 string to your clipboard for use in your code." }
+      "step1": {
+        "name": "Upload your image",
+        "text": "Drag and drop or select a PNG, JPG, WebP, GIF, or SVG image."
+      },
+      "step2": {
+        "name": "Get the Base64 output",
+        "text": "View the generated Base64 string or data URI for your image."
+      },
+      "step3": {
+        "name": "Copy the result",
+        "text": "Click copy to add the Base64 string to your clipboard for use in your code."
+      }
     },
     "video-frame-extractor": {
       "name": "How to Extract Frames from a Video",
       "description": "Capture individual frames from MP4, WebM, and MOV video files.",
-      "step1": { "name": "Upload your video", "text": "Drag and drop or select an MP4, WebM, or MOV video file." },
-      "step2": { "name": "Navigate to the desired frame", "text": "Use the timeline to find the exact frame you want to capture." },
-      "step3": { "name": "Save the frame", "text": "Click capture to save the frame as a PNG or JPG image." }
+      "step1": {
+        "name": "Upload your video",
+        "text": "Drag and drop or select an MP4, WebM, or MOV video file."
+      },
+      "step2": {
+        "name": "Navigate to the desired frame",
+        "text": "Use the timeline to find the exact frame you want to capture."
+      },
+      "step3": {
+        "name": "Save the frame",
+        "text": "Click capture to save the frame as a PNG or JPG image."
+      }
     },
     "stripe-fee-calculator": {
       "name": "How to Calculate Stripe Processing Fees",
       "description": "Calculate Stripe fees for any transaction amount in multiple currencies.",
-      "step1": { "name": "Enter the transaction amount", "text": "Type the amount you want to charge or receive." },
-      "step2": { "name": "Select your currency", "text": "Choose from USD, EUR, GBP, or BRL to see the correct fee rates." },
-      "step3": { "name": "View the fee breakdown", "text": "See the Stripe fee, net amount, and what to charge to receive a specific amount." }
+      "step1": {
+        "name": "Enter the transaction amount",
+        "text": "Type the amount you want to charge or receive."
+      },
+      "step2": {
+        "name": "Select your currency",
+        "text": "Choose from USD, EUR, GBP, or BRL to see the correct fee rates."
+      },
+      "step3": {
+        "name": "View the fee breakdown",
+        "text": "See the Stripe fee, net amount, and what to charge to receive a specific amount."
+      }
     },
     "text-repeater": {
       "name": "How to Repeat Text Multiple Times",
       "description": "Repeat any text string multiple times with custom separators.",
-      "step1": { "name": "Enter your text", "text": "Type or paste the text you want to repeat." },
-      "step2": { "name": "Set repetitions and separator", "text": "Choose how many times to repeat and what separator to use between repetitions." },
-      "step3": { "name": "Copy the result", "text": "Click copy to add the repeated text to your clipboard." }
+      "step1": {
+        "name": "Enter your text",
+        "text": "Type or paste the text you want to repeat."
+      },
+      "step2": {
+        "name": "Set repetitions and separator",
+        "text": "Choose how many times to repeat and what separator to use between repetitions."
+      },
+      "step3": {
+        "name": "Copy the result",
+        "text": "Click copy to add the repeated text to your clipboard."
+      }
     },
     "vtt-to-srt": {
       "name": "How to Convert VTT Subtitles to SRT",
       "description": "Convert WebVTT subtitle files to SRT format instantly.",
-      "step1": { "name": "Upload your VTT file", "text": "Drag and drop or select a WebVTT (.vtt) subtitle file." },
-      "step2": { "name": "Preview the conversion", "text": "Review the converted subtitles to ensure they are correct." },
-      "step3": { "name": "Download the SRT file", "text": "Click download to save the converted SRT subtitle file." }
+      "step1": {
+        "name": "Upload your VTT file",
+        "text": "Drag and drop or select a WebVTT (.vtt) subtitle file."
+      },
+      "step2": {
+        "name": "Preview the conversion",
+        "text": "Review the converted subtitles to ensure they are correct."
+      },
+      "step3": {
+        "name": "Download the SRT file",
+        "text": "Click download to save the converted SRT subtitle file."
+      }
     },
     "json-viewer": {
       "name": "How to Format and Validate JSON Online",
       "description": "Format, validate, and explore JSON data with syntax highlighting.",
-      "step1": { "name": "Paste your JSON", "text": "Paste or type your JSON data into the editor." },
-      "step2": { "name": "Format or minify", "text": "Click format to beautify the JSON or minify to compress it. Validation errors are highlighted." },
-      "step3": { "name": "Copy the result", "text": "Click copy to add the formatted JSON to your clipboard." }
+      "step1": {
+        "name": "Paste your JSON",
+        "text": "Paste or type your JSON data into the editor."
+      },
+      "step2": {
+        "name": "Format or minify",
+        "text": "Click format to beautify the JSON or minify to compress it. Validation errors are highlighted."
+      },
+      "step3": {
+        "name": "Copy the result",
+        "text": "Click copy to add the formatted JSON to your clipboard."
+      }
     },
     "hex-to-decimal": {
       "name": "How to Convert Hexadecimal to Decimal",
       "description": "Convert between hex, decimal, binary, and octal number systems.",
-      "step1": { "name": "Enter a number", "text": "Type a hexadecimal, decimal, binary, or octal number." },
-      "step2": { "name": "View all conversions", "text": "See the number converted to all four bases simultaneously." },
-      "step3": { "name": "Copy any result", "text": "Click copy next to any conversion to add it to your clipboard." }
+      "step1": {
+        "name": "Enter a number",
+        "text": "Type a hexadecimal, decimal, binary, or octal number."
+      },
+      "step2": {
+        "name": "View all conversions",
+        "text": "See the number converted to all four bases simultaneously."
+      },
+      "step3": {
+        "name": "Copy any result",
+        "text": "Click copy next to any conversion to add it to your clipboard."
+      }
     },
     "html-minifier": {
       "name": "How to Minify HTML Code Online",
       "description": "Minify HTML to reduce file size and improve page loading speed.",
-      "step1": { "name": "Paste your HTML", "text": "Paste or type your HTML code into the editor." },
-      "step2": { "name": "Click minify", "text": "Press the minify button to remove whitespace, comments, and optimize the code." },
-      "step3": { "name": "Copy the minified HTML", "text": "Click copy to add the minified HTML to your clipboard." }
+      "step1": {
+        "name": "Paste your HTML",
+        "text": "Paste or type your HTML code into the editor."
+      },
+      "step2": {
+        "name": "Click minify",
+        "text": "Press the minify button to remove whitespace, comments, and optimize the code."
+      },
+      "step3": {
+        "name": "Copy the minified HTML",
+        "text": "Click copy to add the minified HTML to your clipboard."
+      }
     },
     "css-minifier": {
       "name": "How to Minify CSS Stylesheets Online",
       "description": "Minify CSS to remove whitespace, comments, and optimize selectors.",
-      "step1": { "name": "Paste your CSS", "text": "Paste or type your CSS code into the editor." },
-      "step2": { "name": "Click minify", "text": "Press the minify button to compress the CSS code." },
-      "step3": { "name": "Copy the minified CSS", "text": "Click copy to add the minified CSS to your clipboard." }
+      "step1": {
+        "name": "Paste your CSS",
+        "text": "Paste or type your CSS code into the editor."
+      },
+      "step2": {
+        "name": "Click minify",
+        "text": "Press the minify button to compress the CSS code."
+      },
+      "step3": {
+        "name": "Copy the minified CSS",
+        "text": "Click copy to add the minified CSS to your clipboard."
+      }
     },
     "uuid-generator": {
       "name": "How to Generate UUID v4 Identifiers",
       "description": "Generate single or bulk UUID v4 identifiers instantly.",
-      "step1": { "name": "Choose generation mode", "text": "Select single UUID or bulk generation and set the quantity." },
-      "step2": { "name": "Generate UUIDs", "text": "Click generate to create new UUID v4 identifiers." },
-      "step3": { "name": "Copy the UUIDs", "text": "Click copy to add the generated UUIDs to your clipboard." }
+      "step1": {
+        "name": "Choose generation mode",
+        "text": "Select single UUID or bulk generation and set the quantity."
+      },
+      "step2": {
+        "name": "Generate UUIDs",
+        "text": "Click generate to create new UUID v4 identifiers."
+      },
+      "step3": {
+        "name": "Copy the UUIDs",
+        "text": "Click copy to add the generated UUIDs to your clipboard."
+      }
     },
     "base64-decode": {
       "name": "How to Decode Base64 Strings",
       "description": "Decode Base64 encoded strings back to plain text or images.",
-      "step1": { "name": "Paste the Base64 string", "text": "Paste your Base64 encoded string or data URI into the input field." },
-      "step2": { "name": "View the decoded output", "text": "See the decoded text or image preview instantly." },
-      "step3": { "name": "Copy or download", "text": "Copy the decoded text or download the decoded image." }
+      "step1": {
+        "name": "Paste the Base64 string",
+        "text": "Paste your Base64 encoded string or data URI into the input field."
+      },
+      "step2": {
+        "name": "View the decoded output",
+        "text": "See the decoded text or image preview instantly."
+      },
+      "step3": {
+        "name": "Copy or download",
+        "text": "Copy the decoded text or download the decoded image."
+      }
     },
     "case-converter": {
       "name": "How to Convert Text Case Online",
       "description": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, and more.",
-      "step1": { "name": "Enter your text", "text": "Type or paste the text you want to convert." },
-      "step2": { "name": "Choose a case format", "text": "Select from UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, PascalCase, and more." },
-      "step3": { "name": "Copy the result", "text": "Click copy to add the converted text to your clipboard." }
+      "step1": {
+        "name": "Enter your text",
+        "text": "Type or paste the text you want to convert."
+      },
+      "step2": {
+        "name": "Choose a case format",
+        "text": "Select from UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, PascalCase, and more."
+      },
+      "step3": {
+        "name": "Copy the result",
+        "text": "Click copy to add the converted text to your clipboard."
+      }
     },
     "csv-to-json": {
       "name": "How to Convert CSV to JSON Online",
       "description": "Convert CSV data to JSON format with support for custom delimiters.",
-      "step1": { "name": "Paste or upload CSV data", "text": "Paste your CSV data or upload a CSV file. Configure the delimiter if needed." },
-      "step2": { "name": "Preview the JSON output", "text": "Review the converted JSON data with syntax highlighting." },
-      "step3": { "name": "Copy or download the JSON", "text": "Click copy to clipboard or download as a .json file." }
+      "step1": {
+        "name": "Paste or upload CSV data",
+        "text": "Paste your CSV data or upload a CSV file. Configure the delimiter if needed."
+      },
+      "step2": {
+        "name": "Preview the JSON output",
+        "text": "Review the converted JSON data with syntax highlighting."
+      },
+      "step3": {
+        "name": "Copy or download the JSON",
+        "text": "Click copy to clipboard or download as a .json file."
+      }
     }
   },
   "ToolSeo": {
