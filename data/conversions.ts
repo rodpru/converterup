@@ -143,6 +143,13 @@ export const conversions: Conversion[] = [
     category: "video",
   },
   {
+    slug: "gif-to-mp4",
+    fromFormat: "GIF",
+    toFormat: "MP4",
+    toolSlug: "video-to-gif",
+    category: "video",
+  },
+  {
     slug: "webm-to-gif",
     fromFormat: "WebM",
     toFormat: "GIF",

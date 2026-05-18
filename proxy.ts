@@ -64,6 +64,21 @@ const blogRedirects: Record<string, string> = {
 // Supported locales (en, pt, es) are handled exclusively by next-intl.
 const LEGACY_LANG_PREFIXES = ["fr", "de", "ar", "ru", "tr", "it", "vi"];
 
+// Convert slug synonyms — .jpeg and .jpg are the same format. Consolidate
+// link equity by 301-redirecting jpeg variants to the canonical jpg slug.
+const CONVERT_SYNONYMS: Record<string, string> = {
+  "jpeg-to-png": "jpg-to-png",
+  "png-to-jpeg": "png-to-jpg",
+  "jpeg-to-webp": "jpg-to-webp",
+  "webp-to-jpeg": "webp-to-jpg",
+  "jpeg-to-avif": "jpg-to-avif",
+  "avif-to-jpeg": "avif-to-jpg",
+  "heic-to-jpeg": "heic-to-jpg",
+  "heif-to-jpeg": "heif-to-jpg",
+  "svg-to-jpeg": "svg-to-jpg",
+  "tiff-to-jpeg": "tiff-to-jpg",
+};
+
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
@@ -107,6 +122,25 @@ export async function proxy(request: NextRequest) {
       new URL(toolRedirects[pathname.slice(1)], request.url),
       301,
     );
+  }
+
+  // Convert slug synonyms — strip optional locale prefix, match against
+  // CONVERT_SYNONYMS, redirect to canonical /convert/<slug> path.
+  const convertMatch = pathname.match(
+    /^\/(?:(en|pt|es)\/)?convert\/([a-z0-9-]+)\/?$/i,
+  );
+  if (convertMatch) {
+    const localePrefix = convertMatch[1] ? `/${convertMatch[1]}` : "";
+    const synonym = convertMatch[2].toLowerCase();
+    if (CONVERT_SYNONYMS[synonym]) {
+      return NextResponse.redirect(
+        new URL(
+          `${localePrefix}/convert/${CONVERT_SYNONYMS[synonym]}`,
+          request.url,
+        ),
+        301,
+      );
+    }
   }
 
   // Static redirects

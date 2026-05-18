@@ -590,6 +590,26 @@
   "ToolSeo": {
     "image-compressor": {
       "intro": "Comprime imágenes PNG, JPG, WebP y AVIF directamente en tu navegador sin perder calidad visible. El compresor de imágenes de ConverterUp está pensado para diseñadores, desarrolladores y cualquier persona que necesite reducir el tamaño de imágenes para sitios más rápidos, adjuntos de correo más ligeros o publicaciones en redes sociales. Ajusta el control de calidad para encontrar el equilibrio entre tamaño y nitidez, visualiza el resultado en tiempo real y descarga el archivo comprimido. Los archivos nunca salen de tu dispositivo, todo ocurre en el navegador con WebAssembly, manteniendo los originales privados sin colas de subida.",
+      "section1": {
+        "heading": "JPG, PNG, WebP, AVIF: qué formato comprime mejor",
+        "p1": "<strong>JPG</strong> es el caballo de batalla para fotografía. Usa compresión con pérdida basada en DCT, ajustada para imágenes naturales con gradientes suaves (piel, cielo, follaje), y puede reducir un RAW de 6 MB a 200–400 KB con calidad 80 sin diferencia visible. Es una mala elección para capturas de pantalla, logotipos o cualquier imagen con bordes nítidos y colores planos, porque aparecen artefactos de ringing alrededor de las transiciones duras.",
+        "p2": "<strong>PNG</strong> es sin pérdidas e ideal para capturas de UI, iconos, line art y cualquier imagen que necesite fondo transparente. Su compresión se basa en DEFLATE, que funciona bien en grandes zonas planas pero no aprovecha los trucos perceptivos que JPG aplica a las fotos. Una foto de 4000 × 3000 guardada como PNG puede ocupar 20 veces más que su equivalente JPG a calidad 85.",
+        "p3": "<strong>WebP</strong> admite modos con y sin pérdida en un mismo contenedor, ambos con transparencia. WebP con pérdida supera a JPG en torno al <em>25–35 %</em> con la misma calidad perceptiva; WebP sin pérdidas supera a PNG en un 20–25 %. Está soportado en todos los navegadores modernos desde 2021 y es la opción segura por defecto para nuevos activos web.",
+        "p4": "<strong>AVIF</strong> es más reciente (cuadro fijo de AV1), produce archivos un <em>40–50 %</em> más pequeños que JPG y admite HDR y gamut amplio. El precio es una codificación más lenta y algo menos de compatibilidad con clientes de correo y editores antiguos. Para imágenes principales, tarjetas OG y fotos de producto servidas a navegadores modernos, AVIF gana en tamaño. Para adjuntos de correo y compatibilidad con editores, sigue con JPG o WebP."
+      },
+      "section2": {
+        "heading": "Estrategia del control de calidad: dónde están los puntos óptimos",
+        "p1": "La mayoría de codificadores expone una escala de calidad de 0 a 100 que no es lineal: pasar de <code>100</code> a <code>90</code> suele reducir el archivo a la mitad sin pérdida perceptible, mientras que pasar de <code>50</code> a <code>40</code> apenas reduce el tamaño e introduce bloqueo visible. El punto óptimo está entre <code>75</code> y <code>85</code> para casi cualquier uso fotográfico.",
+        "p2": "Para <strong>JPG</strong>, calidad 80 es el ajuste canónico para web: es el valor por defecto en la mayoría de pipelines de CMS (Cloudinary, imgproxy, Next.js Image). Sube a 85 para fotos principales y retratos donde los tonos de piel importan; baja a 70 para miniaturas y vistas en cuadrícula donde el tamaño pesa más que el detalle perfecto.",
+        "p3": "Para <strong>WebP</strong>, calidad 75 produce un archivo equivalente en términos perceptivos a JPG calidad 85, así que puedes ser más agresivo que con JPG. Para <strong>AVIF</strong>, calidad 50–60 es comparable a JPG 80 porque la escala de calidad de AVIF está calibrada de forma distinta. Compara siempre en paralelo al 100 % de zoom antes de fijar una calidad para un lote.",
+        "p4": "Si sirves imágenes responsive, comprime cada tamaño con el presupuesto de calidad adecuado a su distancia de visualización. Una miniatura de 320 píxeles de ancho tolera calidad 60 porque nadie la inspecciona de cerca; una principal de 2560 píxeles en un monitor 4K necesita calidad 85+ para evitar ruido cromático visible."
+      },
+      "section3": {
+        "heading": "Sin pérdida o con pérdida: cuándo elegir cada una",
+        "p1": "La compresión <strong>con pérdida</strong> descarta información perceptiva que el ojo humano no recupera fácilmente: detalle de alta frecuencia, variaciones sutiles de color, ruido fino. Es irreversible: una vez guardas a calidad 70, la información se pierde, y volver a guardar a calidad 100 no la recupera. Úsala para cualquier fotografía servida a usuarios finales.",
+        "p2": "La compresión <strong>sin pérdida</strong> reorganiza los bytes para que el archivo ocupe menos, pero los píxeles son idénticos bit a bit al decodificar. Úsala para masters que vas a reeditar, para capturas de texto y UI donde cada píxel importa, para gráficos y diagramas con líneas nítidas, y para cualquier imagen que se va a recodificar varias veces en un pipeline (cada nuevo guardado con pérdida acumula artefactos).",
+        "p3": "Un error frecuente de flujo es tratar todas las imágenes igual. Mantén un <em>master sin pérdida</em> (PNG o WebP sin pérdida) y exporta <em>copias de entrega con pérdida</em> (JPG/WebP/AVIF) dimensionadas para cada uso. Así siempre puedes reexportar con otro tamaño o calidad desde el master sin pérdida generacional."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Cuánto puedo comprimir una imagen sin pérdida visible de calidad?",
       "a1": "JPG y WebP suelen comprimirse al 60-80 % de calidad sin diferencia visible en fotografías. PNG se beneficia menos del cambio de calidad por ser sin pérdidas, así que conviértelo a WebP o JPG para conseguir el mayor ahorro.",
@@ -598,10 +618,34 @@
       "q3": "¿Mis imágenes se suben a un servidor?",
       "a3": "No. La compresión ocurre íntegramente dentro de tu navegador con WebAssembly. Los bytes de la imagen nunca salen de tu dispositivo y ConverterUp no tiene ningún endpoint de subida.",
       "q4": "¿Qué formatos son compatibles?",
-      "a4": "Entrada: PNG, JPG/JPEG, WebP, AVIF, BMP, TIFF. Salida: PNG, JPG, WebP, AVIF. También puedes usar el compresor como conversor de formato cambiando el formato de salida."
+      "a4": "Entrada: PNG, JPG/JPEG, WebP, AVIF, BMP, TIFF. Salida: PNG, JPG, WebP, AVIF. También puedes usar el compresor como conversor de formato cambiando el formato de salida.",
+      "q5": "¿Sirve de algo recomprimir un JPG ya comprimido?",
+      "a5": "Marginalmente, y con un coste. Recodificar un JPG con pérdida siempre introduce pérdida generacional adicional, incluso a calidad 100, porque el decodificador debe redondear a píxeles enteros antes de la siguiente codificación. Reduce las dimensiones o convierte a WebP/AVIF; ambas opciones recortan tamaño real sin apilar artefactos de JPG.",
+      "q6": "¿Los metadatos EXIF sobreviven a la compresión?",
+      "a6": "Por defecto ConverterUp elimina el EXIF en la salida para mantener los archivos pequeños y evitar filtraciones de coordenadas GPS o números de serie de la cámara. Activa <em>Conservar metadatos</em> en las opciones avanzadas si necesitas mantener fechas, campos de copyright o etiquetas de orientación para un flujo de archivo."
     },
     "image-resizer": {
       "intro": "Redimensiona imágenes online a dimensiones exactas en píxeles o por porcentaje, con bloqueo opcional de proporción para evitar deformaciones. El redimensionador de imágenes de ConverterUp resulta útil para preparar fotos para entradas de blog, fichas de e-commerce, fotos de perfil o materiales para imprimir que requieran un tamaño concreto. Sube un archivo PNG, JPG, WebP o AVIF, escribe el ancho y alto deseados y descarga el resultado en segundos. El redimensionado se ejecuta íntegramente en el navegador, así que las fotos originales y el contenido sensible nunca salen de tu dispositivo ni acaban en una cola del servidor.",
+      "section1": {
+        "heading": "Tamaños objetivo para redes, web e impresión",
+        "p1": "<strong>Open Graph / tarjetas de Twitter</strong>: <code>1200 × 630</code> es el tamaño seguro universal para previsualizaciones de enlace en LinkedIn, Facebook, Twitter/X, Slack y Discord. Slack sigue recortando a <code>1200 × 627</code>, así que mantén el contenido crítico dentro de una zona segura centrada de 1200 × 600.",
+        "p2": "<strong>Instagram</strong>: publicaciones en feed <code>1080 × 1080</code> cuadradas o <code>1080 × 1350</code> verticales; Stories y Reels <code>1080 × 1920</code> (9:16). <strong>Miniaturas de YouTube</strong>: <code>1280 × 720</code>. <strong>TikTok</strong>: <code>1080 × 1920</code>. <strong>Portada de LinkedIn</strong>: <code>1584 × 396</code>.",
+        "p3": "<strong>Favicons web</strong>: incluye al menos 32 × 32, 180 × 180 (Apple touch) y 512 × 512 (PWA). Para <strong>pantallas retina</strong>, exporta al doble del tamaño en píxeles CSS y deja que el navegador escale a la baja: un botón mostrado a 200 × 50 píxeles CSS debe ser una imagen de 400 × 100.",
+        "p4": "<strong>Impresión</strong>: la impresión fotográfica a 300 DPI implica que una página A4 necesita aproximadamente 2480 × 3508 píxeles; una postal de 6 × 4 pulgadas necesita 1800 × 1200. Para carteles vistos a distancia, 150 DPI es aceptable. Exporta siempre los masters de imprenta como PNG o TIFF, nunca como JPG."
+      },
+      "section2": {
+        "heading": "Proporción, recorte y ajustes con criterio",
+        "p1": "Cuando las dimensiones objetivo coinciden con la proporción de origen, redimensionar es un escalado puro. Cuando no, hay que elegir: <strong>letterbox</strong> (conserva toda la imagen y añade márgenes), <strong>recorte</strong> (conserva la proporción y elimina bordes) o <strong>estirado</strong> (deforma la imagen para que encaje). Estirar casi siempre es un error salvo que busques un efecto deliberado.",
+        "p2": "Para retratos y fotos de producto con el sujeto centrado, un <em>recorte central</em> sencillo funciona. Para paisajes y fotos de grupo, el recorte central suele cortar contenido importante: ajusta manualmente el punto de anclaje o recorta antes en un editor de imagen.",
+        "p3": "El <strong>bloqueo de proporción</strong> del redimensionador evita deformaciones accidentales: cambia una dimensión y la otra la sigue. Desactívalo solo cuando realmente quieras aplastar o estirar (poco habitual), y verifica con la vista previa en vivo que el resultado sigue siendo legible.",
+        "p4": "Para catálogos de e-commerce, decide una proporción canónica única (4:5 vertical es habitual) y recorta cada foto de producto a esa proporción antes de redimensionar. Mezclar proporciones en una cuadrícula queda poco profesional y rompe los layouts responsive."
+      },
+      "section3": {
+        "heading": "Algoritmos de remuestreo y calidad",
+        "p1": "Al cambiar las dimensiones en píxeles, cada píxel de salida se reconstruye a partir de varios píxeles de entrada. El algoritmo de reconstrucción decide cuán nítido o suave queda el resultado. <strong>Nearest neighbor</strong> elige el píxel de origen más cercano: rápido, pero produce bordes dentados. Úsalo para pixel art y nunca para fotos.",
+        "p2": "<strong>Bilineal</strong> promedia 4 píxeles vecinos: suave, pero algo blando. <strong>Bicúbico</strong> usa 16 píxeles con ponderación cúbica: es el valor por defecto en la mayoría de editores y la elección correcta para trabajo fotográfico general. <strong>Lanczos</strong> (basado en sinc) usa 36–64 píxeles y produce los resultados más nítidos, sobre todo en reducciones grandes, a un coste de CPU pequeño.",
+        "p3": "ConverterUp usa bicúbico por defecto y cambia a Lanczos en reducciones de más de 2×, donde la nitidez extra se nota más. Tras reducir una foto más de 4×, aplicar una máscara de enfoque suave en tu editor recupera la nitidez perceptiva que cualquier paso de remuestreo pierde de forma natural."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Cómo funciona el bloqueo de proporción?",
       "a1": "Cuando el candado está activo, cambiar el ancho actualiza el alto de forma proporcional y al revés, conservando la proporción original. Desactívalo cuando quieras estirar o aplastar la imagen a dimensiones no proporcionales.",
@@ -610,7 +654,11 @@
       "q3": "¿La imagen pierde calidad al redimensionarse?",
       "a3": "Reducir es por naturaleza con pérdidas, pero ConverterUp usa remuestreo bicúbico de alta calidad para mantener el resultado nítido. Aumentar la resolución no añade detalle que no esté ahí, así que amplía solo cuando sea necesario.",
       "q4": "¿Qué formatos son compatibles?",
-      "a4": "Entrada y salida incluyen PNG, JPG/JPEG, WebP y AVIF. El formato de salida usa por defecto el del original, pero puede cambiarse para convertir y redimensionar en un único paso."
+      "a4": "Entrada y salida incluyen PNG, JPG/JPEG, WebP y AVIF. El formato de salida usa por defecto el del original, pero puede cambiarse para convertir y redimensionar en un único paso.",
+      "q5": "¿Puedo redimensionar por porcentaje en vez de en píxeles?",
+      "a5": "Sí. Cambia el modo de entrada a porcentaje e introduce un valor como <code>50</code> para reducir ambas dimensiones a la mitad, o <code>200</code> para duplicarlas. El modo porcentual mantiene la proporción bloqueada automáticamente, ya que ambas dimensiones escalan por el mismo factor.",
+      "q6": "¿Por qué mi imagen ampliada se ve borrosa?",
+      "a6": "El remuestreo no puede inventar detalle que nunca se capturó. Bicúbico y Lanczos interpolan entre píxeles existentes pero no pueden recuperar bordes que nunca se muestrearon. Para una ampliación real (por ejemplo, 2×) necesitas un modelo de superresolución por IA; en el redimensionador, trata la ampliación como último recurso y pide siempre un original con más resolución."
     },
     "video-to-gif": {
       "intro": "Convierte vídeo a GIF online a partir de archivos MP4, WebM, MOV y AVI sin subir nada. La herramienta de vídeo a GIF de ConverterUp es ideal para crear bucles cortos para documentación, demos de producto, reacciones para redes sociales y plataformas de chat como WhatsApp, Slack o Discord, incluyendo TikTok y Reels. Recorta el segmento que necesites, elige una tasa de fotogramas y un ancho, y descarga el GIF animado directamente en tu dispositivo. La conversión se ejecuta en el navegador con FFmpeg compilado a WebAssembly, así que incluso clips privados y grabaciones de pantalla siguen en tu máquina.",
@@ -626,6 +674,26 @@
     },
     "qr-code-generator": {
       "intro": "Genera códigos QR online para URLs, texto, credenciales Wi-Fi, tarjetas de contacto y mucho más. El generador de códigos QR de ConverterUp permite a profesionales del marketing, dueños de restaurantes y desarrolladores crear códigos escaneables con colores de fondo y primer plano personalizados, tamaño ajustable y cuatro niveles de corrección de errores. Escribe o pega el contenido, ajusta la apariencia, visualiza el resultado en tiempo real y descarga un PNG en alta resolución listo para imprimir o publicar. Todo se genera localmente en tu navegador, así que las URLs y los datos personales que codifiques no se registran ni se envían a ningún sitio.",
+      "section1": {
+        "heading": "Cuándo compensa de verdad un código QR",
+        "p1": "Los códigos QR brillan en contextos <strong>offline-a-online</strong> donde teclear una URL supone fricción: cartas de restaurante, exposiciones de museo, carteles de congresos, insertos de packaging, recibos, tarjetas de visita. Un escaneo sustituye una URL de 40 caracteres por un segundo con la cámara apuntando.",
+        "p2": "El <strong>alta de Wi-Fi</strong> es uno de los formatos más útiles. Codifica <code>WIFI:T:WPA;S:NetworkName;P:password;;</code> y los invitados se conectan a tu red sin teclear la contraseña. Las apps de cámara de iOS y Android reconocen este formato de forma nativa desde 2018.",
+        "p3": "Las <strong>vCards</strong> (<code>BEGIN:VCARD…END:VCARD</code>) guardan la información de contacto en la agenda del lector con un solo toque, con una tasa de conversión muy superior a la de pedir una entrada manual. Los <strong>enlaces de pago</strong> (Bizum en España, PIX en Brasil, UPI en India, EMV en Europa) mueven dinero con un escaneo y ya son el medio de pago presencial dominante en varios mercados.",
+        "p4": "Dónde los códigos QR <em>no</em> compensan: cualquier sitio donde el usuario ya esté ante una pantalla (usa un hipervínculo), tras un cristal o en ángulos forzados (la calidad de escaneo cae rápido), o como sustituto de una URL corta y memorable en una valla publicitaria que se lee a 100 km/h."
+      },
+      "section2": {
+        "heading": "Niveles de corrección de errores: L, M, Q, H",
+        "p1": "Los códigos QR incorporan corrección de errores Reed-Solomon para seguir siendo escaneables aunque estén parcialmente dañados u ocultos. Hay cuatro niveles que intercambian capacidad por resiliencia: <strong>L</strong> recupera ~7 %, <strong>M</strong> ~15 %, <strong>Q</strong> ~25 %, <strong>H</strong> ~30 %.",
+        "p2": "Usa <strong>L</strong> para contextos limpios y solo digitales (webs, visualizaciones dentro de apps) donde quieras el código más pequeño posible y la máxima capacidad de datos. Usa <strong>M</strong> como valor por defecto general: aguanta manchas menores y es lo que producen la mayoría de generadores integrados en el navegador.",
+        "p3": "Usa <strong>Q</strong> cuando el código se vaya a imprimir y pueda arrugarse, mancharse u ocultarse parcialmente (atriles de mesa, etiquetas adhesivas, packaging). Usa <strong>H</strong> cuando necesites superponer un logotipo en el centro del código: la corrección más alta permite al lector reconstruir la zona enmascarada.",
+        "p4": "Una corrección mayor <em>no</em> facilita el escaneo con poca luz o desde lejos; para eso, aumenta el tamaño del módulo. Una corrección mayor solo añade más bytes redundantes, lo que densifica la matriz y puede exigir un tamaño impreso mayor para que los módulos individuales sigan siendo legibles."
+      },
+      "section3": {
+        "heading": "Consejos de diseño: contraste, tamaño y logotipos",
+        "p1": "El <strong>contraste</strong> es el factor más importante para la fiabilidad de escaneo. Apunta a una proporción de contraste de al menos 4:1 entre primer plano y fondo: módulos oscuros sobre fondo claro. Los códigos invertidos (claro sobre oscuro) funcionan, pero muchos lectores antiguos tienen problemas, así que evítalos para impresión.",
+        "p2": "<strong>Tamaño físico mínimo</strong>: como regla, el lado del código debe ser al menos <code>distancia_de_escaneo / 10</code>. Un código escaneado desde 30 cm necesita al menos 3 cm de lado; uno en un cartel a 3 m necesita 30 cm. Incluye siempre una <em>zona de silencio</em> de 4 módulos alrededor del código: sin ella, los lectores pueden no ver los bordes.",
+        "p3": "Los <strong>logotipos superpuestos</strong> funcionan gracias a la corrección de errores, pero limita el logo a un 20 % máximo del área del código con nivel H y prueba siempre con varias apps de escaneo (Cámara de iOS, Google Lens, apps específicas) antes de imprimir. Coloca el logo exactamente en el centro; las superposiciones descentradas alteran los patrones de localización y rompen el escaneo de forma sistemática."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Cómo afecta el nivel de corrección de errores al código QR?",
       "a1": "Los niveles más altos (Q, H) hacen el código legible incluso si está parcialmente dañado o tapado por un logotipo, a cambio de módulos más densos. Usa L o M en pantallas digitales limpias y H para códigos impresos sometidos a desgaste.",
@@ -634,10 +702,34 @@
       "q3": "¿Se rastrean los códigos QR generados?",
       "a3": "No. Los códigos se renderizan íntegramente en el navegador y nunca se envían a un servidor. ConverterUp no inserta redirecciones de seguimiento, así que la URL escaneada es exactamente la que escribiste.",
       "q4": "¿Qué formatos de salida hay disponibles?",
-      "a4": "PNG es el predeterminado y funciona tanto en web como en impresión. SVG está disponible para casos vectoriales como superposición de logotipos y carteles grandes donde la calidad debe escalar sin pixelar."
+      "a4": "PNG es el predeterminado y funciona tanto en web como en impresión. SVG está disponible para casos vectoriales como superposición de logotipos y carteles grandes donde la calidad debe escalar sin pixelar.",
+      "q5": "¿Puedo codificar credenciales de Wi-Fi directamente?",
+      "a5": "Sí. Elige el preset de Wi-Fi e introduce el SSID, la contraseña y el tipo de cifrado (WPA, WEP o ninguno). La herramienta construye el payload estándar <code>WIFI:T:WPA;S:...;P:...;;</code> que las apps de cámara de iOS y Android reconocen de forma nativa, sin necesidad de una app de terceros.",
+      "q6": "¿Sigue funcionando el código QR si cambio el color de fondo?",
+      "a6": "Sí, siempre que el contraste primer plano/fondo se mantenga por encima de ~3:1 y el primer plano sea más oscuro que el fondo. Los códigos en tonos pastel sobre blanco se escanean sin problema; los códigos invertidos claro-sobre-oscuro son más arriesgados con lectores antiguos. Prueba siempre con al menos dos apps de escaneo antes de mandar a imprimir."
     },
     "youtube-thumbnail-downloader": {
       "intro": "Descarga miniaturas de YouTube en todas las resoluciones disponibles a partir de una sola URL de vídeo. El descargador de miniaturas de YouTube de ConverterUp es útil para creadores de contenido, periodistas y educadores que necesitan reutilizar portadas para entradas de blog, notas de podcast, vídeos de reacción o ediciones para TikTok, Reels y WhatsApp. Pega el enlace, elige entre HD, SD, HQ o MQ, y guarda la imagen JPG directamente en tu dispositivo. La herramienta solo solicita la URL pública de la miniatura a YouTube, así que no se necesitan datos personales, login ni clave de API.",
+      "section1": {
+        "heading": "Resoluciones disponibles y el patrón de URL de YouTube",
+        "p1": "YouTube expone cada miniatura pública en URLs predecibles basadas en el ID del vídeo. El patrón es <code>https://img.youtube.com/vi/&lt;ID&gt;/&lt;variante&gt;.jpg</code>. No hay autenticación, ni clave de API, ni límite de peticiones en estos endpoints: están pensados para incrustarse.",
+        "p2": "Las variantes, de mayor a menor: <strong>maxresdefault</strong> (1280 × 720), <strong>sddefault</strong> (640 × 480), <strong>hqdefault</strong> (480 × 360), <strong>mqdefault</strong> (320 × 180) y <strong>default</strong> (120 × 90). YouTube también genera <em>fotogramas automáticos</em> en <code>1.jpg</code>, <code>2.jpg</code> y <code>3.jpg</code>: tres fotogramas extraídos del vídeo que se usan como miniaturas de respaldo antes de que el autor elija una personalizada.",
+        "p3": "Los vídeos más recientes pueden incluir variantes WebP en <code>vi_webp/</code> en lugar de <code>vi/</code> para archivos más pequeños. ConverterUp comprueba ambas rutas y devuelve la que exista en la mayor resolución disponible.",
+        "p4": "<strong>maxresdefault</strong> solo se genera cuando el autor aporta (o YouTube extrae) un fotograma de al menos 1280 × 720. Para vídeos antiguos, subidas desde móvil y Shorts, maxresdefault puede devolver 404; recurre entonces a <code>hqdefault.jpg</code>, que sí existe para todos los vídeos públicos."
+      },
+      "section2": {
+        "heading": "Uso legítimo, atribución y reglas de reutilización",
+        "p1": "Las miniaturas de YouTube están <strong>protegidas por derechos de autor de quien las sube</strong>. La miniatura es una obra creativa, igual que el propio vídeo. Descargar la imagen no te concede licencia para republicarla como si fuera tuya.",
+        "p2": "El <strong>uso legítimo</strong> (EE. UU.) y las doctrinas equivalentes de fair dealing (Reino Unido, Canadá, Australia) y de cita en la mayoría de jurisdicciones europeas suelen permitir la reutilización para comentario, crítica, información periodística y educación: por ejemplo, una entrada de blog que reseña un vídeo puede mostrar su miniatura como contexto. Los cuatro factores del fair use (propósito, naturaleza, cantidad, efecto en el mercado) favorecen el comentario transformador y no comercial.",
+        "p3": "Lo que <em>no</em> es uso legítimo: usar la miniatura de un vídeo popular como portada de tu propio contenido no relacionado, sobre todo si sugiere respaldo o asociación. Algunos creadores emiten retiradas DMCA por reutilización de miniaturas en canales competidores; ten cuidado con los vídeos de reacción y Shorts que copian miniaturas literalmente.",
+        "p4": "Ante la duda, pide permiso al creador, atribuye con claridad (nombre del canal + enlace) o usa la miniatura como parte de una cita obvia en lugar de como imagen principal independiente."
+      },
+      "section3": {
+        "heading": "Casos peliagudos: Shorts, privados, con restricción de edad",
+        "p1": "Los <strong>Shorts</strong> usan fotogramas de origen verticales 9:16, pero YouTube sigue generando miniaturas <em>horizontales</em> con letterbox o recorte. La <code>maxresdefault.jpg</code> de un Short es una imagen 1280 × 720 con el contenido vertical centrado entre bandas negras, no la portada vertical que muestra la app de Shorts. Actualmente no existe un endpoint público para la versión vertical.",
+        "p2": "<strong>Privados y no listados</strong>: los vídeos privados devuelven 404 en todas las variantes de miniatura. Los vídeos no listados se comportan como públicos en cuanto a URLs de miniatura: cualquiera con el ID del vídeo puede obtenerlas, lo que a veces sorprende a quien lo sube en cuanto a privacidad.",
+        "p3": "Los vídeos <strong>con restricción de edad</strong> pueden bloquear el acceso a la miniatura según la política vigente de YouTube. Los vídeos <strong>con restricción regional</strong> siguen exponiendo miniaturas globalmente porque el CDN que sirve <code>img.youtube.com</code> no es el mismo que sirve el stream de vídeo. Los <strong>vídeos eliminados</strong> devuelven 404 al instante; si necesitas la miniatura de un vídeo retirado, solo las capturas de Wayback Machine pueden ayudar."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Qué resoluciones de miniatura hay disponibles?",
       "a1": "HD (1280x720), SD (640x480), HQ (480x360), MQ (320x180) y la predeterminada 120x90. No todos los vídeos tienen versión HD, sobre todo subidas antiguas o de baja resolución, y en esos casos se ofrece el tamaño más cercano.",
@@ -646,7 +738,11 @@
       "q3": "¿Funciona con vídeos no listados o privados?",
       "a3": "No. El descargador solo obtiene miniaturas que YouTube expone de forma pública. Los vídeos no listados con URL conocida suelen funcionar, pero los privados y con restricción de edad no devuelven miniatura.",
       "q4": "¿Por qué la miniatura se ve borrosa?",
-      "a4": "Si solo aparecen las imágenes de menor resolución es porque quien subió el vídeo no proporcionó una miniatura HD. Prueba la versión HQ (480x360), disponible para casi todos los vídeos, o amplía la imagen con el redimensionador."
+      "a4": "Si solo aparecen las imágenes de menor resolución es porque quien subió el vídeo no proporcionó una miniatura HD. Prueba la versión HQ (480x360), disponible para casi todos los vídeos, o amplía la imagen con el redimensionador.",
+      "q5": "¿Puedo extraer IDs de vídeo desde una URL de Shorts o de lista de reproducción?",
+      "a5": "Sí. La herramienta interpreta todos los formatos de URL de YouTube: <code>youtu.be/&lt;id&gt;</code>, <code>youtube.com/watch?v=&lt;id&gt;</code>, <code>youtube.com/shorts/&lt;id&gt;</code>, <code>youtube.com/embed/&lt;id&gt;</code> y URLs de listas (se usa el ID del vídeo activo). Solo tienes que pegar la URL; no hace falta extraer el ID a mano.",
+      "q6": "¿Por qué la imagen maxresdefault devuelve un icono gris genérico?",
+      "a6": "YouTube devuelve una imagen de marcador de 120 × 90 (el gráfico de 'miniatura no disponible') cuando una variante no existe, en lugar de un 404 limpio. ConverterUp lo detecta comprobando las dimensiones de la respuesta y recurre a <code>hqdefault.jpg</code>, que es fiable en todos los vídeos."
     },
     "exif-viewer": {
       "intro": "Consulta y elimina metadatos EXIF de fotos online para proteger tu privacidad antes de compartir imágenes. El visor EXIF de ConverterUp lee archivos JPEG, PNG, WebP y TIFF y muestra modelo de cámara, objetivo, ajustes de exposición, fechas y coordenadas GPS que se hayan podido incrustar automáticamente. Los fotógrafos pueden auditar su flujo de trabajo y los usuarios habituales pueden eliminar datos sensibles con un clic antes de publicar en redes o enviar fotos por correo. El archivo original se lee en local y la copia limpia se genera en el navegador, así que tu foto nunca llega a un servidor externo.",
@@ -719,6 +815,26 @@
     },
     "favicon-generator": {
       "intro": "Genera un paquete de favicons online a partir de una sola imagen de origen, listo para añadir a cualquier sitio o web app. El generador de favicons de ConverterUp produce todos los tamaños estándar de 16x16 a 512x512, incluyendo iconos para Apple touch, iconos de pantalla de inicio en Android y un fragmento de manifiesto que puedes pegar en tu HTML. Diseñadores y desarrolladores ahorran tiempo al evitar varias exportaciones manuales en editores de imagen. La conversión se ejecuta en el navegador, así que logotipos inéditos y activos de marca quedan privados y nunca se almacenan en un servidor remoto.",
+      "section1": {
+        "heading": "Por qué los favicons siguen importando en 2026",
+        "p1": "Un favicon es el pequeño anclaje visual que distingue tu sitio en las pestañas del navegador, los marcadores, el historial y los menús de pestañas desbordadas. Con usuarios que mantienen rutinariamente más de 30 pestañas abiertas, el favicon es a menudo la <strong>única parte visible</strong> de tu marca durante horas seguidas. Un favicon ausente o genérico es una señal pequeña pero constante de que el sitio es aficionado.",
+        "p2": "Más allá de las pestañas del navegador, los favicons definen el icono en la <strong>pantalla de inicio de iOS y Android</strong> cuando se usa 'Añadir a la pantalla de inicio', la baldosa en los anclajes del <strong>menú Inicio de Windows</strong>, el icono en el <strong>Dock de macOS</strong> cuando se instala una PWA, y el avatar en resultados de búsqueda que algunos navegadores (Chrome, DuckDuckGo) muestran junto a los enlaces orgánicos.",
+        "p3": "En las PWAs, los iconos del manifiesto son <em>imprescindibles</em>: sin iconos de 192 × 192 y 512 × 512 declarados en <code>manifest.json</code>, el navegador no muestra el prompt de instalación y Lighthouse suspende la auditoría de instalabilidad.",
+        "p4": "Un paquete de favicons coherente también transmite atención al detalle a las personas que más cuentan para una primera impresión: reclutadores que abren tu portfolio, clientes que aterrizan desde un anuncio de Google, periodistas que verifican una fuente. El coste marginal (una imagen de origen, una subida) tiende a cero; el coste de <em>no</em> hacerlo es un 404 en la pestaña de red y un globo terráqueo genérico en la pestaña."
+      },
+      "section2": {
+        "heading": "Tamaños necesarios para navegadores y sistemas modernos",
+        "p1": "<strong>16 × 16 y 32 × 32</strong>: los favicons clásicos de pestaña. 32 es el valor por defecto moderno; 16 es el respaldo para DPI heredados. Ambos se incluyen dentro de un <code>favicon.ico</code> multirresolución.",
+        "p2": "<strong>180 × 180</strong>: Apple Touch Icon, usado por Safari de iOS para los accesos directos en la pantalla de inicio. Apple ya no necesita tamaños separados por dispositivo desde iOS 11; 180 es el único que hay que enviar.",
+        "p3": "<strong>192 × 192 y 512 × 512</strong>: iconos de pantalla de inicio de Android y de instalación de PWA, declarados en el manifiesto de la web app. El 512 también sirve como icono de splash en Android y como origen de alta DPI para PWAs de escritorio.",
+        "p4": "<strong>Variantes maskable</strong>: los iconos adaptables de Android se recortan a círculo o squircle. Proporciona un icono con <code>purpose: maskable</code> y un <em>área segura</em> generosa (mantén el logotipo dentro del 80 % central del lienzo) para que el sistema no recorte el grafismo de marca."
+      },
+      "section3": {
+        "heading": "Instalación HTML: link, manifiesto y theme color",
+        "p1": "Coloca los archivos generados en la raíz de tu sitio y pega lo siguiente en <code>&lt;head&gt;</code>: <code>&lt;link rel=\"icon\" href=\"/favicon.ico\" sizes=\"32x32\"&gt;</code>, <code>&lt;link rel=\"icon\" href=\"/icon.svg\" type=\"image/svg+xml\"&gt;</code>, <code>&lt;link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\"&gt;</code> y <code>&lt;link rel=\"manifest\" href=\"/manifest.webmanifest\"&gt;</code>.",
+        "p2": "El archivo <code>manifest.webmanifest</code> une todo el paquete para las PWAs: declara <code>name</code>, <code>short_name</code>, <code>start_url</code>, <code>display: \"standalone\"</code>, <code>background_color</code>, <code>theme_color</code> y el array de iconos con las entradas de 192 y 512.",
+        "p3": "Añade <code>&lt;meta name=\"theme-color\" content=\"#2DD4BF\"&gt;</code> para definir el color del chrome del navegador en Chrome de Android y en versiones recientes de Safari. Proporciona variantes con <code>media=\"(prefers-color-scheme: dark)\"</code> si tu sitio tiene modo oscuro, para que el tinte de la barra coincida con ambos esquemas."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Qué tamaños incluye el paquete de favicons?",
       "a1": "El ZIP contiene iconos PNG de 16x16, 32x32, 48x48, 96x96, 144x144, 152x152, 180x180, 192x192, 256x256, 384x384 y 512x512, además de un favicon.ico multirresolución para navegadores antiguos.",
@@ -727,10 +843,34 @@
       "q3": "¿Se admiten archivos SVG como origen?",
       "a3": "Sí. Sube un SVG y el generador lo rasteriza en cada tamaño objetivo para resultados nítidos sin artefactos de antialiasing. También se aceptan PNG y JPG.",
       "q4": "¿Cómo instalo el favicon en mi sitio?",
-      "a4": "Extrae el ZIP, copia los archivos a la raíz o carpeta de assets de tu sitio y pega las etiquetas link en el head del HTML. El archivo de manifiesto incluido permite la instalación como Progressive Web App."
+      "a4": "Extrae el ZIP, copia los archivos a la raíz o carpeta de assets de tu sitio y pega las etiquetas link en el head del HTML. El archivo de manifiesto incluido permite la instalación como Progressive Web App.",
+      "q5": "¿Por qué mi favicon no se actualiza después de reemplazarlo?",
+      "a5": "Los navegadores cachean los favicons de forma agresiva, a veces durante semanas, al margen de la caché normal. Fuerza la recarga versionando la URL (<code>/favicon.ico?v=2</code>), sirviendo el archivo con un <code>Cache-Control</code> con max-age corto, o vaciando la caché del favicon (en Chrome DevTools: Application → Storage → Clear site data).",
+      "q6": "¿Sigo necesitando favicon.ico si proporciono iconos PNG?",
+      "a6": "Sí, por dos motivos: los navegadores antiguos y muchos bots buscan <code>/favicon.ico</code> en la raíz por convención, y algunas plataformas (lectores RSS, previsualizadores de enlaces, herramientas de intranet) solo comprueban la ruta ICO. El coste es bajo: un ICO multirresolución de 4-8 KB cubre todos los clientes heredados."
     },
     "svg-to-png": {
       "intro": "Convierte SVG a PNG online y transforma gráficos vectoriales en imágenes raster para usar donde se necesite PNG. El conversor de SVG a PNG de ConverterUp es ideal para exportar iconos a herramientas de diseño, generar previsualizaciones para redes sociales, incrustar logotipos en PDFs o alimentar arte para plataformas que no aceptan SVG. Elige la escala de salida en 1x, 2x, 3x o 4x para exportaciones listas para retina, define fondo transparente o sólido y descarga el resultado al instante. La conversión ocurre en tu navegador, manteniendo diseños inéditos e iconos propios completamente privados.",
+      "section1": {
+        "heading": "Por qué convertir SVG a PNG",
+        "p1": "SVG es el mejor formato para iconos, logotipos e ilustraciones <em>en la web</em>. Pero muchos destinos siguen rechazándolo o gestionándolo mal: los <strong>clientes de correo</strong> (Gmail, Outlook, Apple Mail) lo eliminan por motivos de seguridad; las <strong>previsualizaciones en redes</strong> (imágenes OG, tarjetas de Twitter) solo aceptan PNG o JPG; los <strong>pipelines de impresión</strong> a menudo exigen TIFF o PNG raster en lugar de vector.",
+        "p2": "Las <strong>herramientas heredadas</strong> —versiones antiguas de Microsoft Word, PowerPoint y muchos editores de texto enriquecido de CMS— no importan SVG de forma limpia. Los <strong>marketplaces</strong> (Etsy, Amazon, Shopify) exigen imágenes de producto raster. Los <strong>destinos de incrustación</strong> como Notion, Confluence y muchos foros tampoco admiten SVG en contextos inline.",
+        "p3": "Incluso donde el SVG funciona, a veces conviene PNG por <em>previsibilidad</em>: un SVG renderizado en Chrome de 2026 puede verse algo distinto al mismo SVG renderizado en el cliente Mail de iOS 14 por diferencias en el soporte de funcionalidades (filtros, máscaras, variables CSS). Rasterizar una vez elimina esa variabilidad.",
+        "p4": "El patrón correcto: mantén el SVG como master y exporta PNGs en las resoluciones que realmente necesites. Reexporta cuando cambie el master. Nunca edites el PNG directamente: cada edición invalida su condición de derivado del origen."
+      },
+      "section2": {
+        "heading": "Estrategia de escala para retina y alta DPI",
+        "p1": "Un SVG tiene un tamaño intrínseco (su <code>viewBox</code> o sus atributos width/height). A <strong>1×</strong>, el PNG coincide con ese tamaño en píxeles. A <strong>2×</strong>, el PNG mide el doble de ancho y de alto, exactamente el origen necesario para una pantalla HDPI que muestra el icono a su tamaño CSS.",
+        "p2": "Para sitios modernos, el valor seguro por defecto es exportar al <strong>2×</strong> del tamaño CSS de visualización. Un icono CSS de 24 × 24 necesita un PNG de 48 × 48. Para móviles con DPR 3× (iPhone Pro recientes, Pixel recientes), <strong>3×</strong> es la opción conservadora; la diferencia visual entre 2× y 3× apenas se percibe en tamaños de icono, así que 2× suele ser un compromiso razonable.",
+        "p3": "Para <strong>impresión</strong>, calcula el tamaño físico objetivo y el DPI: un logotipo impreso a 4 pulgadas de ancho en un folleto a 300 DPI necesita 1200 × N píxeles. Usa el ajuste <strong>4×</strong> o introduce las dimensiones exactas en píxeles en las opciones avanzadas.",
+        "p4": "<strong>No te excedas con la escala</strong>: un PNG de 4096 × 4096 para un icono de 16 × 16 es un desperdicio y se decodifica lento. Ajusta la escala al destino real. Si el icono se usa en varios tamaños, exporta cada tamaño por separado (16, 32, 64, 128) en vez de enviar un único archivo enorme."
+      },
+      "section3": {
+        "heading": "Transparencia, fuentes y recursos externos: cuidado",
+        "p1": "<strong>Transparencia</strong>: los SVG usan fondo transparente por defecto y ConverterUp conserva el canal alfa en el PNG de salida. Si necesitas un fondo sólido para plataformas que aplanan el alfa (algunos pipelines de imprenta y correo), elige un color de fondo en las opciones. Cuidado con los SVG que definen un <code>&lt;rect&gt;</code> opaco como fondo: ese relleno permanecerá independientemente de la opción de exportación.",
+        "p2": "<strong>Fuentes</strong>: un SVG que referencia una fuente por nombre (por ejemplo, <code>font-family: \"Inter\"</code>) la renderizará <em>solo si la fuente está disponible en el navegador</em>. Si has subido un SVG generado por Figma o Illustrator, convierte el <em>texto en contornos</em> en la app de origen antes de exportar. De lo contrario, el PNG usará una fuente sustituta y se verá mal.",
+        "p3": "<strong>Recursos externos</strong>: las etiquetas <code>&lt;image href=\"https://…\"&gt;</code> que apuntan a URLs remotas pueden quedar bloqueadas por la seguridad del navegador (CORS o canvas contaminado). El patrón seguro es incrustar las dependencias de bitmap como data URIs en base64 dentro del SVG antes de exportar. Lo mismo con CSS externo: incluye todos los estilos dentro del documento SVG."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Cómo funciona la opción de escala?",
       "a1": "La escala multiplica las dimensiones intrínsecas del SVG: un SVG de 100x100 a 4x se convierte en un PNG de 400x400. Una escala mayor produce resultados más nítidos en pantallas retina a cambio de un archivo más grande.",
@@ -739,10 +879,34 @@
       "q3": "¿Se admiten recursos externos en el SVG?",
       "a3": "Las imágenes externas y fuentes remotas referenciadas por URLs http pueden quedar bloqueadas por la seguridad del navegador. Para un resultado fiable, incrusta imágenes como data URIs y convierte el texto en contornos antes de exportar desde tu editor SVG.",
       "q4": "¿Cuál es el tamaño máximo de SVG que puedo convertir?",
-      "a4": "Hasta 10 MB por SVG. Documentos muy complejos con miles de nodos pueden ir lentos en móvil, pero los iconos e ilustraciones típicos se convierten en menos de un segundo."
+      "a4": "Hasta 10 MB por SVG. Documentos muy complejos con miles de nodos pueden ir lentos en móvil, pero los iconos e ilustraciones típicos se convierten en menos de un segundo.",
+      "q5": "¿Puedo exportar a JPG o WebP en lugar de PNG?",
+      "a5": "Sí, cambia el formato de salida en las opciones. JPG aplana la transparencia y es apropiado para SVGs sin alfa (ilustraciones a sangre completa). WebP conserva la transparencia y produce archivos más pequeños que PNG, útil para entrega web. PNG sigue siendo el valor por defecto por su máxima compatibilidad.",
+      "q6": "¿Por qué mi PNG exportado se ve borroso comparado con el SVG?",
+      "a6": "O la escala de exportación es demasiado baja para la pantalla en la que lo ves, o el SVG incluye trazos alineados al píxel que pierden el ajuste a escalas no enteras. Prueba a duplicar la escala (1× → 2×) y verifica que los anchos de trazo del origen son píxeles enteros para la escala elegida."
     },
     "image-to-base64": {
       "intro": "Convierte imágenes a Base64 online para incrustarlas directamente en HTML, CSS, JSON o plantillas de correo. La herramienta de imagen a Base64 de ConverterUp genera una cadena codificada limpia o un data URI completo listo para pegar en una hoja de estilos, en un sprite SVG o en un documento markdown. Es útil para apps offline-first, correos transaccionales que deben funcionar sin peticiones externas y para incrustar iconos pequeños ahorrando peticiones HTTP. La codificación se ejecuta íntegramente en el navegador, así que mockups confidenciales y capturas internas nunca salen de tu máquina.",
+      "section1": {
+        "heading": "Cuándo tiene sentido incrustar como Base64",
+        "p1": "Incrustar brilla con activos <strong>de menos de 4 KB</strong>, donde el coste de una petición HTTP separada (DNS, TCP, TLS, cabeceras) supera la penalización del 33 % de tamaño del Base64. Iconos diminutos en pseudoelementos CSS, PNG transparentes de un solo píxel y spinners pequeños son los ejemplos canónicos.",
+        "p2": "Los <strong>correos transaccionales</strong> son el segundo caso claro. Los clientes de correo bloquean las peticiones a imágenes externas por defecto hasta que el destinatario pulsa 'mostrar imágenes', así que los logotipos e iconos incrustados se ven al instante. Sumado a que los correos suelen archivarse durante años, incrustar garantiza que la imagen siga viéndose en 2030 aunque tu CDN haya desaparecido.",
+        "p3": "Las <strong>PWAs offline-first</strong> y los <strong>informes HTML en un solo archivo</strong> (facturas descargables, dashboards exportados, PDF-como-HTML) se benefician de la incrustación por el mismo motivo: el documento es autocontenido y funciona sin red. Lo mismo con los <strong>bundles firmados</strong> que se distribuyen como archivo único.",
+        "p4": "Donde la incrustación <em>falla</em>: cualquier imagen por encima de ~10 KB, cualquier cosa reutilizada entre páginas (pierdes la caché HTTP), animaciones y fotogramas de vídeo y cualquier cosa que requiera lazy-loading. Para esos casos, mantén un archivo real y referéncialo por URL: la caché HTTP del navegador supera al inlining en 2-3 vistas de página."
+      },
+      "section2": {
+        "heading": "Compensaciones de rendimiento que conviene conocer",
+        "p1": "La codificación Base64 infla los datos binarios exactamente un <strong>33,3 %</strong>: cada 3 bytes de entrada se convierten en 4 caracteres de salida. Un PNG de 9 KB pasa a ser una cadena de ~12 KB. Gzip y brotli pueden recuperar parte de eso (~10-15 % para datos de imagen típicos), pero no toda la sobrecarga.",
+        "p2": "La <strong>pérdida de caché</strong> es la penalización mayor para activos reutilizados. Un logotipo de 50 KB referenciado como <code>&lt;img src=\"/logo.png\"&gt;</code> se descarga una vez y se cachea para cada vista de página siguiente. El mismo logo incrustado en 20 correos o 20 páginas HTML se descarga 20 veces. Para un activo de una sola página da igual; para activos compartidos es un coste real de ancho de banda y de tiempo de parseo.",
+        "p3": "El <strong>tiempo de parseo de CSS</strong> crece de forma no lineal con el tamaño de la hoja en dispositivos modestos. Una hoja que pasa de 50 KB a 200 KB por imágenes incrustadas puede añadir decenas de milisegundos al primer pintado en móviles Android de gama media. Trata la incrustación como un presupuesto, no como valor por defecto.",
+        "p4": "<strong>Memoria</strong>: el navegador mantiene en memoria los datos de imagen decodificados <em>y</em> la cadena Base64 original hasta que se parsea el documento. Para activos incrustados muy grandes, esto puede duplicar brevemente el uso de memoria respecto a un archivo referenciado por URL."
+      },
+      "section3": {
+        "heading": "Estructura del data URI y dónde pegarlo",
+        "p1": "El formato del data URI es <code>data:&lt;mime&gt;;base64,&lt;codificado&gt;</code>. Ejemplo: <code>data:image/png;base64,iVBORw0KGgo…</code>. El tipo MIME indica al consumidor cómo interpretar los bytes: <code>image/png</code>, <code>image/jpeg</code>, <code>image/svg+xml</code>, <code>image/webp</code>, etc. Si el MIME es incorrecto, el navegador rechazará renderizar la imagen aunque los bytes sean válidos.",
+        "p2": "En <strong>HTML</strong>: <code>&lt;img src=\"data:image/png;base64,…\" alt=\"...\"&gt;</code>. En <strong>CSS</strong>: <code>background-image: url(\"data:image/png;base64,…\");</code>. En <strong>JSON</strong>: guarda el data URI completo como cadena y asígnalo al <code>src</code> en el render. En <strong>Markdown</strong>: <code>![alt](data:image/png;base64,…)</code> funciona en la mayoría de renderizadores, pero comprueba que el tuyo no trunca cadenas largas.",
+        "p3": "Para <strong>SVG</strong>, es preferible incrustar el marcado SVG directamente (más barato y estilizable con CSS) en lugar de codificar el SVG en Base64. Si necesitas codificarlo, usa <code>image/svg+xml</code> como MIME y considera URL-encoding en lugar de Base64: produce un resultado más pequeño y legible para formatos basados en texto."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Cuándo conviene incrustar una imagen como Base64?",
       "a1": "Base64 tiene sentido para activos muy pequeños (menos de 4 KB), donde una petición HTTP separada cuesta más que la sobrecarga de tamaño. Para imágenes mayores conviene mantener archivos normales, ya que Base64 infla el tamaño un 33 % aproximadamente.",
@@ -751,7 +915,11 @@
       "q3": "¿Cuál es la diferencia entre cadena Base64 y data URI?",
       "a3": "Una cadena Base64 son solo los bytes codificados, mientras que un data URI antepone el tipo MIME, como data:image/png;base64,.... Usa el data URI completo en src o url() y la cadena cruda cuando indiques el tipo por separado.",
       "q4": "¿Qué formatos de imagen son compatibles?",
-      "a4": "PNG, JPG/JPEG, WebP, AVIF, GIF y SVG. El tipo MIME del data URI se asigna automáticamente según el archivo subido."
+      "a4": "PNG, JPG/JPEG, WebP, AVIF, GIF y SVG. El tipo MIME del data URI se asigna automáticamente según el archivo subido.",
+      "q5": "¿Puedo copiar el resultado directamente en JSON sin escapar?",
+      "a5": "Las cadenas Base64 contienen únicamente <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>+</code>, <code>/</code> y <code>=</code>, todos seguros dentro de una cadena JSON. El data URI completo también es seguro en JSON. El único carácter que podrías necesitar escapar es la comilla JSON que envuelve el valor; los botones de copia de ConverterUp ya generan una cadena lista para JSON.",
+      "q6": "¿Debería usar Base64 o URL encoding para incrustar SVG?",
+      "a6": "Usa <strong>URL encoding</strong> para SVG. SVG es texto, así que codificar solo los caracteres no seguros (<code>%, #, &lt;, &gt;</code>, comillas) produce un resultado más pequeño y legible que Base64. Muchas herramientas de SVG a data URI usan URL encoding por defecto por ese motivo."
     },
     "video-frame-extractor": {
       "intro": "Extrae fotogramas de un vídeo online para conseguir miniaturas, fijos de b-roll o frames congelados para diapositivas y artículos. El extractor de fotogramas de ConverterUp lee archivos MP4, WebM y MOV, te permite recorrer la línea de tiempo y guarda el fotograma actual como PNG o JPG. Es práctico para periodistas que sacan fotogramas de imágenes de prensa, diseñadores que capturan frames de referencia y creadores de contenido que preparan miniaturas para YouTube, TikTok o Reels. El vídeo se decodifica en el navegador, así que clips originales y material inédito siguen en tu dispositivo durante todo el proceso.",
@@ -838,6 +1006,26 @@
     },
     "hex-to-decimal": {
       "intro": "Convierte hex a decimal online y alterna entre hexadecimal, decimal, binario y octal en una sola vista. El conversor de bases numéricas de ConverterUp es una referencia rápida para desarrolladores embebidos, programadores de bajo nivel y estudiantes que practican ensamblador o redes. Escribe un valor en cualquier base y los otros tres se actualizan al instante, con soporte opcional para códigos de color hex que muestran también el triplete RGB equivalente. Los cálculos se ejecutan en el navegador, así que los valores nunca salen de tu máquina y la herramienta funciona offline una vez que la página está en caché.",
+      "section1": {
+        "heading": "Dónde aparece la conversión de bases en el día a día",
+        "p1": "La <strong>depuración</strong> es el caso más habitual. Los stack traces muestran direcciones de memoria en hex (<code>0x7ffee5b3c000</code>), los registros en hex, los flags como máscaras de bits. Traducir a decimal ayuda a ver patrones: un registro con <code>0x10000000</code> tiene el bit 28 activo, que a menudo coincide con una definición de flag en el código.",
+        "p2": "Las <strong>redes y los protocolos</strong> usan hex constantemente: direcciones MAC (<code>00:1A:2B:3C:4D:5E</code>), IPv6 (<code>2001:db8::1</code>), números de protocolo, flags de puerto, tamaños MTU, bits de flag TCP. Los volcados de Wireshark y las capturas de paquetes son esencialmente muros de hex; la conversión es necesaria para interpretarlos.",
+        "p3": "El <strong>CSS y el diseño</strong> viven en hex (<code>#2DD4BF</code>), ocasionalmente en decimal-RGB (<code>rgb(45, 212, 191)</code>). Quien diseña entrega un color y quien programa lee el mismo color en bases distintas; la conversión es parte del traspaso.",
+        "p4": "El <strong>desarrollo embebido y ensamblador</strong> toca todas las bases: hex para opcodes y memoria, binario para manipulación de bits, octal para permisos Unix heredados (<code>chmod 755</code> es <code>rwxr-xr-x</code> = <code>111101101</code> en binario = <code>0o755</code> en octal). Mezclar bases sin soltura es receta para errores off-by-one."
+      },
+      "section2": {
+        "heading": "Complemento a dos y enteros con signo",
+        "p1": "Las CPUs modernas representan enteros con signo usando <strong>complemento a dos</strong>. Para negar un número, invierte todos los bits y suma 1. En 8 bits, el valor <code>0xFF</code> es <em>255</em> sin signo pero <em>-1</em> con signo; <code>0x80</code> es <em>128</em> sin signo pero <em>-128</em> con signo. Por eso un entero de 8 bits con signo va de -128 a +127 (no de -127 a +127): el rango negativo tiene un valor más.",
+        "p2": "Al convertir de hex a decimal, hay que conocer el ancho de bits y la condición de signo del origen. <code>0xFFFFFFFF</code> es <em>4 294 967 295</em> como uint32 pero <em>-1</em> como int32. ConverterUp permite elegir el ancho (8, 16, 32, 64) y la interpretación con o sin signo; el valor por defecto es sin signo porque es como se escriben la mayoría de literales hex en C y Go.",
+        "p3": "El <strong>bit de signo</strong> es siempre el bit más significativo. En hex, eso significa el nibble alto: un valor hex de 32 bits que empieza por <code>0x8…</code> hasta <code>0xF…</code> es negativo si se interpreta con signo. <code>0x7FFFFFFF</code> es el máximo int32 (<em>2 147 483 647</em>); súmale 1 y se desborda a <code>0x80000000</code>, que es el mínimo (<em>-2 147 483 648</em>).",
+        "p4": "Al depurar desbordamiento de enteros, cambia a la vista binaria para ver el patrón exacto de bits. El desbordamiento en complemento a dos es silencioso: la CPU no lanza excepción, los bits simplemente se desbordan. Un formulario web que acepta un número en un campo int32 con signo aceptará 2000 millones y los almacenará como se espera; corromperá en silencio cualquier cosa por encima de ~2100 millones."
+      },
+      "section3": {
+        "heading": "Floats IEEE-754 y códigos de color hex",
+        "p1": "Los números en coma flotante en memoria <strong>no</strong> son una simple conversión de base del valor decimal. IEEE-754 de simple precisión (float de 32 bits) reparte 1 bit de signo, 8 bits de exponente y 23 bits de mantisa. <code>1.0</code> en IEEE-754 es <code>0x3F800000</code>; <code>0.1</code> es <code>0x3DCCCCCD</code>, la famosa representación inexacta que provoca <code>0.1 + 0.2 !== 0.3</code> en JavaScript.",
+        "p2": "El modo float de ConverterUp acepta un decimal y devuelve su representación hex IEEE-754 exacta (simple y doble precisión), y viceversa. Útil al depurar números serializados en shaders, pesos de modelos de ML o protocolos binarios donde tienes un volcado hex y necesitas saber qué float representa.",
+        "p3": "Los <strong>códigos de color hex</strong> son otra bestia, más simple: 3 bytes (RGB) o 4 bytes (RGBA), cada uno entre <code>00</code> y <code>FF</code>. <code>#2DD4BF</code> significa R=45, G=212, B=191. La forma de 8 dígitos (<code>#2DD4BFCC</code>) añade el alfa. El CSS moderno también admite la notación de color relativo, pero hex sigue siendo lo más compacto y universalmente soportado."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿El conversor maneja números negativos?",
       "a1": "Sí. Los decimales negativos se convierten usando complemento a dos a 8, 16, 32 o 64 bits, a tu elección en las opciones. Coincide con la forma en que los enteros negativos aparecen en C, Go y la mayoría de lenguajes de bajo nivel.",
@@ -846,7 +1034,11 @@
       "q3": "¿Puedo convertir códigos de color?",
       "a3": "Sí. Introduce un hex como #2E5C55 y la herramienta muestra el RGB(46, 92, 85) correspondiente, valores HSL y una muestra de color. La conversión inversa de RGB a hex también funciona.",
       "q4": "¿Se admiten números en coma flotante?",
-      "a4": "Sí. Los floats se convierten entre decimal, notación científica binaria y la representación hex IEEE-754, útil para depurar números serializados en protocolos de red o shaders."
+      "a4": "Sí. Los floats se convierten entre decimal, notación científica binaria y la representación hex IEEE-754, útil para depurar números serializados en protocolos de red o shaders.",
+      "q5": "¿La herramienta acepta el prefijo <code>0x</code> o la notación <code>0b</code>?",
+      "a5": "Sí. La entrada hex acepta <code>0x</code>, <code>#</code> o ningún prefijo. La binaria acepta <code>0b</code> o ningún prefijo. La octal acepta <code>0o</code> (estilo moderno) o <code>0</code> (estilo C/Unix heredado). Los espacios, guiones bajos y comas dentro del número se eliminan: <code>0xFF_FF_FF_FF</code> funciona igual que <code>0xFFFFFFFF</code>.",
+      "q6": "¿Cómo se manejan las operaciones a nivel de bits?",
+      "a6": "Activa el panel de operaciones bitwise para aplicar AND, OR, XOR, NOT y desplazamientos sobre dos valores en cualquier base. El resultado aparece a la vez en las cuatro bases, lo que facilita verificar manipulaciones de flags y máscaras de permisos sin salir de la página."
     },
     "html-minifier": {
       "intro": "Minifica HTML online para reducir el peso de la página, ahorrar ancho de banda y mejorar las puntuaciones de Core Web Vitals. El minificador de HTML de ConverterUp elimina espacios, comentarios, atributos redundantes y comillas innecesarias manteniendo el documento estructuralmente válido. Los desarrolladores front-end y los creadores de sitios estáticos pueden pegar su plantilla, hacer clic en minificar y enviar un payload más pequeño a producción. La minificación se ejecuta en el navegador con un parser determinista, así que el marcado propio, las plantillas internas y las landings inéditas quedan totalmente privadas.",
@@ -874,6 +1066,26 @@
     },
     "uuid-generator": {
       "intro": "Genera identificadores UUID v4 online para claves de base de datos, tokens de idempotencia, IDs de petición y seguimiento de sesión. El generador de UUID de ConverterUp produce identificadores únicos o en masa usando la fuente aleatoria criptográficamente segura del navegador, así que las colisiones son estadísticamente imposibles. Desarrolladores backend, ingenieros de QA y equipos de devops pueden conseguir un lote en segundos y pegarlo en datos de seed o archivos de configuración. La generación se ejecuta en local sin viaje al servidor, lo que garantiza que los IDs recibidos no se registran, replican ni reutilizan fuera de tu máquina.",
+      "section1": {
+        "heading": "Versiones de UUID: v1, v4, v7 y NIL",
+        "p1": "El <strong>UUID v4</strong> es el caballo de batalla. 122 bits aleatorios más 6 bits fijos de versión/variante, generados desde un RNG criptográficamente seguro. La probabilidad de colisión es tan baja (necesitarías generar ~1000 millones de UUIDs por segundo durante ~85 años para tener un 50 % de probabilidad de colisión) que se puede considerar cero a escala de internet. Úsalo como valor por defecto para casi todo.",
+        "p2": "El <strong>UUID v1</strong> codifica un timestamp de 60 bits más una dirección MAC y una secuencia de reloj. Es <em>ordenable por tiempo de creación</em>, pero filtra la MAC del host y el momento exacto de creación, lo que supone un problema de privacidad. La mayoría de sistemas modernos evitan v1 por esa fuga y porque la ordenación temporal es incómoda (los bits bajos van primero).",
+        "p3": "El <strong>UUID v7</strong> (RFC 9562, 2024) es la alternativa moderna a v1: un timestamp Unix en milisegundos de 48 bits en los bits altos, seguido de bits aleatorios. Es lexicográficamente ordenable, lo que lo hace mucho mejor que v4 para claves primarias en árboles B (v4 fragmenta el índice porque las inserciones quedan dispersas). Usa v7 para diseños de base de datos nuevos donde quieras UUIDs <em>y</em> buena localidad de índice.",
+        "p4": "El <strong>UUID NIL</strong> (<code>00000000-0000-0000-0000-000000000000</code>) es un centinela que significa 'sin valor': útil como valor por defecto en columnas FK opcionales o como marcador en tests. El <strong>UUID Max</strong> (<code>ffffffff-ffff-ffff-ffff-ffffffffffff</code>) es el centinela equivalente para techos en consultas de rango."
+      },
+      "section2": {
+        "heading": "UUID frente a IDs enteros autoincrementales",
+        "p1": "Los <strong>enteros autoincrementales</strong> (BIGSERIAL en Postgres, AUTO_INCREMENT en MySQL) son pequeños (8 bytes), cache-friendly y producen índices B-tree densos. Su pega es que filtran información de negocio —cualquiera que vea <code>order=4217</code> puede estimar tu volumen de pedidos— y complican la escritura multi-master porque el servidor de base de datos tiene que coordinar el siguiente valor.",
+        "p2": "Los <strong>UUIDs</strong> ocupan 16 bytes (2× el coste de almacenamiento e índice de un BIGINT), no filtran conteos, se pueden generar en el cliente sin viaje al servidor y sobreviven a flujos offline-first donde los IDs deben existir antes de que la fila llegue al servidor. Además son seguros en URLs y globalmente únicos entre shards, servicios y bases de datos.",
+        "p3": "El stack pragmático: <strong>UUID v7</strong> como clave primaria (buena localidad de índice, sin filtración de conteos, generable en cliente), una columna <strong>BIGINT order_number</strong> opcional y amigable para mostrar en la UI, y un <strong>public_id opaco</strong> opcional (Nano ID o hash corto) para URLs que deban quedar bonitas.",
+        "p4": "No uses UUID v4 como clave primaria en una tabla grande y caliente sin pensarlo: su aleatoriedad provoca amplificación de escritura severa en índices B-tree. O usa UUID v7, o usa claves primarias BIGINT con una columna UUID separada para referencias externas."
+      },
+      "section3": {
+        "heading": "Formatos de almacenamiento: binario vs cadena",
+        "p1": "Un UUID son fundamentalmente 16 bytes. Almacenado como <strong>binary(16)</strong> o como el tipo <code>uuid</code> de Postgres, ocupa 16 bytes por fila. Almacenado como la <strong>cadena canónica con guiones</strong> (<code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>), ocupa 36 bytes más sobrecarga por fila: más del doble del coste binario.",
+        "p2": "En Postgres, usa siempre el tipo nativo <code>uuid</code>: almacena en binario internamente, acepta entrada/salida como cadena de forma transparente y soporta indexación y ordenación correctamente. MySQL no tiene tipo UUID nativo; usa <code>BINARY(16)</code> con las funciones <code>UUID_TO_BIN</code> y <code>BIN_TO_UUID</code>, opcionalmente con el flag de reordenación para un almacenamiento favorable al índice.",
+        "p3": "Para APIs, devuelve la <strong>cadena con guiones</strong>. Es el formato universal de intercambio. <strong>Base64</strong> o <strong>Base58</strong> producen cadenas más cortas (22 caracteres frente a 36) pero rompen las herramientas: depuradores, greps de logs y clientes SQL esperan la forma con guiones. Reserva las formas codificadas cortas únicamente para slugs de URL."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Estos UUIDs son seguros como claves primarias?",
       "a1": "Sí. UUID v4 tiene 122 bits de aleatoriedad de una fuente criptográficamente segura, lo que da una probabilidad de colisión despreciable a escala de internet. Se usan mucho como claves primarias en PostgreSQL, MongoDB y DynamoDB.",
@@ -882,7 +1094,11 @@
       "q3": "¿Puedo generar otras versiones de UUID?",
       "a3": "La herramienta se centra en la v4 por ser la más común en código de aplicación. Cambia la opción de formato a minúsculas o mayúsculas, con o sin guiones, según los requisitos de almacenamiento.",
       "q4": "¿Los UUIDs son criptográficamente seguros?",
-      "a4": "Sí. Provienen de la API crypto.getRandomValues del navegador, adecuada para tokens de seguridad, identificadores de sesión y cualquier caso donde la previsibilidad importe."
+      "a4": "Sí. Provienen de la API crypto.getRandomValues del navegador, adecuada para tokens de seguridad, identificadores de sesión y cualquier caso donde la previsibilidad importe.",
+      "q5": "¿Puedo obtener UUIDs sin guiones o en mayúsculas?",
+      "a5": "Sí. Las opciones de formato incluyen minúsculas con guiones (por defecto), mayúsculas con guiones, sin guiones (32 caracteres) y entre llaves (<code>{xxxxxxxx-…}</code>) para uso en el registro de Windows. Los bytes codificados son idénticos en todos los formatos; solo cambia la representación textual.",
+      "q6": "¿Cuál es la probabilidad real de colisión de un UUID v4?",
+      "a6": "Despreciable a cualquier escala realista. Con 2^122 UUIDs v4 posibles, generar 1000 millones por segundo durante 85 años da un 50 % de probabilidad de una sola colisión. Para una app típica que genera millones al año, la probabilidad es efectivamente cero: órdenes de magnitud por debajo de la de un bit flip por rayo cósmico en tu base de datos."
     },
     "base64-decode": {
       "intro": "Decodifica cadenas Base64 online de vuelta a texto plano, JSON o imágenes, con detección automática de data URIs. El decodificador Base64 de ConverterUp es útil para inspeccionar payloads JWT, depurar respuestas de API, decodificar adjuntos de correo y extraer imágenes incrustadas en CSS o HTML. Pega la cadena codificada, mira el resultado al instante y copia el texto o descarga la imagen decodificada. La decodificación se ejecuta íntegramente en el navegador, así que tokens sensibles, payloads de cliente e imágenes privadas nunca se registran ni se transmiten a un servidor remoto.",
@@ -898,6 +1114,26 @@
     },
     "case-converter": {
       "intro": "Convierte texto entre mayúsculas y minúsculas online entre MAYÚSCULAS, minúsculas, Tipo Título, Tipo oración, camelCase, snake_case, kebab-case, PascalCase, CONSTANT_CASE y dot.case. El conversor de capitalización de ConverterUp es una ayuda rápida para desarrolladores que renombran variables, redactores que limpian titulares y especialistas SEO que normalizan slugs. Pega tu entrada, haz clic en el formato que necesites y copia el resultado con un toque. El texto se procesa íntegramente en el navegador, así que borradores de blog, fragmentos de código y nombres internos de producto nunca salen de tu dispositivo ni quedan registrados en un servidor de terceros.",
+      "section1": {
+        "heading": "Dónde se usa cada estilo",
+        "p1": "<strong>camelCase</strong> (<code>userId</code>, <code>fetchUserData</code>) es la convención de JavaScript y TypeScript para variables y funciones. También es estándar en Java, Swift, Kotlin y la mayoría de lenguajes OO modernos para variables locales y métodos.",
+        "p2": "<strong>snake_case</strong> (<code>user_id</code>, <code>fetch_user_data</code>) domina en Python (PEP 8), Ruby, Rust y SQL. Es también la convención de facto de JSON para APIs diseñadas contra backends en Python o Rails. Snake case gana en identificadores largos porque los guiones bajos generan separaciones de palabra naturales.",
+        "p3": "<strong>kebab-case</strong> (<code>user-id</code>, <code>fetch-user-data</code>) es la convención para slugs de URL, para clases CSS y custom properties y para atributos HTML. No es válido como identificador en casi ningún lenguaje de programación porque el guion se interpreta como resta.",
+        "p4": "<strong>PascalCase</strong> (<code>UserId</code>, <code>FetchUserData</code>) marca <em>tipos y clases</em> en la mayoría de lenguajes: clases en JavaScript/TypeScript/Python/Java/C#, structs en Rust y Go (solo exportados), componentes en React. <strong>CONSTANT_CASE</strong> (<code>MAX_RETRIES</code>) es universal para constantes en tiempo de compilación, variables de entorno y claves de configuración."
+      },
+      "section2": {
+        "heading": "Convenciones por lenguaje y framework",
+        "p1": "<strong>Go</strong> usa la capitalización como <em>visibilidad</em>: los identificadores que empiezan con mayúscula son exportados (públicos); los que empiezan con minúscula son privados del paquete. <code>User</code> y <code>user</code> no son una elección de estilo: cambian la semántica del lenguaje. Esto es exclusivo de Go entre los lenguajes mayoritarios.",
+        "p2": "<strong>Ruby</strong> usa snake_case para métodos y variables, PascalCase para clases y módulos, y SCREAMING_SNAKE para constantes. <strong>Rust</strong> aplica las mismas convenciones con avisos del compilador: los lints <code>non_snake_case</code> y <code>non_upper_case_globals</code> saltan ante incumplimientos de estilo.",
+        "p3": "Las <strong>convenciones JSON</strong> no están estandarizadas, pero se reparten de facto por ecosistema: las APIs REST con backends Python/Rails usan claves en <code>snake_case</code>; las APIs con backends Node/Java usan <code>camelCase</code>; algunas APIs heredadas de Microsoft usan <code>PascalCase</code>. Mantén una sola convención por API y documéntala.",
+        "p4": "<strong>CSS</strong> usa kebab-case para propiedades (<code>background-color</code>), custom properties (<code>--brand-primary</code>) y nombres de clase por convención (<code>.product-card</code>, BEM <code>.product-card__title--featured</code>). <strong>HTML</strong> usa kebab-case para atributos data personalizados (<code>data-user-id</code>) pero reserva <code>camelCase</code> para las propiedades ARIA accedidas desde JavaScript (<code>el.dataset.userId</code>)."
+      },
+      "section3": {
+        "heading": "Trampas programáticas: acrónimos, números, transiciones",
+        "p1": "Los <strong>acrónimos</strong> son la parte más difícil de la conversión. ¿<code>XMLHttpRequest</code> debe pasar a <code>x_m_l_http_request</code> o a <code>xml_http_request</code>? La mayoría de guías de estilo modernas recomiendan lo segundo. La guía de estilo de JavaScript de Google dice tratar los acrónimos como una sola palabra en camelCase: <code>parseHtml</code>, no <code>parseHTML</code>. La guía de .NET dice lo contrario para acrónimos de dos letras: <code>IOStream</code> está bien, pero <code>HtmlParser</code> para los más largos. ConverterUp sigue la convención de Google por defecto y ofrece un interruptor 'conservar acrónimos'.",
+        "p2": "Los <strong>números</strong> también son ambiguos. ¿<code>html5Parser</code> se separa como <code>html5</code> + <code>Parser</code> (los dígitos se pegan a la palabra anterior) o como <code>html</code> + <code>5Parser</code>? El valor por defecto es que los dígitos se peguen a la palabra anterior, produciendo el snake_case <code>html5_parser</code>. Para identificadores tipo SemVer importa: <code>oauth2Client</code> debe pasar a <code>oauth2_client</code>, no a <code>oauth_2_client</code>.",
+        "p3": "Los <strong>límites de palabra en entradas ya mezcladas</strong> se detectan en: transiciones de minúscula a mayúscula (<code>fooBar</code> → <code>foo</code>, <code>Bar</code>), transiciones de acrónimo en mayúsculas a PascalCase (<code>HTMLParser</code> → <code>HTML</code>, <code>Parser</code>), transiciones a dígito cuando 'dividir en dígito' está activado, y separadores explícitos (<code>-</code>, <code>_</code>, <code>.</code>, espacio). Cuando conviertas una mezcla de convenciones, pega una vez, normaliza a un intermedio conocido (a menudo kebab-case) y luego convierte al destino."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Qué diferencia hay entre Tipo Título y Tipo oración?",
       "a1": "Tipo Título pone en mayúscula la primera letra de cada palabra significativa, como en los títulos de libros. Tipo oración solo pone en mayúscula la primera letra de la frase y los nombres propios, lo que es estándar para el cuerpo de texto.",
@@ -906,10 +1142,34 @@
       "q3": "¿Maneja correctamente acentos en español y portugués?",
       "a3": "Sí. El conversor es totalmente Unicode-aware, así que letras con acento como á, ñ, ü, ã y ç conservan los diacríticos y convierten su capitalización correctamente en cualquier dirección.",
       "q4": "¿Hay un límite de longitud de texto?",
-      "a4": "Hasta 1 MB de texto plano, equivalente a unas 200000 palabras. La transformación es instantánea para cualquier entrada realista gracias a las APIs nativas de strings del navegador."
+      "a4": "Hasta 1 MB de texto plano, equivalente a unas 200000 palabras. La transformación es instantánea para cualquier entrada realista gracias a las APIs nativas de strings del navegador.",
+      "q5": "¿Cómo se manejan los acrónimos como XML, HTTP o ID?",
+      "a5": "Por defecto el conversor trata las letras mayúsculas consecutivas como una sola palabra y luego solo pone en mayúscula la primera letra en la salida: <code>XMLHttpRequest</code> → <code>xmlHttpRequest</code> (camelCase) o <code>xml_http_request</code> (snake_case). Activa <em>Conservar acrónimos</em> para mantenerlos en mayúsculas: <code>XMLHttpRequest</code> queda como <code>XML_HTTP_Request</code>.",
+      "q6": "¿Puedo convertir en bloque, línea por línea?",
+      "a6": "Sí. Pega una entrada multilínea y cada línea se convierte de forma independiente. Útil para renombrar una lista de columnas de base de datos, generar slugs para una lista de títulos o normalizar una exportación de una columna de hoja de cálculo."
     },
     "csv-to-json": {
       "intro": "Convierte CSV a JSON online con soporte para delimitadores personalizados, campos entre comillas y cabeceras configurables. El conversor CSV a JSON de ConverterUp está pensado para analistas que importan hojas de cálculo a APIs, desarrolladores que pueblan bases de datos y product managers que transforman exportaciones de Notion o Google Sheets en datos estructurados. Pega un CSV o sube un archivo, elige las opciones de delimitador y cabecera, y descarga el array JSON resultante o cópialo al portapapeles. El parseo se ejecuta en el navegador con un parser RFC 4180 en streaming, así que listas de clientes y exportaciones confidenciales nunca llegan a un servidor de terceros.",
+      "section1": {
+        "heading": "Particularidades del CSV: RFC 4180, comillas, BOM, codificación",
+        "p1": "El <strong>RFC 4180</strong> es lo más parecido a una especificación de CSV, pero la mayoría de archivos CSV reales se desvían de él. Las reglas canónicas: separador de coma, finales de línea CRLF, comillas dobles alrededor de campos que contienen comas o saltos de línea, y una comilla doble literal dentro de un campo entre comillas se escapa como dos comillas dobles (<code>\"\"</code>).",
+        "p2": "El <strong>BOM</strong> (byte order mark, <code>EF BB BF</code> para UTF-8) lo añade Excel al guardar CSV con codificación UTF-8, y rompe rutinariamente parsers ingenuos: el primer nombre de columna acaba siendo <code>\\uFEFFid</code> en lugar de <code>id</code>. ConverterUp detecta y elimina el BOM automáticamente. Si depuras un parser aguas abajo, comprueba si la primera clave de columna tiene un prefijo BOM oculto.",
+        "p3": "<strong>Codificación</strong>: Excel en Windows suele usar Windows-1252 o UTF-16 LE por defecto, no UTF-8. Guardar un CSV con caracteres acentuados desde Excel e importarlo a una API solo UTF-8 es la fuente clásica del mojibake <code>JoÃ£o</code>. Convierte a UTF-8 con BOM en Excel mediante <em>Guardar como → CSV UTF-8</em>, o abre el archivo en un editor de texto real para confirmar la codificación antes de parsear.",
+        "p4": "Los <strong>finales de línea</strong> varían: las herramientas de Windows producen <code>\\r\\n</code>, las de Unix <code>\\n</code>, las antiguas de macOS <code>\\r</code>. El RFC 4180 indica CRLF, pero cualquier parser robusto acepta los tres. ConverterUp lo hace; pero si escribes tu propio parser, no asumas un único final de línea."
+      },
+      "section2": {
+        "heading": "Detección de cabeceras y salida JSON anidada",
+        "p1": "Con las <strong>cabeceras activadas</strong>, la primera fila se convierte en los nombres de propiedad y cada fila siguiente se emite como objeto: <code>[{\"id\":\"1\",\"name\":\"Ana\"},…]</code>. Es el formato estándar que esperan la mayoría de APIs. Con las cabeceras desactivadas, cada fila se emite como array (<code>[[\"1\",\"Ana\"],…]</code>), útil para datos posicionales o cuando el CSV no tiene línea de cabecera.",
+        "p2": "Los nombres de columna se toman literalmente, incluidos los espacios y caracteres especiales. Si necesitas claves en camelCase o snake_case, pasa primero las cabeceras por el conversor de capitalización o activa la opción <em>Normalizar cabeceras</em>, que recorta espacios, pasa a minúsculas y sustituye espacios por guiones bajos.",
+        "p3": "Los datos CSV son planos por naturaleza; los consumidores de JSON a menudo quieren <strong>objetos anidados</strong>. ConverterUp admite una <em>notación dot-path</em> para las cabeceras: una columna llamada <code>address.city</code> crea una estructura anidada <code>{ \"address\": { \"city\": \"…\" } }</code> en la salida. Usa la notación <code>items[0].sku</code> para arrays anidados.",
+        "p4": "La <strong>inferencia de tipos</strong> es opt-in. Por defecto, cada valor es una cadena, lo que conserva los ceros a la izquierda (códigos postales, números de teléfono, SKUs) y evita la trampa de coma flotante <code>0.1 + 0.2</code> de JavaScript. Activa la inferencia para detectar automáticamente números, booleanos, fechas ISO y marcadores <code>null</code>: útil al alimentar una base de datos con columnas tipadas."
+      },
+      "section3": {
+        "heading": "Problemas frecuentes en la conversión",
+        "p1": "<strong>Comas dentro de los valores</strong>: <code>\"Smith, John\"</code> debe ir entre comillas dobles. Si tu CSV de origen tiene comas sin entrecomillar dentro de valores (un bug habitual en archivos editados a mano y en algunas exportaciones heredadas), cada línea tendrá un recuento de columnas erróneo. El modo de autodetección de ConverterUp señala las filas con recuento inconsistente y ofrece punto y coma como delimitador real probable.",
+        "p2": "<strong>Saltos de línea dentro de las celdas</strong>: los valores multilínea (por ejemplo, direcciones o comentarios) son CSV válido cuando van entre comillas dobles: el parser sabe que un <code>\\n</code> dentro de <code>\"</code>…<code>\"</code> es parte del valor, no un separador de registro. Pegar CSV en muchos editores rompe esa distinción; sube el archivo en lugar de copiar y pegar a través de una UI que pueda normalizar finales de línea.",
+        "p3": "<strong>Comillas sin escapar</strong>: un valor que contiene un <code>\"</code> literal debe duplicarlo (<code>\"Dijo \"\"hola\"\"\"</code>). Algunos exportadores usan barra invertida (<code>\"Dijo \\\"hola\\\"\"</code>), que no es válido en RFC 4180 pero es común en herramientas no nativas de CSV. Activa <em>Manejo flexible de comillas</em> si tu origen usa escapado con barra invertida."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Qué delimitadores son compatibles?",
       "a1": "Coma, punto y coma, tabulación, barra vertical y un campo personalizado donde puedes escribir cualquier carácter. La detección automática inspecciona las primeras líneas y elige el delimitador que produce el recuento de columnas más consistente.",
@@ -918,7 +1178,11 @@
       "q3": "¿Cuál es el tamaño máximo de CSV?",
       "a3": "Hasta 50 MB por archivo. El parser en streaming mantiene un uso de memoria bajo, así que incluso archivos con cientos de miles de filas convierten sin colgar la pestaña del navegador.",
       "q4": "¿Puedo obtener un array de objetos en lugar de arrays?",
-      "a4": "Sí. Activa la opción de cabecera y la primera fila se usa como claves JSON, produciendo un array de objetos. Desactívala para obtener un array de arrays, útil cuando el origen no tiene cabecera o quieres acceso por posición."
+      "a4": "Sí. Activa la opción de cabecera y la primera fila se usa como claves JSON, produciendo un array de objetos. Desactívala para obtener un array de arrays, útil cuando el origen no tiene cabecera o quieres acceso por posición.",
+      "q5": "¿Cómo se representan los campos vacíos y los valores ausentes?",
+      "a5": "Un campo vacío se convierte en cadena vacía (<code>\"\"</code>) por defecto. Activa <em>Vacío como null</em> para mapear <code>,,</code> a <code>null</code> JSON, preferible al alimentar una base de datos que distingue entre cadena vacía y NULL. Una fila con menos columnas que la cabecera deja las claves finales como <code>\"\"</code> o <code>null</code> según ese mismo interruptor.",
+      "q6": "¿Por qué Excel rompe mi CSV al volver a guardarlo?",
+      "a6": "Excel reescribe la codificación al valor por defecto del sistema (Windows-1252 en Windows en muchos locales), elimina el BOM UTF-8 y reformatea números y fechas de forma agresiva: un cero inicial en un código postal pasa de <code>00501</code> a <code>501</code>, una fecha ISO se convierte en una fecha en formato estadounidense. Para hacer un ida y vuelta de CSV por Excel sin problemas, importa con <em>Datos → Desde texto</em> y define explícitamente cada columna como <em>Texto</em>."
     },
     "heic-to-jpg": {
       "intro": "Convierte fotos HEIC a JPG, PNG o WebP directamente en tu navegador. El conversor HEIC de ConverterUp está pensado para usuarios de iPhone y iPad que necesitan compartir o subir fotos a apps y webs que aún no aceptan el formato HEIC de Apple — visores de fotos de Windows, versiones antiguas de Photoshop, la mayoría de dashboards CMS y muchos clientes de correo. Suelta el archivo .heic, elige el formato de destino y descarga la imagen en segundos. El decode ocurre localmente con una build WebAssembly de libheif, así que la foto original nunca sale de tu dispositivo ni se sube a servidores de terceros.",
