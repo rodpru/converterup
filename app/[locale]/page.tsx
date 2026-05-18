@@ -16,6 +16,7 @@ import { HowItWorks } from "@/components/landing/how-it-works";
 import { LiveDemo } from "@/components/landing/live-demo";
 import { LogoBar } from "@/components/landing/logo-bar";
 import { Navbar } from "@/components/landing/navbar";
+import { PopularTools } from "@/components/landing/popular-tools";
 import { Pricing } from "@/components/landing/pricing";
 import { Testimonials } from "@/components/landing/testimonials";
 import { SmoothScroll } from "@/components/smooth-scroll";
@@ -32,7 +33,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <main className="min-h-screen bg-background selection:bg-primary/20 selection:text-primary">
       <JsonLd data={websiteSchema} />
@@ -46,6 +52,7 @@ export default async function Home() {
       <Features />
       <HowItWorks />
       <LiveDemo />
+      <PopularTools locale={locale} />
       <Comparison />
       <Pricing />
       <Testimonials />

@@ -632,6 +632,24 @@
     },
     "exif-viewer": {
       "intro": "Consulta y elimina metadatos EXIF de fotos online para proteger tu privacidad antes de compartir imágenes. El visor EXIF de ConverterUp lee archivos JPEG, PNG, WebP y TIFF y muestra modelo de cámara, objetivo, ajustes de exposición, fechas y coordenadas GPS que se hayan podido incrustar automáticamente. Los fotógrafos pueden auditar su flujo de trabajo y los usuarios habituales pueden eliminar datos sensibles con un clic antes de publicar en redes o enviar fotos por correo. El archivo original se lee en local y la copia limpia se genera en el navegador, así que tu foto nunca llega a un servidor externo.",
+      "section1": {
+        "heading": "Qué son los metadatos EXIF y por qué importan",
+        "p1": "EXIF (Exchangeable Image File Format) es un bloque estructurado de <strong>metadatos</strong> que cámaras y móviles incrustan dentro de casi cualquier foto JPEG, TIFF o HEIC. Registra con qué se hizo la foto (marca, modelo, objetivo, distancia focal), cómo (ISO, apertura, velocidad de obturación, balance de blancos), cuándo (fechas en hora local y UTC) y, lo más sensible, <em>dónde</em>, mediante coordenadas GPS con precisión de pocos metros.",
+        "p2": "EXIF es invisible en los visores de fotos habituales, pero cualquiera con una herramienta gratuita puede leerlo sin esfuerzo. Publicar una captura de tu cocina, del colegio de tu hija o de tu oficina puede revelar tu dirección exacta si olvidaste eliminarlo. Periodistas, activistas y cualquier persona que comparta fotos personales en internet tiene un motivo claro para auditar los metadatos antes de publicar.",
+        "p3": "Más allá de la privacidad, los fotógrafos usan EXIF para auditorías de flujo de trabajo: verificar que un lote de entrega procede del cuerpo de cámara correcto, comprobar que los campos de copyright están definidos o confirmar la zona horaria registrada en un encargo remoto. El visor expone cada etiqueta del archivo, incluidas las notas de fabricante no estándar, así que nada queda oculto."
+      },
+      "section2": {
+        "heading": "Cómo eliminar datos EXIF de las fotos",
+        "p1": "Sube un archivo JPEG, PNG, WebP o TIFF, revisa el informe de metadatos —cada etiqueta se agrupa por categoría (cámara, objetivo, GPS, fechas, software)— y pulsa <strong>Eliminar EXIF</strong> para descargar una copia limpia. Los datos de píxel son idénticos al original; solo se reescribe la cabecera de metadatos.",
+        "p2": "ConverterUp conserva la <strong>marca de orientación</strong> para que las fotos se sigan viendo bien orientadas en cualquier plataforma. Elimina todo lo demás: GPS, fechas, marca y modelo de cámara, datos del objetivo, números de serie, huellas de software, miniaturas (que pueden filtrar el original incluso después de editar) y cualquier imagen previa incrustada.",
+        "p3": "Si solo quieres eliminar la ubicación, cambia al <strong>modo selectivo</strong> y desmarca GPS mientras conservas los datos de cámara y exposición. Es útil para fotógrafos que quieren mantener la información del equipo en los metadatos del portfolio pero sin publicar dónde se tomó cada foto."
+      },
+      "section3": {
+        "heading": "Consejos de privacidad al compartir fotos online",
+        "p1": "La mayoría de redes sociales (Instagram, Facebook, Twitter/X) <strong>eliminan el EXIF al subir</strong>, pero las nubes de archivos, los adjuntos directos, el correo electrónico, Telegram, Signal en modo archivo y WhatsApp en modo <em>documento</em> no lo hacen. Elimina tú los metadatos antes de compartir si existe alguna posibilidad de que el archivo original salga de la plataforma sin cambios.",
+        "p2": "Desactiva el <strong>geoetiquetado en el origen</strong> de tu móvil para ubicaciones sensibles: en iOS, Ajustes → Privacidad → Localización → Cámara → Nunca (o Al usar la app para fotos de viaje). En Android: abre la app Cámara → Ajustes → Etiquetas de ubicación → desactivado. Esto evita el problema desde la raíz.",
+        "p3": "Al publicar capturas de tu pantalla, recuerda que el EXIF no es la única filtración. Los títulos de ventana, los favicons de pestañas, las notificaciones y los desfases horarios en las fechas también pueden revelar información. Combina la eliminación del EXIF con una revisión manual antes de publicar cualquier cosa ligada a tu identidad."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Qué tipo de metadatos guarda EXIF?",
       "a1": "EXIF puede incluir marca y modelo de cámara, objetivo, ISO, velocidad de obturación, apertura, distancia focal, fecha de captura, software usado y coordenadas GPS exactas. Los smartphones suelen añadir la ubicación automáticamente salvo que la desactives en los ajustes del sistema.",
@@ -640,10 +658,33 @@
       "q3": "¿Eliminar EXIF afecta a la calidad de la imagen?",
       "a3": "No. Borrar metadatos solo reescribe la cabecera del archivo y deja intactos los datos de píxel, así que la calidad visual es idéntica a la original.",
       "q4": "¿La foto limpia se sigue mostrando bien en redes sociales?",
-      "a4": "Sí. La mayoría de redes ignoran el EXIF, pero conservan la marca de orientación. ConverterUp preserva la orientación y elimina GPS, fechas e información de cámara, así que las fotos se siguen viendo bien orientadas."
+      "a4": "Sí. La mayoría de redes ignoran el EXIF, pero conservan la marca de orientación. ConverterUp preserva la orientación y elimina GPS, fechas e información de cámara, así que las fotos se siguen viendo bien orientadas.",
+      "q5": "¿Puedo eliminar el EXIF de varias fotos a la vez?",
+      "a5": "Sí. Suelta varios archivos a la vez y el visor los procesa en serie y luego ofrece un único ZIP con cada copia limpia. El informe de cada foto sigue siendo inspeccionable de forma individual antes de descargar.",
+      "q6": "¿Se suben mis fotos a un servidor?",
+      "a6": "No. El archivo se lee con la API FileReader y se decodifica en tu navegador. El análisis y la eliminación de metadatos ocurren íntegramente en el lado del cliente: ConverterUp no tiene endpoint de subida ni registra el contenido ni los metadatos de tu foto."
     },
     "color-palette": {
       "intro": "Extrae paletas de color de imágenes online para encontrar colores dominantes para branding, diseño web o moodboards. La herramienta de paleta de colores de ConverterUp analiza cualquier foto subida y devuelve los colores más representativos con valores HEX, RGB y HSL listos para copiar. Los diseñadores pueden montar una paleta a partir de una foto de producto, los ilustradores pueden muestrear arte de referencia y los desarrolladores pueden extraer colores de tema desde una captura de pantalla. La imagen se procesa íntegramente en el navegador con un algoritmo de cuantización, así que capturas privadas y obras inéditas nunca se suben a un servicio remoto.",
+      "section1": {
+        "heading": "Cómo funciona la extracción de paletas",
+        "p1": "El extractor ejecuta un algoritmo de <strong>cuantización median cut</strong> sobre los píxeles de la imagen. Reduce la foto a un espacio de color manejable, divide en mitades de forma recursiva los grupos de color con más variación y devuelve el centroide de cada grupo final como color representativo. El resultado prioriza la <em>cobertura</em> sobre la viveza: las zonas grandes y apagadas (cielo, paredes, piel) suelen quedar por encima de los acentos pequeños y saturados.",
+        "p2": "Si prefieres colores vivos en lugar de los dominantes, sube el tamaño de la paleta a 10 o 12 colores e ignora las dos o tres primeras entradas. Alternativamente, recorta la imagen a la zona que destaca los colores que realmente te interesan antes de extraerla.",
+        "p3": "Cada píxel se procesa localmente en el navegador mediante un Web Worker, así que el algoritmo se ejecuta sin bloquear la página y la imagen nunca llega a un servidor remoto. Eso importa cuando muestreas fotos de producto inéditas, maquetas internas o capturas con contenido sensible."
+      },
+      "section2": {
+        "heading": "Casos de uso: branding, temas de UI, moodboards",
+        "p1": "<strong>Descubrimiento de marca</strong>: suelta una foto principal, una captura de la home de un competidor o un render de producto y extrae los colores que definen la identidad visual. Copia los valores HEX directamente al panel de estilos de Figma o a una configuración de Tailwind.",
+        "p2": "<strong>Temas de UI a partir de una captura</strong>: los desarrolladores pueden elegir un color primario, secundario y de acento desde cualquier maqueta en pocos clics, sin tener que buscar píxel a píxel con el cuentagotas.",
+        "p3": "<strong>Moodboards y diseño editorial</strong>: fotógrafos e ilustradores pueden construir paletas coherentes a partir de una imagen de referencia y luego exportar la muestra para usarla en InDesign, Photoshop o Procreate.",
+        "p4": "<strong>Comprobaciones de accesibilidad</strong>: combina los colores extraídos con un comprobador de contraste antes de fijarlos en un design system. Una paleta que queda bien sobre una imagen principal suele fallar las pautas WCAG cuando se usa como texto sobre un fondo claro."
+      },
+      "section3": {
+        "heading": "HEX, RGB, HSL: qué formato de color copiar",
+        "p1": "<strong>HEX</strong> (<code>#2DD4BF</code>) es el más compacto y universal: CSS, herramientas de diseño, guías de marca y Tailwind aceptan hex. Es la opción por defecto en caso de duda.",
+        "p2": "<strong>RGB</strong> (<code>rgb(45, 212, 191)</code>) es preferible cuando necesitas exponer un canal alfa vía <code>rgba()</code>, o cuando trabajas con librerías de procesamiento de imagen que operan directamente sobre canales 0–255.",
+        "p3": "<strong>HSL</strong> (<code>hsl(172, 66 %, 50 %)</code>) describe el color en términos humanos —matiz, saturación, luminosidad— y es el formato más fácil de <em>editar</em>. Desplaza el matiz 30° para conseguir un color análogo, baja la luminosidad un 10 % para una tonalidad más oscura, todo sin salir del formato."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Cómo elige la herramienta los colores dominantes?",
       "a1": "Usa un algoritmo de cuantización median cut que agrupa píxeles similares en clústeres y devuelve el centroide de cada clúster. El resultado prioriza la cobertura por encima de la viveza, así que los fondos apagados pueden aparecer por delante de los colores de acento.",
@@ -652,7 +693,11 @@
       "q3": "¿Se envían mis imágenes a algún sitio?",
       "a3": "No. La imagen la decodifica el navegador, se reduce en memoria y se analiza en local. ConverterUp nunca recibe el archivo ni la paleta resultante.",
       "q4": "¿Qué formatos de imagen puedo analizar?",
-      "a4": "PNG, JPG/JPEG, WebP, AVIF, GIF y BMP. Para mejores resultados usa una imagen limpia sin marcas de agua pesadas, ya que las superposiciones de texto se pueden detectar como un color propio."
+      "a4": "PNG, JPG/JPEG, WebP, AVIF, GIF y BMP. Para mejores resultados usa una imagen limpia sin marcas de agua pesadas, ya que las superposiciones de texto se pueden detectar como un color propio.",
+      "q5": "¿Se envían mis imágenes a algún sitio?",
+      "a5": "No. La imagen la decodifica el navegador, se reduce en memoria y se analiza localmente en un Web Worker. ConverterUp nunca recibe el archivo ni la paleta resultante.",
+      "q6": "¿Qué formatos de imagen puedo analizar?",
+      "a6": "PNG, JPG/JPEG, WebP, AVIF, GIF y BMP. Para mejores resultados usa una imagen limpia sin marcas de agua pesadas, ya que las superposiciones de texto y los logos pueden detectarse como un clúster de color propio."
     },
     "favicon-generator": {
       "intro": "Genera un paquete de favicons online a partir de una sola imagen de origen, listo para añadir a cualquier sitio o web app. El generador de favicons de ConverterUp produce todos los tamaños estándar de 16x16 a 512x512, incluyendo iconos para Apple touch, iconos de pantalla de inicio en Android y un fragmento de manifiesto que puedes pegar en tu HTML. Diseñadores y desarrolladores ahorran tiempo al evitar varias exportaciones manuales en editores de imagen. La conversión se ejecuta en el navegador, así que logotipos inéditos y activos de marca quedan privados y nunca se almacenan en un servidor remoto.",
@@ -740,6 +785,25 @@
     },
     "json-viewer": {
       "intro": "Formatea y valida JSON online con resaltado de sintaxis, árboles expandibles e informes de error instantáneos. El visor JSON de ConverterUp está pensado para desarrolladores de backend, consumidores de API y analistas de datos que necesitan inspeccionar respuestas, embellecer payloads minificados o minificar rápido un JSON antes de pegarlo en un archivo de configuración. Suelta un archivo o pega el texto, expande y colapsa objetos anidados, y copia el resultado embellecido o compacto. El JSON se interpreta localmente en el navegador, así que respuestas privadas de API, tokens y datos de cliente nunca llegan a un servidor remoto.",
+      "section1": {
+        "heading": "Cuándo utilizar un visor de JSON",
+        "p1": "El JSON está en todas partes: APIs REST, bases NoSQL, archivos de configuración, salidas de build, líneas de log. Pero el JSON crudo rara vez es legible para una persona. Un visor dedicado convierte un bloque plano en un árbol navegable, muestra los errores de sintaxis a medida que escribes y te permite alternar entre una vista embellecida (para leer) y una vista minificada (para pegar en variables de entorno o cadenas).",
+        "p2": "Las tareas típicas incluyen inspeccionar una respuesta de API mientras desarrollas el frontend, comparar dos payloads en modo diff, cazar la coma que falta o el corchete sobrante en un archivo de configuración, validar que el cuerpo de un webhook cumple con un esquema y embellecer un volcado JSON en una sola línea extraído de un agregador de logs.",
+        "p3": "El visor de ConverterUp se ejecuta <strong>íntegramente en tu navegador</strong>. No se sube nada, no se registra nada. Eso importa cuando el JSON contiene claves de API, datos personales de clientes o formas de respuesta inéditas: justo los casos en los que pegar en una herramienta web cualquiera sería una imprudencia."
+      },
+      "section2": {
+        "heading": "Funciones: formatear, validar, minificar, árbol",
+        "p1": "<strong>Embellecer</strong> indenta y alinea el documento con un ancho de tabulación o espacios configurable, útil para compartir en pull requests o pegar en documentación. <strong>Minificar</strong> elimina todos los espacios para producir el payload más pequeño posible, lo que conviene para cuerpos HTTP, query strings o cuando vas a copiar el JSON como cadena dentro de otro campo.",
+        "p2": "La <strong>vista en árbol</strong> renderiza objetos y arrays como nodos expandibles con conteo de claves, así puedes profundizar en un payload muy anidado sin desplazarte por miles de líneas. El <strong>resaltado de sintaxis</strong> colorea cadenas, números, booleanos y null de forma distintiva para detectar errores de tipo a primera vista.",
+        "p3": "La <strong>validación</strong> ocurre en vivo mientras escribes. Los errores señalan la línea y columna exactas con un mensaje corto: token inesperado, coma sobrante, cadena sin cerrar, clave duplicada. El visor aplica JSON estricto según el RFC 8259, así que las particularidades de JSON5 (comentarios, comillas simples, números hex, comas sobrantes) se marcan como error en lugar de aceptarse en silencio."
+      },
+      "section3": {
+        "heading": "Errores comunes de JSON y cómo solucionarlos",
+        "p1": "<strong>Comas sobrantes</strong>: <code>{\"a\":1,}</code> no es JSON válido. La mayoría de lenguajes y editores las permiten, JSON no. Quita la coma después del último elemento en cualquier objeto o array.",
+        "p2": "<strong>Comillas simples</strong>: <code>{'a':1}</code> parece correcto en JavaScript pero no es JSON. Las claves y los valores de cadena deben usar comillas dobles. Haz un buscar y reemplazar de <code>'</code> a <code>\"</code> si tu fuente viene de un volcado de JavaScript.",
+        "p3": "<strong>Caracteres sin escapar en cadenas</strong>: los saltos de línea, tabulaciones y barras invertidas dentro de valores de cadena deben escaparse como <code>\\n</code>, <code>\\t</code> y <code>\\\\</code>. Pegar una cadena multilínea sin escapar es una causa frecuente de errores de <em>token inesperado</em>.",
+        "p4": "<strong>Corchetes o llaves sin cerrar</strong>: los archivos grandes editados a mano suelen acabar con un par desbalanceado. El visor resalta la línea donde el parser se rindió; desde ahí, retrocede para encontrar el par sin emparejar."
+      },
       "faqHeading": "Preguntas frecuentes",
       "q1": "¿Cómo se reportan los errores de JSON?",
       "a1": "El JSON inválido se resalta en la línea y columna exactas donde falló el parser, con una descripción corta como token inesperado o coma sobrante. Corrige el problema y la vista en árbol se actualiza automáticamente.",
@@ -748,7 +812,11 @@
       "q3": "¿Admite JSON5 o comentarios?",
       "a3": "No. El visor aplica JSON estricto según el RFC 8259, así que las comas sobrantes, las comillas simples y los comentarios se marcan como error. Usa primero un conversor JSON5 si necesitas esa flexibilidad.",
       "q4": "¿Se envía mi JSON a un servidor?",
-      "a4": "No. El parseo, el formateo y la minificación ocurren en el lado del cliente. ConverterUp no tiene endpoint de log para contenido JSON, lo cual es crítico al depurar payloads con credenciales o PII."
+      "a4": "No. El parseo, el formateo y la minificación ocurren en el lado del cliente. ConverterUp no tiene endpoint de log para contenido JSON, lo cual es crítico al depurar payloads con credenciales o PII.",
+      "q5": "¿Puedo ordenar o buscar dentro del JSON?",
+      "a5": "Sí. La vista en árbol incluye un buscador de claves y valores que filtra los nodos mientras escribes y muestra la ruta de cada coincidencia. La ordenación alfabética de claves está disponible con un único interruptor.",
+      "q6": "¿Se envía mi JSON a un servidor?",
+      "a6": "No. El parseo, el formateo, la validación y la minificación se ejecutan en el lado del cliente. ConverterUp no tiene endpoint de log para contenido JSON, lo cual es crítico al depurar payloads con credenciales, tokens o PII."
     },
     "hex-to-decimal": {
       "intro": "Convierte hex a decimal online y alterna entre hexadecimal, decimal, binario y octal en una sola vista. El conversor de bases numéricas de ConverterUp es una referencia rápida para desarrolladores embebidos, programadores de bajo nivel y estudiantes que practican ensamblador o redes. Escribe un valor en cualquier base y los otros tres se actualizan al instante, con soporte opcional para códigos de color hex que muestran también el triplete RGB equivalente. Los cálculos se ejecutan en el navegador, así que los valores nunca salen de tu máquina y la herramienta funciona offline una vez que la página está en caché.",
@@ -870,5 +938,14 @@
     "moreTools": "Más Herramientas",
     "popularConversions": "Conversiones Populares",
     "viewAll": "Ver Todas"
+  },
+  "PopularTools": {
+    "badge": "Todo gratis, sin registro",
+    "heading": "Herramientas online gratis populares",
+    "subheading": "Comprime, convierte, formatea y limpia — todas las herramientas corren en tu navegador. Tus archivos nunca salen del dispositivo.",
+    "viewAll": "Ver las 22 herramientas",
+    "categoryImage": "Imagen y Foto",
+    "categoryConvert": "Conversión",
+    "categoryDev": "Desarrollador y Texto"
   }
 }
