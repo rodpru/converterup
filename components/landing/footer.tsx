@@ -34,6 +34,7 @@ const tools = [
   { name: "Case Converter", href: "/tools/case-converter" },
   { name: "CSV to JSON", href: "/tools/csv-to-json" },
   { name: "HEIC to JPG", href: "/tools/heic-to-jpg" },
+  { name: "HEIC to PDF", href: "/tools/heic-to-pdf" },
 ];
 
 export function Footer() {

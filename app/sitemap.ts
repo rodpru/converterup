@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "case-converter",
     "csv-to-json",
     "heic-to-jpg",
+    "heic-to-pdf",
   ];
 
   const blogEntries = getAllArticles().map((article) => {

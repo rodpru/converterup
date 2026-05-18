@@ -27,6 +27,7 @@ const TOOL_CATEGORIES: Record<
   "case-converter": "UtilityApplication",
   "csv-to-json": "DeveloperApplication",
   "heic-to-jpg": "MultimediaApplication",
+  "heic-to-pdf": "MultimediaApplication",
 };
 
 const BASE_URL = "https://converterup.com";

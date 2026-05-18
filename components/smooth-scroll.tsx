@@ -1,6 +1,5 @@
 "use client";
 
-import Lenis from "lenis";
 import { useEffect } from "react";
 
 export function SmoothScroll() {
@@ -10,20 +9,41 @@ export function SmoothScroll() {
     ).matches;
     if (prefersReduced) return;
 
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t)),
-      touchMultiplier: 2,
-    });
+    // Skip on touch devices — Lenis hijacks native scroll, hurting INP
+    // and causing jank on mobile / iPad.
+    const isTouch = window.matchMedia("(hover: none) and (pointer: coarse)")
+      .matches;
+    if (isTouch) return;
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    let cancelled = false;
+    let cleanup: (() => void) | null = null;
+
+    (async () => {
+      const { default: Lenis } = await import("lenis");
+      if (cancelled) return;
+
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - 2 ** (-10 * t)),
+        touchMultiplier: 2,
+      });
+
+      let rafId = 0;
+      function raf(time: number) {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      }
+      rafId = requestAnimationFrame(raf);
+
+      cleanup = () => {
+        cancelAnimationFrame(rafId);
+        lenis.destroy();
+      };
+    })();
 
     return () => {
-      lenis.destroy();
+      cancelled = true;
+      cleanup?.();
     };
   }, []);
 

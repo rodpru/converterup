@@ -42,16 +42,14 @@ export function Hero() {
               </div>
             </HeroReveal>
 
-            <HeroReveal delay={0.1}>
-              <h1
-                className="font-[Syne] font-extrabold tracking-tight leading-[0.95] mb-8"
-                style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)" }}
-              >
-                {t("title1")}
-                <br />
-                <span className="gradient-text">{t("title2")}</span>
-              </h1>
-            </HeroReveal>
+            <h1
+              className="font-[Syne] font-extrabold tracking-tight leading-[0.95] mb-8"
+              style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)" }}
+            >
+              {t("title1")}
+              <br />
+              <span className="gradient-text">{t("title2")}</span>
+            </h1>
 
             <HeroReveal delay={0.2}>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed mb-10">

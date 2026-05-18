@@ -10,6 +10,7 @@ import {
   FileCode,
   FileImage,
   FileSearch,
+  FileText,
   Film,
   Fingerprint,
   Hash,
@@ -192,6 +193,13 @@ export const tools = [
     href: "/tools/heic-to-jpg",
     icon: Smartphone,
     tags: ["heic", "heif", "jpg", "iphone", "ios", "apple", "convert"],
+  },
+  {
+    name: "HEIC to PDF",
+    description: "Combine iPhone HEIC photos into a single multi-page PDF.",
+    href: "/tools/heic-to-pdf",
+    icon: FileText,
+    tags: ["heic", "heif", "pdf", "iphone", "ios", "merge", "combine"],
   },
 ];
 

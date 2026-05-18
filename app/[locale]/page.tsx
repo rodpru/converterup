@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import {
   faqPageSchema,
   JsonLd,
@@ -6,9 +7,6 @@ import {
   softwareApplicationSchema,
   websiteSchema,
 } from "@/components/json-ld";
-import { Comparison } from "@/components/landing/comparison";
-import { CTA } from "@/components/landing/cta";
-import { FAQ } from "@/components/landing/faq";
 import { Features } from "@/components/landing/features";
 import { Footer } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
@@ -17,10 +15,30 @@ import { LiveDemo } from "@/components/landing/live-demo";
 import { LogoBar } from "@/components/landing/logo-bar";
 import { Navbar } from "@/components/landing/navbar";
 import { PopularTools } from "@/components/landing/popular-tools";
-import { Pricing } from "@/components/landing/pricing";
-import { Testimonials } from "@/components/landing/testimonials";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { generateAlternates } from "@/lib/seo";
+
+// Below-the-fold sections — code-split so their JS (framer-motion etc)
+// loads after the critical path. Still SSR'd for SEO.
+const Comparison = dynamic(() =>
+  import("@/components/landing/comparison").then((m) => ({
+    default: m.Comparison,
+  })),
+);
+const Pricing = dynamic(() =>
+  import("@/components/landing/pricing").then((m) => ({ default: m.Pricing })),
+);
+const Testimonials = dynamic(() =>
+  import("@/components/landing/testimonials").then((m) => ({
+    default: m.Testimonials,
+  })),
+);
+const FAQ = dynamic(() =>
+  import("@/components/landing/faq").then((m) => ({ default: m.FAQ })),
+);
+const CTA = dynamic(() =>
+  import("@/components/landing/cta").then((m) => ({ default: m.CTA })),
+);
 
 export async function generateMetadata({
   params,

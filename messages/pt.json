@@ -215,7 +215,9 @@
     "csv-to-json-title": "Converter CSV para JSON — Grátis, Sem Upload",
     "csv-to-json-desc": "Converta CSV para JSON no browser com delimitadores personalizados, campos entre aspas e deteção de cabeçalho. Grátis, instantâneo, ficheiros nunca saem do dispositivo.",
     "heic-to-jpg-title": "Converter HEIC para JPG — Conversor iPhone Grátis",
-    "heic-to-jpg-desc": "Converta fotos HEIC do iPhone para JPG, PNG ou WebP grátis online. Sem upload, sem registo, sem marca de água — os ficheiros ficam no seu dispositivo. Funciona em Windows, Mac e Linux."
+    "heic-to-jpg-desc": "Converta fotos HEIC do iPhone para JPG, PNG ou WebP grátis online. Sem upload, sem registo, sem marca de água — os ficheiros ficam no seu dispositivo. Funciona em Windows, Mac e Linux.",
+    "heic-to-pdf-title": "Conversor HEIC para PDF — Junte Fotos do iPhone em PDF",
+    "heic-to-pdf-desc": "Junte fotos HEIC do iPhone num único PDF multi-página online. Grátis, sem upload, sem registo. Largue até 20 fotos, ajuste a A4 ou tamanho nativo e descarregue em segundos."
   },
   "ToolHowTo": {
     "image-compressor": {
@@ -584,6 +586,22 @@
       "step3": {
         "name": "Descarregue a imagem convertida",
         "text": "Clique em descarregar para guardar a foto convertida. O decode e re-encode acontecem totalmente no browser."
+      }
+    },
+    "heic-to-pdf": {
+      "name": "Como Juntar Fotos HEIC num PDF",
+      "description": "Junte várias fotos HEIC do iPhone num único PDF multi-página, processado totalmente no browser.",
+      "step1": {
+        "name": "Largue as suas fotos HEIC",
+        "text": "Arraste e largue até 20 fotos .heic ou .heif do iPhone, Mac ou câmara. Reordene removendo e voltando a adicionar."
+      },
+      "step2": {
+        "name": "Escolha tamanho de página e qualidade",
+        "text": "Escolha ajuste A4 (cada foto centrada numa página padrão) ou nativo (página igual às dimensões em pixels da foto). Ajuste o slider de qualidade JPG."
+      },
+      "step3": {
+        "name": "Descarregue o PDF",
+        "text": "Clique em construir PDF — cada HEIC é descodificado sequencialmente, embebido como JPG e escrito num único ficheiro PDF para descarregar."
       }
     }
   },
@@ -1219,6 +1237,40 @@
       "a5": "Converte a imagem principal (primeira) dentro do contentor HEIC. Live Photos guardam o movimento num ficheiro <code>.MOV</code> separado que o iOS emparelha na biblioteca Fotos — esse vídeo não está dentro do HEIC e não é convertido. Bursts HEIC contêm tipicamente uma única imagem representativa.",
       "q6": "A ferramenta suporta HEIF e sequências HEIC?",
       "a6": "Sim. As extensões <code>.heif</code> e <code>.heic</code> são descodificadas pelo mesmo pipeline libheif. Sequências HEIC multi-imagem são detetadas, mas o conversor exporta só a primeira imagem. Se precisa de todos os frames de uma sequência, a opção &quot;exportar todos os frames&quot; está planeada para uma versão futura."
+    },
+    "heic-to-pdf": {
+      "intro": "Junte várias fotos HEIC do iPhone num único PDF multi-página, diretamente no browser. A ferramenta HEIC-para-PDF da ConverterUp foi pensada para quem tem dezenas de ficheiros HEIC do iPhone e precisa de partilhar, imprimir ou arquivar tudo como um só documento — recibos, digitalizações de documentos, receitas, screenshots ou lotes de fotos para clientes. Largue as fotos, escolha ajuste A4 ou tamanho de página nativo, e descarregue um único PDF. O pipeline de decode (libheif) e a montagem do PDF (pdf-lib) correm ambos no browser, por isso os originais nunca saem do seu dispositivo.",
+      "section1": {
+        "heading": "Porque juntar fotos HEIC num PDF",
+        "p1": "O PDF é o <strong>documento portátil universal</strong> — todos os sistemas operativos, clientes de e-mail, drives na cloud e impressoras o leem sem extensões. Agrupar 5 a 20 fotos HEIC num único PDF é melhor do que enviá-las individualmente como anexos de imagem, sobretudo quando o destinatário usa Windows, um Android mais antigo ou um CMS que não aceita HEIC.",
+        "p2": "Casos típicos de uso: <strong>recibos</strong> para notas de despesa (juntar 10 fotos de recibos num só documento), <strong>digitalizações de documentos</strong> para pedidos bancários ou de visto (frente e verso num ficheiro), <strong>receitas e apontamentos</strong> fotografados página a página, <strong>anúncios imobiliários</strong> agrupados por propriedade, e <strong>trabalhos escolares</strong> entregues como um único deliverable.",
+        "p3": "Comparado com imprimir-e-digitalizar, o pipeline HEIC-para-PDF preserva a fidelidade da imagem original, demora segundos em vez de minutos, e funciona a partir de qualquer telemóvel sem hardware adicional. O resultado é também mais pequeno e pronto a partilhar por e-mail ou link de imediato."
+      },
+      "section2": {
+        "heading": "Ajuste A4 vs tamanho de página nativo",
+        "p1": "<strong>Ajuste A4</strong> coloca cada HEIC numa página padrão de 595 × 842 pt (A4 retrato ou paisagem, rodada automaticamente para coincidir com a orientação de cada foto), centrada com margens. É o que quer para documentos imprimíveis, anexos contratuais, entregas escolares, e tudo o que vai para uma caixa de entrada onde o leitor provavelmente irá imprimir ou assinar.",
+        "p2": "<strong>Nativo</strong> define cada página com as dimensões exatas da foto em pontos (1 pixel = 1 ponto). A imagem preenche a página de bordo a bordo, sem margem e sem escala. Escolha este modo para arquivos só-digitais, álbuns fotográficos, e sempre que não quer que o leitor de PDF adicione bordas vazias.",
+        "p3": "Ambos os modos embebem os bytes JPG sem alterações — o pdf-lib não volta a rasterizar. O tamanho final do PDF é aproximadamente a soma dos tamanhos JPG (à qualidade escolhida) mais uns KB de estrutura. Um PDF de 5 páginas a 90 % de qualidade a partir de HEICs típicos de 4 MB fica por volta dos 4–8 MB."
+      },
+      "section3": {
+        "heading": "Qualidade, limites e privacidade",
+        "p1": "O <strong>slider de qualidade</strong> controla o encoder JPG antes da incorporação. 90 % é o ponto ideal — visualmente indistinguível da fonte HEIC para a maioria das fotos, com um tamanho de PDF gerível. Baixe para 75 % em anexos de e-mail onde o tamanho importa mais que a fidelidade. Suba para 100 % para cópias com qualidade de arquivo (espere ficheiros 3 a 5× maiores).",
+        "p2": "Os limites máximos são <strong>20 ficheiros</strong> por PDF, <strong>50 MB por ficheiro</strong> e <strong>200 MB no total</strong>. Estes limites protegem o Safari móvel, que esgota a memória por volta de 12 MP × 20 canvases. Para mais ficheiros, construa dois PDFs e junte-os com um merger de PDF à parte.",
+        "p3": "Privacidade: o WASM do libheif e o JS do pdf-lib são carregados de CDNs, mas cada byte das suas fotos é processado no browser. A ConverterUp não tem endpoint de upload, não regista telemetria sobre o conteúdo dos ficheiros, nem mantém logs no servidor do que converteu. O blob do PDF de saída é criado com <code>URL.createObjectURL</code> e existe apenas no seu separador até o fechar."
+      },
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Quantas fotos HEIC posso juntar num PDF?",
+      "a1": "Até 20 por PDF, com um teto de 200 MB no total. O limite existe porque o libheif corre single-threaded em WASM e o Safari móvel esgota a memória por volta de 12 MP × 20 canvases. Para mais, construa dois PDFs e junte-os.",
+      "q2": "Posso reordenar as fotos antes de construir o PDF?",
+      "a2": "As fotos são adicionadas pela ordem em que aparecem no seletor de ficheiros / evento de drop. Para reordenar, remova as fotos que quer mais tarde e volte a adicioná-las no fim. Uma UI de arrastar-para-reordenar está no roadmap.",
+      "q3": "As minhas fotos são enviadas para algum lado?",
+      "a3": "Não. Tanto o decode HEIC (libheif via WASM) como a montagem do PDF (pdf-lib) correm totalmente no browser. O PDF final é criado em memória e oferecido como download através de blob URL. A ConverterUp não tem endpoint de upload para dados de imagem.",
+      "q4": "Que tamanho de página usa o PDF?",
+      "a4": "Dois modos. <em>Ajuste A4</em> centra cada foto numa página A4 padrão (595 × 842 pt, rodada automaticamente em retrato ou paisagem). <em>Nativo</em> faz coincidir cada página com as dimensões exatas em pixels da foto, sem margem. Escolha A4 para imprimir, nativo para arquivos digitais.",
+      "q5": "O PDF fica muito maior que os ficheiros HEIC?",
+      "a5": "Aproximadamente igual à soma das fotos codificadas em JPG à qualidade escolhida. 5 × 4 MB HEIC a 90 % de qualidade produz tipicamente um PDF de 4–8 MB. Qualidade 100 % duplica, qualidade 75 % reduz para metade. O pdf-lib não volta a rasterizar, por isso não há perda acumulada.",
+      "q6": "O PDF incorpora os metadados EXIF originais?",
+      "a6": "Não. O pipeline de decode-e-recodificação remove o EXIF antes do JPG chegar ao PDF. É o comportamento amigo da privacidade por defeito — coordenadas GPS e timestamps ficam fora do documento. Se precisa de preservar o EXIF, edite o HEIC na app Fotos da Apple e exporte JPGs individuais com metadados antes de juntar."
     }
   },
   "Convert": {
@@ -1261,7 +1313,7 @@
     "badge": "Tudo grátis, sem registo",
     "heading": "Ferramentas online grátis populares",
     "subheading": "Comprima, converta, formate e limpe — todas as ferramentas correm no navegador. Os seus ficheiros nunca saem do dispositivo.",
-    "viewAll": "Ver todas as 23 ferramentas",
+    "viewAll": "Ver todas as 24 ferramentas",
     "categoryImage": "Imagem & Foto",
     "categoryConvert": "Conversão",
     "categoryDev": "Programador & Texto"
