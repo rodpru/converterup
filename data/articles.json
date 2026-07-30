@@ -156,7 +156,7 @@
     "articleId": "youtube-thumbnail",
     "slug": "how-to-download-youtube-thumbnail",
     "title": "How to Download Any YouTube Thumbnail in HD",
-    "description": "Download YouTube video thumbnails in all resolutions — from 120x90 to 1280x720. Free, instant, no software needed.",
+    "description": "Download YouTube video thumbnails in all resolutions — from 120x90 to 1280x720 HD. Free online tool, instant download, no software or signup needed.",
     "keyword": "download youtube thumbnail hd",
     "toolHref": "/tools/youtube-thumbnail-downloader",
     "toolName": "YouTube Thumbnail Downloader",
@@ -319,7 +319,7 @@
     "articleId": "image-formats",
     "slug": "png-vs-jpg-vs-webp",
     "title": "PNG vs JPG vs WebP: Differences, File Size, and When to Use Each",
-    "description": "PNG vs JPG vs WebP compared: lossy vs lossless, real file size benchmarks, transparency support, browser compatibility, and exactly which format to use for photos, graphics, and the web.",
+    "description": "PNG vs JPG vs WebP: lossy vs lossless, real size benchmarks, transparency, browser support, and which format to use for photos, graphics, and the web.",
     "keyword": "png vs jpg vs webp",
     "toolHref": "/dashboard",
     "toolName": "Media Converter",
@@ -812,8 +812,8 @@
   {
     "articleId": "stripe-fees",
     "slug": "stripe-fees-explained",
-    "title": "Stripe Fees Explained: How to Calculate Processing Costs",
-    "description": "Understand Stripe's fee structure for USD, EUR, GBP, and BRL. Use our calculator to see exactly what you'll pay and receive.",
+    "title": "Stripe Fees 2026: How Much Does Stripe Charge? (Full Guide)",
+    "description": "Stripe charges 2.9% + 30¢ in the US, 1.5% + 25¢ in EU, +1% international, +1% conversion. See exact rates, refund policy, and net payout calculator.",
     "keyword": "calculate stripe fees",
     "toolHref": "/tools/stripe-fee-calculator",
     "toolName": "Stripe Fee Calculator",
@@ -948,19 +948,79 @@
         "text": "This policy is standard across Stripe, PayPal, and Square. It means high refund rates can be costly. For a business with a 5% refund rate processing $100,000/month, the unrecoverable fees on refunds alone are approximately $160/month."
       },
       {
+        "type": "heading",
+        "level": 2,
+        "text": "Does Stripe take a fee on every payment?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Yes. Stripe takes a fee on every successful charge — there is no free tier and no monthly minimum to skip fees. The fee is a percentage of the charge plus a fixed amount per transaction. Failed charges are free, but successful transactions always incur the standard rate for your region. See our <a href=\"/tools/stripe-fee-calculator\">Stripe Fee Calculator</a> to compute the exact deduction for any amount."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "How much does Stripe charge for international transactions?"
+      },
+      {
+        "type": "paragraph",
+        "text": "For US merchants, international cards add <strong>+1%</strong>, and if currency conversion happens, another <strong>+1%</strong>. That brings a European card charged in EUR to <strong>4.9% + 30¢</strong>. European merchants pay <strong>+2%</strong> for non-EEA cards on top of the 1.5% + 25¢ base. Stripe international fees also apply to any card issued outside your Stripe account's country, even if the customer pays in your currency."
+      },
+      {
+        "type": "table",
+        "headers": ["Scenario", "US Account", "EU Account"],
+        "rows": [
+          ["Domestic card", "2.9% + 30¢", "1.5% + 25¢"],
+          ["International card (same currency)", "3.9% + 30¢", "3.5% + 25¢"],
+          ["International card + conversion", "4.9% + 30¢", "4.5% + 25¢"]
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Stripe payment charges vs. subscription and invoicing add-ons"
+      },
+      {
+        "type": "paragraph",
+        "text": "Base Stripe payments charges cover card processing only. Extra Stripe products carry their own fees on top:"
+      },
+      {
+        "type": "list",
+        "ordered": false,
+        "items": [
+          "<strong>Stripe Billing (subscriptions):</strong> +0.5% on recurring charges (0.8% on Scale plan).",
+          "<strong>Stripe Invoicing:</strong> +0.4% per paid invoice ($2 minimum monthly usage).",
+          "<strong>Stripe Tax:</strong> +0.5% per transaction (0.4% for platforms).",
+          "<strong>Radar for Fraud Teams:</strong> $0.07 per screened payment.",
+          "<strong>Connect (marketplaces):</strong> +0.25% + $0.25 for Standard, or custom for Express/Custom accounts.",
+          "<strong>Stripe Terminal (in-person):</strong> 2.7% + 5¢ per US card-present tap."
+        ]
+      },
+      {
         "type": "faq",
         "items": [
           {
+            "question": "Does Stripe take a fee?",
+            "answer": "Yes. Stripe takes a percentage-plus-fixed fee on every successful charge. In the US, that is 2.9% + 30¢ per card transaction. In Europe, 1.5% + 25¢. There is no monthly fee, setup fee, or minimum — you only pay when you get paid."
+          },
+          {
+            "question": "How much does Stripe charge?",
+            "answer": "Stripe charges 2.9% + 30¢ per successful card charge in the US, 1.5% + 25¢ in Europe (EUR), 1.5% + 20p in the UK, and 3.99% + R$0.39 in Brazil. International cards add 1%, and currency conversion adds another 1%. ACH and SEPA Direct Debit are cheaper at 0.8% capped at $5 / €5."
+          },
+          {
             "question": "Does Stripe charge a monthly fee?",
-            "answer": "No. Stripe's standard pricing has no monthly fees, setup fees, or minimum charges. You only pay when you process a transaction. However, some premium features like Stripe Tax (0.5% per transaction), Radar for Fraud Teams ($0.07 per screened transaction), and Stripe Atlas ($500 one-time) have additional costs."
+            "answer": "No. Stripe's standard pricing has no monthly fees, setup fees, or minimum charges. You only pay when you process a transaction. However, premium features like Stripe Tax (0.5% per transaction), Radar for Fraud Teams ($0.07 per screened transaction), and Stripe Atlas ($500 one-time) have additional costs."
           },
           {
-            "question": "What about international transaction fees?",
-            "answer": "Stripe charges an additional 1% for international cards (cards issued outside your country) and another 1% if currency conversion is required. For a US merchant processing a European card in EUR, the total would be 2.9% + 30¢ + 1% (international) + 1% (conversion) = 4.9% + 30¢. To avoid the conversion fee, settle in the original currency."
+            "question": "What are Stripe's international transaction fees?",
+            "answer": "Stripe charges an additional 1% for international cards (cards issued outside your country) and another 1% if currency conversion is required. For a US merchant processing a European card in EUR, the total is 2.9% + 30¢ + 1% (international) + 1% (conversion) = 4.9% + 30¢. To avoid the conversion fee, settle in the original currency by opening a local Stripe account."
           },
           {
-            "question": "How do refund fees work?",
-            "answer": "When you issue a refund, Stripe returns the full transaction amount to the customer but does not refund the processing fee to you. For a $100 charge where you paid $3.20 in fees, you would refund $100 to the customer and lose the $3.20. This is standard across all major payment processors."
+            "question": "How do Stripe refund fees work?",
+            "answer": "When you issue a refund, Stripe returns the full transaction amount to the customer but does not refund the processing fee to you. For a $100 charge where you paid $3.20 in fees, you refund $100 and lose the $3.20. This is standard across all major payment processors."
+          },
+          {
+            "question": "What is Stripe pricing for subscriptions?",
+            "answer": "Stripe subscription (Billing) pricing adds 0.5% on top of the standard card processing fee for recurring charges, or 0.8% on the Scale plan. So a $100 US subscription charge costs 2.9% + 30¢ + 0.5% = 3.4% + 30¢ = $3.70 in total fees."
           }
         ]
       }
@@ -1482,7 +1542,7 @@
     "articleId": "extract-video-frames",
     "slug": "how-to-extract-frames-from-video",
     "title": "How to Extract Frames from a Video as Images",
-    "description": "Capture individual frames from any video file as PNG or JPG. Precision seek controls and batch download as ZIP.",
+    "description": "Capture individual frames from MP4, MOV, or WebM videos as PNG or JPG. Precise seek controls, custom intervals, and batch download as a ZIP file.",
     "keyword": "extract frames from video",
     "toolHref": "/tools/video-frame-extractor",
     "toolName": "Video Frame Extractor",
@@ -1630,7 +1690,7 @@
     "articleId": "image-to-base64",
     "slug": "image-to-base64-guide",
     "title": "Image to Base64: What It Is and How to Use It",
-    "description": "Learn what Base64 encoding is, when to embed images as data URIs, and how to convert any image to Base64 instantly.",
+    "description": "Learn what Base64 encoding is, when to embed images as data URIs in HTML or CSS, and how to convert any JPG, PNG, or SVG to Base64 instantly.",
     "keyword": "image to base64",
     "toolHref": "/tools/image-to-base64",
     "toolName": "Image to Base64",
@@ -1911,7 +1971,7 @@
     "articleId": "create-favicon",
     "slug": "how-to-create-favicon",
     "title": "How to Create a Favicon for Your Website",
-    "description": "Generate all favicon sizes from a single image. Includes apple-touch-icon, PWA icons, and the HTML code to add them.",
+    "description": "Generate all favicon sizes from a single image — 16x16, 32x32, 180x180 Apple Touch, PWA icons — plus the HTML <link> code ready to paste.",
     "keyword": "create favicon for website",
     "toolHref": "/tools/favicon-generator",
     "toolName": "Favicon Generator",
@@ -2064,7 +2124,7 @@
     "articleId": "extract-colors",
     "slug": "how-to-extract-colors-from-image",
     "title": "How to Extract a Color Palette from Any Image",
-    "description": "Extract dominant colors from photos and images. Get HEX, RGB, and HSL values for your design projects.",
+    "description": "Extract dominant colors from any photo or image. Get HEX, RGB, and HSL values for your design projects — perfect for palettes, branding, and UI mockups.",
     "keyword": "extract color palette from image",
     "toolHref": "/tools/color-palette",
     "toolName": "Color Palette Extractor",
@@ -2353,7 +2413,7 @@
     "articleId": "json-formatting",
     "slug": "json-formatting-validation-guide",
     "title": "JSON Formatting and Validation: A Complete Guide",
-    "description": "Learn how to format, validate, and debug JSON data. Syntax highlighting, prettify, minify, and common error fixes.",
+    "description": "Learn how to format, validate, and debug JSON data: syntax highlighting, prettify, minify, and fixes for the most common JSON parse errors.",
     "keyword": "format validate json",
     "toolHref": "/tools/json-viewer",
     "toolName": "JSON Viewer",
@@ -3846,7 +3906,7 @@
     "articleId": "svg-to-png",
     "slug": "como-converter-svg-para-png",
     "title": "Como Converter SVG para PNG em Alta Resolução",
-    "description": "Converta arquivos SVG para PNG em qualquer tamanho. Entenda quando usar cada formato e como obter a melhor qualidade.",
+    "description": "Converta arquivos SVG para PNG em qualquer resolução — 512, 1024, 2048 px. Entenda quando usar cada formato e obtenha a melhor qualidade possível.",
     "keyword": "converter svg para png",
     "toolHref": "/tools/svg-to-png",
     "toolName": "Conversor SVG para PNG",
@@ -3943,7 +4003,7 @@
     "articleId": "create-favicon",
     "slug": "como-criar-favicon-para-site",
     "title": "Como Criar um Favicon para Site: Gerador Online + Código HTML",
-    "description": "Como criar um favicon para o seu site: gere todos os tamanhos (ICO, PNG 16x16, 32x32, Apple Touch, Android) a partir de uma imagem e copie o código HTML pronto para adicionar ao <head>.",
+    "description": "Como criar favicon para o seu site: gere todos os tamanhos (ICO, PNG 16x16, 32x32, Apple Touch, Android) a partir de uma imagem e copie o HTML pronto.",
     "keyword": "como criar favicon",
     "toolHref": "/tools/favicon-generator",
     "toolName": "Gerador de Favicon",
@@ -4734,7 +4794,7 @@
     "articleId": "image-formats",
     "slug": "png-vs-jpg-vs-webp-diferencias-y-cual-usar",
     "title": "PNG vs JPG vs WebP: Diferencias y Cuál Usar en Cada Caso",
-    "description": "Comparativa clara entre PNG, JPG y WebP. Cuándo usar cada formato, diferencias de tamaño y cómo convertir entre ellos.",
+    "description": "Comparativa clara entre PNG, JPG y WebP: cuándo usar cada formato, diferencias de peso, transparencia, calidad y cómo convertir entre ellos gratis.",
     "keyword": "png vs jpg vs webp diferencias",
     "toolHref": "/dashboard",
     "toolName": "Convertidor de Medios",
@@ -5191,7 +5251,7 @@
     "articleId": "qr-code-logo",
     "slug": "como-crear-codigo-qr-con-logo-personalizado",
     "title": "Cómo Crear un Código QR con Logo Personalizado",
-    "description": "Genera códigos QR con tu logo, colores personalizados y alta resolución. Gratis, sin registro, descarga en PNG o SVG.",
+    "description": "Genera códigos QR con tu logo, colores personalizados y alta resolución. Gratis, sin registro, descarga en PNG o SVG listos para imprimir o compartir.",
     "keyword": "crear codigo qr con logo",
     "toolHref": "/tools/qr-code-generator",
     "toolName": "Generador de Códigos QR",
@@ -5703,7 +5763,7 @@
     "articleId": "svg-to-png",
     "slug": "como-convertir-svg-a-png-alta-calidad",
     "title": "Cómo Convertir SVG a PNG en Alta Calidad",
-    "description": "Convierte archivos SVG vectoriales a PNG con la resolución que necesites. Gratis, en el navegador, sin perder calidad.",
+    "description": "Convierte archivos SVG vectoriales a PNG en la resolución que necesites: 512, 1024 o 2048 px. Gratis, en el navegador, sin perder calidad.",
     "keyword": "convertir svg a png",
     "toolHref": "/tools/svg-to-png",
     "toolName": "SVG a PNG",
@@ -5813,8 +5873,8 @@
   {
     "articleId": "create-favicon",
     "slug": "como-crear-favicon-para-tu-sitio-web",
-    "title": "Cómo Crear un Favicon Web: Generador Online + Código HTML (Guía)",
-    "description": "Cómo crear un favicon para tu sitio web: genera todos los tamaños (ICO, PNG 16x16, 32x32, Apple Touch, Android) desde una imagen y copia el código HTML listo para añadir al <head>.",
+    "title": "Favicon Web 2026: Medidas, Tamaños y Generador Online Gratis",
+    "description": "Guía completa de medidas de favicon 2026: 16x16, 32x32, 180x180 Apple, 192x192 Android, 512x512 PWA. Genera todos desde una imagen y copia el HTML.",
     "keyword": "como crear favicon",
     "toolHref": "/tools/favicon-generator",
     "toolName": "Generador de Favicon",
@@ -5897,8 +5957,41 @@
         "href": "/tools/favicon-generator"
       },
       {
+        "type": "heading",
+        "level": 2,
+        "text": "Medidas de favicon: tabla resumen rápida"
+      },
+      {
+        "type": "paragraph",
+        "text": "Si solo necesitas saber las <strong>medidas exactas</strong> del favicon, esta es la tabla que debes guardar. Cubre todos los navegadores, iOS, Android y PWA:"
+      },
+      {
+        "type": "table",
+        "headers": ["Medida (px)", "Nombre del archivo", "Dispositivo"],
+        "rows": [
+          ["16x16", "favicon-16x16.png", "Pestaña navegador"],
+          ["32x32", "favicon-32x32.png", "Pestaña retina"],
+          ["48x48", "favicon.ico (incluida)", "Windows / atajos"],
+          ["180x180", "apple-touch-icon.png", "iPhone / iPad home"],
+          ["192x192", "android-chrome-192x192.png", "Android / PWA"],
+          ["512x512", "android-chrome-512x512.png", "PWA splash / Google"]
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "El <strong>tamaño mínimo</strong> es 16x16 píxeles (el clásico) y el <strong>tamaño máximo</strong> recomendado es 512x512 para PWA. Los formatos aceptados son ICO, PNG y SVG. Google Search también usa el favicon en los resultados y recomienda que sea múltiplo de 48x48."
+      },
+      {
         "type": "faq",
         "items": [
+          {
+            "question": "¿Qué medidas debe tener un favicon?",
+            "answer": "Las medidas estándar son 16x16 y 32x32 píxeles para navegadores, 180x180 para iOS (apple-touch-icon), 192x192 y 512x512 para Android y PWA. El archivo favicon.ico debe incluir 16x16, 32x32 y 48x48 combinados. Google recomienda al menos 48x48 para que aparezca bien en resultados de búsqueda."
+          },
+          {
+            "question": "¿Cuál es el tamaño ideal de un favicon?",
+            "answer": "Para partir, usa una imagen cuadrada de 512x512 píxeles y genera todos los tamaños más pequeños desde ahí. Si usas un SVG puedes generar cualquier medida sin pérdida de calidad. La medida más usada en pestañas es 32x32 en pantallas retina y 16x16 en pantallas estándar."
+          },
           {
             "question": "¿Puedo usar un PNG como favicon en lugar de ICO?",
             "answer": "Sí. Todos los navegadores modernos soportan PNG como favicon. Sin embargo, es recomendable incluir también un archivo favicon.ico como respaldo para navegadores legacy y algunos lectores de RSS que solo buscan ese archivo específico."
