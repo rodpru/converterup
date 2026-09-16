@@ -47,24 +47,7 @@ export const softwareApplicationSchema = {
       price: "0",
       priceCurrency: "USD",
       name: "Free",
-      description: "3 conversions per day, all formats, no watermarks",
-    },
-    {
-      "@type": "Offer",
-      price: "5",
-      priceCurrency: "USD",
-      name: "Unlimited",
-      description: "Unlimited conversions, priority support",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: "5",
-        priceCurrency: "USD",
-        referenceQuantity: {
-          "@type": "QuantitativeValue",
-          value: "1",
-          unitCode: "MON",
-        },
-      },
+      description: "Unlimited conversions, all formats, no watermarks",
     },
   ],
   featureList: [
@@ -119,7 +102,7 @@ export const faqPageSchema = {
       name: "Do I need to create an account?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "You can use ConverterUp without an account for basic conversions. Creating a free account unlocks daily conversion tracking and the ability to upgrade to unlimited.",
+        text: "No. ConverterUp works without any account or signup. All conversions happen entirely in your browser — just open a tool and start.",
       },
     },
     {
@@ -127,7 +110,7 @@ export const faqPageSchema = {
       name: "How does pricing work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Free users get 3 conversions per day. For unlimited conversions, you can upgrade to the Unlimited plan at $5/month. Cancel anytime.",
+        text: "ConverterUp is completely free and unlimited. All conversions run in your browser, so there is no payment, no plan, no account, and no signup required.",
       },
     },
   ],
