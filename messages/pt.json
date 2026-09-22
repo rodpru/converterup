@@ -1275,7 +1275,7 @@
   },
   "Convert": {
     "badge": "Conversor grátis",
-    "metaTitle": "Converter {from} para {to} online, grátis, privado e sem envio",
+    "metaTitle": "Converter {from} para {to} grátis e sem envio",
     "metaDescription": "Converta ficheiros {from} para {to} instantaneamente no seu navegador. 100% privado, sem envio, sem registo. Conversor online de {from} para {to} gratuito.",
     "h1": "Converter {from} para {to} online",
     "intro": "Transforme ficheiros {from} em {to} diretamente no seu navegador com a ConverterUp. Não há envio, não há filas de espera, e não é preciso conta. Os seus ficheiros ficam no dispositivo enquanto o WebAssembly faz o trabalho localmente. Ajuste a qualidade e as dimensões quando suportado e depois transfira o resultado. A saída mantém a fidelidade visual que esperaria de uma aplicação para computador, mas a correr inteiramente no separador do navegador.",

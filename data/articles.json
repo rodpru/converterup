@@ -318,7 +318,7 @@
   {
     "articleId": "image-formats",
     "slug": "png-vs-jpg-vs-webp",
-    "title": "PNG vs JPG vs WebP: Differences, File Size, and When to Use Each",
+    "title": "PNG vs JPG vs WebP: Which Format to Use When",
     "description": "PNG vs JPG vs WebP: lossy vs lossless, real size benchmarks, transparency, browser support, and which format to use for photos, graphics, and the web.",
     "keyword": "png vs jpg vs webp",
     "toolHref": "/dashboard",
@@ -812,7 +812,7 @@
   {
     "articleId": "stripe-fees",
     "slug": "stripe-fees-explained",
-    "title": "Stripe Fees 2026: How Much Does Stripe Charge? (Full Guide)",
+    "title": "Stripe Fees 2026: How Much Does Stripe Charge?",
     "description": "Stripe charges 2.9% + 30¢ in the US, 1.5% + 25¢ in EU, +1% international, +1% conversion. See exact rates, refund policy, and net payout calculator.",
     "keyword": "calculate stripe fees",
     "toolHref": "/tools/stripe-fee-calculator",

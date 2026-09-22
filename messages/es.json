@@ -1275,7 +1275,7 @@
   },
   "Convert": {
     "badge": "Conversor gratis",
-    "metaTitle": "Convertir {from} a {to} online, gratis, privado y sin subida",
+    "metaTitle": "Convertir {from} a {to} gratis y sin subida",
     "metaDescription": "Convierte archivos {from} a {to} al instante en tu navegador. 100% privado, sin subida, sin registro. Conversor online de {from} a {to} gratis.",
     "h1": "Convertir {from} a {to} online",
     "intro": "Transforma archivos {from} en {to} directamente en tu navegador con ConverterUp. No hay subida, no hay colas de espera y no necesitas cuenta. Tus archivos se quedan en tu dispositivo mientras WebAssembly hace el trabajo en local. Ajusta la calidad y las dimensiones cuando esté disponible y luego descarga el resultado. La salida mantiene la fidelidad visual que esperarías de una aplicación de escritorio, pero ejecutándose por completo en la pestaña del navegador.",
