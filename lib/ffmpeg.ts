@@ -59,8 +59,11 @@ export async function loadFFmpeg(
     registerProgressHandler(ffmpeg, onProgress);
   }
 
-  const useMultiThread =
-    typeof SharedArrayBuffer !== "undefined" && crossOriginIsolated;
+  // core-mt@0.12.6 loads and starts, but exec() never resolves (stuck at 0%)
+  // on cross-origin-isolated pages. Single-thread core is slower on large
+  // videos but finishes. Re-enable only after verifying a real conversion
+  // end-to-end on an isolated page (/pt/tools/media-converter).
+  const useMultiThread = false;
   const cdn = "https://cdn.jsdelivr.net/npm";
   const pkg = useMultiThread ? "@ffmpeg/core-mt@0.12.6" : "@ffmpeg/core@0.12.6";
   const baseURL = `${cdn}/${pkg}/dist/umd`;

@@ -5,7 +5,7 @@ import { RelatedGuides } from "@/components/related-guides";
 import { ToolJsonLd } from "@/components/tool-json-ld";
 import { ToolSeoContent } from "@/components/tool-seo-content";
 import { pageMetadata } from "@/lib/seo";
-import { ColorPaletteExtractor } from "./extractor";
+import { MediaConverter } from "./converter";
 
 export async function generateMetadata({
   params,
@@ -16,13 +16,13 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "ToolMeta" });
   return pageMetadata({
     locale,
-    path: "/tools/color-palette",
-    title: t("color-palette-title"),
-    description: t("color-palette-desc"),
+    path: "/tools/media-converter",
+    title: t("media-converter-title"),
+    description: t("media-converter-desc"),
   });
 }
 
-export default async function ColorPalettePage({
+export default async function MediaConverterPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -31,11 +31,11 @@ export default async function ColorPalettePage({
   setRequestLocale(locale);
   return (
     <>
-      <ToolJsonLd slug="color-palette" locale={locale} />
-      <ColorPaletteExtractor />
-      <ToolSeoContent slug="color-palette" locale={locale} />
-      <RelatedGuides toolHref="/tools/color-palette" locale={locale} />
-      <RelatedConversions toolSlug="color-palette" locale={locale} />
+      <ToolJsonLd slug="media-converter" locale={locale} />
+      <MediaConverter />
+      <ToolSeoContent slug="media-converter" locale={locale} />
+      <RelatedGuides toolHref="/tools/media-converter" locale={locale} />
+      <RelatedConversions toolSlug="media-converter" locale={locale} />
     </>
   );
 }

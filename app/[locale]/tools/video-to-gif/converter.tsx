@@ -16,7 +16,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 import { loadFFmpeg } from "@/lib/ffmpeg";
 
-const ACCEPTED_FORMATS = ".mp4,.webm,.mov,.avi";
+const ACCEPTED_FORMATS = ".mp4,.webm,.mov,.avi,.mkv,.flv,.m4v,.3gp,.wmv,.ts";
 const MAX_FILE_SIZE_MB = 100;
 const LARGE_FILE_THRESHOLD_MB = 20;
 
@@ -126,8 +126,10 @@ export function VideoToGifConverter() {
       if (!dropped) return;
 
       const ext = getFileExtension(dropped);
-      if (!["mp4", "webm", "mov", "avi"].includes(ext)) {
-        setError("Unsupported format. Please upload MP4, WebM, MOV, or AVI.");
+      if (!ACCEPTED_FORMATS.split(",").includes(`.${ext}`)) {
+        setError(
+          "Unsupported format. Please upload MP4, WebM, MOV, AVI, MKV, FLV, M4V, 3GP, WMV, or TS.",
+        );
         return;
       }
 

@@ -4,6 +4,7 @@ const TOOL_CATEGORIES: Record<
   string,
   "MultimediaApplication" | "UtilityApplication" | "DeveloperApplication"
 > = {
+  "media-converter": "MultimediaApplication",
   "image-compressor": "MultimediaApplication",
   "image-resizer": "MultimediaApplication",
   "video-to-gif": "MultimediaApplication",

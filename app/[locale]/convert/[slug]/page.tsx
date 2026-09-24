@@ -11,7 +11,8 @@ import {
   getRelatedConversions,
 } from "@/data/conversions";
 import { Link } from "@/i18n/routing";
-import { generateAlternates } from "@/lib/seo";
+import { compareFormats, type Msg } from "@/lib/format-compare";
+import { localizedUrl, pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   const locales = ["en", "pt", "es"];
@@ -40,25 +41,12 @@ export async function generateMetadata({
     to: conversion.toFormat,
   });
 
-  const alternates = generateAlternates(`/convert/${slug}`, locale);
-
-  return {
+  return pageMetadata({
+    locale,
+    path: `/convert/${slug}`,
     title,
     description,
-    alternates,
-    openGraph: {
-      title,
-      description,
-      url: alternates.canonical,
-      siteName: "ConverterUp",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
-  };
+  });
 }
 
 export default async function ConvertPage({
@@ -73,8 +61,8 @@ export default async function ConvertPage({
 
   const t = await getTranslations({ locale, namespace: "Convert" });
   const tn = await getTranslations({ locale, namespace: "Navigation" });
-  const localePrefix = locale === "en" ? "" : `/${locale}`;
-  const baseUrl = "https://converterup.com";
+  const tf = await getTranslations({ locale, namespace: "Formats" });
+  const pageUrl = localizedUrl(`/convert/${slug}`, locale);
 
   const args = {
     from: conversion.fromFormat,
@@ -96,22 +84,39 @@ export default async function ConvertPage({
       position: i,
       name: t(`step${i}Title`, args),
       text: t(`step${i}Text`, args),
-      url: `${baseUrl}${localePrefix}/convert/${slug}`,
+      url: pageUrl,
     })),
   };
+
+  const comparison = compareFormats(conversion);
+  const msg = (m: Msg | string) =>
+    typeof m === "string" ? m : t(m.key, m.params);
+
+  const faqs = [
+    ...[1, 2, 3].map((i) => ({
+      q: t(`q${i}`, args),
+      a: t(`a${i}`, args),
+    })),
+    ...(comparison?.faqs ?? []).map((f) => ({ q: msg(f.q), a: msg(f.a) })),
+  ];
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [1, 2, 3].map((i) => ({
+    mainEntity: faqs.map((f) => ({
       "@type": "Question",
-      name: t(`q${i}`, args),
+      name: f.q,
       acceptedAnswer: {
         "@type": "Answer",
-        text: t(`a${i}`, args),
+        text: f.a,
       },
     })),
   };
+
+  const toolHref =
+    conversion.toolSlug === "media-converter"
+      ? `/tools/media-converter?to=${conversion.toFormat.toLowerCase()}`
+      : `/tools/${conversion.toolSlug}`;
 
   const related = getRelatedConversions(slug, 4);
 
@@ -133,7 +138,7 @@ export default async function ConvertPage({
             {t("intro", args)}
           </p>
           <Link
-            href={`/tools/${conversion.toolSlug}`}
+            href={toolHref}
             className="inline-flex items-center gap-2 mt-8 h-12 px-6 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all min-h-[44px]"
           >
             {t("cta", args)}
@@ -168,22 +173,155 @@ export default async function ConvertPage({
         </div>
       </section>
 
+      {comparison && (
+        <>
+          <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-[#2A2535]/50">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-3">
+                {t("compareHeading", args)}
+              </h2>
+              <p className="text-[#A1A1AA] font-[Inter] text-sm sm:text-base mb-6">
+                {t("compareIntro")}
+              </p>
+              <div className="overflow-x-auto border border-[#2A2535]">
+                <table className="w-full text-left text-sm font-[Inter]">
+                  <thead className="bg-[#16131E]">
+                    <tr>
+                      <th className="px-4 py-3 font-mono text-[11px] uppercase tracking-wider text-[#71717A] font-normal">
+                        {t("featureCol")}
+                      </th>
+                      <th className="px-4 py-3 font-mono text-[11px] uppercase tracking-wider text-[#2DD4BF] font-normal">
+                        {conversion.fromFormat}
+                      </th>
+                      <th className="px-4 py-3 font-mono text-[11px] uppercase tracking-wider text-[#2DD4BF] font-normal">
+                        {conversion.toFormat}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {comparison.rows.map((row) => (
+                      <tr key={row.label} className="border-t border-[#2A2535]">
+                        <th
+                          scope="row"
+                          className="px-4 py-3 text-[#71717A] font-normal whitespace-nowrap"
+                        >
+                          {t(row.label)}
+                        </th>
+                        <td className="px-4 py-3 text-[#EDEDEF]">
+                          {msg(row.from)}
+                        </td>
+                        <td className="px-4 py-3 text-[#EDEDEF]">
+                          {msg(row.to)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-[#2A2535]/50">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-6">
+                {t("changesHeading", args)}
+              </h2>
+              <ul className="space-y-4">
+                {comparison.notes.map((note) => (
+                  <li
+                    key={note.key}
+                    className="flex gap-3 text-[#A1A1AA] font-[Inter] text-sm sm:text-base leading-relaxed"
+                  >
+                    <Check className="w-4 h-4 mt-1 shrink-0 text-[#2DD4BF]" />
+                    <span>{msg(note)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          {comparison.examples && (
+            <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-[#2A2535]/50">
+              <div className="max-w-3xl mx-auto">
+                <h2 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-6">
+                  {t("examplesHeading", args)}
+                </h2>
+                <div className="overflow-x-auto border border-[#2A2535]">
+                  <table className="w-full text-left text-sm font-mono">
+                    <thead className="bg-[#16131E]">
+                      <tr>
+                        <th className="px-4 py-3 text-[11px] uppercase tracking-wider text-[#2DD4BF] font-normal">
+                          {conversion.fromFormat}
+                        </th>
+                        <th className="px-4 py-3 text-[11px] uppercase tracking-wider text-[#2DD4BF] font-normal">
+                          {conversion.toFormat}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {comparison.examples.map((ex) => (
+                        <tr key={ex.from} className="border-t border-[#2A2535]">
+                          <td className="px-4 py-2 text-[#EDEDEF]">
+                            {ex.from}
+                          </td>
+                          <td className="px-4 py-2 text-[#EDEDEF]">{ex.to}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          )}
+
+          <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-[#2A2535]/50">
+            <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[comparison.from, comparison.to].map((f) => (
+                <div
+                  key={f.id}
+                  className="bg-[#16131E] border border-[#2A2535] p-5 sm:p-6"
+                >
+                  <h2 className="text-xl font-[Syne] font-bold text-[#EDEDEF] mb-3">
+                    {t("aboutHeading", { format: f.id })}
+                  </h2>
+                  <p className="text-sm text-[#A1A1AA] font-[Inter] leading-relaxed mb-4">
+                    {tf(`${f.id}.desc`)}
+                  </p>
+                  <dl className="space-y-3 text-sm font-[Inter]">
+                    {(["uses", "pros", "cons"] as const).map((k) => (
+                      <div key={k}>
+                        <dt className="font-mono text-[11px] uppercase tracking-wider text-[#2DD4BF]">
+                          {t(`${k}Label`)}
+                        </dt>
+                        <dd className="text-[#A1A1AA] mt-1">
+                          {tf(`${f.id}.${k}`)}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
+
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-[#2A2535]/50">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-8">
             {t("faqHeading")}
           </h2>
           <div className="space-y-6">
-            {[1, 2, 3].map((i) => (
+            {faqs.map((f) => (
               <div
-                key={i}
+                key={f.q}
                 className="border-l-2 border-[#2DD4BF]/40 pl-5 sm:pl-6"
               >
                 <h3 className="text-base sm:text-lg font-[Syne] font-semibold text-[#EDEDEF] mb-2">
-                  {t(`q${i}`, args)}
+                  {f.q}
                 </h3>
                 <p className="text-[#A1A1AA] font-[Inter] text-sm sm:text-base leading-relaxed">
-                  {t(`a${i}`, args)}
+                  {f.a}
                 </p>
               </div>
             ))}
@@ -225,7 +363,7 @@ export default async function ConvertPage({
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
-              href={`/tools/${conversion.toolSlug}`}
+              href={toolHref}
               className="inline-flex items-center gap-2 h-12 px-6 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all min-h-[44px]"
             >
               {t("cta", args)}

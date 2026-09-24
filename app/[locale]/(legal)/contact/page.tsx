@@ -1,15 +1,30 @@
 import type { Metadata } from "next";
+import { JsonLd, organizationSchema } from "@/components/json-ld";
+import { BASE_URL, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+// Legal/info pages are English-only; every locale canonicalises to the EN URL.
+export const metadata: Metadata = pageMetadata({
+  fallbackImage: true,
+  locale: "en",
+  path: "/contact",
   title: "Contact",
   description:
     "Contact ConverterUp for support, feedback, or tool suggestions.",
-  alternates: { canonical: "https://converterup.com/contact" },
-};
+  hreflang: false,
+});
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          url: `${BASE_URL}/contact`,
+          name: "Contact ConverterUp",
+          publisher: organizationSchema,
+        }}
+      />
       <h1>Contact</h1>
 
       <p>

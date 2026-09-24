@@ -24,6 +24,15 @@ export interface ConversionResult {
 }
 
 const VIDEO_FORMATS = ["mp4", "webm", "mkv", "avi", "mov"];
+// Containers ffmpeg can read but we never write.
+const VIDEO_INPUT_FORMATS = [
+  ...VIDEO_FORMATS,
+  "flv",
+  "3gp",
+  "ts",
+  "m4v",
+  "wmv",
+];
 const MAX_VIDEO_SIZE = 500 * 1024 * 1024;
 const MAX_IMAGE_SIZE = 50 * 1024 * 1024;
 
@@ -107,7 +116,18 @@ function buildVideoArgs(
   if (outputExt === "webm") {
     args.push("-c:v", "libvpx", "-c:a", "libvorbis", "-b:v", "1M");
   } else if (outputExt === "mp4") {
-    args.push("-c:v", "libx264", "-c:a", "aac", "-movflags", "+faststart");
+    // yuv420p keeps the output playable everywhere (GIF/PNG sources default
+    // to pixel formats most players reject).
+    args.push(
+      "-c:v",
+      "libx264",
+      "-pix_fmt",
+      "yuv420p",
+      "-c:a",
+      "aac",
+      "-movflags",
+      "+faststart",
+    );
   }
 
   // Quality (CRF for video)
@@ -121,6 +141,9 @@ function buildVideoArgs(
     const w = options.width || -2;
     const h = options.height || -2;
     args.push("-vf", `scale=${w}:${h}`);
+  } else if (outputExt === "mp4") {
+    // libx264 + yuv420p requires even dimensions.
+    args.push("-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2");
   }
 
   args.push("-y", outputName);
@@ -153,7 +176,7 @@ export async function convertMedia(
   onProgress?: (progress: number) => void,
 ): Promise<ConversionResult> {
   const isVideo = VIDEO_FORMATS.includes(options.outputFormat.toLowerCase());
-  const isInputVideo = VIDEO_FORMATS.includes(
+  const isInputVideo = VIDEO_INPUT_FORMATS.includes(
     getInputExtension(options.inputFile),
   );
   const treatAsVideo = isVideo || isInputVideo;

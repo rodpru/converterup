@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { ArticlePageContent } from "@/components/blog/article-page-content";
 import { JsonLd } from "@/components/json-ld";
 import { extractFaqItems, getAllArticles, getArticleBySlug } from "@/lib/blog";
+import { AUTHOR, BASE_URL, localizedUrl, pageMetadata } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -18,38 +20,32 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const article = getArticleBySlug(slug);
-  if (!article) return {};
+  if (!article || article.lang !== locale) return {};
 
-  const localePrefix = locale === "en" ? "" : `/${locale}`;
-  const url = `https://converterup.com${localePrefix}/blog/${article.slug}`;
-
-  return {
+  return pageMetadata({
+    locale,
+    path: `/blog/${article.slug}`,
     title: article.title,
     description: article.description,
-    alternates: { canonical: url },
-    openGraph: {
-      title: article.title,
-      description: article.description,
-      url,
-      siteName: "ConverterUp",
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: article.title,
-      description: article.description,
-    },
-  };
+    type: "article",
+    hreflang: false,
+    publishedTime: article.publishedAt,
+    modifiedTime: article.updatedAt ?? article.publishedAt,
+  });
 }
 
 export default async function ArticlePage({ params }: Props) {
   const { locale, slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) notFound();
+  // Slugs are language-specific — an article only lives under its own locale.
+  if (article.lang !== locale) {
+    permanentRedirect(localizedUrl(`/blog/${article.slug}`, article.lang));
+  }
+  setRequestLocale(locale);
 
   const faqItems = extractFaqItems(article);
-  const localePrefix = locale === "en" ? "" : `/${locale}`;
-  const url = `https://converterup.com${localePrefix}/blog/${article.slug}`;
+  const url = localizedUrl(`/blog/${article.slug}`, locale);
 
   return (
     <>
@@ -60,12 +56,15 @@ export default async function ArticlePage({ params }: Props) {
           headline: article.title,
           description: article.description,
           datePublished: article.publishedAt,
-          author: { "@type": "Organization", name: "ConverterUp" },
+          dateModified: article.updatedAt ?? article.publishedAt,
+          author: AUTHOR,
           publisher: {
             "@type": "Organization",
             name: "ConverterUp",
-            url: "https://converterup.com",
+            url: BASE_URL,
+            logo: `${BASE_URL}/icon-512x512.png`,
           },
+          image: `${url}/opengraph-image`,
           mainEntityOfPage: url,
           inLanguage: article.lang,
         }}
@@ -79,13 +78,13 @@ export default async function ArticlePage({ params }: Props) {
               "@type": "ListItem",
               position: 1,
               name: "Home",
-              item: "https://converterup.com",
+              item: BASE_URL,
             },
             {
               "@type": "ListItem",
               position: 2,
               name: "Blog",
-              item: `https://converterup.com${localePrefix}/blog`,
+              item: localizedUrl("/blog", locale),
             },
             {
               "@type": "ListItem",

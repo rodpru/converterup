@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { RelatedConversions } from "@/components/related-conversions";
 import { RelatedGuides } from "@/components/related-guides";
 import { ToolJsonLd } from "@/components/tool-json-ld";
 import { ToolSeoContent } from "@/components/tool-seo-content";
-import { generateAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { ImageToBase64Encoder } from "./encoder";
 
 export async function generateMetadata({
@@ -14,27 +14,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "ToolMeta" });
-  const alternates = generateAlternates("/tools/image-to-base64", locale);
-  const title = t("image-to-base64-title");
-  const description = t("image-to-base64-desc");
-
-  return {
-    title,
-    description,
-    alternates,
-    openGraph: {
-      title,
-      description,
-      url: alternates.canonical,
-      siteName: "ConverterUp",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
-  };
+  return pageMetadata({
+    locale,
+    path: "/tools/image-to-base64",
+    title: t("image-to-base64-title"),
+    description: t("image-to-base64-desc"),
+  });
 }
 
 export default async function ImageToBase64Page({
@@ -43,6 +28,7 @@ export default async function ImageToBase64Page({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <>
       <ToolJsonLd slug="image-to-base64" locale={locale} />

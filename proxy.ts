@@ -5,7 +5,8 @@ import { routing } from "./i18n/routing";
 const intlMiddleware = createMiddleware(routing);
 
 // Map old tool/format slugs to current paths.
-// Targets prefer /convert/<slug> or /tools/<slug>. Never redirect to /dashboard
+// Targets prefer /convert/<slug> or /tools/<slug>. /dashboard was retired in
+// favour of /tools/media-converter (see DASHBOARD_PATH below).
 // (disallowed in robots.txt — Google treats redirect chain as error).
 const toolRedirects: Record<string, string> = {
   // Tools (kept from previous version)
@@ -33,7 +34,10 @@ const toolRedirects: Record<string, string> = {
   "srt-to-vtt": "/tools/vtt-to-srt",
   "image-resizer": "/tools/image-resizer",
   "image-compressor": "/tools/image-compressor",
-  "image-converter": "/tools",
+  "image-converter": "/tools/media-converter",
+  "media-converter": "/tools/media-converter",
+  "video-converter": "/tools/media-converter",
+  "file-converter": "/tools/media-converter",
   "image-to-base64": "/tools/image-to-base64",
   "base64-to-image": "/tools/base64-decode",
   "color-palette": "/tools/color-palette",
@@ -196,6 +200,9 @@ const CONVERT_SYNONYMS: Record<string, string> = {
   "tiff-to-jpeg": "tiff-to-jpg",
 };
 
+// The old upload→convert dashboard now lives at /tools/media-converter.
+const DASHBOARD_PATH = /^\/(?:(en|pt|es)\/)?dashboard(?:\/.*)?$/i;
+
 function redirect301(url: URL): NextResponse {
   return NextResponse.redirect(url, 301);
 }
@@ -206,6 +213,25 @@ export async function proxy(request: NextRequest) {
   // Skip static files and assets (anything with a file extension)
   if (/\.\w+$/.test(pathname)) {
     return NextResponse.next();
+  }
+
+  // Metadata images are emitted with the locale segment (/en/tools/x/opengraph-image).
+  // Serve them directly — next-intl would 307 the /en/ prefix away, and some
+  // social scrapers don't follow redirects on og:image.
+  if (/^\/(en|pt|es)\/.*(opengraph|twitter)-image/.test(pathname)) {
+    return NextResponse.next();
+  }
+
+  const dashboardMatch = pathname.match(DASHBOARD_PATH);
+  if (dashboardMatch) {
+    const locale = dashboardMatch[1]?.toLowerCase();
+    const prefix = locale && locale !== "en" ? `/${locale}` : "";
+    return redirect301(
+      new URL(
+        `${prefix}/tools/media-converter${request.nextUrl.search}`,
+        request.url,
+      ),
+    );
   }
 
   // Lowercase the path for matching — handles legacy CamelCase URLs like

@@ -220,9 +220,11 @@
     "heic-to-pdf-desc": "Combine iPhone HEIC photos into a single multi-page PDF online. Free, no upload, no signup. Drop up to 20 photos, fit to A4 or native size, download in seconds.",
     "home-title": "ConverterUp — Convert Anything. Upload Nothing.",
     "home-desc": "Convert images and videos instantly, 100% in your browser. No uploads, no waiting, no limits. Powered by FFmpeg.wasm.",
-    "tools-title": "24 Free Online Tools — Image, Video, Code, Text",
-    "tools-desc": "Compress, resize, convert, format. 24 free browser-based tools for images, video, code, and text — 100% private, no upload, no signup.",
-    "blog-title": "Blog — Image, Video & File Conversion Guides"
+    "tools-title": "25 Free Online Tools — Image, Video, Code, Text",
+    "tools-desc": "Compress, resize, convert, format. 25 free browser-based tools for images, video, code, and text — 100% private, no upload, no signup.",
+    "blog-title": "Blog — Image, Video & File Conversion Guides",
+    "media-converter-title": "Media Converter — Convert Video & Images Online Free",
+    "media-converter-desc": "Convert MP4, MOV, MKV, WebM, AVI, PNG, JPG, WebP and AVIF in your browser. Extract MP3 audio, resize, set quality. Free, no upload, no sign-up."
   },
   "ToolHowTo": {
     "image-compressor": {
@@ -607,6 +609,22 @@
       "step3": {
         "name": "Download the PDF",
         "text": "Click build PDF — each HEIC is decoded sequentially, embedded as a JPG, and written to one downloadable PDF file."
+      }
+    },
+    "media-converter": {
+      "name": "How to Convert Video and Image Files Online",
+      "description": "Convert videos between MP4, WebM, MKV, AVI and MOV, or images between PNG, JPG, WebP, AVIF, GIF, TIFF and BMP.",
+      "step1": {
+        "name": "Add your file",
+        "text": "Drag and drop or select an image or video — MP4, MOV, MKV, WebM, AVI, FLV, 3GP, TS, M4V, WMV, PNG, JPG, WebP, AVIF, GIF, TIFF or BMP."
+      },
+      "step2": {
+        "name": "Pick the output",
+        "text": "Choose the target format, quality and optional size, or switch to audio extraction to get MP3, AAC, WAV or OGG."
+      },
+      "step3": {
+        "name": "Convert and download",
+        "text": "Click convert. FFmpeg runs locally in your browser and the converted file downloads straight to your device."
       }
     }
   },
@@ -1476,6 +1494,40 @@
       "a5": "Roughly equal to the sum of the JPG-encoded photos at your chosen quality. 5 × 4 MB HEIC at 90 % quality typically produces a 4–8 MB PDF. Quality 100 % doubles it; quality 75 % halves it. pdf-lib does not re-rasterize, so there is no compounding loss.",
       "q6": "Does the PDF embed the original EXIF metadata?",
       "a6": "No. The decode-and-re-encode pipeline drops EXIF by the time the JPG hits the PDF. That is the privacy-friendly default — GPS coordinates and timestamps stay out of the document. If you need EXIF preserved, edit the HEIC in Apple Photos and export individual JPGs with metadata before merging."
+    },
+    "media-converter": {
+      "intro": "ConverterUp's media converter changes the format of videos and images directly in your browser. Turn an iPhone MOV into an MP4 that plays everywhere, shrink a screen recording to WebM for the web, rescue an old FLV or WMV clip, convert a PNG to JPG or WebP, or pull the soundtrack out of a video as MP3. It runs FFmpeg compiled to WebAssembly on your own device, so nothing is uploaded, there is no queue, and private footage stays private.",
+      "section1": {
+        "heading": "Which video format should you pick?",
+        "p1": "<strong>MP4 (H.264 + AAC)</strong> is the safe default. It plays on every phone, TV, browser, social network and editing app. If you are not sure what the recipient uses, choose MP4.",
+        "p2": "<strong>WebM (VP8/VP9 + Vorbis/Opus)</strong> is the open web format. It is royalty-free and usually smaller than MP4 at similar quality, which makes it a good choice for videos embedded on your own website. Older Apple software has patchy support, so avoid it for files you send to iPhone users.",
+        "p3": "<strong>MKV</strong> is a flexible container that can hold several audio tracks and subtitles. It is ideal for archiving, but many phones and TVs will not play it — convert MKV to MP4 before sharing. <strong>MOV</strong> is Apple's container (what iPhones record); <strong>AVI</strong> and <strong>WMV</strong> are legacy Windows formats worth converting to MP4 for modern players."
+      },
+      "section2": {
+        "heading": "Image formats: PNG, JPG, WebP, AVIF and more",
+        "p1": "<strong>JPG</strong> is best for photos: small files, universal support, but no transparency. <strong>PNG</strong> is lossless and supports transparency — use it for screenshots, logos and graphics with sharp edges.",
+        "p2": "<strong>WebP</strong> and <strong>AVIF</strong> are modern web formats. WebP is typically 25–35% smaller than JPG and supports transparency and animation; AVIF goes further still but takes longer to encode. Both are supported by every current browser.",
+        "p3": "<strong>GIF</strong> is limited to 256 colours — convert animated GIFs to MP4 or WebM to cut file size by 80–95%. <strong>TIFF</strong> and <strong>BMP</strong> are large, uncompressed formats from print and old Windows software; converting them to PNG or JPG makes them shareable. JFIF files are just JPEGs with a different extension and convert to plain .jpg."
+      },
+      "section3": {
+        "heading": "Audio extraction, quality and limits",
+        "p1": "Switch on <strong>audio extraction</strong> to save only the soundtrack of a video as MP3, AAC, WAV or OGG — handy for podcasts, lectures, voice notes and music clips.",
+        "p2": "The <strong>quality</strong> slider controls compression: higher keeps more detail and produces bigger files. You can also set a width and height; with the aspect-ratio lock on, the image or video is scaled without distortion.",
+        "p3": "Because processing happens on your device, speed depends on your CPU and memory. The browser can handle videos up to <strong>500 MB</strong> and images up to <strong>50 MB</strong>. For larger files, trim or compress them first. Converting video is CPU-heavy — a desktop browser is noticeably faster than a phone."
+      },
+      "faqHeading": "Frequently asked questions",
+      "q1": "Are my files uploaded to a server?",
+      "a1": "No. Conversion runs entirely in your browser with FFmpeg compiled to WebAssembly. Your files never leave your device, which also means there is no upload wait.",
+      "q2": "Which formats are supported?",
+      "a2": "Video input: MP4, MOV, MKV, WebM, AVI, FLV, 3GP, TS, M4V, WMV. Video output: MP4, WebM, MKV, AVI, MOV. Images: PNG, JPG/JPEG/JFIF, WebP, AVIF, GIF, TIFF and BMP in both directions. Animated GIFs can also be converted to MP4 or WebM. Audio extraction: MP3, AAC, WAV, OGG.",
+      "q3": "What is the maximum file size?",
+      "a3": "500 MB for videos and 50 MB for images. These limits keep the conversion within the memory a browser tab can safely use.",
+      "q4": "How do I convert MOV to MP4?",
+      "a4": "Drop the MOV file, choose MP4 as the output and click convert. The video is re-encoded to H.264 with AAC audio, the most widely compatible combination.",
+      "q5": "Can I extract MP3 from a video?",
+      "a5": "Yes. After adding the video, enable audio extraction and choose MP3 (or AAC, WAV, OGG). Only the audio track is saved.",
+      "q6": "Is there a daily limit or watermark?",
+      "a6": "No. The converter is free with no daily limit, no watermark and no account."
     }
   },
   "Convert": {
@@ -1506,7 +1558,191 @@
     "trust1": "100% private",
     "trust2": "No upload",
     "trust3": "No signup",
-    "trust4": "Free forever"
+    "trust4": "Free forever",
+    "compareHeading": "{from} vs {to} at a glance",
+    "compareIntro": "Key technical differences between the two formats, so you know what to expect before converting.",
+    "featureCol": "Feature",
+    "changesHeading": "What changes when you convert {from} to {to}",
+    "aboutHeading": "About {format}",
+    "usesLabel": "Best for",
+    "prosLabel": "Strengths",
+    "consLabel": "Limitations",
+    "row": {
+      "kind": "Type",
+      "compression": "Compression",
+      "transparency": "Transparency",
+      "animation": "Animation",
+      "colors": "Colors",
+      "bitDepth": "Bit depth",
+      "audio": "Audio track",
+      "codecs": "Common codecs",
+      "base": "Base (radix)",
+      "browser": "Browser support",
+      "extensions": "Extensions",
+      "mime": "MIME type",
+      "introduced": "Introduced"
+    },
+    "val": {
+      "yes": "Yes",
+      "no": "No",
+      "colorsMax": "Up to {n}",
+      "colorsTrue": "Millions (true color)",
+      "kind": {
+        "raster": "Raster image",
+        "vector": "Vector image",
+        "document": "Document",
+        "video": "Video container",
+        "subtitle": "Subtitle text",
+        "data": "Structured data",
+        "encoding": "Text encoding",
+        "number": "Number system"
+      },
+      "compression": {
+        "lossy": "Lossy",
+        "lossless": "Lossless",
+        "both": "Lossy or lossless",
+        "none": "Uncompressed / text"
+      },
+      "transparency": {
+        "full": "Full alpha channel",
+        "binary": "On/off (1-bit)",
+        "none": "None"
+      },
+      "browser": {
+        "universal": "All browsers",
+        "modern": "All modern browsers",
+        "limited": "Partial",
+        "none": "Not playable natively"
+      }
+    },
+    "notes": {
+      "compression": {
+        "vector": "{from} is resolution-independent, so the {to} output is rendered at a fixed pixel size — pick the final size before converting.",
+        "lossyToLossy": "Both {from} and {to} use lossy compression, so the image is re-encoded once more. At a quality of 80 or higher the extra loss is rarely visible, but avoid converting the same file back and forth repeatedly.",
+        "lossyToLossless": "{to} stores pixels losslessly, so no additional detail is lost — but it cannot restore detail that {from} compression already discarded, and the file usually gets bigger.",
+        "losslessToLossy": "{to} uses lossy compression: fine detail and sharp edges are approximated to save space. For photos the difference is hard to see at high quality; for text, screenshots and line art keep an eye on artifacts.",
+        "toFlexible": "{to} supports both lossy and lossless compression. The converter uses lossy mode by default for smaller files — raise the quality slider if you need the result to stay closer to the original {from}.",
+        "losslessToLossless": "Both formats are lossless, so the pixels in the {to} file are identical to the {from} source. Only the container and compression method change."
+      },
+      "jfifSame": "JFIF and JPG use exactly the same JPEG compression — .jfif is simply an older file extension. Converting to .jpg changes nothing visible but makes the file open in apps and upload forms that reject .jfif.",
+      "vectorToRaster": "Vector shapes and text become a fixed grid of pixels. Scaling the {to} file up later will blur it, so export it at the largest size you need.",
+      "toIco": "An ICO file can bundle several sizes (16×16, 32×32, 48×48 and more) in one file, which is what browsers and Windows expect from a favicon or app icon.",
+      "toPdf": "Each image becomes a page in a PDF document, which is easier to share, print or attach to forms that only accept documents.",
+      "transparency": {
+        "lost": "{to} has no transparency. Transparent areas in the {from} file are flattened onto a solid background (usually white).",
+        "binary": "{to} only supports on/off transparency, so soft edges and semi-transparent pixels from {from} become either fully opaque or fully transparent.",
+        "kept": "Transparency is preserved: {to} supports an alpha channel, so transparent backgrounds from {from} stay transparent."
+      },
+      "animationLost": "{to} holds a single still image, so only the first frame of an animated {from} is kept.",
+      "animationKept": "{to} supports animation, so animated {from} files can keep their frames and timing.",
+      "paletteLimit": "{to} is limited to {n} colors per frame. Photos and gradients will be reduced to a palette, which can cause banding or dithering.",
+      "smaller": "{to} compresses more efficiently than {from}, so the converted file is usually noticeably smaller at similar visual quality.",
+      "larger": "{to} is less space-efficient than {from}, so expect the converted file to be larger than the original.",
+      "compatGain": "Compatibility improves: {to} opens in more browsers, apps and operating systems than {from}.",
+      "compatLoss": "{to} is newer or less widely supported than {from}. Check that the website, app or device where you will use the file accepts {to}.",
+      "fromHeic": "{from} is the default photo format on iPhones and iPads. Converting it avoids the \"unsupported file\" errors common on Windows, Android and many websites.",
+      "videoToGif": "GIF stores every frame as a separate paletted image, so a GIF is usually many times larger than the {from} clip it came from. Keep clips short and reduce width and frame rate.",
+      "audioDropped": "GIF has no audio track, so any sound in the {from} file is removed.",
+      "gifToVideo": "{to} compresses motion far more efficiently than GIF — the same animation often shrinks to a fraction of the size, and it plays smoothly with play/pause controls.",
+      "reencode": "{from} and {to} are containers. The video and audio streams are re-encoded into codecs that {to} supports (typically {codecs}), so you get a file that plays reliably rather than a simple rename.",
+      "audioKept": "The audio track is carried over to the {to} file, re-encoded if needed.",
+      "legacy": "{from} is a legacy format that browsers cannot play directly. Converting to {to} is the easiest way to watch, share or edit old recordings.",
+      "number": {
+        "bases": "{from} is base {fromBase} and {to} is base {toBase}. The value stays exactly the same — only the way it is written changes.",
+        "group": "Because {fromBase} and {toBase} are both powers of two, each {bits} binary digits correspond to exactly one digit of the other base. You can convert by grouping bits from the right, without any arithmetic.",
+        "viaBinary": "The quickest manual method goes through binary: write each {from} digit as bits, then regroup those bits for base {toBase}.",
+        "positional": "Multiply each {from} digit by {fromBase} raised to its position (counting from 0 on the right) and add the results.",
+        "division": "Divide the number by {toBase} repeatedly and write down the remainders; read them from last to first to get the {to} digits.",
+        "example": "Example: {fromValue} in {from} equals {toValue} in {to} (that is {decimal} in decimal)."
+      },
+      "csvJson": {
+        "n1": "The first CSV row is used as the header, and each following row becomes a JSON object whose keys are the header names.",
+        "n2": "CSV has no data types — every value is text. Numbers and true/false values can be detected and converted to real JSON numbers and booleans.",
+        "n3": "Quoted fields, commas inside quotes and custom delimiters (semicolons, tabs) are handled, so exports from Excel or Google Sheets convert correctly."
+      },
+      "vttSrt": {
+        "n1": "Timestamps change from 00:00:01.000 (VTT, dot) to 00:00:01,000 (SRT, comma), and every cue gets a sequential number.",
+        "n2": "The WEBVTT header, NOTE blocks and cue settings such as position and alignment are removed, because SRT does not support them.",
+        "n3": "SRT is accepted by almost every video player and editor (VLC, Premiere, DaVinci Resolve, YouTube), while VTT is mainly used by HTML5 video on the web."
+      },
+      "toBase64": {
+        "n1": "Base64 represents the image bytes as plain text, which makes the encoded version about 33% larger than the original file.",
+        "n2": "The result can be pasted as a data: URI straight into HTML, CSS or JSON, removing one HTTP request for small icons and logos.",
+        "n3": "For images larger than a few kilobytes, a normal file is usually better: it caches separately and does not bloat your HTML or CSS."
+      },
+      "fromBase64": {
+        "n1": "Decoding turns the Base64 text back into the original binary image, roughly 25% smaller than the encoded string.",
+        "n2": "A data: URI prefix (for example data:image/png;base64,) tells you the image type; without it the format is detected from the decoded bytes.",
+        "n3": "Nothing is re-compressed — the decoded image is byte-for-byte the file that was originally encoded."
+      }
+    },
+    "faq": {
+      "quality": {
+        "q": "Does converting {from} to {to} reduce quality?",
+        "vector": "It depends on the output size. {from} has no fixed resolution, so choose a large enough width and height — at the right size the {to} image looks as sharp as the original.",
+        "lossyToLossy": "Slightly. Both formats are lossy, so a second encode adds a small amount of loss. With quality set to 80–90 the difference is almost never visible.",
+        "lossyToLossless": "No further quality is lost, because {to} is lossless. The file will not look better than the {from} source, though, and it will usually be larger.",
+        "losslessToLossy": "Some fine detail is traded for a smaller file, because {to} is lossy. For photos at high quality it is hard to notice; for screenshots or text, use a higher quality setting.",
+        "toFlexible": "Only if you want it to. {to} can be lossless or lossy; a high quality setting keeps the result visually identical to the {from} source while still saving space.",
+        "losslessToLossless": "No. Both formats are lossless, so every pixel is preserved exactly.",
+        "jfifSame": "No. JFIF and JPG are the same JPEG format, so the image data is not degraded — only the file extension changes."
+      },
+      "transparency": {
+        "q": "Does {to} keep the transparent background of my {from}?",
+        "lost": "No. {to} does not support transparency, so transparent areas are filled with a solid background. If you need transparency, convert to PNG or WebP instead.",
+        "binary": "Partly. {to} supports only fully transparent or fully opaque pixels, so soft shadows and anti-aliased edges may look jagged.",
+        "kept": "Yes. {to} supports a full alpha channel, so transparency from the {from} file is preserved.",
+        "noneSource": "{from} has no transparency to begin with, so the {to} file keeps the same solid background. {to} does support transparency, so you can remove the background afterwards in an image editor."
+      },
+      "animation": {
+        "q": "What happens to an animated {from} when converted to {to}?",
+        "kept": "{to} supports animation, so frames and timing can be kept — and the file is usually much smaller than the {from} original.",
+        "lost": "{to} is a still-image format, so only the first frame is saved. To keep the motion, convert to MP4, WebM or an animated WebP instead."
+      },
+      "support": {
+        "q": "Will the {to} file open everywhere?",
+        "universal": "Yes. {to} is supported by every modern browser, operating system and most apps, so it is the safe choice for sharing.",
+        "modern": "In all current browsers and most up-to-date apps, yes. Some older software and devices may still not open {to} files.",
+        "limited": "Not everywhere. {to} opens in some browsers and players but not all, so check the target app or device first.",
+        "none": "{to} is mainly for desktop players and editing software — browsers cannot play it directly."
+      },
+      "audio": {
+        "q": "Does converting {from} to {to} keep the sound?",
+        "lost": "No. GIF has no audio support, so the sound is removed. Convert to MP4 or WebM if you need to keep the audio.",
+        "none": "GIF files never contain audio, so the {to} file will be silent. You can add a soundtrack later in any video editor.",
+        "kept": "Yes. The audio track is kept and, if necessary, re-encoded into a codec that {to} supports."
+      },
+      "number": {
+        "methodQ": "How do I convert {from} to {to} by hand?",
+        "exampleQ": "What is {fromValue} ({from}) in {to}?",
+        "exampleA": "{fromValue} in {from} is {toValue} in {to}. In decimal the value is {decimal}."
+      },
+      "csvJson": {
+        "q1": "What happens to the CSV header row?",
+        "a1": "It becomes the set of keys. Each data row is turned into a JSON object with one property per column.",
+        "q2": "Are empty cells and special characters handled?",
+        "a2": "Yes. Empty cells become empty strings (or null), and quotes, commas and line breaks inside quoted fields are preserved correctly."
+      },
+      "vttSrt": {
+        "q1": "What is the difference between VTT and SRT?",
+        "a1": "Both are timed-text subtitle formats. VTT (WebVTT) is designed for HTML5 video and supports styling and positioning; SRT is simpler and supported by nearly every video player and editor.",
+        "q2": "Will subtitle styling and positioning be kept?",
+        "a2": "No. SRT only supports basic text and simple tags like italics, so VTT positioning, alignment and CSS classes are removed. The text and timing are preserved."
+      },
+      "toBase64": {
+        "q1": "Why is the Base64 version bigger than my image?",
+        "a1": "Base64 uses 4 text characters for every 3 bytes, which adds about 33% overhead. That is the price of embedding binary data inside text.",
+        "q2": "When should I embed an image as Base64?",
+        "a2": "For small icons, logos and email templates, where saving an extra request matters more than size. For large photos, link a normal image file instead."
+      },
+      "fromBase64": {
+        "q1": "How do I know which image format the Base64 string contains?",
+        "a1": "If it starts with a data: URI such as data:image/png;base64, the type is stated there. Otherwise the decoder looks at the first bytes of the decoded data to recognise PNG, JPEG, GIF or WebP.",
+        "q2": "Is the decoded image identical to the original?",
+        "a2": "Yes. Base64 is a lossless encoding, so decoding returns exactly the same bytes that were encoded."
+      }
+    },
+    "examplesHeading": "Quick reference: {from} to {to}"
   },
   "Internal": {
     "relatedGuides": "Related Guides",
@@ -1518,9 +1754,216 @@
     "badge": "All free, no signup",
     "heading": "Popular free online tools",
     "subheading": "Compress, convert, format, and clean — every tool runs in your browser. Your files never leave your device.",
-    "viewAll": "Browse all 24 tools",
+    "viewAll": "Browse all 25 tools",
     "categoryImage": "Image & Photo",
     "categoryConvert": "Conversion",
     "categoryDev": "Developer & Text"
+  },
+  "MediaConverter": {
+    "badge": "Free Tool",
+    "h1": "Media",
+    "h1Gradient": "Converter",
+    "subtitle": "Convert images and videos between formats, or pull the audio out of a video. Everything runs in your browser — files never leave your device.",
+    "unexpectedError": "An unexpected error occurred"
+  },
+  "Formats": {
+    "PNG": {
+      "desc": "PNG (Portable Network Graphics) is a lossless raster format created as a patent-free replacement for GIF. It supports full alpha transparency and up to 16 bits per channel.",
+      "uses": "Screenshots, logos, UI graphics, diagrams and any image that needs a transparent background or pixel-perfect edges.",
+      "pros": "Lossless quality, full transparency, opens everywhere.",
+      "cons": "Photos produce large files compared with JPG, WebP or AVIF."
+    },
+    "JPG": {
+      "desc": "JPG (JPEG) is the most widely used photo format. It uses lossy compression tuned for natural images, discarding detail the eye barely notices to keep files small.",
+      "uses": "Photographs, camera output, social media and email attachments where small size matters more than perfect detail.",
+      "pros": "Small files for photos, universal support in every app and device.",
+      "cons": "No transparency, visible artifacts around text and sharp edges, loses quality each time it is re-saved."
+    },
+    "JFIF": {
+      "desc": "JFIF (JPEG File Interchange Format) is the original container for JPEG image data. A .jfif file is a regular JPEG with a less common extension, often produced by Windows or when saving images from some browsers.",
+      "uses": "Nothing specific — .jfif files are usually renamed or converted so they can be uploaded to sites that only accept .jpg.",
+      "pros": "Same compression and quality as JPG.",
+      "cons": "Many upload forms and apps reject the .jfif extension."
+    },
+    "WebP": {
+      "desc": "WebP is Google's image format for the web. It supports lossy and lossless compression, alpha transparency and animation in a single format, usually producing smaller files than JPG or PNG.",
+      "uses": "Website images, e-commerce product photos, animated stickers and anything served to browsers where page speed matters.",
+      "pros": "Smaller than JPG/PNG at similar quality, transparency and animation, supported by all modern browsers.",
+      "cons": "Some older desktop software, print workflows and upload forms still do not accept it."
+    },
+    "AVIF": {
+      "desc": "AVIF is an image format based on the AV1 video codec, published by the Alliance for Open Media. It offers some of the best compression available, with HDR, wide color gamut and transparency.",
+      "uses": "High-performance websites, large hero images and photo galleries where every kilobyte counts.",
+      "pros": "Very small files at high quality, 10- and 12-bit color, transparency.",
+      "cons": "Slower to encode, and support in older browsers and image editors is still incomplete."
+    },
+    "GIF": {
+      "desc": "GIF (Graphics Interchange Format) dates from 1987 and is best known for short looping animations. Each frame uses a palette of at most 256 colors, with simple on/off transparency.",
+      "uses": "Reaction animations, simple loops, tiny icons and anywhere animation must work without video support.",
+      "pros": "Animation that works everywhere, including email clients and chat apps.",
+      "cons": "256-color limit, no audio and very large files compared with MP4 or WebP for the same animation."
+    },
+    "BMP": {
+      "desc": "BMP (bitmap) is a Microsoft raster format that normally stores pixels uncompressed. It is simple to read and write, which is why it still appears in older Windows software and hardware tools.",
+      "uses": "Legacy Windows applications, embedded systems and tools that need raw pixel data.",
+      "pros": "No compression artifacts, trivial to decode.",
+      "cons": "Huge files, poor web support in practice and no reliable transparency."
+    },
+    "TIFF": {
+      "desc": "TIFF (Tagged Image File Format) is a flexible raster format created by Aldus and now maintained by Adobe. It supports high bit depths, layers of metadata, multiple pages and lossless compression.",
+      "uses": "Professional photography, print production, scanning, archiving and GIS imagery.",
+      "pros": "Lossless, high bit depth, rich metadata, accepted by print shops.",
+      "cons": "Very large files and almost no browser support — only Safari displays TIFF natively."
+    },
+    "ICO": {
+      "desc": "ICO is the Windows icon format. One .ico file can hold several images at different sizes, stored as BMP or PNG data, so the system can pick the best one for each context.",
+      "uses": "Website favicons, Windows application and shortcut icons.",
+      "pros": "Multiple sizes in one file, transparency, recognised by every browser as a favicon.",
+      "cons": "Not suitable for general images or photos."
+    },
+    "SVG": {
+      "desc": "SVG (Scalable Vector Graphics) is a W3C standard that describes images as shapes, paths and text in XML. It scales to any size without losing sharpness and can be styled with CSS.",
+      "uses": "Logos, icons, illustrations, charts and interface graphics on the web.",
+      "pros": "Infinitely scalable, tiny for simple graphics, editable as text.",
+      "cons": "Not suited to photos, and many apps, social networks and upload forms do not accept SVG."
+    },
+    "HEIC": {
+      "desc": "HEIC is Apple's name for HEIF images compressed with HEVC (H.265). It is the default photo format on iPhone and iPad, storing photos at roughly half the size of an equivalent JPG.",
+      "uses": "Photos taken on Apple devices and stored in iCloud Photos.",
+      "pros": "Small files with high quality, 10-bit color, depth and Live Photo data.",
+      "cons": "Poor support outside Apple devices: many Windows apps, Android devices and websites cannot open it."
+    },
+    "HEIF": {
+      "desc": "HEIF (High Efficiency Image File Format) is an MPEG standard container for images and image sequences. It usually stores HEVC-compressed pictures and is used by some Android phones and cameras.",
+      "uses": "Photos from newer smartphones and cameras that save in HEIF instead of JPG.",
+      "pros": "Efficient compression, high bit depth, can hold several images and metadata.",
+      "cons": "Limited browser and software support, similar to HEIC."
+    },
+    "PDF": {
+      "desc": "PDF (Portable Document Format) was created by Adobe and is now an ISO standard. It preserves layout, fonts and images exactly, so a document looks the same on every device and printer.",
+      "uses": "Sharing and printing documents, forms, invoices, and combining photos into a single file.",
+      "pros": "Looks identical everywhere, opens in every browser, easy to print and attach.",
+      "cons": "Harder to edit, and images inside it are not easy to reuse."
+    },
+    "Image": {
+      "desc": "Any common image file — PNG, JPG, WebP, GIF or SVG — stored as binary data on your device.",
+      "uses": "Everyday images you want to embed, share or process.",
+      "pros": "Compact binary storage, cached separately by browsers.",
+      "cons": "Cannot be pasted directly into text-based files such as HTML, CSS or JSON."
+    },
+    "MP4": {
+      "desc": "MP4 (MPEG-4 Part 14) is the most widely supported video container. It typically holds H.264 or H.265 video with AAC audio and plays on virtually every phone, browser, TV and editor.",
+      "uses": "Sharing videos, uploading to social networks and YouTube, and playback on any device.",
+      "pros": "Universal playback, good compression, streaming-friendly.",
+      "cons": "Lossy codecs, so repeated re-encoding gradually reduces quality."
+    },
+    "WebM": {
+      "desc": "WebM is an open, royalty-free video container from Google based on Matroska. It carries VP8, VP9 or AV1 video with Vorbis or Opus audio and is designed for HTML5 video.",
+      "uses": "Video on websites, screen recordings from browsers and open-source workflows.",
+      "pros": "Royalty-free, efficient VP9/AV1 compression, native in modern browsers.",
+      "cons": "Less accepted by editing software, older Apple devices and some social platforms."
+    },
+    "MOV": {
+      "desc": "MOV is Apple's QuickTime container. It can hold H.264, HEVC or ProRes video and is the default format for iPhone videos and many Mac editing workflows.",
+      "uses": "iPhone recordings, Final Cut Pro and professional editing, ProRes masters.",
+      "pros": "High quality, supports professional codecs and multiple tracks.",
+      "cons": "Large files and inconsistent playback outside Apple software and Safari."
+    },
+    "AVI": {
+      "desc": "AVI (Audio Video Interleave) is a Microsoft container from 1992. It was the standard for PC video for years and can hold many codecs, such as DivX, Xvid or MJPEG.",
+      "uses": "Old digital camera clips, legacy Windows video and archived downloads.",
+      "pros": "Simple container, widely supported by desktop players.",
+      "cons": "Large files, no browser playback and weak support for modern codecs and features."
+    },
+    "MKV": {
+      "desc": "MKV (Matroska) is an open container that can hold almost any video, audio and subtitle codec, with multiple audio tracks, chapters and subtitles in one file.",
+      "uses": "Movie and TV rips, multi-language videos, archiving with subtitles.",
+      "pros": "Extremely flexible, open standard, keeps multiple tracks and subtitles.",
+      "cons": "Not playable in Safari or on many phones and TVs without extra apps."
+    },
+    "FLV": {
+      "desc": "FLV (Flash Video) is the container used by Adobe Flash Player to stream video on the web in the 2000s. It typically holds Sorenson Spark, VP6 or H.264 video.",
+      "uses": "Old web video downloads and archived Flash content.",
+      "pros": "Small files for its time.",
+      "cons": "Flash is discontinued, so FLV files cannot be played in any modern browser."
+    },
+    "3GP": {
+      "desc": "3GP is a multimedia container defined by the 3GPP for mobile phones. It stores H.263 or H.264 video with AMR or AAC audio at low bitrates suited to early mobile networks.",
+      "uses": "Videos recorded on older mobile phones and MMS messages.",
+      "pros": "Very small files.",
+      "cons": "Low quality, limited modern support and codecs that many apps cannot decode."
+    },
+    "TS": {
+      "desc": "TS (MPEG transport stream) is a container designed for broadcasting and streaming. It splits video and audio into small packets so playback can recover from transmission errors.",
+      "uses": "Digital TV recordings, IPTV, HLS streaming segments and set-top box recordings.",
+      "pros": "Robust for broadcast and streaming, supports many codecs.",
+      "cons": "Larger overhead than MP4 and poor support in editors and browsers."
+    },
+    "M4V": {
+      "desc": "M4V is Apple's variant of MP4, used by iTunes and the Apple TV app. It usually contains H.264 video and AAC audio and may include Apple FairPlay copy protection.",
+      "uses": "Videos from iTunes, Apple devices and some screen-recording tools.",
+      "pros": "Essentially MP4, good quality and compression.",
+      "cons": "Protected files cannot be converted, and some players do not recognise the .m4v extension."
+    },
+    "WMV": {
+      "desc": "WMV (Windows Media Video) is Microsoft's video format from 1999, based on the Windows Media codecs and later standardised as VC-1.",
+      "uses": "Old Windows Movie Maker projects, corporate recordings and legacy PC video.",
+      "pros": "Good compression for its time on Windows.",
+      "cons": "No browser support and limited playback on Mac, iPhone and Android."
+    },
+    "CSV": {
+      "desc": "CSV (comma-separated values) is plain text where each line is a row and commas separate columns. It is the simplest way to exchange spreadsheet and database data.",
+      "uses": "Exports from Excel, Google Sheets, CRMs and databases.",
+      "pros": "Human-readable, opened by any spreadsheet, tiny files.",
+      "cons": "No data types, no nesting, and delimiter and encoding conventions vary."
+    },
+    "JSON": {
+      "desc": "JSON (JavaScript Object Notation) is a lightweight text format for structured data using objects, arrays, strings, numbers and booleans. It is the standard format of web APIs.",
+      "uses": "APIs, configuration files, app data and importing data into JavaScript.",
+      "pros": "Typed values, supports nesting, parsed natively by every programming language.",
+      "cons": "More verbose than CSV for flat tables and not directly editable in spreadsheets."
+    },
+    "VTT": {
+      "desc": "VTT (WebVTT, Web Video Text Tracks) is the W3C subtitle format for HTML5 video. It supports cue positioning, styling with CSS and metadata alongside timed text.",
+      "uses": "Subtitles and captions on websites using the HTML track element, and streaming platforms.",
+      "pros": "Native in browsers, supports styling and positioning.",
+      "cons": "Many desktop players and video editors expect SRT instead."
+    },
+    "SRT": {
+      "desc": "SRT (SubRip Subtitle) is the most common subtitle format: numbered cues, a start and end time, and the subtitle text. It originated with the SubRip ripping tool.",
+      "uses": "Subtitles for video players, video editors, YouTube uploads and media servers.",
+      "pros": "Simple, human-readable, supported almost everywhere.",
+      "cons": "No positioning or advanced styling, and not supported by the HTML5 track element."
+    },
+    "Base64": {
+      "desc": "Base64 is an encoding that represents binary data using 64 printable text characters. It lets images and files travel inside text formats such as HTML, CSS, JSON and email.",
+      "uses": "Data URIs, inline images in emails and APIs that only accept text.",
+      "pros": "Safe to embed anywhere text is allowed.",
+      "cons": "About 33% larger than the original binary data."
+    },
+    "Hex": {
+      "desc": "Hexadecimal is base 16, using the digits 0–9 and the letters A–F. One hex digit represents exactly four bits, so two digits describe one byte.",
+      "uses": "Colors in CSS (#FF5733), memory addresses, byte dumps and hashes.",
+      "pros": "Compact and maps directly to binary.",
+      "cons": "Less intuitive for everyday arithmetic than decimal."
+    },
+    "Decimal": {
+      "desc": "Decimal is the base-10 number system we use every day, with the digits 0 to 9. Each position is worth ten times the one to its right.",
+      "uses": "Everyday numbers, prices, measurements and human-readable output.",
+      "pros": "Familiar and easy to read.",
+      "cons": "Does not map neatly to bits and bytes."
+    },
+    "Binary": {
+      "desc": "Binary is base 2, using only 0 and 1. It is the native language of computers: every value in memory is ultimately a sequence of bits.",
+      "uses": "Bit flags, network masks, low-level programming and learning how computers store data.",
+      "pros": "Shows the exact bit pattern of a value.",
+      "cons": "Long and hard to read for large numbers."
+    },
+    "Octal": {
+      "desc": "Octal is base 8, using the digits 0 to 7. Each octal digit represents exactly three bits.",
+      "uses": "Unix file permissions (chmod 755), some legacy systems and escape sequences.",
+      "pros": "Compact representation of groups of three bits.",
+      "cons": "Rarely used outside permissions and older systems."
+    }
   }
 }

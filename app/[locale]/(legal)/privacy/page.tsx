@@ -1,17 +1,33 @@
 import type { Metadata } from "next";
+import { JsonLd, organizationSchema } from "@/components/json-ld";
+import { BASE_URL, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+// Legal/info pages are English-only; every locale canonicalises to the EN URL.
+export const metadata: Metadata = pageMetadata({
+  fallbackImage: true,
+  locale: "en",
+  path: "/privacy",
   title: "Privacy Policy",
   description:
     "Privacy policy for ConverterUp. Files are processed locally in your browser and never uploaded.",
-  alternates: { canonical: "https://converterup.com/privacy" },
-};
+  hreflang: false,
+});
 
 const LAST_UPDATED = "2026-05-02";
 
 export default function PrivacyPage() {
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          url: `${BASE_URL}/privacy`,
+          name: "Privacy Policy",
+          dateModified: LAST_UPDATED,
+          publisher: organizationSchema,
+        }}
+      />
       <h1>Privacy Policy</h1>
       <p>
         <em>Last updated: {LAST_UPDATED}</em>

@@ -1,3 +1,5 @@
+import { AUTHOR } from "@/lib/seo";
+
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
     <script
@@ -29,7 +31,11 @@ export const organizationSchema = {
   "@type": "Organization",
   name: "ConverterUp",
   url: "https://converterup.com",
-  logo: "https://converterup.com/logo.svg",
+  logo: "https://converterup.com/icon-512x512.png",
+  email: "rgp.prt@gmail.com",
+  founder: AUTHOR,
+  description:
+    "Free, 100% client-side toolkit for converting images, videos, and text. Files are processed in the browser and never uploaded.",
 };
 
 export const softwareApplicationSchema = {

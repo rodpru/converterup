@@ -1,9 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { JsonLd } from "@/components/json-ld";
 import { Link } from "@/i18n/routing";
 import { getAllArticles } from "@/lib/blog";
-import { generateAlternates } from "@/lib/seo";
+import { BASE_URL, localizedUrl, pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -13,22 +14,14 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Blog" });
   const tm = await getTranslations({ locale, namespace: "ToolMeta" });
-  const title = tm("blog-title");
-  const description = t("desc");
 
-  return {
-    title,
-    description,
-    alternates: generateAlternates("/blog", locale),
-    openGraph: {
-      title,
-      description,
-      url: generateAlternates("/blog", locale).canonical,
-      siteName: "ConverterUp",
-      type: "website",
-      locale,
-    },
-  };
+  return pageMetadata({
+    fallbackImage: true,
+    locale,
+    path: "/blog",
+    title: tm("blog-title"),
+    description: t("desc"),
+  });
 }
 
 export default async function BlogIndex({
@@ -37,11 +30,36 @@ export default async function BlogIndex({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "Blog" });
+  const tm = await getTranslations({ locale, namespace: "ToolMeta" });
   const articles = getAllArticles().filter((post) => post.lang === locale);
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          name: tm("blog-title"),
+          description: t("desc"),
+          url: localizedUrl("/blog", locale),
+          inLanguage: locale,
+          publisher: {
+            "@type": "Organization",
+            name: "ConverterUp",
+            url: BASE_URL,
+          },
+          blogPost: articles.map((post) => ({
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.description,
+            url: localizedUrl(`/blog/${post.slug}`, locale),
+            datePublished: post.publishedAt,
+            dateModified: post.updatedAt ?? post.publishedAt,
+          })),
+        }}
+      />
       <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
         <div className="max-w-3xl mx-auto text-center">
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">

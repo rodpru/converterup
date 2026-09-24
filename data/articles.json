@@ -95,7 +95,7 @@
       },
       {
         "type": "paragraph",
-        "text": "For web projects, converting your images to WebP using a <a href=\"/dashboard\">media converter</a> is one of the fastest ways to improve page load times. A typical product page with 20 images can shave off 1-3MB just by switching from JPEG to WebP."
+        "text": "For web projects, converting your images to WebP using a <a href=\"/tools/media-converter\">media converter</a> is one of the fastest ways to improve page load times. A typical product page with 20 images can shave off 1-3MB just by switching from JPEG to WebP."
       },
       {
         "type": "heading",
@@ -294,7 +294,7 @@
       },
       {
         "type": "paragraph",
-        "text": "YouTube thumbnails are served as JPEG files. If you need them in another format (PNG for transparency compositing, WebP for web performance), you can convert them using our <a href=\"/dashboard\">Media Converter</a>."
+        "text": "YouTube thumbnails are served as JPEG files. If you need them in another format (PNG for transparency compositing, WebP for web performance), you can convert them using our <a href=\"/tools/media-converter\">Media Converter</a>."
       },
       {
         "type": "faq",
@@ -321,7 +321,7 @@
     "title": "PNG vs JPG vs WebP: Which Format to Use When",
     "description": "PNG vs JPG vs WebP: lossy vs lossless, real size benchmarks, transparency, browser support, and which format to use for photos, graphics, and the web.",
     "keyword": "png vs jpg vs webp",
-    "toolHref": "/dashboard",
+    "toolHref": "/tools/media-converter",
     "toolName": "Media Converter",
     "category": "image",
     "publishedAt": "2026-03-27",
@@ -441,14 +441,14 @@
       },
       {
         "type": "paragraph",
-        "text": "For web projects, the practical approach is to serve WebP as the primary format with a JPEG/PNG fallback using the HTML <code>&lt;picture&gt;</code> element. Our <a href=\"/dashboard\">Media Converter</a> can handle the conversion to generate both versions from a single source."
+        "text": "For web projects, the practical approach is to serve WebP as the primary format with a JPEG/PNG fallback using the HTML <code>&lt;picture&gt;</code> element. Our <a href=\"/tools/media-converter\">Media Converter</a> can handle the conversion to generate both versions from a single source."
       },
       {
         "type": "cta",
         "title": "Convert Between Formats Instantly",
         "description": "Convert PNG, JPG, WebP, AVIF, and more — directly in your browser. No uploads, no quality loss during conversion.",
         "buttonText": "Open Media Converter",
-        "href": "/dashboard"
+        "href": "/tools/media-converter"
       },
       {
         "type": "heading",
@@ -819,6 +819,7 @@
     "toolName": "Stripe Fee Calculator",
     "category": "utility",
     "publishedAt": "2026-03-27",
+    "updatedAt": "2026-07-30",
     "lang": "en",
     "body": [
       {
@@ -2869,7 +2870,7 @@
     "title": "PNG vs JPG vs WebP: Qual Formato de Imagem Usar?",
     "description": "Guia completo comparando PNG, JPG e WebP. Descubra qual formato oferece melhor qualidade, menor tamanho e quando usar cada um.",
     "keyword": "png vs jpg vs webp",
-    "toolHref": "/dashboard",
+    "toolHref": "/tools/media-converter",
     "toolName": "Conversor de Mídia",
     "category": "image",
     "publishedAt": "2026-04-01",
@@ -2956,14 +2957,14 @@
       },
       {
         "type": "paragraph",
-        "text": "Para converter entre formatos rapidamente, use nosso <a href=\"/dashboard\">conversor de mídia gratuito</a>. Ele funciona inteiramente no navegador — seus arquivos nunca saem do seu dispositivo."
+        "text": "Para converter entre formatos rapidamente, use nosso <a href=\"/tools/media-converter\">conversor de mídia gratuito</a>. Ele funciona inteiramente no navegador — seus arquivos nunca saem do seu dispositivo."
       },
       {
         "type": "cta",
         "title": "Converta Imagens Entre Formatos",
         "description": "Converta PNG para WebP, JPG para PNG, ou qualquer combinação. Processamento 100% no navegador, sem upload para servidores.",
         "buttonText": "Abrir Conversor de Mídia",
-        "href": "/dashboard"
+        "href": "/tools/media-converter"
       },
       {
         "type": "faq",
@@ -3211,7 +3212,7 @@
   {
     "articleId": "stripe-fees",
     "slug": "taxas-stripe-como-calcular-custos",
-    "title": "Taxas do Stripe Explicadas: Como Calcular Custos de Processamento",
+    "title": "Taxas do Stripe: Como Calcular Custos de Processamento",
     "description": "Entenda a estrutura de taxas do Stripe para USD, EUR, GBP e BRL. Use nossa calculadora para ver exatamente quanto você pagará e receberá.",
     "keyword": "calculadora taxas stripe",
     "toolHref": "/tools/stripe-fee-calculator",
@@ -4002,7 +4003,7 @@
   {
     "articleId": "create-favicon",
     "slug": "como-criar-favicon-para-site",
-    "title": "Como Criar um Favicon para Site: Gerador Online + Código HTML",
+    "title": "Como Criar um Favicon: Gerador Online + Código HTML",
     "description": "Como criar favicon para o seu site: gere todos os tamanhos (ICO, PNG 16x16, 32x32, Apple Touch, Android) a partir de uma imagem e copie o HTML pronto.",
     "keyword": "como criar favicon",
     "toolHref": "/tools/favicon-generator",
@@ -4647,7 +4648,7 @@
   {
     "articleId": "youtube-thumbnail",
     "slug": "como-descargar-miniatura-de-youtube-en-hd",
-    "title": "Cómo Descargar la Miniatura de Cualquier Video de YouTube en HD",
+    "title": "Cómo Descargar la Miniatura de un Video de YouTube en HD",
     "description": "Descarga miniaturas de videos de YouTube en todas las resoluciones, desde 120x90 hasta 1280x720. Gratis, al instante y sin instalar nada.",
     "keyword": "descargar miniatura youtube",
     "toolHref": "/tools/youtube-thumbnail-downloader",
@@ -4796,7 +4797,7 @@
     "title": "PNG vs JPG vs WebP: Diferencias y Cuál Usar en Cada Caso",
     "description": "Comparativa clara entre PNG, JPG y WebP: cuándo usar cada formato, diferencias de peso, transparencia, calidad y cómo convertir entre ellos gratis.",
     "keyword": "png vs jpg vs webp diferencias",
-    "toolHref": "/dashboard",
+    "toolHref": "/tools/media-converter",
     "toolName": "Convertidor de Medios",
     "category": "image",
     "publishedAt": "2026-04-01",
@@ -4890,7 +4891,7 @@
         "title": "Convierte Entre Formatos al Instante",
         "description": "Convierte PNG, JPG, WebP, AVIF y más directamente en tu navegador. Sin subidas, sin pérdida de calidad durante la conversión.",
         "buttonText": "Abrir Convertidor de Medios",
-        "href": "/dashboard"
+        "href": "/tools/media-converter"
       },
       {
         "type": "heading",
@@ -5136,7 +5137,7 @@
   {
     "articleId": "stripe-fees",
     "slug": "calculadora-comisiones-stripe-cuanto-cobra",
-    "title": "Calculadora de Comisiones de Stripe: ¿Cuánto Cobra Realmente?",
+    "title": "Comisiones de Stripe: ¿Cuánto Cobra Realmente?",
     "description": "Calcula exactamente cuánto te cobra Stripe por cada transacción. Incluye comisiones por país, tipo de tarjeta y conversión de moneda.",
     "keyword": "calculadora comisiones stripe",
     "toolHref": "/tools/stripe-fee-calculator",
@@ -5442,7 +5443,7 @@
   {
     "articleId": "resize-social-media",
     "slug": "redimensionar-imagenes-para-redes-sociales",
-    "title": "Tamaños de Imagen para Redes Sociales: Guía Completa 2026",
+    "title": "Tamaños de Imagen para Redes Sociales: Guía 2026",
     "description": "Todas las medidas de imágenes para Instagram, Facebook, Twitter, LinkedIn y TikTok. Redimensiona tus imágenes gratis en el navegador.",
     "keyword": "redimensionar imagenes redes sociales",
     "toolHref": "/tools/image-resizer",
@@ -5873,13 +5874,14 @@
   {
     "articleId": "create-favicon",
     "slug": "como-crear-favicon-para-tu-sitio-web",
-    "title": "Favicon Web 2026: Medidas, Tamaños y Generador Online Gratis",
+    "title": "Favicon Web 2026: Medidas, Tamaños y Generador Gratis",
     "description": "Guía completa de medidas de favicon 2026: 16x16, 32x32, 180x180 Apple, 192x192 Android, 512x512 PWA. Genera todos desde una imagen y copia el HTML.",
     "keyword": "como crear favicon",
     "toolHref": "/tools/favicon-generator",
     "toolName": "Generador de Favicon",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-07-30",
     "lang": "es",
     "body": [
       {
@@ -6226,7 +6228,7 @@
   {
     "articleId": "json-formatting",
     "slug": "como-formatear-y-validar-json-online",
-    "title": "Cómo Formatear y Validar JSON Online: Guía para Desarrolladores",
+    "title": "Cómo Formatear y Validar JSON Online: Guía Práctica",
     "description": "Formatea, valida y visualiza JSON al instante. Detecta errores de sintaxis, compara estructuras y explora datos con facilidad.",
     "keyword": "formatear y validar json",
     "toolHref": "/tools/json-viewer",

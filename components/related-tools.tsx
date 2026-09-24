@@ -2,10 +2,14 @@
 
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useParams, usePathname } from "next/navigation";
-import { Link } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 
 const allTools = [
+  {
+    name: "Media Converter",
+    href: "/tools/media-converter",
+    category: "video",
+  },
   {
     name: "Image Compressor",
     href: "/tools/image-compressor",
@@ -63,18 +67,13 @@ const allTools = [
 ];
 
 export function RelatedTools() {
+  // Locale-less on server and client (see Breadcrumbs).
   const pathname = usePathname();
-  const params = useParams();
   const t = useTranslations("Internal");
-  const locale = (params?.locale as string) ?? "en";
-  const localePrefix = locale === "en" ? "" : `/${locale}`;
 
-  if (pathname === "/tools" || pathname === `${localePrefix}/tools`)
-    return null;
+  if (pathname === "/tools") return null;
 
-  const stripped = pathname.startsWith(localePrefix)
-    ? pathname.slice(localePrefix.length) || "/"
-    : pathname;
+  const stripped = pathname;
 
   const currentTool = allTools.find((tool) => tool.href === stripped);
   const category = currentTool?.category;

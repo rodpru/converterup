@@ -8,6 +8,8 @@ function tryGet(
   t: Awaited<ReturnType<typeof getTranslations>>,
   key: string,
 ): string | null {
+  // has() first — t() on a missing key logs MISSING_MESSAGE on every probe.
+  if (!t.has(key)) return null;
   try {
     const v = t(key);
     return v && v !== key ? v : null;

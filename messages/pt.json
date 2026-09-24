@@ -200,7 +200,7 @@
     "vtt-to-srt-desc": "Converta legendas WebVTT para SRT num clique. Preserva timestamps e formatação. Grátis, instantâneo, 100% no browser. Sem upload.",
     "json-viewer-title": "Visualizador JSON — Formatar e Validar Online",
     "json-viewer-desc": "Formate, valide, embeleze e minifique JSON com destaque de sintaxe e árvore. Grátis, instantâneo, no browser — o seu JSON nunca sai do dispositivo.",
-    "hex-to-decimal-title": "Converter Hex para Decimal — Grátis (Binário, Octal, RGB)",
+    "hex-to-decimal-title": "Converter Hex para Decimal — Grátis (Binário, Octal)",
     "hex-to-decimal-desc": "Conversor hexadecimal para decimal grátis online. Converte hex para decimal, binário, octal e códigos de cor RGB ao instante. Sem registo, 100% no browser.",
     "html-minifier-title": "Minificador HTML — Comprimir HTML Online Grátis",
     "html-minifier-desc": "Minifique HTML para reduzir o tamanho e acelerar o carregamento. Remove espaços, comentários e tags opcionais. Grátis, rápido, 100% no browser.",
@@ -220,9 +220,11 @@
     "heic-to-pdf-desc": "Junte fotos HEIC do iPhone num PDF multi-página. Grátis, sem upload, sem registo. Até 20 fotos, ajuste a A4 ou tamanho nativo e descarregue já.",
     "home-title": "ConverterUp — Converta Tudo. Sem Uploads.",
     "home-desc": "Converta imagens e vídeos ao instante, 100% no browser. Sem uploads, sem esperas, sem limites. Com tecnologia FFmpeg.wasm.",
-    "tools-title": "24 Ferramentas Grátis — Imagem, Vídeo, Código, Texto",
-    "tools-desc": "Comprima, redimensione, converta, formate. 24 ferramentas grátis no browser para imagens, vídeo, código e texto — 100% privado, sem upload, sem registo.",
-    "blog-title": "Blog — Guias de Imagem, Vídeo e Ficheiros"
+    "tools-title": "25 Ferramentas Grátis — Imagem, Vídeo, Código, Texto",
+    "tools-desc": "Comprima, redimensione, converta, formate. 25 ferramentas grátis no browser para imagens, vídeo, código e texto — 100% privado, sem upload, sem registo.",
+    "blog-title": "Blog — Guias de Imagem, Vídeo e Ficheiros",
+    "media-converter-title": "Conversor de Media — Vídeo e Imagem Online Grátis",
+    "media-converter-desc": "Converta MP4, MOV, MKV, WebM, AVI, PNG, JPG, WebP e AVIF no browser. Extraia áudio MP3, redimensione e ajuste a qualidade. Grátis, sem upload nem registo."
   },
   "ToolHowTo": {
     "image-compressor": {
@@ -607,6 +609,22 @@
       "step3": {
         "name": "Descarregue o PDF",
         "text": "Clique em construir PDF — cada HEIC é descodificado sequencialmente, embebido como JPG e escrito num único ficheiro PDF para descarregar."
+      }
+    },
+    "media-converter": {
+      "name": "Como Converter Ficheiros de Vídeo e Imagem Online",
+      "description": "Converta vídeos entre MP4, WebM, MKV, AVI e MOV, ou imagens entre PNG, JPG, WebP, AVIF, GIF, TIFF e BMP.",
+      "step1": {
+        "name": "Adicione o ficheiro",
+        "text": "Arraste ou selecione uma imagem ou vídeo — MP4, MOV, MKV, WebM, AVI, FLV, 3GP, TS, M4V, WMV, PNG, JPG, WebP, AVIF, GIF, TIFF ou BMP."
+      },
+      "step2": {
+        "name": "Escolha o formato de saída",
+        "text": "Selecione o formato de destino, a qualidade e, se quiser, o tamanho — ou ative a extração de áudio para obter MP3, AAC, WAV ou OGG."
+      },
+      "step3": {
+        "name": "Converta e descarregue",
+        "text": "Clique em converter. O FFmpeg corre localmente no browser e o ficheiro convertido é descarregado diretamente para o seu dispositivo."
       }
     }
   },
@@ -1276,6 +1294,40 @@
       "a5": "Aproximadamente igual à soma das fotos codificadas em JPG à qualidade escolhida. 5 × 4 MB HEIC a 90 % de qualidade produz tipicamente um PDF de 4–8 MB. Qualidade 100 % duplica, qualidade 75 % reduz para metade. O pdf-lib não volta a rasterizar, por isso não há perda acumulada.",
       "q6": "O PDF incorpora os metadados EXIF originais?",
       "a6": "Não. O pipeline de decode-e-recodificação remove o EXIF antes do JPG chegar ao PDF. É o comportamento amigo da privacidade por defeito — coordenadas GPS e timestamps ficam fora do documento. Se precisa de preservar o EXIF, edite o HEIC na app Fotos da Apple e exporte JPGs individuais com metadados antes de juntar."
+    },
+    "media-converter": {
+      "intro": "O conversor de media da ConverterUp muda o formato de vídeos e imagens diretamente no browser. Transforme um MOV do iPhone num MP4 que funciona em qualquer lado, reduza uma gravação de ecrã para WebM, recupere um clip antigo em FLV ou WMV, converta PNG para JPG ou WebP, ou extraia a banda sonora de um vídeo em MP3. Usa FFmpeg compilado para WebAssembly no seu próprio dispositivo: nada é carregado para servidores, não há filas de espera e os seus vídeos privados continuam privados.",
+      "section1": {
+        "heading": "Que formato de vídeo escolher?",
+        "p1": "<strong>MP4 (H.264 + AAC)</strong> é a escolha segura. Reproduz em qualquer telemóvel, televisão, browser, rede social ou editor de vídeo. Se não sabe o que o destinatário usa, escolha MP4.",
+        "p2": "<strong>WebM (VP8/VP9 + Vorbis/Opus)</strong> é o formato aberto da web. Não tem royalties e costuma ser mais pequeno do que o MP4 com qualidade semelhante, por isso é ótimo para vídeos no seu próprio site. O suporte em software Apple mais antigo é irregular — evite-o para enviar a utilizadores de iPhone.",
+        "p3": "<strong>MKV</strong> é um contentor flexível que suporta várias faixas de áudio e legendas. É ideal para arquivo, mas muitos telemóveis e televisões não o reproduzem — converta MKV para MP4 antes de partilhar. <strong>MOV</strong> é o contentor da Apple (o que o iPhone grava); <strong>AVI</strong> e <strong>WMV</strong> são formatos antigos do Windows que vale a pena converter para MP4."
+      },
+      "section2": {
+        "heading": "Formatos de imagem: PNG, JPG, WebP, AVIF e outros",
+        "p1": "<strong>JPG</strong> é o melhor para fotografias: ficheiros pequenos e suporte universal, mas sem transparência. <strong>PNG</strong> não tem perdas e suporta transparência — use-o para capturas de ecrã, logótipos e gráficos com contornos nítidos.",
+        "p2": "<strong>WebP</strong> e <strong>AVIF</strong> são formatos modernos para a web. O WebP é tipicamente 25–35% mais pequeno do que o JPG e suporta transparência e animação; o AVIF comprime ainda mais, mas demora mais a codificar. Ambos funcionam em todos os browsers atuais.",
+        "p3": "<strong>GIF</strong> está limitado a 256 cores — converta GIFs animados para MP4 ou WebM e reduza o tamanho em 80–95%. <strong>TIFF</strong> e <strong>BMP</strong> são formatos grandes e sem compressão, vindos da impressão e do Windows antigo; convertê-los para PNG ou JPG torna-os fáceis de partilhar. Os ficheiros JFIF são simplesmente JPEG com outra extensão e convertem para .jpg."
+      },
+      "section3": {
+        "heading": "Extração de áudio, qualidade e limites",
+        "p1": "Ative a <strong>extração de áudio</strong> para guardar apenas a banda sonora de um vídeo em MP3, AAC, WAV ou OGG — útil para podcasts, aulas, notas de voz e música.",
+        "p2": "O controlo de <strong>qualidade</strong> define a compressão: valores mais altos mantêm mais detalhe e geram ficheiros maiores. Pode também definir largura e altura; com o bloqueio de proporção ativo, a imagem ou o vídeo é redimensionado sem deformar.",
+        "p3": "Como o processamento acontece no seu dispositivo, a velocidade depende do processador e da memória. O browser aguenta vídeos até <strong>500 MB</strong> e imagens até <strong>50 MB</strong>. Para ficheiros maiores, corte-os ou comprima-os primeiro. Converter vídeo exige muito do processador — num computador é bem mais rápido do que num telemóvel."
+      },
+      "faqHeading": "Perguntas frequentes",
+      "q1": "Os meus ficheiros são enviados para um servidor?",
+      "a1": "Não. A conversão corre inteiramente no browser com FFmpeg compilado para WebAssembly. Os ficheiros nunca saem do seu dispositivo, por isso também não há tempo de upload.",
+      "q2": "Que formatos são suportados?",
+      "a2": "Vídeo de entrada: MP4, MOV, MKV, WebM, AVI, FLV, 3GP, TS, M4V, WMV. Vídeo de saída: MP4, WebM, MKV, AVI, MOV. Imagens: PNG, JPG/JPEG/JFIF, WebP, AVIF, GIF, TIFF e BMP nos dois sentidos. GIFs animados também podem ser convertidos para MP4 ou WebM. Extração de áudio: MP3, AAC, WAV, OGG.",
+      "q3": "Qual é o tamanho máximo de ficheiro?",
+      "a3": "500 MB para vídeos e 50 MB para imagens. Estes limites mantêm a conversão dentro da memória que um separador do browser pode usar com segurança.",
+      "q4": "Como converto MOV para MP4?",
+      "a4": "Largue o ficheiro MOV, escolha MP4 como formato de saída e clique em converter. O vídeo é recodificado em H.264 com áudio AAC, a combinação mais compatível.",
+      "q5": "Posso extrair MP3 de um vídeo?",
+      "a5": "Sim. Depois de adicionar o vídeo, ative a extração de áudio e escolha MP3 (ou AAC, WAV, OGG). Só a faixa de áudio é guardada.",
+      "q6": "Há limite diário ou marca de água?",
+      "a6": "Não. O conversor é grátis, sem limite diário, sem marca de água e sem conta."
     }
   },
   "Convert": {
@@ -1306,7 +1358,191 @@
     "trust1": "100% privado",
     "trust2": "Sem envio",
     "trust3": "Sem registo",
-    "trust4": "Sempre grátis"
+    "trust4": "Sempre grátis",
+    "compareHeading": "{from} vs {to} num relance",
+    "compareIntro": "As principais diferenças técnicas entre os dois formatos, para saber o que esperar antes de converter.",
+    "featureCol": "Característica",
+    "changesHeading": "O que muda ao converter {from} para {to}",
+    "aboutHeading": "Sobre o {format}",
+    "usesLabel": "Ideal para",
+    "prosLabel": "Pontos fortes",
+    "consLabel": "Limitações",
+    "row": {
+      "kind": "Tipo",
+      "compression": "Compressão",
+      "transparency": "Transparência",
+      "animation": "Animação",
+      "colors": "Cores",
+      "bitDepth": "Profundidade de bits",
+      "audio": "Faixa de áudio",
+      "codecs": "Codecs comuns",
+      "base": "Base numérica",
+      "browser": "Suporte nos browsers",
+      "extensions": "Extensões",
+      "mime": "Tipo MIME",
+      "introduced": "Lançamento"
+    },
+    "val": {
+      "yes": "Sim",
+      "no": "Não",
+      "colorsMax": "Até {n}",
+      "colorsTrue": "Milhões (true color)",
+      "kind": {
+        "raster": "Imagem raster",
+        "vector": "Imagem vetorial",
+        "document": "Documento",
+        "video": "Contentor de vídeo",
+        "subtitle": "Legendas em texto",
+        "data": "Dados estruturados",
+        "encoding": "Codificação de texto",
+        "number": "Sistema numérico"
+      },
+      "compression": {
+        "lossy": "Com perdas",
+        "lossless": "Sem perdas",
+        "both": "Com ou sem perdas",
+        "none": "Sem compressão / texto"
+      },
+      "transparency": {
+        "full": "Canal alfa completo",
+        "binary": "Liga/desliga (1 bit)",
+        "none": "Nenhuma"
+      },
+      "browser": {
+        "universal": "Todos os browsers",
+        "modern": "Todos os browsers modernos",
+        "limited": "Parcial",
+        "none": "Sem reprodução nativa"
+      }
+    },
+    "notes": {
+      "compression": {
+        "vector": "O {from} não depende da resolução, por isso o {to} é gerado com um tamanho fixo em píxeis — escolha o tamanho final antes de converter.",
+        "lossyToLossy": "Tanto o {from} como o {to} usam compressão com perdas, por isso a imagem é recodificada mais uma vez. Com qualidade 80 ou superior a perda extra raramente se nota, mas evite converter o mesmo ficheiro de um lado para o outro várias vezes.",
+        "lossyToLossless": "O {to} guarda os píxeis sem perdas, por isso não se perde mais detalhe — mas também não recupera o que a compressão do {from} já eliminou, e o ficheiro costuma ficar maior.",
+        "losslessToLossy": "O {to} usa compressão com perdas: detalhes finos e arestas nítidas são aproximados para poupar espaço. Em fotografias a diferença quase não se vê com qualidade alta; em texto, capturas de ecrã e desenhos de linhas, atenção aos artefactos.",
+        "toFlexible": "O {to} suporta compressão com e sem perdas. O conversor usa o modo com perdas por omissão para gerar ficheiros mais pequenos — suba a qualidade se precisar de um resultado mais próximo do {from} original.",
+        "losslessToLossless": "Ambos os formatos são sem perdas, por isso os píxeis do {to} são idênticos aos do {from}. Só mudam o contentor e o método de compressão."
+      },
+      "jfifSame": "JFIF e JPG usam exatamente a mesma compressão JPEG — .jfif é apenas uma extensão mais antiga. Converter para .jpg não altera nada visualmente, mas faz o ficheiro abrir em apps e formulários que rejeitam .jfif.",
+      "vectorToRaster": "As formas e o texto vetoriais passam a uma grelha fixa de píxeis. Ampliar o {to} depois vai desfocá-lo, por isso exporte no maior tamanho de que precisa.",
+      "toIco": "Um ficheiro ICO pode juntar vários tamanhos (16×16, 32×32, 48×48 e mais) num só ficheiro, que é o que os browsers e o Windows esperam de um favicon ou ícone de aplicação.",
+      "toPdf": "Cada imagem passa a ser uma página de um documento PDF, mais fácil de partilhar, imprimir ou anexar a formulários que só aceitam documentos.",
+      "transparency": {
+        "lost": "O {to} não tem transparência. As áreas transparentes do {from} são preenchidas com um fundo sólido (normalmente branco).",
+        "binary": "O {to} só suporta transparência total ou nenhuma, por isso sombras suaves e píxeis semitransparentes do {from} ficam totalmente opacos ou totalmente transparentes.",
+        "kept": "A transparência mantém-se: o {to} suporta canal alfa, por isso os fundos transparentes do {from} continuam transparentes."
+      },
+      "animationLost": "O {to} guarda uma única imagem fixa, por isso só o primeiro frame de um {from} animado é mantido.",
+      "animationKept": "O {to} suporta animação, por isso um {from} animado pode manter os frames e o ritmo.",
+      "paletteLimit": "O {to} está limitado a {n} cores por frame. Fotografias e gradientes são reduzidos a uma paleta, o que pode causar bandas ou pontilhado.",
+      "smaller": "O {to} comprime melhor do que o {from}, por isso o ficheiro convertido costuma ficar visivelmente mais pequeno com qualidade visual semelhante.",
+      "larger": "O {to} é menos eficiente em espaço do que o {from}, por isso conte com um ficheiro convertido maior do que o original.",
+      "compatGain": "A compatibilidade melhora: o {to} abre em mais browsers, apps e sistemas operativos do que o {from}.",
+      "compatLoss": "O {to} é mais recente ou menos suportado do que o {from}. Confirme que o site, a app ou o dispositivo onde vai usar o ficheiro aceita {to}.",
+      "fromHeic": "O {from} é o formato de fotografia por omissão nos iPhone e iPad. Convertê-lo evita os erros de \"ficheiro não suportado\" frequentes no Windows, no Android e em muitos sites.",
+      "videoToGif": "O GIF guarda cada frame como uma imagem própria com paleta, por isso um GIF costuma ser muitas vezes maior do que o clip {from} de origem. Mantenha os clips curtos e reduza a largura e os frames por segundo.",
+      "audioDropped": "O GIF não tem faixa de áudio, por isso qualquer som do {from} é removido.",
+      "gifToVideo": "O {to} comprime movimento de forma muito mais eficiente do que o GIF — a mesma animação fica muitas vezes com uma fração do tamanho e reproduz de forma fluida, com controlos de pausa.",
+      "reencode": "O {from} e o {to} são contentores. As faixas de vídeo e áudio são recodificadas em codecs que o {to} suporta (normalmente {codecs}), para obter um ficheiro que reproduz de forma fiável e não uma simples mudança de nome.",
+      "audioKept": "A faixa de áudio passa para o {to}, recodificada se for necessário.",
+      "legacy": "O {from} é um formato antigo que os browsers não reproduzem diretamente. Converter para {to} é a forma mais simples de ver, partilhar ou editar gravações antigas.",
+      "number": {
+        "bases": "O {from} é base {fromBase} e o {to} é base {toBase}. O valor mantém-se exatamente igual — só muda a forma de o escrever.",
+        "group": "Como {fromBase} e {toBase} são ambos potências de dois, cada grupo de {bits} dígitos binários corresponde a exatamente um dígito da outra base. Basta agrupar os bits a partir da direita, sem fazer contas.",
+        "viaBinary": "O método manual mais rápido passa pelo binário: escreva cada dígito {from} em bits e depois reagrupe esses bits para a base {toBase}.",
+        "positional": "Multiplique cada dígito {from} por {fromBase} elevado à sua posição (a contar de 0 a partir da direita) e some os resultados.",
+        "division": "Divida o número por {toBase} sucessivamente e anote os restos; lidos do último para o primeiro, dão os dígitos em {to}.",
+        "example": "Exemplo: {fromValue} em {from} é igual a {toValue} em {to} (ou seja, {decimal} em decimal)."
+      },
+      "csvJson": {
+        "n1": "A primeira linha do CSV é usada como cabeçalho, e cada linha seguinte passa a ser um objeto JSON cujas chaves são os nomes das colunas.",
+        "n2": "O CSV não tem tipos de dados — todos os valores são texto. Números e valores true/false podem ser detetados e convertidos em números e booleanos JSON reais.",
+        "n3": "Campos entre aspas, vírgulas dentro de aspas e delimitadores personalizados (ponto e vírgula, tabulação) são tratados, por isso exportações do Excel ou do Google Sheets convertem corretamente."
+      },
+      "vttSrt": {
+        "n1": "Os timestamps passam de 00:00:01.000 (VTT, ponto) para 00:00:01,000 (SRT, vírgula), e cada legenda recebe um número sequencial.",
+        "n2": "O cabeçalho WEBVTT, os blocos NOTE e as definições de posição e alinhamento são removidos, porque o SRT não os suporta.",
+        "n3": "O SRT é aceite por quase todos os leitores e editores de vídeo (VLC, Premiere, DaVinci Resolve, YouTube), enquanto o VTT é usado sobretudo no vídeo HTML5 na web."
+      },
+      "toBase64": {
+        "n1": "O Base64 representa os bytes da imagem como texto simples, o que torna a versão codificada cerca de 33% maior do que o ficheiro original.",
+        "n2": "O resultado pode ser colado como data: URI diretamente em HTML, CSS ou JSON, poupando um pedido HTTP em ícones e logótipos pequenos.",
+        "n3": "Para imagens com mais do que alguns kilobytes, um ficheiro normal costuma ser melhor: fica em cache à parte e não incha o HTML ou o CSS."
+      },
+      "fromBase64": {
+        "n1": "A descodificação transforma o texto Base64 de volta na imagem binária original, cerca de 25% mais pequena do que a string codificada.",
+        "n2": "Um prefixo data: URI (por exemplo data:image/png;base64,) indica o tipo de imagem; sem ele, o formato é detetado a partir dos bytes descodificados.",
+        "n3": "Nada é recomprimido — a imagem descodificada é, byte a byte, o ficheiro que foi codificado."
+      }
+    },
+    "faq": {
+      "quality": {
+        "q": "Converter {from} para {to} reduz a qualidade?",
+        "vector": "Depende do tamanho de saída. O {from} não tem resolução fixa, por isso escolha largura e altura suficientes — no tamanho certo, a imagem {to} fica tão nítida como a original.",
+        "lossyToLossy": "Ligeiramente. Ambos os formatos são com perdas, por isso uma segunda codificação acrescenta uma pequena perda. Com qualidade entre 80 e 90 a diferença quase nunca se vê.",
+        "lossyToLossless": "Não se perde mais qualidade, porque o {to} é sem perdas. Ainda assim, o ficheiro não fica melhor do que o {from} de origem e costuma ser maior.",
+        "losslessToLossy": "Troca-se algum detalhe fino por um ficheiro mais pequeno, porque o {to} é com perdas. Em fotografias com qualidade alta mal se nota; para capturas de ecrã ou texto, use uma qualidade mais alta.",
+        "toFlexible": "Só se quiser. O {to} pode ser com ou sem perdas; uma qualidade alta mantém o resultado visualmente idêntico ao {from} e ainda poupa espaço.",
+        "losslessToLossless": "Não. Ambos os formatos são sem perdas, por isso cada píxel é preservado exatamente.",
+        "jfifSame": "Não. JFIF e JPG são o mesmo formato JPEG, por isso os dados da imagem não se degradam — só muda a extensão do ficheiro."
+      },
+      "transparency": {
+        "q": "O {to} mantém o fundo transparente do meu {from}?",
+        "lost": "Não. O {to} não suporta transparência, por isso as áreas transparentes são preenchidas com um fundo sólido. Se precisa de transparência, converta para PNG ou WebP.",
+        "binary": "Em parte. O {to} só suporta píxeis totalmente transparentes ou totalmente opacos, por isso sombras suaves e contornos suavizados podem ficar serrilhados.",
+        "kept": "Sim. O {to} suporta canal alfa completo, por isso a transparência do {from} é preservada.",
+        "noneSource": "O {from} não tem transparência à partida, por isso o {to} mantém o mesmo fundo sólido. O {to} suporta transparência, por isso pode remover o fundo depois num editor de imagem."
+      },
+      "animation": {
+        "q": "O que acontece a um {from} animado ao converter para {to}?",
+        "kept": "O {to} suporta animação, por isso os frames e o ritmo podem manter-se — e o ficheiro costuma ser bem mais pequeno do que o {from} original.",
+        "lost": "O {to} é um formato de imagem fixa, por isso só é guardado o primeiro frame. Para manter o movimento, converta para MP4, WebM ou WebP animado."
+      },
+      "support": {
+        "q": "O ficheiro {to} abre em todo o lado?",
+        "universal": "Sim. O {to} é suportado por todos os browsers modernos, sistemas operativos e pela maioria das apps, por isso é a escolha segura para partilhar.",
+        "modern": "Em todos os browsers atuais e na maioria das apps atualizadas, sim. Algum software e dispositivos mais antigos podem ainda não abrir ficheiros {to}.",
+        "limited": "Nem em todo o lado. O {to} abre em alguns browsers e leitores, mas não em todos, por isso confirme primeiro a app ou o dispositivo de destino.",
+        "none": "O {to} destina-se sobretudo a leitores de ambiente de trabalho e software de edição — os browsers não o reproduzem diretamente."
+      },
+      "audio": {
+        "q": "Converter {from} para {to} mantém o som?",
+        "lost": "Não. O GIF não suporta áudio, por isso o som é removido. Converta para MP4 ou WebM se precisar de manter o áudio.",
+        "none": "Os ficheiros GIF nunca têm áudio, por isso o {to} fica sem som. Pode adicionar uma banda sonora depois em qualquer editor de vídeo.",
+        "kept": "Sim. A faixa de áudio mantém-se e, se necessário, é recodificada num codec que o {to} suporta."
+      },
+      "number": {
+        "methodQ": "Como converter {from} para {to} à mão?",
+        "exampleQ": "Quanto é {fromValue} ({from}) em {to}?",
+        "exampleA": "{fromValue} em {from} é {toValue} em {to}. Em decimal, o valor é {decimal}."
+      },
+      "csvJson": {
+        "q1": "O que acontece à linha de cabeçalho do CSV?",
+        "a1": "Passa a ser o conjunto de chaves. Cada linha de dados é transformada num objeto JSON com uma propriedade por coluna.",
+        "q2": "Células vazias e caracteres especiais são tratados?",
+        "a2": "Sim. Células vazias passam a strings vazias (ou null), e aspas, vírgulas e quebras de linha dentro de campos entre aspas são preservadas corretamente."
+      },
+      "vttSrt": {
+        "q1": "Qual é a diferença entre VTT e SRT?",
+        "a1": "Ambos são formatos de legendas com tempos. O VTT (WebVTT) foi pensado para vídeo HTML5 e suporta estilos e posicionamento; o SRT é mais simples e é suportado por praticamente todos os leitores e editores de vídeo.",
+        "q2": "O estilo e o posicionamento das legendas mantêm-se?",
+        "a2": "Não. O SRT só suporta texto básico e tags simples como itálico, por isso o posicionamento, o alinhamento e as classes CSS do VTT são removidos. O texto e os tempos mantêm-se."
+      },
+      "toBase64": {
+        "q1": "Porque é que a versão Base64 é maior do que a imagem?",
+        "a1": "O Base64 usa 4 caracteres de texto por cada 3 bytes, o que acrescenta cerca de 33%. É o preço de meter dados binários dentro de texto.",
+        "q2": "Quando devo incorporar uma imagem em Base64?",
+        "a2": "Em ícones pequenos, logótipos e templates de email, onde poupar um pedido conta mais do que o tamanho. Para fotografias grandes, use um ficheiro de imagem normal."
+      },
+      "fromBase64": {
+        "q1": "Como sei qual o formato de imagem da string Base64?",
+        "a1": "Se começar por um data: URI como data:image/png;base64, o tipo está indicado aí. Caso contrário, o descodificador analisa os primeiros bytes para reconhecer PNG, JPEG, GIF ou WebP.",
+        "q2": "A imagem descodificada é idêntica à original?",
+        "a2": "Sim. O Base64 é uma codificação sem perdas, por isso a descodificação devolve exatamente os mesmos bytes que foram codificados."
+      }
+    },
+    "examplesHeading": "Tabela rápida: {from} para {to}"
   },
   "Internal": {
     "relatedGuides": "Guias Relacionados",
@@ -1318,9 +1554,216 @@
     "badge": "Tudo grátis, sem registo",
     "heading": "Ferramentas online grátis populares",
     "subheading": "Comprima, converta, formate e limpe — todas as ferramentas correm no navegador. Os seus ficheiros nunca saem do dispositivo.",
-    "viewAll": "Ver todas as 24 ferramentas",
+    "viewAll": "Ver todas as 25 ferramentas",
     "categoryImage": "Imagem & Foto",
     "categoryConvert": "Conversão",
     "categoryDev": "Programador & Texto"
+  },
+  "MediaConverter": {
+    "badge": "Ferramenta Grátis",
+    "h1": "Conversor de",
+    "h1Gradient": "Media",
+    "subtitle": "Converta imagens e vídeos entre formatos ou extraia o áudio de um vídeo. Tudo corre no seu browser — os ficheiros nunca saem do seu dispositivo.",
+    "unexpectedError": "Ocorreu um erro inesperado"
+  },
+  "Formats": {
+    "PNG": {
+      "desc": "O PNG (Portable Network Graphics) é um formato raster sem perdas criado como alternativa livre de patentes ao GIF. Suporta transparência alfa completa e até 16 bits por canal.",
+      "uses": "Capturas de ecrã, logótipos, elementos de interface, diagramas e qualquer imagem que precise de fundo transparente ou contornos perfeitos ao píxel.",
+      "pros": "Qualidade sem perdas, transparência completa, abre em todo o lado.",
+      "cons": "Em fotografias gera ficheiros grandes comparado com JPG, WebP ou AVIF."
+    },
+    "JPG": {
+      "desc": "O JPG (JPEG) é o formato de fotografia mais usado. Usa compressão com perdas pensada para imagens naturais, descartando detalhe que o olho mal nota para manter os ficheiros pequenos.",
+      "uses": "Fotografias, imagens de câmaras, redes sociais e anexos de email onde o tamanho conta mais do que o detalhe perfeito.",
+      "pros": "Ficheiros pequenos para fotografias, suporte universal em qualquer app e dispositivo.",
+      "cons": "Sem transparência, artefactos visíveis em texto e arestas nítidas, perde qualidade sempre que é guardado de novo."
+    },
+    "JFIF": {
+      "desc": "O JFIF (JPEG File Interchange Format) é o contentor original dos dados JPEG. Um ficheiro .jfif é um JPEG normal com uma extensão menos comum, muitas vezes gerado pelo Windows ou ao guardar imagens a partir de alguns browsers.",
+      "uses": "Nada em particular — os ficheiros .jfif costumam ser renomeados ou convertidos para poderem ser enviados a sites que só aceitam .jpg.",
+      "pros": "A mesma compressão e qualidade do JPG.",
+      "cons": "Muitos formulários e apps rejeitam a extensão .jfif."
+    },
+    "WebP": {
+      "desc": "O WebP é o formato de imagem da Google para a web. Suporta compressão com e sem perdas, transparência alfa e animação num só formato, gerando normalmente ficheiros mais pequenos do que JPG ou PNG.",
+      "uses": "Imagens de sites, fotografias de produtos em lojas online, stickers animados e tudo o que é servido em browsers onde a velocidade conta.",
+      "pros": "Mais pequeno do que JPG/PNG com qualidade semelhante, transparência e animação, suportado por todos os browsers modernos.",
+      "cons": "Algum software de ambiente de trabalho mais antigo, fluxos de impressão e formulários ainda não o aceitam."
+    },
+    "AVIF": {
+      "desc": "O AVIF é um formato de imagem baseado no codec de vídeo AV1, publicado pela Alliance for Open Media. Oferece das melhores compressões disponíveis, com HDR, gama de cores alargada e transparência.",
+      "uses": "Sites de alto desempenho, imagens de destaque grandes e galerias de fotografias onde cada kilobyte conta.",
+      "pros": "Ficheiros muito pequenos com qualidade alta, cor a 10 e 12 bits, transparência.",
+      "cons": "Codificação mais lenta, e o suporte em browsers e editores de imagem mais antigos ainda é incompleto."
+    },
+    "GIF": {
+      "desc": "O GIF (Graphics Interchange Format) data de 1987 e é conhecido sobretudo pelas animações curtas em loop. Cada frame usa uma paleta de no máximo 256 cores, com transparência simples de liga/desliga.",
+      "uses": "Animações de reação, loops simples, ícones pequenos e onde a animação tem de funcionar sem suporte de vídeo.",
+      "pros": "Animação que funciona em todo o lado, incluindo clientes de email e apps de chat.",
+      "cons": "Limite de 256 cores, sem áudio e ficheiros muito grandes comparados com MP4 ou WebP para a mesma animação."
+    },
+    "BMP": {
+      "desc": "O BMP (bitmap) é um formato raster da Microsoft que normalmente guarda os píxeis sem compressão. É simples de ler e escrever, por isso ainda aparece em software Windows antigo e em ferramentas de hardware.",
+      "uses": "Aplicações Windows antigas, sistemas embebidos e ferramentas que precisam dos píxeis em bruto.",
+      "pros": "Sem artefactos de compressão, trivial de descodificar.",
+      "cons": "Ficheiros enormes, pouco uso na web e sem transparência fiável."
+    },
+    "TIFF": {
+      "desc": "O TIFF (Tagged Image File Format) é um formato raster flexível criado pela Aldus e hoje mantido pela Adobe. Suporta profundidades de bits elevadas, metadados ricos, várias páginas e compressão sem perdas.",
+      "uses": "Fotografia profissional, produção gráfica, digitalização, arquivo e imagens GIS.",
+      "pros": "Sem perdas, alta profundidade de bits, metadados ricos, aceite por gráficas.",
+      "cons": "Ficheiros muito grandes e quase nenhum suporte nos browsers — só o Safari mostra TIFF nativamente."
+    },
+    "ICO": {
+      "desc": "O ICO é o formato de ícones do Windows. Um ficheiro .ico pode guardar várias imagens em tamanhos diferentes, em BMP ou PNG, para o sistema escolher a melhor em cada contexto.",
+      "uses": "Favicons de sites, ícones de aplicações e atalhos do Windows.",
+      "pros": "Vários tamanhos num só ficheiro, transparência, reconhecido por todos os browsers como favicon.",
+      "cons": "Não serve para imagens gerais nem fotografias."
+    },
+    "SVG": {
+      "desc": "O SVG (Scalable Vector Graphics) é um padrão do W3C que descreve imagens como formas, caminhos e texto em XML. Escala para qualquer tamanho sem perder nitidez e pode ser estilizado com CSS.",
+      "uses": "Logótipos, ícones, ilustrações, gráficos e elementos de interface na web.",
+      "pros": "Escalável sem limites, muito leve em gráficos simples, editável como texto.",
+      "cons": "Não serve para fotografias, e muitas apps, redes sociais e formulários não aceitam SVG."
+    },
+    "HEIC": {
+      "desc": "HEIC é o nome que a Apple dá às imagens HEIF comprimidas com HEVC (H.265). É o formato de fotografia por omissão no iPhone e no iPad e guarda fotografias com cerca de metade do tamanho de um JPG equivalente.",
+      "uses": "Fotografias tiradas em dispositivos Apple e guardadas no iCloud Fotos.",
+      "pros": "Ficheiros pequenos com qualidade alta, cor a 10 bits, dados de profundidade e Live Photos.",
+      "cons": "Pouco suporte fora dos dispositivos Apple: muitas apps Windows, dispositivos Android e sites não o abrem."
+    },
+    "HEIF": {
+      "desc": "O HEIF (High Efficiency Image File Format) é um contentor normalizado pelo MPEG para imagens e sequências de imagens. Guarda normalmente imagens comprimidas em HEVC e é usado por alguns telemóveis Android e câmaras.",
+      "uses": "Fotografias de smartphones e câmaras recentes que guardam em HEIF em vez de JPG.",
+      "pros": "Compressão eficiente, alta profundidade de bits, pode guardar várias imagens e metadados.",
+      "cons": "Suporte limitado em browsers e software, tal como o HEIC."
+    },
+    "PDF": {
+      "desc": "O PDF (Portable Document Format) foi criado pela Adobe e é hoje uma norma ISO. Preserva exatamente o layout, as fontes e as imagens, para que um documento fique igual em qualquer dispositivo e impressora.",
+      "uses": "Partilhar e imprimir documentos, formulários, faturas e juntar fotografias num único ficheiro.",
+      "pros": "Aspeto idêntico em todo o lado, abre em qualquer browser, fácil de imprimir e anexar.",
+      "cons": "Mais difícil de editar, e as imagens lá dentro não são fáceis de reaproveitar."
+    },
+    "Image": {
+      "desc": "Qualquer ficheiro de imagem comum — PNG, JPG, WebP, GIF ou SVG — guardado como dados binários no seu dispositivo.",
+      "uses": "Imagens do dia a dia que quer incorporar, partilhar ou processar.",
+      "pros": "Armazenamento binário compacto, guardado em cache à parte pelos browsers.",
+      "cons": "Não pode ser colado diretamente em ficheiros de texto como HTML, CSS ou JSON."
+    },
+    "MP4": {
+      "desc": "O MP4 (MPEG-4 Part 14) é o contentor de vídeo com maior suporte. Normalmente leva vídeo H.264 ou H.265 com áudio AAC e reproduz em praticamente qualquer telemóvel, browser, televisão e editor.",
+      "uses": "Partilhar vídeos, publicar em redes sociais e no YouTube e reproduzir em qualquer dispositivo.",
+      "pros": "Reprodução universal, boa compressão, adequado a streaming.",
+      "cons": "Codecs com perdas, por isso recodificar várias vezes reduz a qualidade aos poucos."
+    },
+    "WebM": {
+      "desc": "O WebM é um contentor de vídeo aberto e livre de royalties da Google, baseado no Matroska. Leva vídeo VP8, VP9 ou AV1 com áudio Vorbis ou Opus e foi pensado para o vídeo HTML5.",
+      "uses": "Vídeo em sites, gravações de ecrã feitas no browser e fluxos de trabalho open source.",
+      "pros": "Livre de royalties, compressão VP9/AV1 eficiente, nativo nos browsers modernos.",
+      "cons": "Menos aceite por software de edição, dispositivos Apple antigos e algumas redes sociais."
+    },
+    "MOV": {
+      "desc": "O MOV é o contentor QuickTime da Apple. Pode levar vídeo H.264, HEVC ou ProRes e é o formato por omissão dos vídeos do iPhone e de muitos fluxos de edição em Mac.",
+      "uses": "Gravações de iPhone, Final Cut Pro e edição profissional, masters em ProRes.",
+      "pros": "Qualidade alta, suporta codecs profissionais e várias faixas.",
+      "cons": "Ficheiros grandes e reprodução irregular fora do software da Apple e do Safari."
+    },
+    "AVI": {
+      "desc": "O AVI (Audio Video Interleave) é um contentor da Microsoft de 1992. Foi durante anos o padrão do vídeo em PC e pode levar muitos codecs, como DivX, Xvid ou MJPEG.",
+      "uses": "Vídeos de câmaras digitais antigas, vídeo Windows antigo e downloads arquivados.",
+      "pros": "Contentor simples, bem suportado por leitores de ambiente de trabalho.",
+      "cons": "Ficheiros grandes, sem reprodução nos browsers e fraco suporte para codecs e funcionalidades modernas."
+    },
+    "MKV": {
+      "desc": "O MKV (Matroska) é um contentor aberto que aceita praticamente qualquer codec de vídeo, áudio e legendas, com várias faixas de áudio, capítulos e legendas no mesmo ficheiro.",
+      "uses": "Cópias de filmes e séries, vídeos em várias línguas, arquivo com legendas.",
+      "pros": "Extremamente flexível, padrão aberto, mantém várias faixas e legendas.",
+      "cons": "Não reproduz no Safari nem em muitos telemóveis e televisões sem apps extra."
+    },
+    "FLV": {
+      "desc": "O FLV (Flash Video) é o contentor usado pelo Adobe Flash Player para transmitir vídeo na web nos anos 2000. Normalmente leva vídeo Sorenson Spark, VP6 ou H.264.",
+      "uses": "Vídeos antigos descarregados da web e conteúdo Flash arquivado.",
+      "pros": "Ficheiros pequenos para a época.",
+      "cons": "O Flash foi descontinuado, por isso os FLV não reproduzem em nenhum browser moderno."
+    },
+    "3GP": {
+      "desc": "O 3GP é um contentor multimédia definido pelo 3GPP para telemóveis. Guarda vídeo H.263 ou H.264 com áudio AMR ou AAC em bitrates baixos, adequados às primeiras redes móveis.",
+      "uses": "Vídeos gravados em telemóveis antigos e mensagens MMS.",
+      "pros": "Ficheiros muito pequenos.",
+      "cons": "Qualidade baixa, pouco suporte atual e codecs que muitas apps não descodificam."
+    },
+    "TS": {
+      "desc": "O TS (MPEG transport stream) é um contentor pensado para transmissão televisiva e streaming. Divide o vídeo e o áudio em pequenos pacotes para que a reprodução recupere de erros de transmissão.",
+      "uses": "Gravações de TV digital, IPTV, segmentos de streaming HLS e gravações de boxes.",
+      "pros": "Robusto para transmissão e streaming, suporta muitos codecs.",
+      "cons": "Mais overhead do que o MP4 e fraco suporte em editores e browsers."
+    },
+    "M4V": {
+      "desc": "O M4V é a variante da Apple do MP4, usada pelo iTunes e pela app Apple TV. Normalmente contém vídeo H.264 e áudio AAC e pode incluir a proteção FairPlay da Apple.",
+      "uses": "Vídeos do iTunes, de dispositivos Apple e de algumas ferramentas de gravação de ecrã.",
+      "pros": "Na prática é MP4, com boa qualidade e compressão.",
+      "cons": "Ficheiros protegidos não podem ser convertidos, e alguns leitores não reconhecem a extensão .m4v."
+    },
+    "WMV": {
+      "desc": "O WMV (Windows Media Video) é o formato de vídeo da Microsoft de 1999, baseado nos codecs Windows Media e mais tarde normalizado como VC-1.",
+      "uses": "Projetos antigos do Windows Movie Maker, gravações empresariais e vídeo de PC antigo.",
+      "pros": "Boa compressão para a época no Windows.",
+      "cons": "Sem suporte nos browsers e reprodução limitada em Mac, iPhone e Android."
+    },
+    "CSV": {
+      "desc": "O CSV (valores separados por vírgulas) é texto simples em que cada linha é um registo e as vírgulas separam as colunas. É a forma mais simples de trocar dados de folhas de cálculo e bases de dados.",
+      "uses": "Exportações do Excel, Google Sheets, CRMs e bases de dados.",
+      "pros": "Legível, abre em qualquer folha de cálculo, ficheiros minúsculos.",
+      "cons": "Sem tipos de dados, sem estruturas aninhadas, e as convenções de delimitador e codificação variam."
+    },
+    "JSON": {
+      "desc": "O JSON (JavaScript Object Notation) é um formato de texto leve para dados estruturados, com objetos, arrays, strings, números e booleanos. É o formato padrão das APIs web.",
+      "uses": "APIs, ficheiros de configuração, dados de aplicações e importação de dados em JavaScript.",
+      "pros": "Valores com tipo, suporta estruturas aninhadas, lido nativamente por qualquer linguagem de programação.",
+      "cons": "Mais verboso do que o CSV em tabelas simples e não se edita diretamente numa folha de cálculo."
+    },
+    "VTT": {
+      "desc": "O VTT (WebVTT, Web Video Text Tracks) é o formato de legendas do W3C para vídeo HTML5. Suporta posicionamento das legendas, estilos com CSS e metadados junto do texto com tempos.",
+      "uses": "Legendas em sites através do elemento track do HTML e em plataformas de streaming.",
+      "pros": "Nativo nos browsers, suporta estilos e posicionamento.",
+      "cons": "Muitos leitores de ambiente de trabalho e editores de vídeo esperam SRT."
+    },
+    "SRT": {
+      "desc": "O SRT (SubRip Subtitle) é o formato de legendas mais comum: legendas numeradas, tempo de início e fim e o texto. Nasceu com a ferramenta de extração SubRip.",
+      "uses": "Legendas para leitores e editores de vídeo, uploads para o YouTube e servidores multimédia.",
+      "pros": "Simples, legível, suportado em quase todo o lado.",
+      "cons": "Sem posicionamento nem estilos avançados, e não é suportado pelo elemento track do HTML5."
+    },
+    "Base64": {
+      "desc": "O Base64 é uma codificação que representa dados binários com 64 caracteres de texto imprimíveis. Permite que imagens e ficheiros viajem dentro de formatos de texto como HTML, CSS, JSON e email.",
+      "uses": "Data URIs, imagens incorporadas em emails e APIs que só aceitam texto.",
+      "pros": "Pode ser incorporado em qualquer sítio onde se aceite texto.",
+      "cons": "Cerca de 33% maior do que os dados binários originais."
+    },
+    "Hex": {
+      "desc": "O hexadecimal é base 16 e usa os dígitos 0–9 e as letras A–F. Um dígito hexadecimal representa exatamente quatro bits, por isso dois dígitos descrevem um byte.",
+      "uses": "Cores em CSS (#FF5733), endereços de memória, dumps de bytes e hashes.",
+      "pros": "Compacto e corresponde diretamente ao binário.",
+      "cons": "Menos intuitivo do que o decimal para contas do dia a dia."
+    },
+    "Decimal": {
+      "desc": "O decimal é o sistema de base 10 que usamos todos os dias, com os dígitos de 0 a 9. Cada posição vale dez vezes a posição à sua direita.",
+      "uses": "Números do dia a dia, preços, medidas e resultados legíveis por pessoas.",
+      "pros": "Familiar e fácil de ler.",
+      "cons": "Não corresponde de forma direta a bits e bytes."
+    },
+    "Binary": {
+      "desc": "O binário é base 2 e usa apenas 0 e 1. É a linguagem nativa dos computadores: qualquer valor em memória é, no fundo, uma sequência de bits.",
+      "uses": "Flags de bits, máscaras de rede, programação de baixo nível e aprender como os computadores guardam dados.",
+      "pros": "Mostra o padrão exato de bits de um valor.",
+      "cons": "Longo e difícil de ler em números grandes."
+    },
+    "Octal": {
+      "desc": "O octal é base 8 e usa os dígitos de 0 a 7. Cada dígito octal representa exatamente três bits.",
+      "uses": "Permissões de ficheiros Unix (chmod 755), alguns sistemas antigos e sequências de escape.",
+      "pros": "Representação compacta de grupos de três bits.",
+      "cons": "Pouco usado fora das permissões e de sistemas antigos."
+    }
   }
 }

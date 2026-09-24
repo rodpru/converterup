@@ -1,31 +1,43 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 import { ConversionError } from "@/components/conversion-error";
 import { ConversionOptions } from "@/components/conversion-options";
 import { ConversionProgress } from "@/components/conversion-progress";
 import { ConversionResult } from "@/components/conversion-result";
 import { FileUploader } from "@/components/file-uploader";
-import { Navbar } from "@/components/landing/navbar";
 import {
   type ConversionResult as ConversionResultType,
   convertMedia,
 } from "@/lib/conversion";
 import { usePrefersReducedMotion } from "@/lib/mobile-utils";
+import { useQueryParam } from "@/lib/use-query-param";
 
-type DashboardStep = "upload" | "configure" | "converting" | "result" | "error";
+type ConverterStep = "upload" | "configure" | "converting" | "result" | "error";
 
-export default function DashboardPage() {
-  const [step, setStep] = useState<DashboardStep>("upload");
+type ConvertOptions = {
+  outputFormat: string;
+  quality: number;
+  width?: number;
+  height?: number;
+  maintainAspect: boolean;
+  extractAudio?: boolean;
+  audioFormat?: "mp3" | "aac" | "wav" | "ogg";
+};
+
+export function MediaConverter() {
+  const t = useTranslations("MediaConverter");
+  const preferredFormat = useQueryParam("to")?.toLowerCase() ?? undefined;
+
+  const [step, setStep] = useState<ConverterStep>("upload");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [result, setResult] = useState<ConversionResultType | null>(null);
   const [progress, setProgress] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
-  const [conversionOptions, setConversionOptions] = useState<Record<
-    string,
-    unknown
-  > | null>(null);
+  const [conversionOptions, setConversionOptions] =
+    useState<ConvertOptions | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const fadeInUp = prefersReducedMotion
@@ -35,6 +47,7 @@ export default function DashboardPage() {
         animate: { opacity: 1, y: 0 },
         exit: { opacity: 0, y: -20 },
       };
+  const transition = { duration: prefersReducedMotion ? 0 : 0.5 };
 
   const handleFileSelect = (file: File) => {
     setSelectedFile(file);
@@ -42,18 +55,10 @@ export default function DashboardPage() {
   };
 
   const handleConvert = useCallback(
-    async (options: {
-      outputFormat: string;
-      quality: number;
-      width?: number;
-      height?: number;
-      maintainAspect: boolean;
-      extractAudio?: boolean;
-      audioFormat?: "mp3" | "aac" | "wav" | "ogg";
-    }) => {
+    async (options: ConvertOptions) => {
       if (!selectedFile) return;
 
-      setConversionOptions(options as unknown as Record<string, unknown>);
+      setConversionOptions(options);
       setStep("converting");
       setProgress(0);
 
@@ -77,17 +82,17 @@ export default function DashboardPage() {
       } catch (err) {
         console.error("[Conversion Error]", err);
         setErrorMessage(
-          err instanceof Error ? err.message : "An unexpected error occurred",
+          err instanceof Error ? err.message : t("unexpectedError"),
         );
         setStep("error");
       }
     },
-    [selectedFile],
+    [selectedFile, t],
   );
 
   const handleRetry = () => {
     if (conversionOptions && selectedFile) {
-      handleConvert(conversionOptions as Parameters<typeof handleConvert>[0]);
+      handleConvert(conversionOptions);
     }
   };
 
@@ -101,37 +106,36 @@ export default function DashboardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0C0A12] text-[#EDEDEF] selection:bg-[#2DD4BF]/20 selection:text-[#2DD4BF]">
-      <Navbar />
+    <>
+      <section className="container mx-auto px-4 sm:px-6 pt-12 pb-8 sm:pt-20 sm:pb-12">
+        <div className="max-w-3xl mx-auto text-center">
+          <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
+            {t("badge")}
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
+            {t("h1")}
+            <br />
+            <span className="gradient-text">{t("h1Gradient")}</span>
+          </h1>
+          <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
+            {t("subtitle")}
+          </p>
+        </div>
+      </section>
 
-      <div className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16">
+      <section className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
         <AnimatePresence mode="wait">
           {step === "upload" && (
-            <motion.div
-              key="upload"
-              {...fadeInUp}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
-            >
-              <div className="text-center mb-8 sm:mb-12">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4 sm:mb-6">
-                  Upload your media
-                </h1>
-                <p className="text-lg sm:text-xl text-[#71717A] font-light max-w-xl mx-auto">
-                  Drop an image or video to get started.
-                </p>
-              </div>
+            <motion.div key="upload" {...fadeInUp} transition={transition}>
               <FileUploader onFileSelect={handleFileSelect} />
             </motion.div>
           )}
 
           {step === "configure" && selectedFile && (
-            <motion.div
-              key="configure"
-              {...fadeInUp}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
-            >
+            <motion.div key="configure" {...fadeInUp} transition={transition}>
               <ConversionOptions
                 file={selectedFile}
+                preferredFormat={preferredFormat}
                 onConvert={handleConvert}
                 onBack={handleReset}
               />
@@ -139,21 +143,13 @@ export default function DashboardPage() {
           )}
 
           {step === "converting" && (
-            <motion.div
-              key="converting"
-              {...fadeInUp}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
-            >
+            <motion.div key="converting" {...fadeInUp} transition={transition}>
               <ConversionProgress progress={progress} onCancel={handleReset} />
             </motion.div>
           )}
 
           {step === "result" && selectedFile && result && (
-            <motion.div
-              key="result"
-              {...fadeInUp}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
-            >
+            <motion.div key="result" {...fadeInUp} transition={transition}>
               <ConversionResult
                 originalFile={selectedFile}
                 result={result}
@@ -163,11 +159,7 @@ export default function DashboardPage() {
           )}
 
           {step === "error" && (
-            <motion.div
-              key="error"
-              {...fadeInUp}
-              transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
-            >
+            <motion.div key="error" {...fadeInUp} transition={transition}>
               <ConversionError
                 message={errorMessage}
                 onRetry={handleRetry}
@@ -176,7 +168,7 @@ export default function DashboardPage() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-    </main>
+      </section>
+    </>
   );
 }

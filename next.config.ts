@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
     ];
 
     // Cross-origin isolation enables ffmpeg.wasm multi-threading via SharedArrayBuffer.
-    // Scoped to tool/dashboard routes only — AdSense and YouTube embeds on landing/blog
+    // Scoped to tool routes only — AdSense and YouTube embeds on landing/blog
     // require cross-origin iframes that COEP would block.
     const isolationHeaders = [
       { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
@@ -45,7 +45,16 @@ const nextConfig: NextConfig = {
     return [
       { source: "/(.*)", headers: baseHeaders },
       { source: "/:locale/tools/:path*", headers: isolationHeaders },
-      { source: "/:locale/dashboard/:path*", headers: isolationHeaders },
+      // ffmpeg.wasm runs in a Turbopack-bundled dedicated worker. On an isolated
+      // page Chrome refuses to start a worker whose script lacks COEP, so the
+      // worker errors silently and conversion hangs at 0%. COEP on a script
+      // response has no effect outside a worker context.
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
+        ],
+      },
     ];
   },
 };

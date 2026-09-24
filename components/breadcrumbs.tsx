@@ -1,9 +1,10 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
 import { JsonLd } from "@/components/json-ld";
+import { Link, usePathname } from "@/i18n/routing";
+import { localizedUrl } from "@/lib/seo";
 
 const toolNames: Record<string, string> = {
   "image-compressor": "Image Compressor",
@@ -28,10 +29,17 @@ const toolNames: Record<string, string> = {
   "base64-decode": "Base64 Decoder",
   "case-converter": "Case Converter",
   "csv-to-json": "CSV to JSON",
+  "heic-to-jpg": "HEIC to JPG",
+  "heic-to-pdf": "HEIC to PDF",
+  "media-converter": "Media Converter",
 };
 
 export function Breadcrumbs() {
+  // next-intl's usePathname is locale-less on both server and client. The
+  // next/navigation one returns "/en/tools/x" during static generation but
+  // "/tools/x" in the browser, which broke hydration.
   const pathname = usePathname();
+  const locale = useLocale();
 
   // Only show on individual tool pages, not /tools index
   if (pathname === "/tools") return null;
@@ -48,19 +56,19 @@ export function Breadcrumbs() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://converterup.com",
+        item: localizedUrl("", locale),
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Tools",
-        item: "https://converterup.com/tools",
+        item: localizedUrl("/tools", locale),
       },
       {
         "@type": "ListItem",
         position: 3,
         name: toolName,
-        item: `https://converterup.com${pathname}`,
+        item: localizedUrl(pathname, locale),
       },
     ],
   };

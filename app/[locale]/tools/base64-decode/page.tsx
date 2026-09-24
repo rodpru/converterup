@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { RelatedConversions } from "@/components/related-conversions";
 import { RelatedGuides } from "@/components/related-guides";
 import { ToolJsonLd } from "@/components/tool-json-ld";
 import { ToolSeoContent } from "@/components/tool-seo-content";
-import { generateAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { Base64Decoder } from "./decoder";
 
 export async function generateMetadata({
@@ -14,27 +14,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "ToolMeta" });
-  const alternates = generateAlternates("/tools/base64-decode", locale);
-  const title = t("base64-decode-title");
-  const description = t("base64-decode-desc");
-
-  return {
-    title,
-    description,
-    alternates,
-    openGraph: {
-      title,
-      description,
-      url: alternates.canonical,
-      siteName: "ConverterUp",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
-  };
+  return pageMetadata({
+    locale,
+    path: "/tools/base64-decode",
+    title: t("base64-decode-title"),
+    description: t("base64-decode-desc"),
+  });
 }
 
 export default async function Base64DecodePage({
@@ -43,6 +28,7 @@ export default async function Base64DecodePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <>
       <ToolJsonLd slug="base64-decode" locale={locale} />

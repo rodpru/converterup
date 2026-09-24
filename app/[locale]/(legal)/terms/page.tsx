@@ -1,17 +1,33 @@
 import type { Metadata } from "next";
+import { JsonLd, organizationSchema } from "@/components/json-ld";
+import { BASE_URL, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+// Legal/info pages are English-only; every locale canonicalises to the EN URL.
+export const metadata: Metadata = pageMetadata({
+  fallbackImage: true,
+  locale: "en",
+  path: "/terms",
   title: "Terms of Service",
   description:
     "Terms of service for using ConverterUp's free, browser-based file conversion tools.",
-  alternates: { canonical: "https://converterup.com/terms" },
-};
+  hreflang: false,
+});
 
 const LAST_UPDATED = "2026-05-02";
 
 export default function TermsPage() {
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          url: `${BASE_URL}/terms`,
+          name: "Terms of Service",
+          dateModified: LAST_UPDATED,
+          publisher: organizationSchema,
+        }}
+      />
       <h1>Terms of Service</h1>
       <p>
         <em>Last updated: {LAST_UPDATED}</em>

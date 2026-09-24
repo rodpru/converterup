@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   faqPageSchema,
   JsonLd,
@@ -16,7 +17,7 @@ import { LogoBar } from "@/components/landing/logo-bar";
 import { Navbar } from "@/components/landing/navbar";
 import { PopularTools } from "@/components/landing/popular-tools";
 import { SmoothScroll } from "@/components/smooth-scroll";
-import { generateAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 
 // Below-the-fold sections — code-split so their JS (framer-motion etc)
 // loads after the critical path. Still SSR'd for SEO.
@@ -46,9 +47,15 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    alternates: generateAlternates("", locale),
-  };
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  return pageMetadata({
+    fallbackImage: true,
+    locale,
+    path: "",
+    title: t("home-title"),
+    description: t("home-desc"),
+    absoluteTitle: true,
+  });
 }
 
 export default async function Home({
@@ -57,6 +64,7 @@ export default async function Home({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <main className="min-h-screen bg-background selection:bg-primary/20 selection:text-primary">
       <JsonLd data={websiteSchema} />

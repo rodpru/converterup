@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { RelatedConversions } from "@/components/related-conversions";
 import { RelatedGuides } from "@/components/related-guides";
 import { ToolJsonLd } from "@/components/tool-json-ld";
 import { ToolSeoContent } from "@/components/tool-seo-content";
-import { generateAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { ImageResizer } from "./resizer";
 
 export async function generateMetadata({
@@ -14,27 +14,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "ToolMeta" });
-  const alternates = generateAlternates("/tools/image-resizer", locale);
-  const title = t("image-resizer-title");
-  const description = t("image-resizer-desc");
-
-  return {
-    title,
-    description,
-    alternates,
-    openGraph: {
-      title,
-      description,
-      url: alternates.canonical,
-      siteName: "ConverterUp",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
-  };
+  return pageMetadata({
+    locale,
+    path: "/tools/image-resizer",
+    title: t("image-resizer-title"),
+    description: t("image-resizer-desc"),
+  });
 }
 
 export default async function ImageResizerPage({
@@ -43,6 +28,7 @@ export default async function ImageResizerPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <>
       <ToolJsonLd slug="image-resizer" locale={locale} />

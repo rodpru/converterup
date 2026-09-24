@@ -1,9 +1,16 @@
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Syne } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { CookieConsent } from "@/components/cookie-consent";
+import { routing } from "@/i18n/routing";
+import { BASE_URL, OG_LOCALE } from "@/lib/seo";
 import "../globals.css";
 
 const syne = Syne({
@@ -39,11 +46,9 @@ export const viewport: Viewport = {
   ],
 };
 
-const LOCALE_TO_OG: Record<string, string> = {
-  en: "en_US",
-  pt: "pt_PT",
-  es: "es_ES",
-};
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({
   params,
@@ -61,7 +66,7 @@ export async function generateMetadata({
       template: "%s | ConverterUp",
     },
     description,
-    metadataBase: new URL("https://converterup.com"),
+    metadataBase: new URL(BASE_URL),
 
     appleWebApp: {
       capable: true,
@@ -83,9 +88,8 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: "https://converterup.com",
       siteName: "ConverterUp",
-      locale: LOCALE_TO_OG[locale] ?? "en_US",
+      locale: OG_LOCALE[locale] ?? "en_US",
       type: "website",
     },
 
@@ -116,6 +120,8 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
   const messages = await getMessages();
 
   return (

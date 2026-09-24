@@ -60,7 +60,7 @@ export function Hero() {
             <HeroReveal delay={0.3}>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
-                  href="/dashboard"
+                  href="/tools/media-converter"
                   className="group inline-flex items-center justify-center h-12 px-7 bg-primary text-primary-foreground font-medium text-sm uppercase tracking-wider rounded-lg hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(45,212,191,0.3)] transition-all duration-300 min-h-[44px]"
                 >
                   {t("cta1")}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { JsonLd } from "@/components/json-ld";
-import { generateAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { ToolsGrid } from "./tools-grid";
 
 export async function generateMetadata({
@@ -10,32 +10,23 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const alternates = generateAlternates("/tools", locale);
-
   const t = await getTranslations({ locale, namespace: "ToolMeta" });
-  const title = t("tools-title");
-  const description = t("tools-desc");
-
-  return {
-    title,
-    description,
-    alternates,
-    openGraph: {
-      title,
-      description,
-      url: alternates.canonical,
-      siteName: "ConverterUp",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-    },
-  };
+  return pageMetadata({
+    fallbackImage: true,
+    locale,
+    path: "/tools",
+    title: t("tools-title"),
+    description: t("tools-desc"),
+  });
 }
 
-export default function ToolsPage() {
+export default async function ToolsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <>
       <JsonLd
@@ -44,9 +35,15 @@ export default function ToolsPage() {
           "@type": "ItemList",
           name: "ConverterUp Free Online Tools",
           description:
-            "24 free browser-based tools for images, video, code, and more.",
-          numberOfItems: 24,
+            "25 free browser-based tools for images, video, code, and more.",
+          numberOfItems: 25,
           itemListElement: [
+            {
+              name: "Media Converter",
+              href: "/tools/media-converter",
+              description:
+                "Convert images and videos between PNG, JPG, WebP, MP4, MKV and more.",
+            },
             {
               name: "Image Compressor",
               href: "/tools/image-compressor",

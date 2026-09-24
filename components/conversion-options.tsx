@@ -14,6 +14,8 @@ import {
 
 interface ConversionOptionsProps {
   file: File;
+  /** Output format to preselect when the input supports it (e.g. from `?to=`). */
+  preferredFormat?: string;
   onConvert: (options: {
     outputFormat: string;
     quality: number;
@@ -28,6 +30,7 @@ interface ConversionOptionsProps {
 
 export function ConversionOptions({
   file,
+  preferredFormat,
   onConvert,
   onBack,
 }: ConversionOptionsProps) {
@@ -38,7 +41,11 @@ export function ConversionOptions({
     [inputExt],
   );
 
-  const [outputFormat, setOutputFormat] = useState(formats[0] || "");
+  const [outputFormat, setOutputFormat] = useState(
+    preferredFormat && formats.includes(preferredFormat)
+      ? preferredFormat
+      : formats[0] || "",
+  );
   const [quality, setQuality] = useState(80);
   const [width, setWidth] = useState<string>("");
   const [height, setHeight] = useState<string>("");

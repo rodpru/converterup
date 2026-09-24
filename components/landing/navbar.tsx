@@ -54,7 +54,7 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <LanguageSelector />
           <Link
-            href="/dashboard"
+            href="/tools/media-converter"
             className="inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)] transition-all duration-200 min-h-[44px]"
           >
             {t("startConverting")}
@@ -114,7 +114,7 @@ export function Navbar() {
                 <LanguageSelector />
               </div>
               <Link
-                href="/dashboard"
+                href="/tools/media-converter"
                 onClick={() => setMobileOpen(false)}
                 className="inline-flex items-center justify-center w-full h-12 bg-primary text-primary-foreground text-[13px] font-medium uppercase tracking-wider rounded-lg min-h-[44px]"
               >

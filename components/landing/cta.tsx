@@ -75,7 +75,7 @@ export function CTA() {
                 className="group glow rounded-xl h-12 sm:h-14 md:h-16 px-6 sm:px-8 md:px-10 text-base sm:text-lg bg-[#2DD4BF] text-[#0C0A12] font-semibold hover:bg-[#2DD4BF]/90 transition-all duration-300 hover:-translate-y-0.5 border-0 min-h-[44px]"
                 asChild
               >
-                <Link href="/dashboard">
+                <Link href="/tools/media-converter">
                   {t("button")}
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>

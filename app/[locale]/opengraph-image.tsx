@@ -1,9 +1,13 @@
 import { ImageResponse } from "next/og";
+import { routing } from "@/i18n/routing";
 
 export const alt = "ConverterUp — Convert Anything. Upload Nothing.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const runtime = "edge";
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default function OgImage() {
   return new ImageResponse(

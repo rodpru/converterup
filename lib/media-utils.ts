@@ -10,14 +10,27 @@ export function getFileCategory(file: File): FileCategory {
     "png",
     "jpg",
     "jpeg",
+    "jfif",
     "webp",
     "avif",
     "gif",
     "svg",
     "tiff",
+    "tif",
     "bmp",
   ];
-  const videoExts = ["mp4", "mkv", "avi", "webm", "mov"];
+  const videoExts = [
+    "mp4",
+    "mkv",
+    "avi",
+    "webm",
+    "mov",
+    "flv",
+    "3gp",
+    "ts",
+    "m4v",
+    "wmv",
+  ];
 
   if (imageExts.includes(ext)) return "image";
   if (videoExts.includes(ext)) return "video";
@@ -27,16 +40,31 @@ export function getFileCategory(file: File): FileCategory {
 export function getAvailableOutputFormats(inputFormat: string): string[] {
   const imageFormats = ["png", "jpg", "webp", "avif", "gif", "tiff", "bmp"];
   const videoFormats = ["mp4", "webm", "mkv", "avi", "mov"];
+  const videoInputs = [...videoFormats, "flv", "3gp", "ts", "m4v", "wmv"];
 
-  const ext = inputFormat.toLowerCase().replace("jpeg", "jpg");
+  const ext = normalizeExtension(inputFormat);
+  // JFIF is JPEG data, but users still want a plain .jpg out of it.
+  const exclude = inputFormat.toLowerCase() === "jfif" ? "" : ext;
 
-  if (imageFormats.includes(ext)) {
-    return imageFormats.filter((f) => f !== ext);
+  // Animated GIFs can also become a (much smaller) video.
+  if (ext === "gif") {
+    return [...imageFormats.filter((f) => f !== ext), "mp4", "webm"];
   }
-  if (videoFormats.includes(ext)) {
+  if (imageFormats.includes(ext)) {
+    return imageFormats.filter((f) => f !== exclude);
+  }
+  if (videoInputs.includes(ext)) {
     return videoFormats.filter((f) => f !== ext);
   }
   return [];
+}
+
+/** Map extension aliases (jpeg, jfif, tif) to the canonical format name. */
+export function normalizeExtension(ext: string): string {
+  const lower = ext.toLowerCase();
+  if (lower === "jpeg" || lower === "jfif") return "jpg";
+  if (lower === "tif") return "tiff";
+  return lower;
 }
 
 export function formatFileSize(bytes: number): string {
@@ -54,17 +82,22 @@ export function createPreviewUrl(file: File): string {
 export function getAcceptedFileTypes(): Record<string, string[]> {
   return {
     "image/png": [".png"],
-    "image/jpeg": [".jpg", ".jpeg"],
+    "image/jpeg": [".jpg", ".jpeg", ".jfif"],
     "image/webp": [".webp"],
     "image/avif": [".avif"],
     "image/gif": [".gif"],
-    "image/tiff": [".tiff"],
+    "image/tiff": [".tiff", ".tif"],
     "image/bmp": [".bmp"],
     "video/mp4": [".mp4"],
     "video/webm": [".webm"],
     "video/x-matroska": [".mkv"],
     "video/x-msvideo": [".avi"],
     "video/quicktime": [".mov"],
+    "video/x-flv": [".flv"],
+    "video/3gpp": [".3gp"],
+    "video/mp2t": [".ts"],
+    "video/x-m4v": [".m4v"],
+    "video/x-ms-wmv": [".wmv"],
   };
 }
 

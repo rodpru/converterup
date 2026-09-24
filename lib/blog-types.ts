@@ -78,6 +78,8 @@ export interface Article {
   toolName: string;
   category: ArticleCategory;
   publishedAt: string;
+  /** Last substantive content change (YYYY-MM-DD). Falls back to publishedAt. */
+  updatedAt?: string;
   lang: ArticleLang;
   body: ContentBlock[];
 }

@@ -2,6 +2,7 @@
 
 import {
   AppWindow,
+  ArrowLeftRight,
   Binary,
   Braces,
   Calculator,
@@ -27,12 +28,33 @@ import {
   Unlock,
   Youtube,
 } from "lucide-react";
-import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Suspense, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "@/i18n/routing";
+import { useQueryParam } from "@/lib/use-query-param";
 
 export const tools = [
+  {
+    name: "Media Converter",
+    description:
+      "Convert images and videos between PNG, JPG, WebP, MP4, MKV and more.",
+    href: "/tools/media-converter",
+    icon: ArrowLeftRight,
+    tags: [
+      "convert",
+      "image",
+      "video",
+      "audio",
+      "mp4",
+      "webm",
+      "mkv",
+      "mov",
+      "png",
+      "jpg",
+      "webp",
+      "avif",
+    ],
+  },
   {
     name: "Image Compressor",
     description: "Reduce image file size without losing quality.",
@@ -203,10 +225,12 @@ export const tools = [
   },
 ];
 
-function ToolsGridInner() {
-  const searchParams = useSearchParams();
-  const initialQuery = searchParams.get("q") ?? "";
-  const [query, setQuery] = useState(initialQuery);
+export function ToolsGrid() {
+  const initialQuery = useQueryParam("q");
+  const [query, setQuery] = useState("");
+  useEffect(() => {
+    if (initialQuery) setQuery(initialQuery);
+  }, [initialQuery]);
   const t = useTranslations("Tools");
 
   const filtered = useMemo(() => {
@@ -288,13 +312,5 @@ function ToolsGridInner() {
         </div>
       </section>
     </>
-  );
-}
-
-export function ToolsGrid() {
-  return (
-    <Suspense>
-      <ToolsGridInner />
-    </Suspense>
   );
 }

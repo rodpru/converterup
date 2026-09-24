@@ -1,119 +1,77 @@
 import type { MetadataRoute } from "next";
 import { conversions } from "@/data/conversions";
+import { routing } from "@/i18n/routing";
 import { getAllArticles } from "@/lib/blog";
+import { BASE_URL, generateAlternates, localizedUrl } from "@/lib/seo";
+import { getAllToolSlugs } from "@/lib/tool-schemas";
+
+// Real content dates, not build time — search engines ignore lastmod once it
+// changes on every deploy. Bump the matching date when a section's content
+// actually changes.
+const CONTENT_UPDATED = {
+  home: "2026-09-24",
+  tools: "2026-09-24",
+  convert: "2026-09-24",
+  blogIndex: "2026-09-24",
+  about: "2026-09-24",
+  contact: "2026-09-24",
+  privacy: "2026-05-02",
+  terms: "2026-05-02",
+} as const;
+
+type Entry = MetadataRoute.Sitemap[number];
+
+/** One <url> per locale, each carrying the full hreflang set. */
+function localizedEntries(
+  path: string,
+  lastModified: string,
+  changeFrequency: Entry["changeFrequency"],
+  priority: number,
+): Entry[] {
+  const { languages } = generateAlternates(path, "en");
+  return routing.locales.map((locale) => ({
+    url: localizedUrl(path, locale),
+    lastModified: new Date(lastModified),
+    changeFrequency,
+    priority,
+    alternates: { languages },
+  }));
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://converterup.com";
+  const blogEntries: Entry[] = getAllArticles().map((article) => ({
+    url: localizedUrl(`/blog/${article.slug}`, article.lang),
+    lastModified: new Date(article.updatedAt ?? article.publishedAt),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
 
-  const toolPages = [
-    "image-compressor",
-    "image-resizer",
-    "video-to-gif",
-    "qr-code-generator",
-    "youtube-thumbnail-downloader",
-    "exif-viewer",
-    "color-palette",
-    "favicon-generator",
-    "svg-to-png",
-    "image-to-base64",
-    "video-frame-extractor",
-    "stripe-fee-calculator",
-    "text-repeater",
-    "vtt-to-srt",
-    "json-viewer",
-    "hex-to-decimal",
-    "html-minifier",
-    "css-minifier",
-    "uuid-generator",
-    "base64-decode",
-    "case-converter",
-    "csv-to-json",
-    "heic-to-jpg",
-    "heic-to-pdf",
-  ];
-
-  const blogEntries = getAllArticles().map((article) => {
-    const localePrefix = article.lang === "en" ? "" : `/${article.lang}`;
-    return {
-      url: `${baseUrl}${localePrefix}/blog/${article.slug}`,
-      lastModified: new Date(article.publishedAt),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    };
-  });
+  // Legal/info pages are English-only (other locales canonicalise to EN).
+  const infoEntries: Entry[] = (
+    ["about", "contact", "privacy", "terms"] as const
+  ).map((slug) => ({
+    url: `${BASE_URL}/${slug}`,
+    lastModified: new Date(CONTENT_UPDATED[slug]),
+    changeFrequency: "yearly",
+    priority: 0.3,
+  }));
 
   return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-      alternates: {
-        languages: {
-          en: baseUrl,
-          pt: `${baseUrl}/pt`,
-          es: `${baseUrl}/es`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/tools`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/tools`,
-          pt: `${baseUrl}/pt/tools`,
-          es: `${baseUrl}/es/tools`,
-        },
-      },
-    },
-    ...toolPages.map((slug) => ({
-      url: `${baseUrl}/tools/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/tools/${slug}`,
-          pt: `${baseUrl}/pt/tools/${slug}`,
-          es: `${baseUrl}/es/tools/${slug}`,
-        },
-      },
-    })),
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/blog`,
-          pt: `${baseUrl}/pt/blog`,
-          es: `${baseUrl}/es/blog`,
-        },
-      },
-    },
-    ...["about", "contact", "privacy", "terms"].map((slug) => ({
-      url: `${baseUrl}/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: "yearly" as const,
-      priority: 0.3,
-    })),
-    ...conversions.map((c) => ({
-      url: `${baseUrl}/convert/${c.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.75,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/convert/${c.slug}`,
-          pt: `${baseUrl}/pt/convert/${c.slug}`,
-          es: `${baseUrl}/es/convert/${c.slug}`,
-        },
-      },
-    })),
+    ...localizedEntries("", CONTENT_UPDATED.home, "weekly", 1),
+    ...localizedEntries("/tools", CONTENT_UPDATED.tools, "weekly", 0.9),
+    ...getAllToolSlugs().flatMap((slug) =>
+      localizedEntries(`/tools/${slug}`, CONTENT_UPDATED.tools, "monthly", 0.8),
+    ),
+    ...conversions.flatMap((c) =>
+      localizedEntries(
+        `/convert/${c.slug}`,
+        CONTENT_UPDATED.convert,
+        "monthly",
+        0.75,
+      ),
+    ),
+    ...localizedEntries("/blog", CONTENT_UPDATED.blogIndex, "weekly", 0.8),
     ...blogEntries,
+    ...infoEntries,
   ];
 }
