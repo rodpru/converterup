@@ -12,7 +12,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Blog" });
-  const title = `${t("badge")} | ConverterUp`;
+  const tm = await getTranslations({ locale, namespace: "ToolMeta" });
+  const title = tm("blog-title");
   const description = t("desc");
 
   return {

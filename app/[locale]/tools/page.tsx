@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/json-ld";
 import { generateAlternates } from "@/lib/seo";
 import { ToolsGrid } from "./tools-grid";
@@ -11,9 +12,9 @@ export async function generateMetadata({
   const { locale } = await params;
   const alternates = generateAlternates("/tools", locale);
 
-  const title = "24 Free Online Tools — Image, Video, Code, Text";
-  const description =
-    "Compress, resize, convert, format. 24 free browser-based tools for images, video, code, and text — 100% private, no upload, no signup.";
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const title = t("tools-title");
+  const description = t("tools-desc");
 
   return {
     title,

@@ -2,7 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Syne } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { CookieConsent } from "@/components/cookie-consent";
 import "../globals.css";
 
@@ -51,14 +51,16 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ToolMeta" });
+  const title = t("home-title");
+  const description = t("home-desc");
 
   return {
     title: {
-      default: "ConverterUp — Convert Anything. Upload Nothing.",
+      default: title,
       template: "%s | ConverterUp",
     },
-    description:
-      "Convert images and videos instantly, 100% in your browser. No uploads, no waiting, no limits. Powered by FFmpeg.wasm.",
+    description,
     metadataBase: new URL("https://converterup.com"),
 
     appleWebApp: {
@@ -79,9 +81,8 @@ export async function generateMetadata({
     },
 
     openGraph: {
-      title: "ConverterUp — Convert Anything. Upload Nothing.",
-      description:
-        "Convert images and videos instantly, 100% in your browser. No uploads, no servers, no compromises.",
+      title,
+      description,
       url: "https://converterup.com",
       siteName: "ConverterUp",
       locale: LOCALE_TO_OG[locale] ?? "en_US",
@@ -90,9 +91,8 @@ export async function generateMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title: "ConverterUp — Convert Anything. Upload Nothing.",
-      description:
-        "Convert images and videos instantly, 100% in your browser. No uploads, no servers, no compromises.",
+      title,
+      description,
     },
 
     robots: {

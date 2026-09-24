@@ -217,7 +217,12 @@
     "heic-to-jpg-title": "HEIC to JPG Converter — Free iPhone Photo Converter",
     "heic-to-jpg-desc": "Convert iPhone HEIC photos to JPG, PNG, or WebP free online. No upload, no signup, no watermark — files stay on your device. Works on Windows, Mac, Linux.",
     "heic-to-pdf-title": "HEIC to PDF Converter — Combine iPhone Photos to PDF",
-    "heic-to-pdf-desc": "Combine iPhone HEIC photos into a single multi-page PDF online. Free, no upload, no signup. Drop up to 20 photos, fit to A4 or native size, download in seconds."
+    "heic-to-pdf-desc": "Combine iPhone HEIC photos into a single multi-page PDF online. Free, no upload, no signup. Drop up to 20 photos, fit to A4 or native size, download in seconds.",
+    "home-title": "ConverterUp — Convert Anything. Upload Nothing.",
+    "home-desc": "Convert images and videos instantly, 100% in your browser. No uploads, no waiting, no limits. Powered by FFmpeg.wasm.",
+    "tools-title": "24 Free Online Tools — Image, Video, Code, Text",
+    "tools-desc": "Compress, resize, convert, format. 24 free browser-based tools for images, video, code, and text — 100% private, no upload, no signup.",
+    "blog-title": "Blog — Image, Video & File Conversion Guides"
   },
   "ToolHowTo": {
     "image-compressor": {

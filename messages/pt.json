@@ -204,20 +204,25 @@
     "hex-to-decimal-desc": "Conversor hexadecimal para decimal grátis online. Converte hex para decimal, binário, octal e códigos de cor RGB ao instante. Sem registo, 100% no browser.",
     "html-minifier-title": "Minificador HTML — Comprimir HTML Online Grátis",
     "html-minifier-desc": "Minifique HTML para reduzir o tamanho e acelerar o carregamento. Remove espaços, comentários e tags opcionais. Grátis, rápido, 100% no browser.",
-    "css-minifier-title": "Minificador CSS — Comprimir Stylesheets Online",
+    "css-minifier-title": "Minificador CSS — Comprimir Folhas de Estilo Online",
     "css-minifier-desc": "Minifique CSS para sites mais leves e rápidos. Remove espaços, comentários e otimiza seletores. Grátis, instantâneo, corre localmente no browser.",
     "uuid-generator-title": "Gerador UUID — v4, v7, NIL, em Massa, Grátis",
     "uuid-generator-desc": "Gere identificadores UUID v4 e v7 individualmente ou em massa (até 10.000). Copie como JSON, CSV ou lista simples. Grátis, instantâneo, 100% no browser.",
     "base64-decode-title": "Descodificador Base64 — Grátis Online (Texto + Imagens)",
     "base64-decode-desc": "Descodificador e codificador Base64 grátis. Converte strings Base64 para texto simples, imagens ou data URIs, e codifica de volta. 100% no browser, sem upload.",
-    "case-converter-title": "Conversor de Texto — camelCase, snake_case, kebab",
+    "case-converter-title": "Conversor de Maiúsculas — camelCase, snake_case",
     "case-converter-desc": "Converta texto entre MAIÚSCULAS, minúsculas, Primeira Maiúscula, camelCase, snake_case, kebab-case, PascalCase e CONSTANT_CASE. Grátis e instantâneo.",
     "csv-to-json-title": "Converter CSV para JSON — Grátis, Sem Upload",
     "csv-to-json-desc": "Converta CSV para JSON no browser com delimitadores personalizados, aspas e deteção de cabeçalho. Grátis, instantâneo, ficheiros ficam locais.",
     "heic-to-jpg-title": "Converter HEIC para JPG — Conversor iPhone Grátis",
     "heic-to-jpg-desc": "Converta fotos HEIC do iPhone para JPG, PNG ou WebP grátis online. Sem upload, sem registo — ficheiros ficam no seu dispositivo. Windows, Mac e Linux.",
     "heic-to-pdf-title": "Conversor HEIC para PDF — Junte Fotos do iPhone em PDF",
-    "heic-to-pdf-desc": "Junte fotos HEIC do iPhone num PDF multi-página. Grátis, sem upload, sem registo. Até 20 fotos, ajuste a A4 ou tamanho nativo e descarregue já."
+    "heic-to-pdf-desc": "Junte fotos HEIC do iPhone num PDF multi-página. Grátis, sem upload, sem registo. Até 20 fotos, ajuste a A4 ou tamanho nativo e descarregue já.",
+    "home-title": "ConverterUp — Converta Tudo. Sem Uploads.",
+    "home-desc": "Converta imagens e vídeos ao instante, 100% no browser. Sem uploads, sem esperas, sem limites. Com tecnologia FFmpeg.wasm.",
+    "tools-title": "24 Ferramentas Grátis — Imagem, Vídeo, Código, Texto",
+    "tools-desc": "Comprima, redimensione, converta, formate. 24 ferramentas grátis no browser para imagens, vídeo, código e texto — 100% privado, sem upload, sem registo.",
+    "blog-title": "Blog — Guias de Imagem, Vídeo e Ficheiros"
   },
   "ToolHowTo": {
     "image-compressor": {
