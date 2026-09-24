@@ -5,11 +5,22 @@ import { ArticlePageContent } from "@/components/blog/article-page-content";
 import { JsonLd } from "@/components/json-ld";
 import { RelatedConversions } from "@/components/related-conversions";
 import { extractFaqItems, getAllArticles, getArticleBySlug } from "@/lib/blog";
-import { AUTHOR, BASE_URL, localizedUrl, pageMetadata } from "@/lib/seo";
+import {
+  AUTHOR,
+  BASE_URL,
+  currentDateIso,
+  formatDisplayDate,
+  localizedUrl,
+  pageMetadata,
+} from "@/lib/seo";
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
 }
+
+// 7 days. Article bodies are static; the weekly regen keeps
+// the visible "Updated" date and dateModified at most 7 days old.
+export const revalidate = 604800;
 
 export function generateStaticParams() {
   return getAllArticles().map((article) => ({
@@ -31,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     type: "article",
     hreflang: false,
     publishedTime: article.publishedAt,
-    modifiedTime: article.updatedAt ?? article.publishedAt,
+    modifiedTime: currentDateIso(),
   });
 }
 
@@ -47,6 +58,7 @@ export default async function ArticlePage({ params }: Props) {
 
   const faqItems = extractFaqItems(article);
   const url = localizedUrl(`/blog/${article.slug}`, locale);
+  const lastUpdated = currentDateIso();
 
   return (
     <>
@@ -57,7 +69,7 @@ export default async function ArticlePage({ params }: Props) {
           headline: article.title,
           description: article.description,
           datePublished: article.publishedAt,
-          dateModified: article.updatedAt ?? article.publishedAt,
+          dateModified: lastUpdated,
           author: AUTHOR,
           publisher: {
             "@type": "Organization",
@@ -112,7 +124,13 @@ export default async function ArticlePage({ params }: Props) {
           }}
         />
       )}
-      <ArticlePageContent slug={slug} locale={locale} />
+      <ArticlePageContent
+        slug={slug}
+        locale={locale}
+        publishedLabel={formatDisplayDate(article.publishedAt, locale)}
+        updatedAt={lastUpdated}
+        updatedLabel={formatDisplayDate(lastUpdated, locale)}
+      />
       {article.toolHref.startsWith("/tools/") && (
         <RelatedConversions
           toolSlug={article.toolHref.replace("/tools/", "")}

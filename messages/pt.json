@@ -158,7 +158,14 @@
     "title": "Guias e",
     "titleGradient": "Tutoriais",
     "desc": "Aprenda a otimizar imagens, converter vídeos e aproveitar ao máximo nossas ferramentas gratuitas.",
-    "noArticles": "Nenhum artigo encontrado para este idioma."
+    "noArticles": "Nenhum artigo encontrado para este idioma.",
+    "updated": "Atualizado em {date}",
+    "category": {
+      "image": "Imagem",
+      "video": "Vídeo",
+      "developer": "Desenvolvimento",
+      "utility": "Utilitários"
+    }
   },
   "Tools": {
     "badge": "Todas as Ferramentas",

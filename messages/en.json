@@ -158,7 +158,14 @@
     "title": "Guides &",
     "titleGradient": "Tutorials",
     "desc": "Learn how to optimize images, convert videos, and make the most of our free online tools.",
-    "noArticles": "No articles found for this language."
+    "noArticles": "No articles found for this language.",
+    "updated": "Updated {date}",
+    "category": {
+      "image": "Image",
+      "video": "Video",
+      "developer": "Developer",
+      "utility": "Utility"
+    }
   },
   "Tools": {
     "badge": "All Tools",

@@ -819,7 +819,6 @@
     "toolName": "Stripe Fee Calculator",
     "category": "utility",
     "publishedAt": "2026-03-27",
-    "updatedAt": "2026-07-30",
     "lang": "en",
     "body": [
       {
@@ -2615,7 +2614,6 @@
     "toolName": "Compressor de Imagens",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -2769,7 +2767,6 @@
     "toolName": "Baixar Thumbnail do YouTube",
     "category": "video",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -2900,7 +2897,6 @@
     "toolName": "Conversor de Mídia",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -3034,7 +3030,6 @@
     "toolName": "Conversor de Vídeo para GIF",
     "category": "video",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -3159,7 +3154,6 @@
     "toolName": "Visualizador e Removedor de EXIF",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -3284,7 +3278,6 @@
     "toolName": "Calculadora de Taxas Stripe",
     "category": "utility",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -3424,7 +3417,6 @@
     "toolName": "Gerador de QR Code",
     "category": "utility",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -3542,7 +3534,6 @@
     "toolName": "Conversor VTT para SRT",
     "category": "utility",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -3673,7 +3664,6 @@
     "toolName": "Redimensionador de Imagens",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -3803,7 +3793,6 @@
     "toolName": "Extrator de Frames de Vídeo",
     "category": "video",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -3907,7 +3896,6 @@
     "toolName": "Conversor Imagem para Base64",
     "category": "developer",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -4036,7 +4024,6 @@
     "toolName": "Conversor SVG para PNG",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -4146,7 +4133,6 @@
     "toolName": "Gerador de Favicon",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -4291,7 +4277,6 @@
     "toolName": "Extrator de Paleta de Cores",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -4429,7 +4414,6 @@
     "toolName": "Conversor Hex para Decimal",
     "category": "developer",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -4553,7 +4537,6 @@
     "toolName": "Visualizador JSON",
     "category": "developer",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
       {
@@ -4694,7 +4677,6 @@
     "toolName": "Compresor de Imágenes",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -4840,7 +4822,6 @@
     "toolName": "Descargador de Miniaturas de YouTube",
     "category": "video",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -5004,7 +4985,6 @@
     "toolName": "Convertidor de Medios",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -5151,7 +5131,6 @@
     "toolName": "Convertidor de Video a GIF",
     "category": "video",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -5260,7 +5239,6 @@
     "toolName": "Visor y Eliminador de EXIF",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -5383,7 +5361,6 @@
     "toolName": "Calculadora de Comisiones de Stripe",
     "category": "utility",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -5506,7 +5483,6 @@
     "toolName": "Generador de Códigos QR",
     "category": "utility",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -5608,7 +5584,6 @@
     "toolName": "Convertidor VTT a SRT",
     "category": "utility",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -5716,7 +5691,6 @@
     "toolName": "Redimensionador de Imágenes",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -5848,7 +5822,6 @@
     "toolName": "Extractor de Fotogramas de Video",
     "category": "video",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -5963,7 +5936,6 @@
     "toolName": "Imagen a Base64",
     "category": "developer",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -6072,7 +6044,6 @@
     "toolName": "SVG a PNG",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -6201,7 +6172,6 @@
     "toolName": "Generador de Favicon",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -6344,7 +6314,6 @@
     "toolName": "Extractor de Paleta de Colores",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -6455,7 +6424,6 @@
     "toolName": "Hexadecimal a Decimal",
     "category": "developer",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
@@ -6582,7 +6550,6 @@
     "toolName": "Visor de JSON",
     "category": "developer",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {

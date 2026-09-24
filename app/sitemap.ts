@@ -2,7 +2,12 @@ import type { MetadataRoute } from "next";
 import { conversions } from "@/data/conversions";
 import { routing } from "@/i18n/routing";
 import { getAllArticles } from "@/lib/blog";
-import { BASE_URL, generateAlternates, localizedUrl } from "@/lib/seo";
+import {
+  BASE_URL,
+  currentDateIso,
+  generateAlternates,
+  localizedUrl,
+} from "@/lib/seo";
 import { getAllToolSlugs } from "@/lib/tool-schemas";
 
 // Real content dates, not build time — search engines ignore lastmod once it
@@ -12,7 +17,6 @@ const CONTENT_UPDATED = {
   home: "2026-09-24",
   tools: "2026-09-24",
   convert: "2026-09-24",
-  blogIndex: "2026-09-24",
   about: "2026-09-24",
   contact: "2026-09-24",
   privacy: "2026-05-02",
@@ -38,10 +42,14 @@ function localizedEntries(
   }));
 }
 
+// Regenerate weekly so blog lastmod tracks the articles' 7-day ISR cycle.
+export const revalidate = 604800;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogEntries: Entry[] = getAllArticles().map((article) => ({
     url: localizedUrl(`/blog/${article.slug}`, article.lang),
-    lastModified: new Date(article.updatedAt ?? article.publishedAt),
+    // Matches the article's dateModified (weekly ISR, see blog/[slug]).
+    lastModified: new Date(currentDateIso()),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
@@ -70,7 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         0.75,
       ),
     ),
-    ...localizedEntries("/blog", CONTENT_UPDATED.blogIndex, "weekly", 0.8),
+    ...localizedEntries("/blog", currentDateIso(), "weekly", 0.8),
     ...blogEntries,
     ...infoEntries,
   ];

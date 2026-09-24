@@ -3,32 +3,25 @@
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { getArticleBySlug, getRelatedArticles } from "@/lib/blog";
 import { ArticleRenderer } from "./article-renderer";
-
-const CATEGORY_LABELS: Record<string, string> = {
-  image: "Image",
-  video: "Video",
-  developer: "Developer",
-  utility: "Utility",
-};
-
-function formatDate(dateStr: string): string {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
 
 export function ArticlePageContent({
   slug,
   locale,
+  publishedLabel,
+  updatedAt,
+  updatedLabel,
 }: {
   slug: string;
   locale: string;
+  /** Dates are formatted on the server (UTC) to avoid hydration drift. */
+  publishedLabel: string;
+  updatedAt: string;
+  updatedLabel: string;
 }) {
+  const t = useTranslations("Blog");
   const article = getArticleBySlug(slug);
   if (!article) return null;
 
@@ -66,14 +59,21 @@ export function ArticlePageContent({
         <header className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <span className="font-mono text-[11px] uppercase tracking-wider text-[#2DD4BF]">
-              {CATEGORY_LABELS[article.category] ?? article.category}
+              {t(`category.${article.category}`)}
             </span>
             <span className="text-[#71717A]">/</span>
             <time
               dateTime={article.publishedAt}
               className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]"
             >
-              {formatDate(article.publishedAt)}
+              {publishedLabel}
+            </time>
+            <span className="text-[#71717A]">/</span>
+            <time
+              dateTime={updatedAt}
+              className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]"
+            >
+              {t("updated", { date: updatedLabel })}
             </time>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-[Syne] font-bold text-[#EDEDEF] leading-tight mb-4">
@@ -101,7 +101,7 @@ export function ArticlePageContent({
                   className="group bg-[#16131E] border border-[#2A2535] rounded-xl p-5 hover:border-[#2DD4BF]/20 transition-colors"
                 >
                   <span className="font-mono text-[10px] uppercase tracking-wider text-[#2DD4BF]">
-                    {CATEGORY_LABELS[post.category] ?? post.category}
+                    {t(`category.${post.category}`)}
                   </span>
                   <h3 className="text-sm font-[Syne] font-semibold text-[#EDEDEF] mt-2 group-hover:text-[#2DD4BF] transition-colors">
                     {post.title}

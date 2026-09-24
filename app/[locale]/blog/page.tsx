@@ -4,7 +4,15 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { JsonLd } from "@/components/json-ld";
 import { Link } from "@/i18n/routing";
 import { getAllArticles } from "@/lib/blog";
-import { BASE_URL, localizedUrl, pageMetadata } from "@/lib/seo";
+import {
+  BASE_URL,
+  currentDateIso,
+  localizedUrl,
+  pageMetadata,
+} from "@/lib/seo";
+
+// 7 days, like the article pages — keeps BlogPosting dateModified in sync.
+export const revalidate = 604800;
 
 export async function generateMetadata({
   params,
@@ -56,7 +64,7 @@ export default async function BlogIndex({
             description: post.description,
             url: localizedUrl(`/blog/${post.slug}`, locale),
             datePublished: post.publishedAt,
-            dateModified: post.updatedAt ?? post.publishedAt,
+            dateModified: currentDateIso(),
           })),
         }}
       />
@@ -86,7 +94,7 @@ export default async function BlogIndex({
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="inline-block font-mono text-[10px] uppercase tracking-wider text-[#2DD4BF]">
-                    {post.category}
+                    {t(`category.${post.category}`)}
                   </span>
                 </div>
                 <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF] mb-2 group-hover:text-[#2DD4BF] transition-colors">

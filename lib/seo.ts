@@ -9,6 +9,31 @@ export const AUTHOR = {
   url: `${BASE_URL}/about`,
 } as const;
 
+/**
+ * Blog freshness, same pattern as timezonepair: blog routes regenerate via ISR
+ * every 7 days and stamp `dateModified` with the render date, so search
+ * snippets never show a stale date. The routes export `revalidate = 604800`.
+ */
+
+/** Render date (UTC, YYYY-MM-DD) — stable for one ISR cycle. */
+export function currentDateIso(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+const DATE_LOCALE: Record<string, string> = {
+  en: "en-US",
+  pt: "pt-BR",
+  es: "es-ES",
+};
+
+/** Localized display date, formatted server-side in UTC (no hydration drift). */
+export function formatDisplayDate(iso: string, locale: string): string {
+  return new Date(`${iso.slice(0, 10)}T00:00:00Z`).toLocaleDateString(
+    DATE_LOCALE[locale] ?? "en-US",
+    { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" },
+  );
+}
+
 export const OG_LOCALE: Record<string, string> = {
   en: "en_US",
   pt: "pt_BR",
