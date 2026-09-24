@@ -8,6 +8,7 @@ import {
   Loader2,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 
 import { JsonLd } from "@/components/json-ld";
@@ -76,6 +77,8 @@ function getFileExtension(mimeType: string): string {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ImageCompressor() {
+  const t = useTranslations("ToolUI.image-compressor");
+  const ts = useTranslations("SharedUI");
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [quality, setQuality] = useState(75);
@@ -102,9 +105,7 @@ export function ImageCompressor() {
       const accepted =
         ACCEPTED_TYPES.includes(selectedFile.type) || isHeicFile(selectedFile);
       if (!accepted) {
-        setError(
-          "Unsupported format. Please upload a PNG, JPG, WebP, AVIF, or HEIC image.",
-        );
+        setError(t("errUnsupported"));
         return;
       }
 
@@ -113,7 +114,7 @@ export function ImageCompressor() {
         setPreviewUrl(URL.createObjectURL(selectedFile));
       }
     },
-    [resetState],
+    [resetState, t],
   );
 
   const handleDrop = useCallback(
@@ -153,9 +154,9 @@ export function ImageCompressor() {
 
     try {
       const canvas = canvasRef.current;
-      if (!canvas) throw new Error("Canvas not available.");
+      if (!canvas) throw new Error(t("errCanvas"));
       const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("Canvas context not available.");
+      if (!ctx) throw new Error(t("errCanvas"));
 
       if (isHeicFile(file)) {
         const { canvas: srcCanvas, width, height } = await decodeHeic(file);
@@ -166,7 +167,7 @@ export function ImageCompressor() {
         const img = new Image();
         const loadPromise = new Promise<void>((resolve, reject) => {
           img.onload = () => resolve();
-          img.onerror = () => reject(new Error("Failed to load image."));
+          img.onerror = () => reject(new Error(t("errLoad")));
         });
 
         const objectUrl = URL.createObjectURL(file);
@@ -186,7 +187,7 @@ export function ImageCompressor() {
         canvas.toBlob(
           (b) => {
             if (b) resolve(b);
-            else reject(new Error("Compression failed."));
+            else reject(new Error(t("errCompress")));
           },
           outputMimeType,
           qualityParam,
@@ -205,13 +206,11 @@ export function ImageCompressor() {
         fileName: `${baseName}-compressed${ext}`,
       });
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "An unexpected error occurred.",
-      );
+      setError(err instanceof Error ? err.message : ts("error.unexpected"));
     } finally {
       setCompressing(false);
     }
-  }, [file, quality]);
+  }, [file, quality, t, ts]);
 
   const handleDownload = useCallback(async () => {
     if (!result) return;
@@ -241,16 +240,15 @@ export function ImageCompressor() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Image
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Compressor</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Compress PNG, JPG, WebP, and AVIF images directly in your browser.
-            Adjust quality and download smaller files instantly.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -283,7 +281,7 @@ export function ImageCompressor() {
               <Upload className="w-8 h-8 text-[#71717A]" />
               <div className="text-center">
                 <p className="text-sm font-[Inter] text-[#EDEDEF] mb-1">
-                  Drop an image here or click to browse
+                  {t("drop")}
                 </p>
                 <p className="font-mono text-[11px] text-[#71717A] uppercase tracking-wider">
                   PNG, JPG, WebP, AVIF
@@ -330,7 +328,7 @@ export function ImageCompressor() {
                       }}
                       className="font-mono text-[11px] uppercase tracking-wider text-[#71717A] hover:text-[#FB7185] transition-colors min-h-[44px] px-3"
                     >
-                      Remove
+                      {ts("remove")}
                     </button>
                   </div>
                 </div>
@@ -341,7 +339,7 @@ export function ImageCompressor() {
                       {file.name}
                     </p>
                     <p className="font-mono text-[11px] text-[#71717A] mt-1">
-                      {formatFileSize(file.size)} · HEIC preview after compress
+                      {formatFileSize(file.size)} · {t("heicPreview")}
                     </p>
                   </div>
                   <button
@@ -352,7 +350,7 @@ export function ImageCompressor() {
                     }}
                     className="font-mono text-[11px] uppercase tracking-wider text-[#71717A] hover:text-[#FB7185] transition-colors min-h-[44px] px-3 shrink-0"
                   >
-                    Remove
+                    {ts("remove")}
                   </button>
                 </div>
               )}
@@ -363,7 +361,7 @@ export function ImageCompressor() {
                     htmlFor="quality-slider"
                     className="text-sm font-[Inter] font-medium text-[#EDEDEF]"
                   >
-                    Quality
+                    {t("quality")}
                   </label>
                   <span className="font-mono text-[11px] text-[#2DD4BF] uppercase tracking-wider">
                     {quality}%
@@ -380,10 +378,10 @@ export function ImageCompressor() {
                 />
                 <div className="flex justify-between mt-2">
                   <span className="font-mono text-[10px] text-[#71717A]">
-                    Smaller file
+                    {t("smallerFile")}
                   </span>
                   <span className="font-mono text-[10px] text-[#71717A]">
-                    Higher quality
+                    {t("higherQuality")}
                   </span>
                 </div>
               </div>
@@ -397,10 +395,10 @@ export function ImageCompressor() {
                 {compressing ? (
                   <span className="flex items-center justify-center gap-2">
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    Compressing
+                    {t("compressing")}
                   </span>
                 ) : (
-                  "Compress Image"
+                  t("compress")
                 )}
               </button>
 
@@ -432,14 +430,14 @@ export function ImageCompressor() {
                     <div className="flex items-center gap-2 mb-2">
                       <ImageIcon className="w-4 h-4 text-primary" />
                       <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                        Result
+                        {ts("resultTitle")}
                       </h2>
                     </div>
 
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div>
                         <p className="font-mono text-[11px] text-[#71717A] uppercase tracking-wider mb-1">
-                          Original
+                          {t("original")}
                         </p>
                         <p className="text-sm font-[Inter] font-medium text-[#EDEDEF]">
                           {formatFileSize(result.originalSize)}
@@ -447,7 +445,7 @@ export function ImageCompressor() {
                       </div>
                       <div>
                         <p className="font-mono text-[11px] text-[#71717A] uppercase tracking-wider mb-1">
-                          Compressed
+                          {t("compressed")}
                         </p>
                         <p className="text-sm font-[Inter] font-medium text-[#EDEDEF]">
                           {formatFileSize(result.compressedSize)}
@@ -455,7 +453,7 @@ export function ImageCompressor() {
                       </div>
                       <div>
                         <p className="font-mono text-[11px] text-[#71717A] uppercase tracking-wider mb-1">
-                          Reduction
+                          {t("reduction")}
                         </p>
                         <p
                           className={`text-sm font-[Inter] font-medium ${
@@ -477,7 +475,7 @@ export function ImageCompressor() {
                       className="w-full h-12 rounded-lg flex items-center justify-center gap-2 border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors font-mono text-sm uppercase tracking-wider min-h-[44px]"
                     >
                       <Download className="w-4 h-4" />
-                      Download Compressed Image
+                      {t("download")}
                     </button>
                   </motion.div>
                 )}
@@ -496,24 +494,24 @@ export function ImageCompressor() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Upload",
-                desc: "Drop or select a PNG, JPG, WebP, or AVIF image.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Adjust",
-                desc: "Use the quality slider to balance size and clarity.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Download",
-                desc: "Get your compressed image instantly, processed in-browser.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -525,7 +523,7 @@ export function ImageCompressor() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

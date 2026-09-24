@@ -9,6 +9,7 @@ export type FormatKind =
   | "vector"
   | "document"
   | "video"
+  | "audio"
   | "subtitle"
   | "data"
   | "encoding"
@@ -373,6 +374,49 @@ export const formats: Record<string, FormatInfo> = {
     extensions: [".txt", "data: URI"],
     developer: "IETF (RFC 4648)",
     year: 2006,
+  },
+  Video: {
+    // Generic source for "video to X" pages — any common container.
+    id: "Video",
+    kind: "video",
+    extensions: [".mp4", ".mov", ".webm", ".mkv", ".avi"],
+    compression: "lossy",
+    audio: true,
+    codecs: ["H.264", "HEVC", "VP9", "AV1", "AAC"],
+  },
+  MP3: {
+    id: "MP3",
+    kind: "audio",
+    extensions: [".mp3"],
+    mime: "audio/mpeg",
+    compression: "lossy",
+    audio: true,
+    developer: "Fraunhofer IIS / MPEG",
+    year: 1993,
+    browserSupport: "universal",
+  },
+  AAC: {
+    id: "AAC",
+    kind: "audio",
+    extensions: [".aac", ".m4a"],
+    mime: "audio/aac",
+    compression: "lossy",
+    audio: true,
+    developer: "MPEG",
+    year: 1997,
+    browserSupport: "modern",
+  },
+  WAV: {
+    id: "WAV",
+    kind: "audio",
+    extensions: [".wav"],
+    mime: "audio/wav",
+    compression: "none",
+    audio: true,
+    bitDepth: "8–32 bit PCM",
+    developer: "Microsoft & IBM",
+    year: 1991,
+    browserSupport: "universal",
   },
   Hex: { id: "Hex", kind: "number", extensions: [], base: 16 },
   Decimal: { id: "Decimal", kind: "number", extensions: [], base: 10 },

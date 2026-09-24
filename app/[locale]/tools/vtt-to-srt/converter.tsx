@@ -9,6 +9,7 @@ import {
   Subtitles,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -91,6 +92,7 @@ function convertVttToSrt(vtt: string): string {
 }
 
 export function VttToSrtConverter() {
+  const t = useTranslations("ToolUI.vtt-to-srt");
   const [vttInput, setVttInput] = useState("");
   const [srtOutput, setSrtOutput] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -98,27 +100,30 @@ export function VttToSrtConverter() {
   const [fileName, setFileName] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleConvert = useCallback((input: string) => {
-    setError(null);
-    setSrtOutput("");
+  const handleConvert = useCallback(
+    (input: string) => {
+      setError(null);
+      setSrtOutput("");
 
-    const trimmed = input.trim();
-    if (!trimmed) {
-      setError("Please paste VTT content or upload a .vtt file.");
-      return;
-    }
-
-    try {
-      const result = convertVttToSrt(trimmed);
-      if (!result.trim()) {
-        setError("No valid subtitle cues found in the input.");
+      const trimmed = input.trim();
+      if (!trimmed) {
+        setError(t("errEmpty"));
         return;
       }
-      setSrtOutput(result);
-    } catch {
-      setError("Failed to parse VTT content. Please check the format.");
-    }
-  }, []);
+
+      try {
+        const result = convertVttToSrt(trimmed);
+        if (!result.trim()) {
+          setError(t("errNoCues"));
+          return;
+        }
+        setSrtOutput(result);
+      } catch {
+        setError(t("errParse"));
+      }
+    },
+    [t],
+  );
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -185,16 +190,15 @@ export function VttToSrtConverter() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            VTT to SRT
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Converter</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Convert WebVTT subtitle files to SRT format. Upload a file or paste
-            content directly — conversion happens instantly in your browser.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -221,7 +225,7 @@ export function VttToSrtConverter() {
               className="flex items-center gap-2 h-12 px-5 rounded-lg border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] font-[Inter] text-sm"
             >
               <Upload className="w-4 h-4" />
-              Upload .vtt file
+              {t("upload")}
             </button>
             {fileName && (
               <span className="font-mono text-[11px] text-[#71717A]">
@@ -237,7 +241,7 @@ export function VttToSrtConverter() {
               <div className="flex items-center gap-2 mb-2">
                 <Subtitles className="w-4 h-4 text-primary" />
                 <span className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                  VTT Input
+                  {t("inputLabel")}
                 </span>
               </div>
               <textarea
@@ -255,7 +259,7 @@ export function VttToSrtConverter() {
                 <div className="flex items-center gap-2">
                   <Subtitles className="w-4 h-4 text-primary" />
                   <span className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                    SRT Output
+                    {t("outputLabel")}
                   </span>
                 </div>
                 {srtOutput && (
@@ -270,7 +274,7 @@ export function VttToSrtConverter() {
                       ) : (
                         <ClipboardCopy className="w-3.5 h-3.5" />
                       )}
-                      {copied ? "Copied" : "Copy"}
+                      {copied ? t("copied") : t("copy")}
                     </button>
                     <button
                       type="button"
@@ -278,7 +282,7 @@ export function VttToSrtConverter() {
                       className="flex items-center gap-1.5 h-8 px-3 rounded-md bg-[#2DD4BF] text-[#042F2E] text-xs font-mono font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all"
                     >
                       <Download className="w-3.5 h-3.5" />
-                      Download .srt
+                      {t("download")}
                     </button>
                   </div>
                 )}
@@ -286,7 +290,7 @@ export function VttToSrtConverter() {
               <textarea
                 value={srtOutput}
                 readOnly
-                placeholder="SRT output will appear here..."
+                placeholder={t("outputPlaceholder")}
                 className="flex-1 min-h-[300px] p-4 border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] rounded-lg font-mono text-sm resize-y placeholder:text-[#71717A]/40"
                 spellCheck={false}
               />
@@ -318,24 +322,24 @@ export function VttToSrtConverter() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Paste or Upload",
-                desc: "Paste VTT content or upload a .vtt subtitle file.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Instant Convert",
-                desc: "Timestamps and cues are converted to SRT format automatically.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Download or Copy",
-                desc: "Download as .srt or copy the output to your clipboard.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -347,7 +351,7 @@ export function VttToSrtConverter() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ImageIcon, Upload, Video, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FormatBadge } from "@/components/format-badge";
@@ -19,6 +20,7 @@ interface FileUploaderProps {
 }
 
 export function FileUploader({ onFileSelect }: FileUploaderProps) {
+  const t = useTranslations("SharedUI");
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -31,14 +33,14 @@ export function FileUploader({ onFileSelect }: FileUploaderProps) {
         const selectedFile = acceptedFiles[0];
         const category = getFileCategory(selectedFile);
         if (category === "unknown") {
-          setError("Unsupported file format. Please upload an image or video.");
+          setError(t("uploader.unsupported"));
           return;
         }
         setFile(selectedFile);
         onFileSelect(selectedFile);
       }
     },
-    [onFileSelect],
+    [onFileSelect, t],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -91,7 +93,7 @@ export function FileUploader({ onFileSelect }: FileUploaderProps) {
               {previewUrl ? (
                 <img
                   src={previewUrl}
-                  alt="Preview"
+                  alt={t("preview")}
                   className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-xl border border-[#2A2535] mb-4"
                 />
               ) : (
@@ -125,7 +127,7 @@ export function FileUploader({ onFileSelect }: FileUploaderProps) {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#2A2535] text-[#EDEDEF] text-sm hover:border-[#FB7185]/50 hover:text-[#FB7185] transition-colors min-h-[44px]"
               >
                 <X className="w-4 h-4" />
-                Remove File
+                {t("uploader.remove")}
               </button>
             </motion.div>
           ) : (
@@ -148,10 +150,10 @@ export function FileUploader({ onFileSelect }: FileUploaderProps) {
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-2 sm:mb-3 px-4">
-                {isDragActive ? "Drop it here." : "Upload Media"}
+                {isDragActive ? t("uploader.drop") : t("uploader.title")}
               </h3>
               <p className="text-[#71717A] max-w-xs mx-auto font-mono text-xs sm:text-sm px-4">
-                Images (PNG, JPG, WebP, GIF...) or Videos (MP4, WebM, MOV...)
+                {t("uploader.hint")}
               </p>
 
               {error && (

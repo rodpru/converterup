@@ -2,14 +2,15 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, ClipboardCopy, Repeat, Type } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
 const SEPARATOR_OPTIONS = [
-  { value: "newline", label: "New Line" },
-  { value: "space", label: "Space" },
-  { value: "comma", label: "Comma" },
-  { value: "custom", label: "Custom" },
+  { value: "newline" },
+  { value: "space" },
+  { value: "comma" },
+  { value: "custom" },
 ] as const;
 
 type SeparatorType = (typeof SEPARATOR_OPTIONS)[number]["value"];
@@ -56,6 +57,7 @@ function countWords(text: string): number {
 }
 
 export function TextRepeater() {
+  const t = useTranslations("ToolUI.text-repeater");
   const [text, setText] = useState("");
   const [repeatCount, setRepeatCount] = useState(3);
   const [separatorType, setSeparatorType] = useState<SeparatorType>("newline");
@@ -116,16 +118,15 @@ export function TextRepeater() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Text
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Repeater</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Repeat any text multiple times with custom separators. Fast, free,
-            and entirely in your browser.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -143,7 +144,7 @@ export function TextRepeater() {
               htmlFor="input-text"
               className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
             >
-              Text to Repeat
+              {t("inputLabel")}
             </label>
             <div className="relative">
               <Type className="absolute left-4 top-4 w-4 h-4 text-[#71717A]" />
@@ -151,7 +152,7 @@ export function TextRepeater() {
                 id="input-text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Enter text to repeat..."
+                placeholder={t("inputPlaceholder")}
                 rows={4}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm resize-y min-h-[44px]"
               />
@@ -166,7 +167,7 @@ export function TextRepeater() {
                 htmlFor="repeat-count"
                 className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
               >
-                Repeat Count
+                {t("countLabel")}
               </label>
               <div className="relative">
                 <Repeat className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#71717A]" />
@@ -188,7 +189,7 @@ export function TextRepeater() {
                 htmlFor="separator"
                 className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
               >
-                Separator
+                {t("separatorLabel")}
               </label>
               <select
                 id="separator"
@@ -200,7 +201,7 @@ export function TextRepeater() {
               >
                 {SEPARATOR_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
-                    {opt.label}
+                    {t(`separator.${opt.value}`)}
                   </option>
                 ))}
               </select>
@@ -220,14 +221,14 @@ export function TextRepeater() {
                   htmlFor="custom-separator"
                   className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
                 >
-                  Custom Separator
+                  {t("customLabel")}
                 </label>
                 <input
                   id="custom-separator"
                   type="text"
                   value={customSeparator}
                   onChange={(e) => setCustomSeparator(e.target.value)}
-                  placeholder="Enter custom separator..."
+                  placeholder={t("customPlaceholder")}
                   className="w-full h-12 px-4 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm min-h-[44px]"
                 />
               </motion.div>
@@ -237,14 +238,14 @@ export function TextRepeater() {
           {/* Stats bar */}
           <div className="flex items-center gap-4 py-3 px-4 bg-[#16131E] border border-[#2A2535] rounded-lg">
             <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-              Characters:{" "}
+              {t("characters")}{" "}
               <span className="text-[#EDEDEF]">
                 {charCount.toLocaleString()}
               </span>
             </span>
             <span className="w-px h-4 bg-[#2A2535]" />
             <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-              Words:{" "}
+              {t("words")}{" "}
               <span className="text-[#EDEDEF]">
                 {wordCount.toLocaleString()}
               </span>
@@ -258,7 +259,7 @@ export function TextRepeater() {
                 htmlFor="output-text"
                 className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A]"
               >
-                Output
+                {t("outputLabel")}
               </label>
               <button
                 type="button"
@@ -269,12 +270,12 @@ export function TextRepeater() {
                 {copied ? (
                   <>
                     <Check className="w-4 h-4" />
-                    Copied
+                    {t("copied")}
                   </>
                 ) : (
                   <>
                     <ClipboardCopy className="w-4 h-4" />
-                    Copy to Clipboard
+                    {t("copy")}
                   </>
                 )}
               </button>
@@ -284,7 +285,7 @@ export function TextRepeater() {
               value={output}
               readOnly
               rows={8}
-              placeholder="Repeated text will appear here..."
+              placeholder={t("outputPlaceholder")}
               className="w-full px-4 py-3 border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] rounded-lg font-[Inter] text-sm resize-y min-h-[44px] placeholder:text-[#71717A]/60 focus:outline-none"
             />
           </div>
@@ -301,24 +302,24 @@ export function TextRepeater() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Enter Text",
-                desc: "Type or paste the text you want to repeat.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Configure",
-                desc: "Set the repeat count and choose a separator.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Copy",
-                desc: "Copy the repeated text to your clipboard instantly.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -330,7 +331,7 @@ export function TextRepeater() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

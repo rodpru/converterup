@@ -11,7 +11,7 @@ export const AUTHOR = {
 
 export const OG_LOCALE: Record<string, string> = {
   en: "en_US",
-  pt: "pt_PT",
+  pt: "pt_BR",
   es: "es_ES",
 };
 

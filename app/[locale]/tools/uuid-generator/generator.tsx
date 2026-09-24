@@ -8,6 +8,7 @@ import {
   Hash,
   RefreshCw,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -50,6 +51,7 @@ function formatUuid(
 }
 
 export function UuidGenerator() {
+  const t = useTranslations("ToolUI.uuid-generator");
   const [singleUuid, setSingleUuid] = useState("");
   const [bulkUuids, setBulkUuids] = useState("");
   const [bulkCount, setBulkCount] = useState(10);
@@ -131,16 +133,15 @@ export function UuidGenerator() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            UUID
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Generator</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Generate UUID v4 identifiers instantly. Single or bulk, with format
-            options. Fast, free, and entirely in your browser.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -162,7 +163,7 @@ export function UuidGenerator() {
                 className="w-4 h-4 accent-[#2DD4BF]"
               />
               <span className="font-mono text-[11px] uppercase tracking-wider text-[#EDEDEF]">
-                Uppercase
+                {t("uppercase")}
               </span>
             </label>
             <label className="flex items-center gap-3 py-3 px-4 bg-[#16131E] border border-[#2A2535] rounded-lg cursor-pointer min-h-[44px]">
@@ -173,7 +174,7 @@ export function UuidGenerator() {
                 className="w-4 h-4 accent-[#2DD4BF]"
               />
               <span className="font-mono text-[11px] uppercase tracking-wider text-[#EDEDEF]">
-                Include Hyphens
+                {t("hyphens")}
               </span>
             </label>
           </div>
@@ -181,7 +182,7 @@ export function UuidGenerator() {
           {/* Single UUID */}
           <div>
             <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-              Single UUID
+              {t("singleLabel")}
             </label>
             <div className="flex flex-col sm:flex-row gap-3">
               <button
@@ -190,7 +191,7 @@ export function UuidGenerator() {
                 className="flex items-center gap-2 h-12 px-8 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-[11px] uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px] shrink-0"
               >
                 <RefreshCw className="w-4 h-4" />
-                Generate
+                {t("generate")}
               </button>
               {singleUuid && (
                 <AnimatePresence mode="wait">
@@ -208,6 +209,7 @@ export function UuidGenerator() {
                     <button
                       type="button"
                       onClick={handleCopySingle}
+                      aria-label={t("copy")}
                       className="shrink-0 p-2 rounded-md hover:bg-[#2A2535] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                     >
                       {copiedSingle ? (
@@ -226,7 +228,7 @@ export function UuidGenerator() {
           <div className="flex items-center gap-4">
             <div className="flex-1 h-px bg-[#2A2535]" />
             <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-              or
+              {t("or")}
             </span>
             <div className="flex-1 h-px bg-[#2A2535]" />
           </div>
@@ -237,7 +239,7 @@ export function UuidGenerator() {
               htmlFor="bulk-count"
               className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
             >
-              Generate Multiple
+              {t("bulkLabel")}
             </label>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative shrink-0">
@@ -258,7 +260,7 @@ export function UuidGenerator() {
                 className="flex items-center gap-2 h-12 px-8 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-[11px] uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px] shrink-0"
               >
                 <RefreshCw className="w-4 h-4" />
-                Generate Bulk
+                {t("generateBulk")}
               </button>
             </div>
           </div>
@@ -275,7 +277,7 @@ export function UuidGenerator() {
                   htmlFor="bulk-output"
                   className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A]"
                 >
-                  Generated UUIDs
+                  {t("generatedLabel")}
                 </label>
                 <button
                   type="button"
@@ -285,12 +287,12 @@ export function UuidGenerator() {
                   {copiedAll ? (
                     <>
                       <Check className="w-4 h-4" />
-                      Copied All
+                      {t("copiedAll")}
                     </>
                   ) : (
                     <>
                       <ClipboardCopy className="w-4 h-4" />
-                      Copy All
+                      {t("copyAll")}
                     </>
                   )}
                 </button>
@@ -317,24 +319,24 @@ export function UuidGenerator() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Configure",
-                desc: "Choose format options: uppercase, lowercase, with or without hyphens.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Generate",
-                desc: "Click Generate for a single UUID or Generate Bulk for multiple.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Copy",
-                desc: "Copy individual UUIDs or all at once to your clipboard.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -346,7 +348,7 @@ export function UuidGenerator() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

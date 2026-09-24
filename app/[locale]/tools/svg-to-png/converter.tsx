@@ -9,6 +9,7 @@ import {
   Loader2,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -45,6 +46,8 @@ const ease = [0.16, 1, 0.3, 1] as const;
 type InputMode = "upload" | "paste";
 
 export function SvgToPngConverter() {
+  const t = useTranslations("ToolUI.svg-to-png");
+  const ts = useTranslations("SharedUI");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [inputMode, setInputMode] = useState<InputMode>("upload");
   const [svgCode, setSvgCode] = useState("");
@@ -60,39 +63,42 @@ export function SvgToPngConverter() {
   const [error, setError] = useState<string | null>(null);
   const [converting, setConverting] = useState(false);
 
-  const processSvg = useCallback((svgString: string) => {
-    setError(null);
-    setPngUrl(null);
+  const processSvg = useCallback(
+    (svgString: string) => {
+      setError(null);
+      setPngUrl(null);
 
-    if (!svgString.trim()) {
-      setSvgBlobUrl(null);
-      setSvgDimensions(null);
-      return;
-    }
+      if (!svgString.trim()) {
+        setSvgBlobUrl(null);
+        setSvgDimensions(null);
+        return;
+      }
 
-    if (!svgString.includes("<svg") || !svgString.includes("</svg>")) {
-      setError("Invalid SVG content. Please provide a valid SVG.");
-      return;
-    }
+      if (!svgString.includes("<svg") || !svgString.includes("</svg>")) {
+        setError(t("errInvalid"));
+        return;
+      }
 
-    const blob = new Blob([svgString], { type: "image/svg+xml" });
-    const url = URL.createObjectURL(blob);
-    setSvgBlobUrl(url);
+      const blob = new Blob([svgString], { type: "image/svg+xml" });
+      const url = URL.createObjectURL(blob);
+      setSvgBlobUrl(url);
 
-    const img = new Image();
-    img.onload = () => {
-      setSvgDimensions({
-        width: img.naturalWidth || 300,
-        height: img.naturalHeight || 150,
-      });
-      URL.revokeObjectURL(url);
-    };
-    img.onerror = () => {
-      setError("Failed to parse SVG. Please check the file content.");
-      URL.revokeObjectURL(url);
-    };
-    img.src = url;
-  }, []);
+      const img = new Image();
+      img.onload = () => {
+        setSvgDimensions({
+          width: img.naturalWidth || 300,
+          height: img.naturalHeight || 150,
+        });
+        URL.revokeObjectURL(url);
+      };
+      img.onerror = () => {
+        setError(t("errParse"));
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    },
+    [t],
+  );
 
   const handleFileUpload = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +106,7 @@ export function SvgToPngConverter() {
       if (!file) return;
 
       if (!file.type.includes("svg") && !file.name.endsWith(".svg")) {
-        setError("Please upload an SVG file.");
+        setError(t("errNotSvg"));
         return;
       }
 
@@ -110,10 +116,10 @@ export function SvgToPngConverter() {
         setSvgCode(text);
         processSvg(text);
       };
-      reader.onerror = () => setError("Failed to read the file.");
+      reader.onerror = () => setError(t("errRead"));
       reader.readAsText(file);
     },
-    [processSvg],
+    [processSvg, t],
   );
 
   const handlePaste = useCallback(
@@ -168,11 +174,11 @@ export function SvgToPngConverter() {
       const pngObjUrl = URL.createObjectURL(pngBlob);
       setPngUrl(pngObjUrl);
     } catch {
-      setError("Failed to convert SVG to PNG. Please check your SVG content.");
+      setError(t("errConvert"));
     }
 
     setConverting(false);
-  }, [svgCode, svgDimensions, scale, bgMode, bgColor]);
+  }, [svgCode, svgDimensions, scale, bgMode, bgColor, t]);
 
   const handleDownload = useCallback(async () => {
     if (!pngUrl) return;
@@ -197,16 +203,15 @@ export function SvgToPngConverter() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            SVG to PNG
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Converter</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Upload or paste SVG code and convert to high-resolution PNG. Choose
-            your scale and background, all processed in your browser.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -230,7 +235,7 @@ export function SvgToPngConverter() {
               }`}
             >
               <Upload className="w-3.5 h-3.5" />
-              Upload File
+              {t("uploadFile")}
             </button>
             <button
               type="button"
@@ -242,7 +247,7 @@ export function SvgToPngConverter() {
               }`}
             >
               <Code2 className="w-3.5 h-3.5" />
-              Paste SVG Code
+              {t("pasteCode")}
             </button>
           </div>
 
@@ -260,7 +265,7 @@ export function SvgToPngConverter() {
             >
               <Upload className="w-6 h-6 text-[#71717A] mb-2" />
               <p className="text-sm font-[Inter] text-[#71717A]">
-                Click to upload an SVG file
+                {t("clickUpload")}
               </p>
               <input
                 ref={fileInputRef}
@@ -277,7 +282,7 @@ export function SvgToPngConverter() {
             <textarea
               value={svgCode}
               onChange={(e) => handlePaste(e.target.value)}
-              placeholder="Paste your SVG code here..."
+              placeholder={t("placeholder")}
               className="w-full h-40 p-4 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-mono text-sm resize-none"
             />
           )}
@@ -287,7 +292,7 @@ export function SvgToPngConverter() {
             {/* Scale selector */}
             <div>
               <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                Scale
+                {t("scale")}
               </label>
               <div className="flex gap-1.5">
                 {SCALE_OPTIONS.map((opt) => (
@@ -310,7 +315,7 @@ export function SvgToPngConverter() {
             {/* Background mode */}
             <div>
               <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                Background
+                {t("background")}
               </label>
               <div className="flex gap-1.5">
                 <button
@@ -322,7 +327,7 @@ export function SvgToPngConverter() {
                       : "border border-[#2A2535] bg-[#1C1825] text-[#71717A] hover:border-[#2DD4BF]/30"
                   }`}
                 >
-                  None
+                  {t("bgNone")}
                 </button>
                 <button
                   type="button"
@@ -333,7 +338,7 @@ export function SvgToPngConverter() {
                       : "border border-[#2A2535] bg-[#1C1825] text-[#71717A] hover:border-[#2DD4BF]/30"
                   }`}
                 >
-                  Color
+                  {t("bgColorBtn")}
                 </button>
               </div>
             </div>
@@ -341,7 +346,7 @@ export function SvgToPngConverter() {
             {/* Color picker */}
             <div>
               <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                {bgMode === "custom" ? "Pick Color" : "Background Color"}
+                {bgMode === "custom" ? t("pickColor") : t("bgColor")}
               </label>
               <div className="relative">
                 <input
@@ -365,10 +370,10 @@ export function SvgToPngConverter() {
             {converting ? (
               <span className="flex items-center justify-center gap-2">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Converting
+                {t("converting")}
               </span>
             ) : (
-              "Convert to PNG"
+              t("convert")
             )}
           </button>
 
@@ -400,7 +405,7 @@ export function SvgToPngConverter() {
               <div className="flex items-center gap-2 mb-4">
                 <ImageIcon className="w-4 h-4 text-primary" />
                 <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                  SVG Preview
+                  {t("svgPreview")}
                 </h2>
                 <span className="ml-auto font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
                   {svgDimensions.width} x {svgDimensions.height}
@@ -430,7 +435,7 @@ export function SvgToPngConverter() {
               <div className="flex items-center gap-2 mb-4">
                 <Download className="w-4 h-4 text-primary" />
                 <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                  PNG Output
+                  {t("pngOutput")}
                 </h2>
                 {svgDimensions && (
                   <span className="ml-auto font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
@@ -444,7 +449,7 @@ export function SvgToPngConverter() {
                   {/* biome-ignore lint/a11y/useAltText: Dynamic PNG output preview from user conversion */}
                   <img
                     src={pngUrl}
-                    alt="Converted PNG output"
+                    alt={t("pngOutput")}
                     className="max-w-full max-h-[400px] object-contain"
                   />
                 </div>
@@ -455,7 +460,7 @@ export function SvgToPngConverter() {
                     className="w-full h-12 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] font-mono text-sm uppercase tracking-wider hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] flex items-center justify-center gap-2"
                   >
                     <Download className="w-4 h-4" />
-                    Download PNG
+                    {t("download")}
                   </button>
                 </div>
               </div>
@@ -473,24 +478,24 @@ export function SvgToPngConverter() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Upload SVG",
-                desc: "Upload an SVG file or paste SVG code directly.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Configure",
-                desc: "Choose output scale (1x-4x) and background color.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Download",
-                desc: "Convert and download your high-resolution PNG.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -502,7 +507,7 @@ export function SvgToPngConverter() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { AlertTriangle, RotateCcw } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface ConversionErrorProps {
   message: string;
@@ -14,6 +15,7 @@ export function ConversionError({
   onRetry,
   onBack,
 }: ConversionErrorProps) {
+  const t = useTranslations("SharedUI");
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -25,7 +27,7 @@ export function ConversionError({
       </div>
 
       <h2 className="text-2xl sm:text-3xl font-[Syne] font-bold text-[#EDEDEF] mb-3">
-        Conversion failed
+        {t("error.title")}
       </h2>
       <p className="text-[#71717A] mb-8 font-mono text-sm">{message}</p>
 
@@ -36,14 +38,14 @@ export function ConversionError({
           className="h-12 px-6 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px] flex items-center justify-center gap-2"
         >
           <RotateCcw className="w-4 h-4" />
-          Try Again
+          {t("error.retry")}
         </button>
         <button
           type="button"
           onClick={onBack}
           className="h-12 px-6 rounded-lg border border-[#2A2535] text-[#EDEDEF] font-mono uppercase tracking-wider hover:border-[#2DD4BF]/30 transition-colors min-h-[44px]"
         >
-          Change File
+          {t("changeFile")}
         </button>
       </div>
     </motion.div>

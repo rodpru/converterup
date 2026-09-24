@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, Download, ImageIcon, Link2, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -78,6 +79,8 @@ async function checkImageExists(url: string): Promise<boolean> {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function YouTubeThumbnailDownloader() {
+  const t = useTranslations("ToolUI.youtube-thumbnail-downloader");
+  const ts = useTranslations("SharedUI");
   const [url, setUrl] = useState("");
   const [videoId, setVideoId] = useState<string | null>(null);
   const [thumbnails, setThumbnails] = useState<ThumbnailResult[]>([]);
@@ -93,9 +96,7 @@ export function YouTubeThumbnailDownloader() {
 
       const id = extractVideoId(url);
       if (!id) {
-        setError(
-          "Invalid YouTube URL. Please enter a valid YouTube video link.",
-        );
+        setError(t("errInvalid"));
         return;
       }
 
@@ -126,7 +127,7 @@ export function YouTubeThumbnailDownloader() {
       setThumbnails(ordered);
       setLoading(false);
     },
-    [url],
+    [url, t],
   );
 
   const handleDownload = useCallback(
@@ -145,14 +146,14 @@ export function YouTubeThumbnailDownloader() {
         document.body.removeChild(a);
         URL.revokeObjectURL(blobUrl);
       } catch {
-        setError("Failed to download thumbnail. Please try again.");
+        setError(t("errDownload"));
       }
       setDownloadingKey(null);
     },
-    [videoId],
+    [videoId, t],
   );
 
-  const availableThumbnails = thumbnails.filter((t) => t.exists);
+  const availableThumbnails = thumbnails.filter((thumb) => thumb.exists);
 
   return (
     <>
@@ -166,16 +167,15 @@ export function YouTubeThumbnailDownloader() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            YouTube Thumbnail
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Downloader</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Download YouTube video thumbnails in all available resolutions.
-            Paste a URL and grab any size you need, instantly.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -197,7 +197,7 @@ export function YouTubeThumbnailDownloader() {
                 type="text"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                placeholder="Paste YouTube URL here..."
+                placeholder={t("placeholder")}
                 className="w-full h-12 pl-11 pr-4 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 min-h-[44px] placeholder:text-[#71717A]/60 font-[Inter] text-sm"
               />
             </div>
@@ -209,10 +209,10 @@ export function YouTubeThumbnailDownloader() {
               {loading ? (
                 <span className="flex items-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Loading
+                  {t("loading")}
                 </span>
               ) : (
-                "Get Thumbnails"
+                t("submit")
               )}
             </button>
           </form>
@@ -244,10 +244,10 @@ export function YouTubeThumbnailDownloader() {
               <div className="flex items-center gap-2 mb-6">
                 <ImageIcon className="w-4 h-4 text-primary" />
                 <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                  Available Thumbnails
+                  {t("available")}
                 </h2>
                 <span className="ml-auto font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                  {availableThumbnails.length} found
+                  {t("found", { count: availableThumbnails.length })}
                 </span>
               </div>
 
@@ -264,7 +264,7 @@ export function YouTubeThumbnailDownloader() {
                       {/* biome-ignore lint/performance/noImgElement: External YouTube URLs loaded dynamically from user input */}
                       <img
                         src={thumb.url}
-                        alt={`${thumb.label} thumbnail`}
+                        alt={t("thumbAlt", { quality: t(`q_${thumb.key}`) })}
                         className="w-full h-full object-cover"
                         loading="lazy"
                       />
@@ -272,7 +272,7 @@ export function YouTubeThumbnailDownloader() {
                     <div className="p-4 flex items-center justify-between gap-3">
                       <div>
                         <p className="text-sm font-[Inter] font-medium text-[#EDEDEF]">
-                          {thumb.label}
+                          {t(`q_${thumb.key}`)}
                         </p>
                         <p className="font-mono text-[11px] text-[#71717A]">
                           {thumb.width} x {thumb.height}
@@ -283,7 +283,12 @@ export function YouTubeThumbnailDownloader() {
                         onClick={() => handleDownload(thumb)}
                         disabled={downloadingKey === thumb.key}
                         className="flex items-center justify-center w-10 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] min-w-[44px] disabled:opacity-50"
-                        title={`Download ${thumb.label}`}
+                        title={t("downloadQuality", {
+                          quality: t(`q_${thumb.key}`),
+                        })}
+                        aria-label={t("downloadQuality", {
+                          quality: t(`q_${thumb.key}`),
+                        })}
                       >
                         {downloadingKey === thumb.key ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -307,10 +312,7 @@ export function YouTubeThumbnailDownloader() {
               animate={{ opacity: 1 }}
               className="max-w-2xl mx-auto mt-10 text-center"
             >
-              <p className="text-[#71717A] text-sm font-[Inter]">
-                No thumbnails found for this video. Please check the URL and try
-                again.
-              </p>
+              <p className="text-[#71717A] text-sm font-[Inter]">{t("none")}</p>
             </motion.div>
           )}
       </section>
@@ -324,24 +326,24 @@ export function YouTubeThumbnailDownloader() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Paste URL",
-                desc: "Copy any YouTube video link and paste it above.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Preview",
-                desc: "See all available thumbnail resolutions instantly.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Download",
-                desc: "Click the download button for any resolution you need.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -353,7 +355,7 @@ export function YouTubeThumbnailDownloader() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

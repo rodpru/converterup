@@ -9,6 +9,7 @@ import {
   ImageIcon,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -51,6 +52,8 @@ function formatBytes(bytes: number): string {
 }
 
 export function ImageToBase64Encoder() {
+  const t = useTranslations("ToolUI.image-to-base64");
+  const ts = useTranslations("SharedUI");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -72,9 +75,7 @@ export function ImageToBase64Encoder() {
       setCopiedField(null);
 
       if (!ACCEPTED_TYPES.includes(file.type)) {
-        setError(
-          "Unsupported file type. Please upload a PNG, JPG, WebP, GIF, or SVG image.",
-        );
+        setError(t("errUnsupported"));
         return;
       }
 
@@ -90,11 +91,10 @@ export function ImageToBase64Encoder() {
         const base64Part = result.split(",")[1] || "";
         setBase64Only(base64Part);
       };
-      reader.onerror = () =>
-        setError("Failed to read the file. Please try again.");
+      reader.onerror = () => setError(t("errRead"));
       reader.readAsDataURL(file);
     },
-    [],
+    [t],
   );
 
   const handleDrop = useCallback(
@@ -118,10 +118,10 @@ export function ImageToBase64Encoder() {
         setCopiedField(field);
         setTimeout(() => setCopiedField(null), 2000);
       } catch {
-        setError("Failed to copy to clipboard.");
+        setError(t("errCopy"));
       }
     },
-    [],
+    [t],
   );
 
   return (
@@ -136,16 +136,15 @@ export function ImageToBase64Encoder() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Image to Base64
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Encoder</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Upload any image and get its Base64 string or Data URI instantly.
-            Copy with one click, processed entirely in your browser.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -171,9 +170,7 @@ export function ImageToBase64Encoder() {
             className="flex flex-col items-center justify-center h-40 border-2 border-dashed border-[#2A2535] bg-[#1C1825] rounded-xl cursor-pointer hover:border-[#2DD4BF]/30 transition-colors"
           >
             <Upload className="w-6 h-6 text-[#71717A] mb-2" />
-            <p className="text-sm font-[Inter] text-[#71717A]">
-              Click or drag an image to upload
-            </p>
+            <p className="text-sm font-[Inter] text-[#71717A]">{t("drop")}</p>
             <p className="text-xs font-mono text-[#71717A]/60 mt-1">
               PNG, JPG, WebP, GIF, SVG
             </p>
@@ -216,7 +213,7 @@ export function ImageToBase64Encoder() {
                 <div className="flex items-center gap-2 mb-4">
                   <ImageIcon className="w-4 h-4 text-primary" />
                   <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                    Image Preview
+                    {t("preview")}
                   </h2>
                   {fileName && (
                     <span className="ml-auto font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
@@ -228,7 +225,7 @@ export function ImageToBase64Encoder() {
                   {/* biome-ignore lint/a11y/useAltText: Dynamic user-uploaded image preview */}
                   <img
                     src={previewUrl}
-                    alt="Uploaded image preview"
+                    alt={t("preview")}
                     className="max-w-full max-h-[300px] object-contain"
                   />
                 </div>
@@ -238,15 +235,15 @@ export function ImageToBase64Encoder() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-4">
                   <p className="font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-1">
-                    String Length
+                    {t("length")}
                   </p>
                   <p className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                    {base64Only.length.toLocaleString()} chars
+                    {t("chars", { count: base64Only.length })}
                   </p>
                 </div>
                 <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-4">
                   <p className="font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-1">
-                    Estimated Size
+                    {t("size")}
                   </p>
                   <p className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
                     {formatBytes(Math.ceil((base64Only.length * 3) / 4))}
@@ -259,7 +256,7 @@ export function ImageToBase64Encoder() {
                 <div className="flex items-center gap-2 mb-3">
                   <FileImage className="w-4 h-4 text-primary" />
                   <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                    Base64 String
+                    {t("base64String")}
                   </h2>
                 </div>
                 <div className="relative">
@@ -277,12 +274,12 @@ export function ImageToBase64Encoder() {
                     {copiedField === "base64" ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-[#2DD4BF]" />
-                        Copied
+                        {ts("copied")}
                       </>
                     ) : (
                       <>
                         <Clipboard className="w-3.5 h-3.5" />
-                        Copy Base64
+                        {t("copyBase64")}
                       </>
                     )}
                   </button>
@@ -294,7 +291,7 @@ export function ImageToBase64Encoder() {
                 <div className="flex items-center gap-2 mb-3">
                   <FileImage className="w-4 h-4 text-primary" />
                   <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                    Data URI
+                    {t("dataUri")}
                   </h2>
                 </div>
                 <div className="relative">
@@ -312,12 +309,12 @@ export function ImageToBase64Encoder() {
                     {copiedField === "datauri" ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-[#2DD4BF]" />
-                        Copied
+                        {ts("copied")}
                       </>
                     ) : (
                       <>
                         <Clipboard className="w-3.5 h-3.5" />
-                        Copy Data URI
+                        {t("copyDataUri")}
                       </>
                     )}
                   </button>
@@ -337,24 +334,24 @@ export function ImageToBase64Encoder() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Upload Image",
-                desc: "Drop or select any image file (PNG, JPG, WebP, GIF, SVG).",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Encode",
-                desc: "Your image is converted to Base64 instantly in the browser.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Copy",
-                desc: "Copy the Base64 string or full Data URI with one click.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -366,7 +363,7 @@ export function ImageToBase64Encoder() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

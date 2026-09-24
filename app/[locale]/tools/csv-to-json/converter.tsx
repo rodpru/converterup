@@ -8,6 +8,7 @@ import {
   FileSpreadsheet,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -36,11 +37,11 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 type DelimiterType = "comma" | "semicolon" | "tab" | "custom";
 
-const DELIMITER_OPTIONS: { value: DelimiterType; label: string }[] = [
-  { value: "comma", label: "Comma (,)" },
-  { value: "semicolon", label: "Semicolon (;)" },
-  { value: "tab", label: "Tab" },
-  { value: "custom", label: "Custom" },
+const DELIMITER_OPTIONS: DelimiterType[] = [
+  "comma",
+  "semicolon",
+  "tab",
+  "custom",
 ];
 
 function getDelimiter(type: DelimiterType, custom: string): string {
@@ -95,7 +96,8 @@ function parseCsvLine(line: string, delimiter: string): string[] {
 interface ParseResult {
   json: string;
   rowCount: number;
-  error?: string;
+  /** Translation key under ToolUI.csv-to-json */
+  error?: "errParse";
 }
 
 function parseCsv(
@@ -135,12 +137,13 @@ function parseCsv(
     return {
       json: "",
       rowCount: 0,
-      error: "Failed to parse CSV. Check your input and delimiter settings.",
+      error: "errParse",
     };
   }
 }
 
 export function CsvToJsonConverter() {
+  const t = useTranslations("ToolUI.csv-to-json");
   const [input, setInput] = useState("");
   const [delimiterType, setDelimiterType] = useState<DelimiterType>("comma");
   const [customDelimiter, setCustomDelimiter] = useState("");
@@ -218,16 +221,15 @@ export function CsvToJsonConverter() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            CSV to
+            {t("h1a")}
             <br />
-            <span className="gradient-text">JSON</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Convert CSV data to JSON instantly. Supports custom delimiters,
-            quoted fields, and header rows.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -242,7 +244,7 @@ export function CsvToJsonConverter() {
           {/* File upload */}
           <div>
             <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-              Upload CSV File
+              {t("uploadLabel")}
             </label>
             <input
               ref={fileInputRef}
@@ -258,7 +260,7 @@ export function CsvToJsonConverter() {
               className="flex items-center gap-2 h-12 px-6 rounded-lg border border-dashed border-[#2A2535] text-[#EDEDEF] font-mono text-[11px] uppercase tracking-wider hover:border-[#2DD4BF]/30 transition-colors min-h-[44px] w-full justify-center"
             >
               <Upload className="w-4 h-4" />
-              Choose CSV File
+              {t("chooseFile")}
             </button>
           </div>
 
@@ -268,7 +270,7 @@ export function CsvToJsonConverter() {
               htmlFor="csv-input"
               className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
             >
-              Or Paste CSV
+              {t("pasteLabel")}
             </label>
             <div className="relative">
               <FileSpreadsheet className="absolute left-4 top-4 w-4 h-4 text-[#71717A]" />
@@ -291,7 +293,7 @@ export function CsvToJsonConverter() {
                 htmlFor="delimiter-select"
                 className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
               >
-                Delimiter
+                {t("delimiterLabel")}
               </label>
               <select
                 id="delimiter-select"
@@ -302,8 +304,8 @@ export function CsvToJsonConverter() {
                 className="w-full h-12 px-4 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 font-[Inter] text-sm min-h-[44px] appearance-none cursor-pointer"
               >
                 {DELIMITER_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
+                  <option key={opt} value={opt}>
+                    {t(`delimiter.${opt}`)}
                   </option>
                 ))}
               </select>
@@ -312,7 +314,7 @@ export function CsvToJsonConverter() {
             {/* Header toggle */}
             <div>
               <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                Options
+                {t("optionsLabel")}
               </label>
               <button
                 type="button"
@@ -334,7 +336,7 @@ export function CsvToJsonConverter() {
                     <Check className="w-3 h-3 text-[#042F2E]" />
                   )}
                 </span>
-                First Row is Header
+                {t("headerRow")}
               </button>
             </div>
           </div>
@@ -351,14 +353,14 @@ export function CsvToJsonConverter() {
                 htmlFor="custom-delimiter"
                 className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
               >
-                Custom Delimiter
+                {t("customLabel")}
               </label>
               <input
                 id="custom-delimiter"
                 type="text"
                 value={customDelimiter}
                 onChange={(e) => setCustomDelimiter(e.target.value)}
-                placeholder="Enter delimiter character..."
+                placeholder={t("customPlaceholder")}
                 className="w-full h-12 px-4 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm min-h-[44px]"
               />
             </motion.div>
@@ -371,7 +373,7 @@ export function CsvToJsonConverter() {
               animate={{ opacity: 1, y: 0 }}
               className="px-4 py-3 bg-[#FB7185]/10 border border-[#FB7185]/30 rounded-lg text-[#FB7185] text-sm font-[Inter]"
             >
-              {result.error}
+              {t(result.error)}
             </motion.div>
           )}
 
@@ -379,14 +381,14 @@ export function CsvToJsonConverter() {
           {result.json && (
             <div className="flex items-center gap-4 py-3 px-4 bg-[#16131E] border border-[#2A2535] rounded-lg">
               <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                Rows:{" "}
+                {t("rows")}{" "}
                 <span className="text-[#EDEDEF]">
                   {result.rowCount.toLocaleString()}
                 </span>
               </span>
               <span className="w-px h-4 bg-[#2A2535]" />
               <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                Characters:{" "}
+                {t("characters")}{" "}
                 <span className="text-[#EDEDEF]">
                   {result.json.length.toLocaleString()}
                 </span>
@@ -401,7 +403,7 @@ export function CsvToJsonConverter() {
                 htmlFor="json-output"
                 className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A]"
               >
-                JSON Output
+                {t("outputLabel")}
               </label>
               <div className="flex items-center gap-2">
                 <button
@@ -411,7 +413,7 @@ export function CsvToJsonConverter() {
                   className="flex items-center gap-2 h-10 px-4 rounded-lg border border-[#2A2535] text-[#EDEDEF] font-mono text-[11px] uppercase tracking-wider hover:border-[#2DD4BF]/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
                 >
                   <Download className="w-4 h-4" />
-                  Download
+                  {t("download")}
                 </button>
                 <button
                   type="button"
@@ -422,12 +424,12 @@ export function CsvToJsonConverter() {
                   {copied ? (
                     <>
                       <Check className="w-4 h-4" />
-                      Copied
+                      {t("copied")}
                     </>
                   ) : (
                     <>
                       <ClipboardCopy className="w-4 h-4" />
-                      Copy JSON
+                      {t("copyJson")}
                     </>
                   )}
                 </button>
@@ -438,7 +440,7 @@ export function CsvToJsonConverter() {
               value={result.json}
               readOnly
               rows={10}
-              placeholder="JSON output will appear here..."
+              placeholder={t("outputPlaceholder")}
               className="w-full px-4 py-3 border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] rounded-lg font-mono text-sm resize-y min-h-[44px] placeholder:text-[#71717A]/60 focus:outline-none"
             />
           </div>
@@ -455,24 +457,24 @@ export function CsvToJsonConverter() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Add CSV",
-                desc: "Upload a CSV file or paste your CSV data directly.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Configure",
-                desc: "Choose your delimiter and header row settings.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Get JSON",
-                desc: "Copy or download the converted JSON instantly.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -484,7 +486,7 @@ export function CsvToJsonConverter() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

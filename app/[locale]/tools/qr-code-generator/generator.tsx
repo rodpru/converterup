@@ -10,6 +10,7 @@ import {
   Type,
   X,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import QRCode from "qrcode";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
@@ -54,6 +55,8 @@ const jsonLdSchema = {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function QRCodeGenerator() {
+  const t = useTranslations("ToolUI.qr-code-generator");
+  const ts = useTranslations("SharedUI");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
   const [text, setText] = useState("");
@@ -124,9 +127,9 @@ export function QRCodeGenerator() {
         img.src = logoSrc;
       }
     } catch {
-      setError("Failed to generate QR code. Please check your input.");
+      setError(t("errGenerate"));
     }
-  }, [text, fgColor, bgColor, size, errorCorrection, logoSrc]);
+  }, [text, fgColor, bgColor, size, errorCorrection, logoSrc, t]);
 
   useEffect(() => {
     if (text.trim()) {
@@ -178,10 +181,10 @@ export function QRCodeGenerator() {
       a.click();
       document.body.removeChild(a);
     } catch {
-      setError("Failed to download QR code. Please try again.");
+      setError(t("errDownload"));
     }
     setDownloading(false);
-  }, [text, size, bgColor]);
+  }, [text, size, bgColor, t]);
 
   return (
     <>
@@ -195,16 +198,15 @@ export function QRCodeGenerator() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            QR Code
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Generator</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Generate custom QR codes with your own colors, sizes, and error
-            correction levels. Download as PNG instantly.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -222,14 +224,14 @@ export function QRCodeGenerator() {
               {/* Text/URL Input */}
               <div>
                 <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                  Text or URL
+                  {t("textLabel")}
                 </label>
                 <div className="relative">
                   <Type className="absolute left-4 top-4 w-4 h-4 text-[#71717A]" />
                   <textarea
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    placeholder="Enter text or URL to encode..."
+                    placeholder={t("textPlaceholder")}
                     rows={3}
                     className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm resize-none"
                   />
@@ -240,7 +242,7 @@ export function QRCodeGenerator() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                    Foreground Color
+                    {t("fgColor")}
                   </label>
                   <div className="flex items-center gap-3 h-12 px-3 border border-[#2A2535] bg-[#1C1825] rounded-lg min-h-[44px]">
                     <input
@@ -256,7 +258,7 @@ export function QRCodeGenerator() {
                 </div>
                 <div>
                   <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                    Background Color
+                    {t("bgColor")}
                   </label>
                   <div className="flex items-center gap-3 h-12 px-3 border border-[#2A2535] bg-[#1C1825] rounded-lg min-h-[44px]">
                     <input
@@ -275,7 +277,7 @@ export function QRCodeGenerator() {
               {/* Size Selector */}
               <div>
                 <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                  Size
+                  {t("size")}
                 </label>
                 <div className="grid grid-cols-4 gap-2">
                   {SIZE_OPTIONS.map((option) => (
@@ -298,7 +300,7 @@ export function QRCodeGenerator() {
               {/* Error Correction */}
               <div>
                 <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                  Error Correction
+                  {t("errorCorrection")}
                 </label>
                 <div className="grid grid-cols-4 gap-2">
                   {ERROR_CORRECTION_LEVELS.map((level) => (
@@ -313,26 +315,21 @@ export function QRCodeGenerator() {
                           ? "bg-[#2DD4BF] text-[#042F2E] font-semibold"
                           : "border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] hover:border-[#2DD4BF]/30"
                       }`}
-                      title={level.label}
+                      title={t(`ec${level.value}`)}
                     >
                       {level.value}
                     </button>
                   ))}
                 </div>
                 <p className="mt-1.5 font-mono text-[10px] text-[#71717A]">
-                  {
-                    ERROR_CORRECTION_LEVELS.find(
-                      (l) => l.value === errorCorrection,
-                    )?.label
-                  }{" "}
-                  — Higher correction allows more damage tolerance
+                  {t("ecHint", { level: t(`ec${errorCorrection}`) })}
                 </p>
               </div>
 
               {/* Center Logo */}
               <div>
                 <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                  Center Logo (optional)
+                  {t("logo")}
                 </label>
                 {logoSrc ? (
                   <div className="flex items-center gap-3 h-12 px-3 border border-[#2A2535] bg-[#1C1825] rounded-lg min-h-[44px]">
@@ -342,11 +339,12 @@ export function QRCodeGenerator() {
                       className="w-8 h-8 rounded object-contain"
                     />
                     <span className="text-xs text-[#EDEDEF] font-[Inter] flex-1 truncate">
-                      Logo added
+                      {t("logoAdded")}
                     </span>
                     <button
                       type="button"
                       onClick={removeLogo}
+                      aria-label={t("removeLogo")}
                       className="p-1 text-[#71717A] hover:text-[#FB7185] transition-colors"
                     >
                       <X className="w-4 h-4" />
@@ -359,7 +357,7 @@ export function QRCodeGenerator() {
                     className="flex items-center justify-center gap-2 w-full h-11 border border-dashed border-[#2A2535] bg-[#1C1825] rounded-lg text-[#71717A] hover:border-[#2DD4BF]/30 hover:text-[#EDEDEF] transition-colors font-mono text-xs min-h-[44px]"
                   >
                     <ImagePlus className="w-4 h-4" />
-                    Upload Logo
+                    {t("uploadLogo")}
                   </button>
                 )}
                 <input
@@ -370,7 +368,7 @@ export function QRCodeGenerator() {
                   className="hidden"
                 />
                 <p className="mt-1.5 font-mono text-[10px] text-[#71717A]">
-                  Best with error correction H (30%) for logo visibility
+                  {t("logoHint")}
                 </p>
               </div>
 
@@ -384,12 +382,12 @@ export function QRCodeGenerator() {
                 {downloading ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    Downloading
+                    {t("downloading")}
                   </>
                 ) : (
                   <>
                     <Download className="w-4 h-4" />
-                    Download PNG
+                    {t("download")}
                   </>
                 )}
               </button>
@@ -401,7 +399,7 @@ export function QRCodeGenerator() {
                 <div className="flex items-center gap-2 w-full mb-4">
                   <QrCode className="w-4 h-4 text-primary" />
                   <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                    Preview
+                    {ts("preview")}
                   </span>
                 </div>
                 <div
@@ -417,13 +415,14 @@ export function QRCodeGenerator() {
                     <div className="absolute inset-0 flex flex-col items-center justify-center w-64 h-64 bg-[#1C1825] rounded-lg">
                       <QrCode className="w-12 h-12 text-[#2A2535] mb-3" />
                       <p className="text-[#71717A] text-sm font-[Inter] text-center px-4">
-                        Enter text or a URL to generate a QR code
+                        {t("empty")}
                       </p>
                     </div>
                   )}
                 </div>
                 <p className="mt-3 font-mono text-[10px] text-[#71717A] text-center">
-                  {size} x {size}px &middot; Error correction: {errorCorrection}
+                  {size} x {size}px &middot; {t("errorCorrection")}:{" "}
+                  {errorCorrection}
                 </p>
               </div>
             </div>
@@ -453,24 +452,24 @@ export function QRCodeGenerator() {
           className="max-w-3xl mx-auto mt-16 sm:mt-24"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Enter Content",
-                desc: "Type or paste any text, URL, or data you want to encode.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Customize",
-                desc: "Pick your colors, size, and error correction level.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Download",
-                desc: "Grab your QR code as a high-quality PNG file.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -482,7 +481,7 @@ export function QRCodeGenerator() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

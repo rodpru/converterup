@@ -3,6 +3,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { ArticlePageContent } from "@/components/blog/article-page-content";
 import { JsonLd } from "@/components/json-ld";
+import { RelatedConversions } from "@/components/related-conversions";
 import { extractFaqItems, getAllArticles, getArticleBySlug } from "@/lib/blog";
 import { AUTHOR, BASE_URL, localizedUrl, pageMetadata } from "@/lib/seo";
 
@@ -112,6 +113,13 @@ export default async function ArticlePage({ params }: Props) {
         />
       )}
       <ArticlePageContent slug={slug} locale={locale} />
+      {article.toolHref.startsWith("/tools/") && (
+        <RelatedConversions
+          toolSlug={article.toolHref.replace("/tools/", "")}
+          locale={locale}
+          limit={4}
+        />
+      )}
     </>
   );
 }

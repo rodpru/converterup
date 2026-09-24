@@ -6,13 +6,35 @@ import { JsonLd } from "@/components/json-ld";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import {
+  type Conversion,
   conversions,
   getConversion,
   getRelatedConversions,
 } from "@/data/conversions";
 import { Link } from "@/i18n/routing";
+import { getAllArticles } from "@/lib/blog";
 import { compareFormats, type Msg } from "@/lib/format-compare";
 import { localizedUrl, pageMetadata } from "@/lib/seo";
+
+/**
+ * Best blog article for a conversion in the same locale: format names in the
+ * slug/keyword/title weigh most, the article's tool link breaks ties.
+ */
+function relatedGuide(c: Conversion, locale: string) {
+  const formats = [c.fromFormat, c.toFormat].map((f) => f.toLowerCase());
+  let best: { score: number; slug: string; title: string } | undefined;
+  for (const a of getAllArticles().filter((x) => x.lang === locale)) {
+    const words = new Set(
+      `${a.slug} ${a.keyword} ${a.title}`.toLowerCase().split(/[^a-z0-9]+/),
+    );
+    let score = formats.filter((f) => words.has(f)).length * 2;
+    if (a.toolHref === `/tools/${c.toolSlug}`) score += 1;
+    if (score > 0 && (!best || score > best.score)) {
+      best = { score, slug: a.slug, title: a.title };
+    }
+  }
+  return best;
+}
 
 export function generateStaticParams() {
   const locales = ["en", "pt", "es"];
@@ -32,14 +54,23 @@ export async function generateMetadata({
   if (!conversion) return {};
 
   const t = await getTranslations({ locale, namespace: "Convert" });
-  const title = t("metaTitle", {
-    from: conversion.fromFormat,
-    to: conversion.toFormat,
-  });
-  const description = t("metaDescription", {
-    from: conversion.fromFormat,
-    to: conversion.toFormat,
-  });
+  const tfn = await getTranslations({ locale, namespace: "FormatNames" });
+  const args = {
+    from: tfn.has(conversion.fromFormat)
+      ? tfn(conversion.fromFormat)
+      : conversion.fromFormat,
+    to: tfn.has(conversion.toFormat)
+      ? tfn(conversion.toFormat)
+      : conversion.toFormat,
+  };
+  // "Without losing quality" is meaningless for number bases and text formats.
+  const isData =
+    conversion.category === "data" || conversion.category === "text";
+  const title = t(isData ? "metaTitleData" : "metaTitle", args);
+  const description = t(
+    isData ? "metaDescriptionData" : "metaDescription",
+    args,
+  );
 
   return pageMetadata({
     locale,
@@ -64,9 +95,13 @@ export default async function ConvertPage({
   const tf = await getTranslations({ locale, namespace: "Formats" });
   const pageUrl = localizedUrl(`/convert/${slug}`, locale);
 
+  const tfn = await getTranslations({ locale, namespace: "FormatNames" });
+  // Localized display name for word-like formats (Binary → Binário); format
+  // codes such as PNG or MP4 pass through unchanged.
+  const localName = (f: string) => (tfn.has(f) ? tfn(f) : f);
   const args = {
-    from: conversion.fromFormat,
-    to: conversion.toFormat,
+    from: localName(conversion.fromFormat),
+    to: localName(conversion.toFormat),
   };
 
   const howToSchema = {
@@ -77,7 +112,7 @@ export default async function ConvertPage({
     totalTime: "PT30S",
     tool: {
       "@type": "HowToTool",
-      name: `ConverterUp ${conversion.fromFormat} to ${conversion.toFormat}`,
+      name: `ConverterUp ${args.from} → ${args.to}`,
     },
     step: [1, 2, 3].map((i) => ({
       "@type": "HowToStep",
@@ -90,7 +125,18 @@ export default async function ConvertPage({
 
   const comparison = compareFormats(conversion);
   const msg = (m: Msg | string) =>
-    typeof m === "string" ? m : t(m.key, m.params);
+    typeof m === "string"
+      ? m
+      : t(
+          m.key,
+          m.params &&
+            Object.fromEntries(
+              Object.entries(m.params).map(([k, v]) => [
+                k,
+                typeof v === "string" ? localName(v) : v,
+              ]),
+            ),
+        );
 
   const faqs = [
     ...[1, 2, 3].map((i) => ({
@@ -119,6 +165,7 @@ export default async function ConvertPage({
       : `/tools/${conversion.toolSlug}`;
 
   const related = getRelatedConversions(slug, 4);
+  const guide = relatedGuide(conversion, locale);
 
   return (
     <main className="min-h-screen bg-[#0C0A12] text-[#EDEDEF]">
@@ -191,10 +238,10 @@ export default async function ConvertPage({
                         {t("featureCol")}
                       </th>
                       <th className="px-4 py-3 font-mono text-[11px] uppercase tracking-wider text-[#2DD4BF] font-normal">
-                        {conversion.fromFormat}
+                        {args.from}
                       </th>
                       <th className="px-4 py-3 font-mono text-[11px] uppercase tracking-wider text-[#2DD4BF] font-normal">
-                        {conversion.toFormat}
+                        {args.to}
                       </th>
                     </tr>
                   </thead>
@@ -251,10 +298,10 @@ export default async function ConvertPage({
                     <thead className="bg-[#16131E]">
                       <tr>
                         <th className="px-4 py-3 text-[11px] uppercase tracking-wider text-[#2DD4BF] font-normal">
-                          {conversion.fromFormat}
+                          {args.from}
                         </th>
                         <th className="px-4 py-3 text-[11px] uppercase tracking-wider text-[#2DD4BF] font-normal">
-                          {conversion.toFormat}
+                          {args.to}
                         </th>
                       </tr>
                     </thead>
@@ -329,6 +376,25 @@ export default async function ConvertPage({
         </div>
       </section>
 
+      {guide && (
+        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-[#2A2535]/50">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6">
+              {t("guideHeading")}
+            </h2>
+            <Link
+              href={`/blog/${guide.slug}`}
+              className="group flex items-center justify-between gap-4 p-5 border border-[#2A2535] bg-[#16131E] hover:border-[#2DD4BF]/30 transition-colors"
+            >
+              <span className="text-sm sm:text-base font-[Inter] text-[#EDEDEF] group-hover:text-[#2DD4BF] transition-colors">
+                {guide.title}
+              </span>
+              <ArrowRight className="w-4 h-4 shrink-0 text-[#71717A] group-hover:text-[#2DD4BF] transition-colors" />
+            </Link>
+          </div>
+        </section>
+      )}
+
       {related.length > 0 && (
         <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-[#2A2535]/50">
           <div className="max-w-3xl mx-auto">
@@ -343,7 +409,7 @@ export default async function ConvertPage({
                   className="flex items-center justify-between gap-3 p-4 rounded-xl border border-[#2A2535] bg-[#16131E] hover:border-[#2DD4BF]/30 transition-colors"
                 >
                   <span className="text-sm font-[Inter] text-[#EDEDEF]">
-                    {c.fromFormat} → {c.toFormat}
+                    {localName(c.fromFormat)} → {localName(c.toFormat)}
                   </span>
                   <ArrowRight className="w-4 h-4 text-[#71717A]" />
                 </Link>

@@ -35,9 +35,6 @@ import { useQueryParam } from "@/lib/use-query-param";
 
 export const tools = [
   {
-    name: "Media Converter",
-    description:
-      "Convert images and videos between PNG, JPG, WebP, MP4, MKV and more.",
     href: "/tools/media-converter",
     icon: ArrowLeftRight,
     tags: [
@@ -56,169 +53,121 @@ export const tools = [
     ],
   },
   {
-    name: "Image Compressor",
-    description: "Reduce image file size without losing quality.",
     href: "/tools/image-compressor",
     icon: ImageDown,
     tags: ["image", "compress", "reduce", "size", "png", "jpg", "webp"],
   },
   {
-    name: "Image Resizer",
-    description: "Resize images to exact dimensions or percentages.",
     href: "/tools/image-resizer",
     icon: Scaling,
     tags: ["image", "resize", "dimensions", "scale", "crop"],
   },
   {
-    name: "Video to GIF",
-    description: "Convert video clips into lightweight animated GIFs.",
     href: "/tools/video-to-gif",
     icon: Film,
     tags: ["video", "gif", "convert", "animation", "mp4"],
   },
   {
-    name: "QR Code Generator",
-    description: "Generate QR codes for URLs, text, or contact info.",
     href: "/tools/qr-code-generator",
     icon: QrCode,
     tags: ["qr", "code", "generate", "url", "barcode"],
   },
   {
-    name: "YouTube Thumbnail Downloader",
-    description: "Download YouTube thumbnails in all resolutions.",
     href: "/tools/youtube-thumbnail-downloader",
     icon: Youtube,
     tags: ["youtube", "thumbnail", "download", "video", "image"],
   },
   {
-    name: "EXIF Viewer & Remover",
-    description: "View and strip metadata from your photos.",
     href: "/tools/exif-viewer",
     icon: FileSearch,
     tags: ["exif", "metadata", "photo", "privacy", "gps", "camera"],
   },
   {
-    name: "Color Palette Extractor",
-    description: "Extract dominant colors from any image.",
     href: "/tools/color-palette",
     icon: Palette,
     tags: ["color", "palette", "extract", "image", "hex", "rgb"],
   },
   {
-    name: "Favicon Generator",
-    description: "Generate favicons in all sizes from a single image.",
     href: "/tools/favicon-generator",
     icon: AppWindow,
     tags: ["favicon", "icon", "generate", "website", "pwa"],
   },
   {
-    name: "SVG to PNG",
-    description: "Convert SVG vector files to PNG raster images.",
     href: "/tools/svg-to-png",
     icon: FileImage,
     tags: ["svg", "png", "convert", "vector", "raster"],
   },
   {
-    name: "Image to Base64",
-    description: "Encode images as Base64 data URIs for embedding.",
     href: "/tools/image-to-base64",
     icon: Binary,
     tags: ["image", "base64", "encode", "data uri", "embed"],
   },
   {
-    name: "Video Frame Extractor",
-    description: "Extract individual frames from video files.",
     href: "/tools/video-frame-extractor",
     icon: Clapperboard,
     tags: ["video", "frame", "screenshot", "extract", "capture"],
   },
   {
-    name: "Stripe Fee Calculator",
-    description: "Calculate Stripe processing fees for any amount.",
     href: "/tools/stripe-fee-calculator",
     icon: Calculator,
     tags: ["stripe", "fee", "calculator", "payment", "processing"],
   },
   {
-    name: "Text Repeater",
-    description: "Repeat any text multiple times with separators.",
     href: "/tools/text-repeater",
     icon: Repeat,
     tags: ["text", "repeat", "copy", "duplicate", "generate"],
   },
   {
-    name: "VTT to SRT Converter",
-    description: "Convert WebVTT subtitles to SRT format instantly.",
     href: "/tools/vtt-to-srt",
     icon: Subtitles,
     tags: ["vtt", "srt", "subtitle", "convert", "caption"],
   },
   {
-    name: "JSON Viewer",
-    description: "Format, validate, and explore JSON with syntax highlighting.",
     href: "/tools/json-viewer",
     icon: Braces,
     tags: ["json", "format", "validate", "viewer", "prettify"],
   },
   {
-    name: "Hex to Decimal",
-    description: "Convert between hex, decimal, binary, and octal.",
     href: "/tools/hex-to-decimal",
     icon: Hash,
     tags: ["hex", "decimal", "binary", "octal", "convert", "number"],
   },
   {
-    name: "HTML Minifier",
-    description: "Minify HTML code to reduce file size.",
     href: "/tools/html-minifier",
     icon: FileCode,
     tags: ["html", "minify", "compress", "code", "web"],
   },
   {
-    name: "CSS Minifier",
-    description: "Minify CSS stylesheets for faster loading.",
     href: "/tools/css-minifier",
     icon: Paintbrush,
     tags: ["css", "minify", "compress", "stylesheet", "web"],
   },
   {
-    name: "UUID Generator",
-    description: "Generate UUID v4 identifiers instantly.",
     href: "/tools/uuid-generator",
     icon: Fingerprint,
     tags: ["uuid", "guid", "generate", "random", "identifier"],
   },
   {
-    name: "Base64 Decoder",
-    description: "Decode Base64 strings to text or images.",
     href: "/tools/base64-decode",
     icon: Unlock,
     tags: ["base64", "decode", "text", "image", "data uri"],
   },
   {
-    name: "Case Converter",
-    description: "Convert text between camelCase, snake_case, and more.",
     href: "/tools/case-converter",
     icon: CaseSensitive,
     tags: ["case", "convert", "camel", "snake", "uppercase", "lowercase"],
   },
   {
-    name: "CSV to JSON",
-    description: "Convert CSV files to JSON format instantly.",
     href: "/tools/csv-to-json",
     icon: Table,
     tags: ["csv", "json", "convert", "data", "spreadsheet"],
   },
   {
-    name: "HEIC to JPG",
-    description: "Convert iPhone HEIC photos to JPG, PNG, or WebP.",
     href: "/tools/heic-to-jpg",
     icon: Smartphone,
     tags: ["heic", "heif", "jpg", "iphone", "ios", "apple", "convert"],
   },
   {
-    name: "HEIC to PDF",
-    description: "Combine iPhone HEIC photos into a single multi-page PDF.",
     href: "/tools/heic-to-pdf",
     icon: FileText,
     tags: ["heic", "heif", "pdf", "iphone", "ios", "merge", "combine"],
@@ -232,17 +181,39 @@ export function ToolsGrid() {
     if (initialQuery) setQuery(initialQuery);
   }, [initialQuery]);
   const t = useTranslations("Tools");
+  const tu = useTranslations("SharedUI.tools");
+
+  // Name/description/tags are localized; the English tags in code keep
+  // format-name searches ("mp4", "heic") working in every language.
+  const localized = useMemo(
+    () =>
+      tools.map((tool) => {
+        const slug = tool.href.replace("/tools/", "");
+        return {
+          ...tool,
+          name: tu(`${slug}.name`),
+          description: tu(`${slug}.description`),
+          searchTags: [
+            ...tool.tags,
+            ...tu(`${slug}.tags`)
+              .split(",")
+              .map((tag) => tag.trim().toLowerCase()),
+          ],
+        };
+      }),
+    [tu],
+  );
 
   const filtered = useMemo(() => {
-    if (!query.trim()) return tools;
+    if (!query.trim()) return localized;
     const q = query.toLowerCase();
-    return tools.filter(
-      (t) =>
-        t.name.toLowerCase().includes(q) ||
-        t.description.toLowerCase().includes(q) ||
-        t.tags.some((tag) => tag.includes(q)),
+    return localized.filter(
+      (tool) =>
+        tool.name.toLowerCase().includes(q) ||
+        tool.description.toLowerCase().includes(q) ||
+        tool.searchTags.some((tag) => tag.includes(q)),
     );
-  }, [query]);
+  }, [query, localized]);
 
   return (
     <>

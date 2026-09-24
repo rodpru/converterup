@@ -12,6 +12,7 @@ import {
   TriangleAlert,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 import { loadFFmpeg } from "@/lib/ffmpeg";
@@ -66,6 +67,8 @@ function getFileExtension(file: File): string {
 }
 
 export function VideoToGifConverter() {
+  const t = useTranslations("ToolUI.video-to-gif");
+  const ts = useTranslations("SharedUI");
   const [file, setFile] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [fps, setFps] = useState<number>(15);
@@ -101,7 +104,10 @@ export function VideoToGifConverter() {
 
       if (selected.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
         setError(
-          `File too large. Maximum size is ${MAX_FILE_SIZE_MB}MB. Your file is ${formatFileSize(selected.size)}.`,
+          t("errTooLarge", {
+            max: MAX_FILE_SIZE_MB,
+            size: formatFileSize(selected.size),
+          }),
         );
         return;
       }
@@ -114,7 +120,7 @@ export function VideoToGifConverter() {
       setGifUrl(null);
       setGifSize(0);
     },
-    [videoUrl, gifUrl],
+    [videoUrl, gifUrl, t],
   );
 
   const handleDrop = useCallback(
@@ -127,15 +133,16 @@ export function VideoToGifConverter() {
 
       const ext = getFileExtension(dropped);
       if (!ACCEPTED_FORMATS.split(",").includes(`.${ext}`)) {
-        setError(
-          "Unsupported format. Please upload MP4, WebM, MOV, AVI, MKV, FLV, M4V, 3GP, WMV, or TS.",
-        );
+        setError(t("errUnsupported"));
         return;
       }
 
       if (dropped.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
         setError(
-          `File too large. Maximum size is ${MAX_FILE_SIZE_MB}MB. Your file is ${formatFileSize(dropped.size)}.`,
+          t("errTooLarge", {
+            max: MAX_FILE_SIZE_MB,
+            size: formatFileSize(dropped.size),
+          }),
         );
         return;
       }
@@ -148,7 +155,7 @@ export function VideoToGifConverter() {
       setGifUrl(null);
       setGifSize(0);
     },
-    [videoUrl, gifUrl],
+    [videoUrl, gifUrl, t],
   );
 
   const handleConvert = useCallback(async () => {
@@ -201,13 +208,11 @@ export function VideoToGifConverter() {
       }
     } catch (err) {
       console.error("Conversion error:", err);
-      setError(
-        "Conversion failed. The video may be too large or in an unsupported codec. Try a smaller file or different format.",
-      );
+      setError(t("errConvert"));
     } finally {
       setConverting(false);
     }
-  }, [file, fps, width, gifUrl]);
+  }, [file, fps, width, gifUrl, t]);
 
   const handleDownload = useCallback(async () => {
     if (!gifUrl || !file) return;
@@ -248,16 +253,15 @@ export function VideoToGifConverter() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Video to GIF
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Converter</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Convert MP4, WebM, MOV, and AVI videos to high-quality GIF
-            animations. All processing happens in your browser.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -295,10 +299,10 @@ export function VideoToGifConverter() {
                 <Upload className="w-6 h-6 text-[#71717A] group-hover:text-[#2DD4BF] transition-colors" />
               </div>
               <p className="text-[#EDEDEF] font-[Inter] text-base font-medium mb-2">
-                Drop your video here or click to browse
+                {t("drop")}
               </p>
               <p className="text-[#71717A] font-[Inter] text-sm">
-                MP4, WebM, MOV, AVI — up to {MAX_FILE_SIZE_MB}MB
+                {t("dropHint", { max: MAX_FILE_SIZE_MB })}
               </p>
             </div>
           )}
@@ -345,10 +349,7 @@ export function VideoToGifConverter() {
                   >
                     <TriangleAlert className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5" />
                     <p className="text-[#F59E0B] text-sm font-[Inter]">
-                      This file is over {LARGE_FILE_THRESHOLD_MB}MB. Conversion
-                      may take significantly longer depending on your device.
-                      Single-thread FFmpeg is used when multi-thread is not
-                      available.
+                      {t("largeFile", { size: LARGE_FILE_THRESHOLD_MB })}
                     </p>
                   </motion.div>
                 )}
@@ -358,7 +359,7 @@ export function VideoToGifConverter() {
                   <div className="flex items-center gap-2 mb-5">
                     <Settings2 className="w-4 h-4 text-primary" />
                     <h2 className="text-sm font-[Syne] font-bold text-[#EDEDEF] uppercase tracking-wider">
-                      Settings
+                      {t("settings")}
                     </h2>
                   </div>
 
@@ -366,7 +367,7 @@ export function VideoToGifConverter() {
                     {/* Frame rate */}
                     <div>
                       <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                        Frame Rate
+                        {t("frameRate")}
                       </label>
                       <div className="flex gap-2">
                         {FPS_OPTIONS.map((option) => (
@@ -385,14 +386,14 @@ export function VideoToGifConverter() {
                         ))}
                       </div>
                       <p className="font-mono text-[10px] text-[#71717A]/60 mt-1.5">
-                        fps — higher = smoother, larger file
+                        {t("fpsHint")}
                       </p>
                     </div>
 
                     {/* Width */}
                     <div>
                       <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                        Width
+                        {t("width")}
                       </label>
                       <div className="flex flex-wrap gap-2">
                         {WIDTH_OPTIONS.map((option) => (
@@ -406,12 +407,12 @@ export function VideoToGifConverter() {
                                 : "bg-[#0C0A12] border border-[#2A2535] text-[#71717A] hover:border-[#2DD4BF]/30 hover:text-[#EDEDEF]"
                             }`}
                           >
-                            {option.label}
+                            {option.value === -1 ? t("original") : option.label}
                           </button>
                         ))}
                       </div>
                       <p className="font-mono text-[10px] text-[#71717A]/60 mt-1.5">
-                        px — height scales proportionally
+                        {t("widthHint")}
                       </p>
                     </div>
                   </div>
@@ -425,7 +426,7 @@ export function VideoToGifConverter() {
                     disabled={converting}
                     className="h-12 px-5 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] font-mono text-sm uppercase tracking-wider hover:border-[#2DD4BF]/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
                   >
-                    Reset
+                    {ts("reset")}
                   </button>
                   <button
                     type="button"
@@ -436,10 +437,10 @@ export function VideoToGifConverter() {
                     {converting ? (
                       <span className="flex items-center justify-center gap-2">
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Converting...
+                        {t("converting")}
                       </span>
                     ) : (
-                      "Convert to GIF"
+                      t("convert")
                     )}
                   </button>
                 </div>
@@ -455,7 +456,7 @@ export function VideoToGifConverter() {
                     >
                       <div className="flex items-center justify-between mb-2">
                         <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                          Processing
+                          {ts("processing")}
                         </span>
                         <span className="font-mono text-[11px] text-[#2DD4BF]">
                           {progress}%
@@ -505,7 +506,7 @@ export function VideoToGifConverter() {
               <div className="flex items-center gap-2 mb-4">
                 <Film className="w-4 h-4 text-primary" />
                 <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                  Result
+                  {ts("resultTitle")}
                 </h2>
                 <span className="ml-auto font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
                   {formatFileSize(gifSize)}
@@ -517,7 +518,7 @@ export function VideoToGifConverter() {
                   {/* biome-ignore lint/performance/noImgElement: Dynamic blob URL for converted GIF output */}
                   <img
                     src={gifUrl}
-                    alt="Converted GIF preview"
+                    alt={t("previewAlt")}
                     className="max-w-full max-h-[500px] object-contain rounded"
                   />
                 </div>
@@ -528,7 +529,7 @@ export function VideoToGifConverter() {
                     className="w-full flex items-center justify-center gap-2 h-12 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
                   >
                     <Download className="w-4 h-4" />
-                    Download GIF
+                    {t("download")}
                   </button>
                 </div>
               </div>
@@ -547,24 +548,24 @@ export function VideoToGifConverter() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Upload Video",
-                desc: "Select an MP4, WebM, MOV, or AVI file from your device.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Customize",
-                desc: "Choose your preferred frame rate and output width for the GIF.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Download",
-                desc: "Convert and download your GIF. Everything stays in your browser.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -576,7 +577,7 @@ export function VideoToGifConverter() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

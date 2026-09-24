@@ -15,6 +15,7 @@ import {
   Upload,
   X,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -70,6 +71,8 @@ function formatFileSize(bytes: number): string {
 }
 
 export function VideoFrameExtractor() {
+  const t = useTranslations("ToolUI.video-frame-extractor");
+  const ts = useTranslations("SharedUI");
   const [file, setFile] = useState<File | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [frames, setFrames] = useState<CapturedFrame[]>([]);
@@ -105,7 +108,10 @@ export function VideoFrameExtractor() {
 
       if (selected.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
         setError(
-          `File too large. Maximum size is ${MAX_FILE_SIZE_MB}MB. Your file is ${formatFileSize(selected.size)}.`,
+          t("errTooLarge", {
+            max: MAX_FILE_SIZE_MB,
+            size: formatFileSize(selected.size),
+          }),
         );
         return;
       }
@@ -123,7 +129,7 @@ export function VideoFrameExtractor() {
       setFrames([]);
       setLightboxFrame(null);
     },
-    [videoUrl, frames],
+    [videoUrl, frames, t],
   );
 
   const captureFrame = useCallback(() => {
@@ -139,7 +145,7 @@ export function VideoFrameExtractor() {
       canvas.height = video.videoHeight;
       const ctx = canvas.getContext("2d");
       if (!ctx) {
-        setError("Failed to create canvas context.");
+        setError(t("errCanvas"));
         setCapturing(false);
         return;
       }
@@ -152,9 +158,7 @@ export function VideoFrameExtractor() {
       canvas.toBlob(
         (blob) => {
           if (!blob) {
-            setError(
-              "Failed to capture frame. Try seeking to a different position.",
-            );
+            setError(t("errCaptureSeek"));
             setCapturing(false);
             return;
           }
@@ -176,10 +180,10 @@ export function VideoFrameExtractor() {
         quality,
       );
     } catch {
-      setError("Failed to capture frame. The video may not be fully loaded.");
+      setError(t("errCapture"));
       setCapturing(false);
     }
-  }, [outputFormat]);
+  }, [outputFormat, t]);
 
   const deleteFrame = useCallback((frameId: string) => {
     setFrames((prev) => {
@@ -229,10 +233,10 @@ export function VideoFrameExtractor() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch {
-      setError("Failed to create ZIP file. Please try again.");
+      setError(t("errZip"));
     }
     setDownloadingAll(false);
-  }, [frames, outputFormat, file]);
+  }, [frames, outputFormat, file, t]);
 
   const seekBy = useCallback((seconds: number) => {
     const video = videoRef.current;
@@ -269,16 +273,15 @@ export function VideoFrameExtractor() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Video Frame
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Extractor</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Capture screenshots from any video file. Seek to the perfect moment,
-            grab frames, and download them as PNG or JPG.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -308,10 +311,10 @@ export function VideoFrameExtractor() {
               </div>
               <div className="text-center">
                 <p className="text-[#EDEDEF] font-[Inter] font-medium mb-1">
-                  Click to upload a video
+                  {t("clickUpload")}
                 </p>
                 <p className="text-[#71717A] font-mono text-[11px] uppercase tracking-wider">
-                  MP4, WebM, MOV — up to {MAX_FILE_SIZE_MB}MB
+                  {t("uploadHint", { max: MAX_FILE_SIZE_MB })}
                 </p>
               </div>
               <input
@@ -344,7 +347,8 @@ export function VideoFrameExtractor() {
                       type="button"
                       onClick={() => seekBy(-5)}
                       className="flex items-center justify-center w-10 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] min-w-[44px]"
-                      title="Back 5 seconds"
+                      title={t("back5s")}
+                      aria-label={t("back5s")}
                     >
                       <ChevronLeft className="w-4 h-4" />
                     </button>
@@ -352,7 +356,7 @@ export function VideoFrameExtractor() {
                       type="button"
                       onClick={() => seekBy(-1)}
                       className="flex items-center justify-center px-2 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#71717A] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] font-mono text-[11px]"
-                      title="Back 1 second"
+                      title={t("back1s")}
                     >
                       -1s
                     </button>
@@ -360,7 +364,7 @@ export function VideoFrameExtractor() {
                       type="button"
                       onClick={() => seekBy(-0.04)}
                       className="flex items-center justify-center px-2 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#71717A] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] font-mono text-[11px]"
-                      title="Back 1 frame (~1/25s)"
+                      title={t("back1f")}
                     >
                       -1f
                     </button>
@@ -368,7 +372,7 @@ export function VideoFrameExtractor() {
                       type="button"
                       onClick={() => seekBy(0.04)}
                       className="flex items-center justify-center px-2 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#71717A] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] font-mono text-[11px]"
-                      title="Forward 1 frame (~1/25s)"
+                      title={t("fwd1f")}
                     >
                       +1f
                     </button>
@@ -376,7 +380,7 @@ export function VideoFrameExtractor() {
                       type="button"
                       onClick={() => seekBy(1)}
                       className="flex items-center justify-center px-2 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#71717A] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] font-mono text-[11px]"
-                      title="Forward 1 second"
+                      title={t("fwd1s")}
                     >
                       +1s
                     </button>
@@ -384,7 +388,8 @@ export function VideoFrameExtractor() {
                       type="button"
                       onClick={() => seekBy(5)}
                       className="flex items-center justify-center w-10 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] min-w-[44px]"
-                      title="Forward 5 seconds"
+                      title={t("fwd5s")}
+                      aria-label={t("fwd5s")}
                     >
                       <ChevronRight className="w-4 h-4" />
                     </button>
@@ -393,7 +398,7 @@ export function VideoFrameExtractor() {
                   {/* Format selector */}
                   <div className="flex items-center gap-2 ml-auto">
                     <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                      Format
+                      {t("format")}
                     </span>
                     <div className="flex rounded-lg border border-[#2A2535] overflow-hidden">
                       {(["png", "jpg"] as const).map((fmt) => (
@@ -425,7 +430,7 @@ export function VideoFrameExtractor() {
                     ) : (
                       <Camera className="w-4 h-4" />
                     )}
-                    Capture Frame
+                    {t("capture")}
                   </button>
                 </div>
               </div>
@@ -440,7 +445,7 @@ export function VideoFrameExtractor() {
                   onClick={resetAll}
                   className="text-[#71717A] hover:text-[#FB7185] font-mono text-[11px] uppercase tracking-wider transition-colors shrink-0"
                 >
-                  Remove video
+                  {t("removeVideo")}
                 </button>
               </div>
             </div>
@@ -475,10 +480,10 @@ export function VideoFrameExtractor() {
               <div className="flex items-center gap-2 mb-6">
                 <ImageIcon className="w-4 h-4 text-primary" />
                 <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                  Captured Frames
+                  {t("captured")}
                 </h2>
                 <span className="ml-auto font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                  {frames.length} frame{frames.length !== 1 ? "s" : ""}
+                  {t("frameCount", { count: frames.length })}
                 </span>
               </div>
 
@@ -499,7 +504,9 @@ export function VideoFrameExtractor() {
                       {/* biome-ignore lint/a11y/useAltText: Dynamically generated frame captures */}
                       <img
                         src={frame.url}
-                        alt={`Frame at ${formatTimestamp(frame.timestamp)}`}
+                        alt={t("frameAt", {
+                          time: formatTimestamp(frame.timestamp),
+                        })}
                         className="w-full h-full object-cover"
                         loading="lazy"
                       />
@@ -521,7 +528,8 @@ export function VideoFrameExtractor() {
                           type="button"
                           onClick={() => downloadFrame(frame)}
                           className="flex items-center justify-center w-9 h-9 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] min-w-[44px]"
-                          title="Download frame"
+                          title={t("downloadFrame")}
+                          aria-label={t("downloadFrame")}
                         >
                           <Download className="w-3.5 h-3.5" />
                         </button>
@@ -529,7 +537,8 @@ export function VideoFrameExtractor() {
                           type="button"
                           onClick={() => deleteFrame(frame.id)}
                           className="flex items-center justify-center w-9 h-9 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#71717A] hover:border-[#FB7185]/30 hover:text-[#FB7185] transition-colors min-h-[44px] min-w-[44px]"
-                          title="Delete frame"
+                          title={t("deleteFrame")}
+                          aria-label={t("deleteFrame")}
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -552,7 +561,7 @@ export function VideoFrameExtractor() {
                   ) : (
                     <Download className="w-4 h-4" />
                   )}
-                  Download All as ZIP
+                  {t("downloadAll")}
                 </button>
               </div>
             </motion.div>
@@ -585,7 +594,9 @@ export function VideoFrameExtractor() {
                 {/* biome-ignore lint/a11y/useAltText: Dynamically generated frame capture in lightbox */}
                 <img
                   src={lightboxFrame.url}
-                  alt={`Frame at ${formatTimestamp(lightboxFrame.timestamp)}`}
+                  alt={t("frameAt", {
+                    time: formatTimestamp(lightboxFrame.timestamp),
+                  })}
                   className="max-w-full max-h-[85vh] object-contain rounded-lg"
                 />
                 <div className="absolute top-3 right-3 flex items-center gap-2">
@@ -593,7 +604,8 @@ export function VideoFrameExtractor() {
                     type="button"
                     onClick={() => downloadFrame(lightboxFrame)}
                     className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#16131E]/90 border border-[#2A2535] text-[#EDEDEF] hover:text-[#2DD4BF] transition-colors min-h-[44px] min-w-[44px]"
-                    title="Download frame"
+                    title={t("downloadFrame")}
+                    aria-label={t("downloadFrame")}
                   >
                     <Download className="w-4 h-4" />
                   </button>
@@ -601,7 +613,8 @@ export function VideoFrameExtractor() {
                     type="button"
                     onClick={() => setLightboxFrame(null)}
                     className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#16131E]/90 border border-[#2A2535] text-[#EDEDEF] hover:text-[#FB7185] transition-colors min-h-[44px] min-w-[44px]"
-                    title="Close"
+                    title={t("close")}
+                    aria-label={t("close")}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -628,24 +641,24 @@ export function VideoFrameExtractor() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Upload Video",
-                desc: "Select an MP4, WebM, or MOV video file from your device.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Seek & Capture",
-                desc: "Use the video controls to find the perfect moment, then capture the frame.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Download",
-                desc: "Download individual frames or grab all of them as a ZIP file.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -657,7 +670,7 @@ export function VideoFrameExtractor() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

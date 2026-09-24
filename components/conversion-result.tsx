@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Download, RotateCcw, Share2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { FormatBadge } from "@/components/format-badge";
 import { formatFileSize, getFileCategory } from "@/lib/media-utils";
 import { canShare, downloadFile, shareFile } from "@/lib/mobile-utils";
@@ -24,6 +25,7 @@ export function ConversionResult({
   onConvertAnother,
   onDownload,
 }: ConversionResultProps) {
+  const t = useTranslations("SharedUI.result");
   const category = getFileCategory(originalFile);
   const reduction = Math.round((1 - result.size / originalFile.size) * 100);
   const outputExt = result.filename.split(".").pop() ?? "";
@@ -52,11 +54,13 @@ export function ConversionResult({
     >
       <div className="text-center mb-8">
         <h2 className="text-3xl sm:text-4xl font-[Syne] font-bold text-[#EDEDEF] mb-2">
-          Done.
+          {t("done")}
         </h2>
         {result.duration && (
           <p className="text-[#71717A] font-mono text-xs">
-            Completed in {(result.duration / 1000).toFixed(1)}s
+            {t("completedIn", {
+              seconds: (result.duration / 1000).toFixed(1),
+            })}
           </p>
         )}
       </div>
@@ -65,7 +69,7 @@ export function ConversionResult({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-6 text-center">
           <span className="text-xs font-mono uppercase tracking-wider text-[#71717A] block mb-3">
-            Before
+            {t("before")}
           </span>
           <FormatBadge
             format={originalFile.name.split(".").pop() ?? ""}
@@ -78,7 +82,7 @@ export function ConversionResult({
         </div>
         <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-6 text-center">
           <span className="text-xs font-mono uppercase tracking-wider text-[#71717A] block mb-3">
-            After
+            {t("after")}
           </span>
           <FormatBadge
             format={outputExt}
@@ -91,12 +95,12 @@ export function ConversionResult({
           </p>
           {reduction > 0 && (
             <p className="font-mono text-xs text-[#2DD4BF] mt-1">
-              {reduction}% smaller
+              {t("smaller", { percent: reduction })}
             </p>
           )}
           {reduction < 0 && (
             <p className="font-mono text-xs text-[#FB7185] mt-1">
-              {Math.abs(reduction)}% larger
+              {t("larger", { percent: Math.abs(reduction) })}
             </p>
           )}
         </div>
@@ -110,12 +114,13 @@ export function ConversionResult({
           className="flex-1 h-14 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px] flex items-center justify-center gap-2"
         >
           <Download className="w-5 h-5" />
-          Download
+          {t("download")}
         </button>
         {canShare() && (
           <button
             type="button"
             onClick={handleShare}
+            aria-label={t("share")}
             className="h-14 px-6 rounded-lg border border-[#2A2535] text-[#EDEDEF] hover:border-[#2DD4BF]/30 transition-colors min-h-[44px] flex items-center justify-center"
           >
             <Share2 className="w-5 h-5" />
@@ -127,7 +132,7 @@ export function ConversionResult({
           className="flex-1 h-14 rounded-lg border border-[#2A2535] text-[#EDEDEF] font-mono uppercase tracking-wider hover:border-[#2DD4BF]/30 transition-colors min-h-[44px] flex items-center justify-center gap-2"
         >
           <RotateCcw className="w-4 h-4" />
-          Convert Another
+          {t("convertAnother")}
         </button>
       </div>
     </motion.div>

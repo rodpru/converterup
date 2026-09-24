@@ -73,7 +73,10 @@ function buildRows(from: FormatInfo, to: FormatInfo): CompareRow[] {
   add("row.kind", (f) => ({ key: `val.kind.${f.kind}` }), true);
   add(
     "row.compression",
-    (f) => enumVal("compression", f.compression),
+    (f) =>
+      f.kind === "audio" && f.compression === "none"
+        ? { key: "val.compression.pcm" }
+        : enumVal("compression", f.compression),
     either("compression"),
   );
   add(
@@ -261,6 +264,39 @@ function videoNotes(c: Conversion, from: FormatInfo, to: FormatInfo) {
   return { notes, faqs };
 }
 
+function audioNotes(c: Conversion, from: FormatInfo, to: FormatInfo) {
+  const p = { from: c.fromFormat, to: c.toFormat };
+  const notes: Msg[] = [{ key: "notes.audio.videoDropped", params: p }];
+  if (from.id === "Video")
+    notes.push({ key: "notes.audio.anyVideo", params: p });
+  notes.push({ key: `notes.audio.encoding.${to.id}`, params: p });
+  notes.push({
+    key:
+      to.compression === "none"
+        ? "notes.audio.sizeLarger"
+        : "notes.audio.sizeSmaller",
+    params: p,
+  });
+  notes.push({ key: `notes.audio.compat.${to.id}`, params: p });
+  notes.push({ key: "notes.audio.sourceCeiling", params: p });
+
+  const faqs: FormatComparison["faqs"] = [
+    {
+      q: { key: "faq.audioOut.qualityQ", params: p },
+      a: { key: `faq.audioOut.quality.${to.id}`, params: p },
+    },
+    {
+      q: { key: "faq.audioOut.linkQ", params: p },
+      a: { key: "faq.audioOut.linkA", params: p },
+    },
+    {
+      q: { key: "faq.audioOut.sizeQ", params: p },
+      a: { key: "faq.audioOut.sizeA", params: p },
+    },
+  ];
+  return { notes, faqs };
+}
+
 function numberNotes(c: Conversion, from: FormatInfo, to: FormatInfo) {
   const fb = from.base ?? 10;
   const tb = to.base ?? 10;
@@ -330,15 +366,17 @@ export function compareFormats(c: Conversion): FormatComparison | undefined {
   const { notes, faqs } =
     from.kind === "number" || to.kind === "number"
       ? numberNotes(c, from, to)
-      : from.kind === "video" || to.kind === "video"
-        ? videoNotes(c, from, to)
-        : from.kind === "raster" ||
-            from.kind === "vector" ||
-            to.kind === "document"
-          ? from.id === "Image" || to.id === "Image"
-            ? dataNotes(c)
-            : imageNotes(c, from, to)
-          : dataNotes(c);
+      : to.kind === "audio"
+        ? audioNotes(c, from, to)
+        : from.kind === "video" || to.kind === "video"
+          ? videoNotes(c, from, to)
+          : from.kind === "raster" ||
+              from.kind === "vector" ||
+              to.kind === "document"
+            ? from.id === "Image" || to.id === "Image"
+              ? dataNotes(c)
+              : imageNotes(c, from, to)
+            : dataNotes(c);
 
   const examples =
     from.base && to.base

@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Lock, Music, Unlock } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { FormatBadge } from "@/components/format-badge";
 import {
@@ -11,6 +12,9 @@ import {
   getFileCategory,
   getFileExtension,
 } from "@/lib/media-utils";
+
+const AUDIO_FORMATS = ["mp3", "aac", "wav", "ogg"] as const;
+type AudioFormat = (typeof AUDIO_FORMATS)[number];
 
 interface ConversionOptionsProps {
   file: File;
@@ -34,6 +38,7 @@ export function ConversionOptions({
   onConvert,
   onBack,
 }: ConversionOptionsProps) {
+  const t = useTranslations("SharedUI");
   const category = getFileCategory(file);
   const inputExt = getFileExtension(file);
   const formats = useMemo(
@@ -50,9 +55,13 @@ export function ConversionOptions({
   const [width, setWidth] = useState<string>("");
   const [height, setHeight] = useState<string>("");
   const [maintainAspect, setMaintainAspect] = useState(true);
-  const [extractAudio, setExtractAudio] = useState(false);
-  const [audioFormat, setAudioFormat] = useState<"mp3" | "aac" | "wav" | "ogg">(
-    "mp3",
+  // `?to=mp3|aac|wav|ogg` on a video opens straight into audio extraction.
+  const preferredAudio = AUDIO_FORMATS.find(
+    (f) => category === "video" && f === preferredFormat,
+  );
+  const [extractAudio, setExtractAudio] = useState(Boolean(preferredAudio));
+  const [audioFormat, setAudioFormat] = useState<AudioFormat>(
+    preferredAudio ?? "mp3",
   );
 
   const previewUrl = useMemo(() => {
@@ -79,7 +88,7 @@ export function ConversionOptions({
         onClick={onBack}
         className="text-xs sm:text-sm font-mono uppercase tracking-widest text-[#71717A] hover:text-[#2DD4BF] transition-colors flex items-center gap-2 min-h-[44px] mb-6"
       >
-        <span>&larr;</span> Change File
+        <span>&larr;</span> {t("changeFile")}
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -88,7 +97,7 @@ export function ConversionOptions({
           {previewUrl ? (
             <img
               src={previewUrl}
-              alt="Preview"
+              alt={t("preview")}
               className="max-w-full max-h-[280px] object-contain rounded-lg mb-4"
             />
           ) : (
@@ -112,7 +121,7 @@ export function ConversionOptions({
           {!extractAudio && (
             <div>
               <label className="block text-xs font-mono uppercase tracking-wider mb-3 text-[#71717A]">
-                Output Format
+                {t("options.outputFormat")}
               </label>
               <div className="flex flex-wrap gap-2">
                 {formats.map((fmt) => (
@@ -138,7 +147,7 @@ export function ConversionOptions({
                 className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider min-h-[44px] transition-colors text-[#71717A] hover:text-[#2DD4BF]"
               >
                 <Music className="w-4 h-4" />
-                <span>Extract Audio</span>
+                <span>{t("options.extractAudio")}</span>
                 <div
                   className={`w-8 h-4 border border-[#2A2535] rounded-full relative transition-colors ${extractAudio ? "bg-[#2DD4BF]" : "bg-[#1C1825]"}`}
                 >
@@ -168,7 +177,7 @@ export function ConversionOptions({
           {!extractAudio && (
             <div>
               <label className="block text-xs font-mono uppercase tracking-wider mb-3 text-[#71717A]">
-                Quality — {quality}%
+                {t("options.quality", { quality })}
               </label>
               <input
                 type="range"
@@ -182,10 +191,10 @@ export function ConversionOptions({
               />
               <div className="flex justify-between mt-1">
                 <span className="font-mono text-[10px] text-[#71717A]">
-                  Smaller
+                  {t("options.smaller")}
                 </span>
                 <span className="font-mono text-[10px] text-[#71717A]">
-                  Better
+                  {t("options.better")}
                 </span>
               </div>
             </div>
@@ -195,14 +204,14 @@ export function ConversionOptions({
           {!extractAudio && (
             <div>
               <label className="block text-xs font-mono uppercase tracking-wider mb-3 text-[#71717A]">
-                Resize (optional)
+                {t("options.resize")}
               </label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
                   value={width}
                   onChange={(e) => setWidth(e.target.value)}
-                  placeholder="Width"
+                  placeholder={t("options.width")}
                   className="flex-1 h-10 px-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 placeholder:text-[#71717A]/60"
                 />
                 <button
@@ -211,8 +220,8 @@ export function ConversionOptions({
                   className="p-2 border border-[#2A2535] rounded-lg hover:bg-[#1C1825] transition-colors text-[#71717A] hover:text-[#2DD4BF]"
                   title={
                     maintainAspect
-                      ? "Aspect ratio locked"
-                      : "Aspect ratio unlocked"
+                      ? t("options.aspectLocked")
+                      : t("options.aspectUnlocked")
                   }
                 >
                   {maintainAspect ? (
@@ -225,7 +234,7 @@ export function ConversionOptions({
                   type="number"
                   value={height}
                   onChange={(e) => setHeight(e.target.value)}
-                  placeholder="Height"
+                  placeholder={t("options.height")}
                   className="flex-1 h-10 px-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg font-mono text-sm focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 placeholder:text-[#71717A]/60"
                 />
               </div>
@@ -240,8 +249,8 @@ export function ConversionOptions({
             className="w-full h-14 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono uppercase tracking-wider text-base font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] flex items-center justify-center gap-2"
           >
             {extractAudio
-              ? "Extract Audio"
-              : `Convert to ${outputFormat.toUpperCase()}`}
+              ? t("options.extractAudio")
+              : t("options.convertTo", { format: outputFormat.toUpperCase() })}
             <ArrowRight className="w-5 h-5" />
           </button>
         </div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check, ClipboardCopy, Download, FileCode2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -45,7 +46,8 @@ interface DecodeResult {
   text?: string;
   imageSrc?: string;
   imageMime?: string;
-  error?: string;
+  /** Translation key under ToolUI.base64-decode.err */
+  error?: "dataUri" | "invalid";
 }
 
 function decodeBase64(input: string): DecodeResult {
@@ -77,7 +79,7 @@ function decodeBase64(input: string): DecodeResult {
     } catch {
       return {
         type: "error",
-        error: "Could not decode the Base64 content from the data URI.",
+        error: "dataUri",
       };
     }
   }
@@ -117,12 +119,13 @@ function decodeBase64(input: string): DecodeResult {
   } catch {
     return {
       type: "error",
-      error: "Invalid Base64 string. Check your input and try again.",
+      error: "invalid",
     };
   }
 }
 
 export function Base64Decoder() {
+  const t = useTranslations("ToolUI.base64-decode");
   const [input, setInput] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -182,16 +185,15 @@ export function Base64Decoder() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Base64
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Decoder</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Decode Base64 strings to text or images instantly. Supports data
-            URIs and plain Base64.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -209,7 +211,7 @@ export function Base64Decoder() {
               htmlFor="base64-input"
               className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
             >
-              Base64 Input
+              {t("inputLabel")}
             </label>
             <div className="relative">
               <FileCode2 className="absolute left-4 top-4 w-4 h-4 text-[#71717A]" />
@@ -217,7 +219,7 @@ export function Base64Decoder() {
                 id="base64-input"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Paste a Base64 string or data URI..."
+                placeholder={t("inputPlaceholder")}
                 rows={6}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-mono text-sm resize-y min-h-[44px]"
               />
@@ -231,7 +233,7 @@ export function Base64Decoder() {
               animate={{ opacity: 1, y: 0 }}
               className="px-4 py-3 bg-[#FB7185]/10 border border-[#FB7185]/30 rounded-lg text-[#FB7185] text-sm font-[Inter]"
             >
-              {result.error}
+              {result.error && t(`err.${result.error}`)}
             </motion.div>
           )}
 
@@ -239,12 +241,12 @@ export function Base64Decoder() {
           {result.type === "image" && result.imageSrc && (
             <div>
               <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-                Image Preview
+                {t("imagePreview")}
               </label>
               <div className="border border-[#2A2535] bg-[#0C0A12] rounded-lg p-4 flex items-center justify-center">
                 <img
                   src={result.imageSrc}
-                  alt="Decoded from Base64"
+                  alt={t("imageAlt")}
                   className="max-w-full max-h-96 object-contain rounded"
                 />
               </div>
@@ -259,7 +261,7 @@ export function Base64Decoder() {
                   htmlFor="decoded-output"
                   className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A]"
                 >
-                  Decoded Text
+                  {t("decodedText")}
                 </label>
                 <button
                   type="button"
@@ -270,12 +272,12 @@ export function Base64Decoder() {
                   {copied ? (
                     <>
                       <Check className="w-4 h-4" />
-                      Copied
+                      {t("copied")}
                     </>
                   ) : (
                     <>
                       <ClipboardCopy className="w-4 h-4" />
-                      Copy Text
+                      {t("copyText")}
                     </>
                   )}
                 </button>
@@ -285,7 +287,7 @@ export function Base64Decoder() {
                 value={result.text ?? ""}
                 readOnly
                 rows={8}
-                placeholder="Decoded text will appear here..."
+                placeholder={t("outputPlaceholder")}
                 className="w-full px-4 py-3 border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] rounded-lg font-[Inter] text-sm resize-y min-h-[44px] placeholder:text-[#71717A]/60 focus:outline-none"
               />
             </div>
@@ -305,7 +307,7 @@ export function Base64Decoder() {
                 className="flex items-center gap-2 h-10 px-4 rounded-lg border border-[#2A2535] text-[#EDEDEF] font-mono text-[11px] uppercase tracking-wider hover:border-[#2DD4BF]/30 transition-colors min-h-[44px]"
               >
                 <Download className="w-4 h-4" />
-                Download
+                {t("download")}
               </button>
             </motion.div>
           )}
@@ -322,24 +324,24 @@ export function Base64Decoder() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Paste Base64",
-                desc: "Paste a Base64 string or data URI into the input field.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Auto-Decode",
-                desc: "The content is decoded live as you type. Images are previewed automatically.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Copy or Download",
-                desc: "Copy the decoded text or download the decoded content.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -351,7 +353,7 @@ export function Base64Decoder() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

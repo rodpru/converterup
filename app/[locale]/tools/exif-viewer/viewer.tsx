@@ -12,6 +12,7 @@ import {
   ShieldOff,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -96,49 +97,6 @@ function formatExifValue(key: string, value: unknown): string {
   return String(value);
 }
 
-function getDisplayLabel(key: string): string {
-  const labels: Record<string, string> = {
-    Make: "Camera Make",
-    Model: "Camera Model",
-    LensModel: "Lens",
-    LensMake: "Lens Make",
-    FNumber: "Aperture",
-    ExposureTime: "Shutter Speed",
-    ISO: "ISO",
-    ISOSpeedRatings: "ISO",
-    FocalLength: "Focal Length",
-    FocalLengthIn35mmFormat: "Focal Length (35mm)",
-    DateTimeOriginal: "Date Taken",
-    CreateDate: "Date Created",
-    ModifyDate: "Date Modified",
-    ExifImageWidth: "Width",
-    ExifImageHeight: "Height",
-    ImageWidth: "Width",
-    ImageHeight: "Height",
-    Software: "Software",
-    Artist: "Artist",
-    Copyright: "Copyright",
-    Orientation: "Orientation",
-    ColorSpace: "Color Space",
-    WhiteBalance: "White Balance",
-    Flash: "Flash",
-    MeteringMode: "Metering Mode",
-    ExposureProgram: "Exposure Program",
-    ExposureCompensation: "Exposure Compensation",
-    DigitalZoomRatio: "Digital Zoom",
-    SceneCaptureType: "Scene Type",
-    Contrast: "Contrast",
-    Saturation: "Saturation",
-    Sharpness: "Sharpness",
-    GPSLatitude: "GPS Latitude",
-    GPSLongitude: "GPS Longitude",
-    GPSAltitude: "GPS Altitude",
-    latitude: "GPS Latitude",
-    longitude: "GPS Longitude",
-  };
-  return labels[key] || key;
-}
-
 function extractGps(data: ExifData): GpsCoordinates | null {
   const lat = data.latitude ?? data.GPSLatitude;
   const lng = data.longitude ?? data.GPSLongitude;
@@ -160,6 +118,8 @@ function getStaticMapUrl(coords: GpsCoordinates): string {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ExifViewer() {
+  const t = useTranslations("ToolUI.exif-viewer");
+  const ts = useTranslations("SharedUI");
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [exifData, setExifData] = useState<ExifData | null>(null);
@@ -183,47 +143,46 @@ export function ExifViewer() {
     setError(null);
   }, [previewUrl, cleanedUrl]);
 
-  const parseExif = useCallback(async (imageFile: File) => {
-    setLoading(true);
-    setError(null);
-    setExifData(null);
-    setGps(null);
-    setCleanedUrl(null);
+  const parseExif = useCallback(
+    async (imageFile: File) => {
+      setLoading(true);
+      setError(null);
+      setExifData(null);
+      setGps(null);
+      setCleanedUrl(null);
 
-    try {
-      const data = await exifr.parse(imageFile, {
-        gps: true,
-        tiff: true,
-        exif: true,
-        iptc: true,
-        xmp: true,
-      });
+      try {
+        const data = await exifr.parse(imageFile, {
+          gps: true,
+          tiff: true,
+          exif: true,
+          iptc: true,
+          xmp: true,
+        });
 
-      if (!data || Object.keys(data).length === 0) {
-        setExifData(null);
-        setError("No EXIF data found in this image.");
-      } else {
-        setExifData(data);
-        const gpsCoords = extractGps(data);
-        setGps(gpsCoords);
+        if (!data || Object.keys(data).length === 0) {
+          setExifData(null);
+          setError(t("errNoData"));
+        } else {
+          setExifData(data);
+          const gpsCoords = extractGps(data);
+          setGps(gpsCoords);
+        }
+      } catch {
+        setError(t("errParse"));
       }
-    } catch {
-      setError(
-        "Failed to parse EXIF data. The file may be corrupted or unsupported.",
-      );
-    }
 
-    setLoading(false);
-  }, []);
+      setLoading(false);
+    },
+    [t],
+  );
 
   const handleFile = useCallback(
     (selectedFile: File) => {
       resetState();
 
       if (!ACCEPTED_TYPES.includes(selectedFile.type)) {
-        setError(
-          "Unsupported format. Please upload a JPG, PNG, WebP, or TIFF image.",
-        );
+        setError(t("errUnsupported"));
         return;
       }
 
@@ -231,7 +190,7 @@ export function ExifViewer() {
       setPreviewUrl(URL.createObjectURL(selectedFile));
       parseExif(selectedFile);
     },
-    [resetState, parseExif],
+    [resetState, parseExif, t],
   );
 
   const handleDrop = useCallback(
@@ -272,7 +231,7 @@ export function ExifViewer() {
       const img = new Image();
       const loadPromise = new Promise<void>((resolve, reject) => {
         img.onload = () => resolve();
-        img.onerror = () => reject(new Error("Failed to load image."));
+        img.onerror = () => reject(new Error(t("errLoad")));
       });
 
       const objectUrl = URL.createObjectURL(file);
@@ -281,13 +240,13 @@ export function ExifViewer() {
       URL.revokeObjectURL(objectUrl);
 
       const canvas = canvasRef.current;
-      if (!canvas) throw new Error("Canvas not available.");
+      if (!canvas) throw new Error(t("errCanvas"));
 
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
 
       const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("Canvas context not available.");
+      if (!ctx) throw new Error(t("errCanvas"));
 
       ctx.drawImage(img, 0, 0);
 
@@ -298,7 +257,7 @@ export function ExifViewer() {
         canvas.toBlob(
           (b) => {
             if (b) resolve(b);
-            else reject(new Error("Failed to create blob."));
+            else reject(new Error(t("errStrip")));
           },
           outputType,
           quality,
@@ -309,11 +268,11 @@ export function ExifViewer() {
       const url = URL.createObjectURL(blob);
       setCleanedUrl(url);
     } catch {
-      setError("Failed to strip EXIF data. Please try again.");
+      setError(t("errStrip"));
     }
 
     setStripping(false);
-  }, [file, cleanedUrl]);
+  }, [file, cleanedUrl, t]);
 
   const downloadClean = useCallback(async () => {
     if (!cleanedUrl || !file) return;
@@ -371,16 +330,15 @@ export function ExifViewer() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            EXIF Data
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Viewer & Remover</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Upload a photo to inspect its metadata — camera, lens, GPS, date,
-            and more. Remove all EXIF data with one click for privacy.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -420,7 +378,7 @@ export function ExifViewer() {
               />
               <Upload className="w-8 h-8 text-[#71717A] mx-auto mb-4" />
               <p className="text-[#EDEDEF] font-[Inter] text-sm mb-1">
-                Drop an image here or click to browse
+                {t("drop")}
               </p>
               <p className="text-[#71717A] font-mono text-[11px] uppercase tracking-wider">
                 JPG, PNG, WebP, TIFF
@@ -455,7 +413,7 @@ export function ExifViewer() {
                   }}
                   className="text-[#71717A] hover:text-[#FB7185] transition-colors text-sm font-mono min-h-[44px] min-w-[44px] flex items-center justify-center"
                 >
-                  Clear
+                  {ts("reset")}
                 </button>
               </div>
             </div>
@@ -479,7 +437,7 @@ export function ExifViewer() {
             <div className="flex items-center justify-center gap-2 mt-8">
               <Loader2 className="w-5 h-5 animate-spin text-[#2DD4BF]" />
               <span className="text-sm text-[#71717A] font-[Inter]">
-                Reading EXIF data...
+                {t("reading")}
               </span>
             </div>
           )}
@@ -499,10 +457,10 @@ export function ExifViewer() {
                 <div className="flex items-center gap-2">
                   <Eye className="w-4 h-4 text-primary" />
                   <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                    Metadata
+                    {t("metadata")}
                   </h2>
                   <span className="ml-2 font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                    {sortedEntries.length} fields
+                    {t("fields", { count: sortedEntries.length })}
                   </span>
                 </div>
 
@@ -519,7 +477,7 @@ export function ExifViewer() {
                       ) : (
                         <ShieldOff className="w-4 h-4" />
                       )}
-                      Remove EXIF Data
+                      {t("remove")}
                     </button>
                   ) : (
                     <button
@@ -528,7 +486,7 @@ export function ExifViewer() {
                       className="flex items-center gap-2 h-10 px-5 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-[11px] uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
                     >
                       <Download className="w-4 h-4" />
-                      Download Clean Image
+                      {t("downloadClean")}
                     </button>
                   )}
                 </div>
@@ -544,8 +502,7 @@ export function ExifViewer() {
                   >
                     <ShieldOff className="w-4 h-4 text-[#2DD4BF] shrink-0" />
                     <p className="text-[#2DD4BF] text-sm font-[Inter]">
-                      EXIF data has been stripped. Your clean image is ready for
-                      download.
+                      {t("stripped")}
                     </p>
                   </motion.div>
                 )}
@@ -573,7 +530,7 @@ export function ExifViewer() {
                   <div className="p-4 border-b border-[#2A2535] flex items-center gap-2">
                     <Camera className="w-4 h-4 text-primary" />
                     <h3 className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                      EXIF Fields
+                      {t("exifFields")}
                     </h3>
                   </div>
                   <div className="max-h-[500px] overflow-y-auto">
@@ -588,7 +545,7 @@ export function ExifViewer() {
                             className="border-b border-[#2A2535]/50 last:border-0"
                           >
                             <td className="px-4 py-2.5 text-[11px] font-mono uppercase tracking-wider text-[#71717A] w-2/5 align-top">
-                              {getDisplayLabel(key)}
+                              {t.has(`field.${key}`) ? t(`field.${key}`) : key}
                             </td>
                             <td className="px-4 py-2.5 text-sm font-[Inter] text-[#EDEDEF] break-all">
                               {formatExifValue(key, value)}
@@ -608,7 +565,7 @@ export function ExifViewer() {
                       <div className="p-4 border-b border-[#2A2535] flex items-center gap-2">
                         <Eye className="w-4 h-4 text-primary" />
                         <h3 className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                          Preview
+                          {ts("preview")}
                         </h3>
                       </div>
                       <div className="p-4">
@@ -633,7 +590,7 @@ export function ExifViewer() {
                       <div className="p-4 border-b border-[#2A2535] flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-primary" />
                         <h3 className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                          GPS Location
+                          {t("gps")}
                         </h3>
                       </div>
                       <div className="p-4">
@@ -667,24 +624,24 @@ export function ExifViewer() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Upload",
-                desc: "Drop or select a JPG, PNG, WebP, or TIFF image.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Inspect",
-                desc: "View all EXIF metadata: camera, lens, GPS, date, and more.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Clean & Download",
-                desc: "Strip all metadata with one click and download the clean file.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -696,7 +653,7 @@ export function ExifViewer() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

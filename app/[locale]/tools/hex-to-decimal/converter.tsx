@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, Check, ClipboardCopy, Hash, Palette } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -61,6 +62,7 @@ function parseColorHex(hex: string): ColorInfo {
 }
 
 export function HexToDecimalConverter() {
+  const t = useTranslations("ToolUI.hex-to-decimal");
   const [hexInput, setHexInput] = useState("");
   const [decInput, setDecInput] = useState("");
   const [source, setSource] = useState<"hex" | "dec">("hex");
@@ -109,14 +111,14 @@ export function HexToDecimalConverter() {
         return;
       }
       if (!/^[0-9a-fA-F]+$/.test(cleaned)) {
-        setError("Invalid hexadecimal value.");
+        setError(t("errHex"));
         setDecInput("");
         return;
       }
       const dec = Number.parseInt(cleaned, 16);
       setDecInput(dec.toString(10));
     },
-    [],
+    [t],
   );
 
   const handleDecChange = useCallback(
@@ -132,14 +134,14 @@ export function HexToDecimalConverter() {
         return;
       }
       if (!/^\d+$/.test(trimmed)) {
-        setError("Invalid decimal value.");
+        setError(t("errDec"));
         setHexInput("");
         return;
       }
       const dec = Number.parseInt(trimmed, 10);
       setHexInput(dec.toString(16).toUpperCase());
     },
-    [],
+    [t],
   );
 
   const handleCopy = useCallback(async (value: string, field: string) => {
@@ -160,16 +162,15 @@ export function HexToDecimalConverter() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Hex to Decimal
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Converter</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Convert between hexadecimal, decimal, binary, and octal. Supports
-            color hex codes with RGB breakdown.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -187,14 +188,14 @@ export function HexToDecimalConverter() {
               <label className="flex items-center gap-2 mb-2">
                 <Hash className="w-4 h-4 text-primary" />
                 <span className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                  Hexadecimal
+                  {t("hexadecimal")}
                 </span>
               </label>
               <input
                 type="text"
                 value={hexInput}
                 onChange={handleHexChange}
-                placeholder="FF5733 or 0xFF5733 or #FF5733"
+                placeholder={t("hexPlaceholder")}
                 className="w-full h-12 px-4 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 min-h-[44px] placeholder:text-[#71717A]/40 font-mono text-sm"
               />
             </div>
@@ -202,7 +203,7 @@ export function HexToDecimalConverter() {
               <label className="flex items-center gap-2 mb-2">
                 <Hash className="w-4 h-4 text-primary" />
                 <span className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                  Decimal
+                  {t("decimal")}
                 </span>
               </label>
               <input
@@ -241,28 +242,32 @@ export function HexToDecimalConverter() {
               >
                 {[
                   {
-                    label: "Hexadecimal",
+                    id: "hex",
+                    label: t("hexadecimal"),
                     value: representations.hex,
                     prefix: "0x",
                   },
                   {
-                    label: "Decimal",
+                    id: "decimal",
+                    label: t("decimal"),
                     value: representations.decimal,
                     prefix: "",
                   },
                   {
-                    label: "Binary",
+                    id: "binary",
+                    label: t("binary"),
                     value: representations.binary,
                     prefix: "0b",
                   },
                   {
-                    label: "Octal",
+                    id: "octal",
+                    label: t("octal"),
                     value: representations.octal,
                     prefix: "0o",
                   },
                 ].map((row) => (
                   <div
-                    key={row.label}
+                    key={row.id}
                     className="flex items-center gap-3 p-4 bg-[#16131E] border border-[#2A2535] rounded-xl"
                   >
                     <div className="flex-1 min-w-0">
@@ -277,12 +282,12 @@ export function HexToDecimalConverter() {
                     <button
                       type="button"
                       onClick={() =>
-                        handleCopy(`${row.prefix}${row.value}`, row.label)
+                        handleCopy(`${row.prefix}${row.value}`, row.id)
                       }
                       className="flex items-center justify-center w-10 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] min-w-[44px]"
-                      title={`Copy ${row.label}`}
+                      title={t("copyValue", { label: row.label })}
                     >
-                      {copiedField === row.label ? (
+                      {copiedField === row.id ? (
                         <Check className="w-4 h-4 text-[#4ADE80]" />
                       ) : (
                         <ClipboardCopy className="w-4 h-4" />
@@ -302,7 +307,7 @@ export function HexToDecimalConverter() {
                     <div className="flex items-center gap-2 mb-3">
                       <Palette className="w-4 h-4 text-primary" />
                       <span className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                        Color Preview
+                        {t("colorPreview")}
                       </span>
                     </div>
                     <div className="flex items-center gap-4">
@@ -313,7 +318,7 @@ export function HexToDecimalConverter() {
                       <div className="grid grid-cols-3 gap-3 flex-1">
                         <div>
                           <span className="block font-mono text-[11px] text-[#71717A] uppercase tracking-wider mb-0.5">
-                            Red
+                            {t("red")}
                           </span>
                           <span className="block font-mono text-sm text-[#FB7185]">
                             {colorInfo.r}
@@ -321,7 +326,7 @@ export function HexToDecimalConverter() {
                         </div>
                         <div>
                           <span className="block font-mono text-[11px] text-[#71717A] uppercase tracking-wider mb-0.5">
-                            Green
+                            {t("green")}
                           </span>
                           <span className="block font-mono text-sm text-[#4ADE80]">
                             {colorInfo.g}
@@ -329,7 +334,7 @@ export function HexToDecimalConverter() {
                         </div>
                         <div>
                           <span className="block font-mono text-[11px] text-[#71717A] uppercase tracking-wider mb-0.5">
-                            Blue
+                            {t("blue")}
                           </span>
                           <span className="block font-mono text-sm text-[#60A5FA]">
                             {colorInfo.b}
@@ -345,7 +350,7 @@ export function HexToDecimalConverter() {
                           )
                         }
                         className="flex items-center justify-center w-10 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] min-w-[44px] shrink-0"
-                        title="Copy RGB"
+                        title={t("copyRgb")}
                       >
                         {copiedField === "rgb" ? (
                           <Check className="w-4 h-4 text-[#4ADE80]" />
@@ -371,24 +376,24 @@ export function HexToDecimalConverter() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Enter a Value",
-                desc: "Type a hex or decimal number in either input field.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "See All Bases",
-                desc: "Instantly view the value in hex, decimal, binary, and octal.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Copy & Use",
-                desc: "Copy any representation to your clipboard with one click.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -400,7 +405,7 @@ export function HexToDecimalConverter() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

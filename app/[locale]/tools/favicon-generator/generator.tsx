@@ -10,6 +10,7 @@ import {
   Package,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -108,6 +109,8 @@ function downloadBlob(blob: Blob, filename: string) {
 }
 
 export function FaviconGenerator() {
+  const t = useTranslations("ToolUI.favicon-generator");
+  const ts = useTranslations("SharedUI");
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [sourcePreview, setSourcePreview] = useState<string | null>(null);
   const [favicons, setFavicons] = useState<GeneratedFavicon[]>([]);
@@ -132,16 +135,14 @@ export function FaviconGenerator() {
       resetState();
 
       if (!ACCEPTED_TYPES.includes(file.type)) {
-        setError(
-          "Unsupported format. Please upload a PNG, JPG, WebP, or SVG image.",
-        );
+        setError(t("errUnsupported"));
         return;
       }
 
       setSourceFile(file);
       setSourcePreview(URL.createObjectURL(file));
     },
-    [resetState],
+    [resetState, t],
   );
 
   const generateFavicons = useCallback(async () => {
@@ -167,11 +168,11 @@ export function FaviconGenerator() {
 
       setFavicons(results);
     } catch {
-      setError("Failed to generate favicons. Please try a different image.");
+      setError(t("errGenerate"));
     } finally {
       setGenerating(false);
     }
-  }, [sourcePreview]);
+  }, [sourcePreview, t]);
 
   const handleDownloadSingle = useCallback(async (fav: GeneratedFavicon) => {
     setDownloadingSize(fav.size);
@@ -210,11 +211,11 @@ export function FaviconGenerator() {
       const content = await zip.generateAsync({ type: "blob" });
       downloadBlob(content, "favicons.zip");
     } catch {
-      setError("Failed to create ZIP file. Please try again.");
+      setError(t("errZip"));
     } finally {
       setDownloadingAll(false);
     }
-  }, [favicons]);
+  }, [favicons, t]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -249,16 +250,15 @@ export function FaviconGenerator() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Favicon
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Generator</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Upload any image and generate favicons in all standard sizes.
-            Download individually or grab them all as a ZIP.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -292,12 +292,8 @@ export function FaviconGenerator() {
               <div className="w-12 h-12 rounded-lg bg-[#2DD4BF]/10 flex items-center justify-center">
                 <Upload className="w-6 h-6 text-[#2DD4BF]" />
               </div>
-              <p className="text-sm font-[Inter] text-[#EDEDEF]">
-                Drop your image here or click to browse
-              </p>
-              <p className="text-xs font-mono text-[#71717A]">
-                PNG, JPG, WebP, or SVG
-              </p>
+              <p className="text-sm font-[Inter] text-[#EDEDEF]">{t("drop")}</p>
+              <p className="text-xs font-mono text-[#71717A]">{t("formats")}</p>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -339,7 +335,7 @@ export function FaviconGenerator() {
                     }}
                     className="h-10 px-4 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] text-sm font-mono hover:border-[#FB7185]/30 hover:text-[#FB7185] transition-colors min-h-[44px]"
                   >
-                    Remove
+                    {ts("remove")}
                   </button>
                   <button
                     type="button"
@@ -350,10 +346,10 @@ export function FaviconGenerator() {
                     {generating ? (
                       <span className="flex items-center gap-2">
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Generating
+                        {t("generating")}
                       </span>
                     ) : (
-                      "Generate"
+                      t("generate")
                     )}
                   </button>
                 </div>
@@ -391,10 +387,10 @@ export function FaviconGenerator() {
               <div className="flex items-center gap-2 mb-6">
                 <ImageIcon className="w-4 h-4 text-primary" />
                 <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                  Generated Favicons
+                  {t("generated")}
                 </h2>
                 <span className="ml-auto font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                  {favicons.length} sizes
+                  {t("sizes", { count: favicons.length })}
                 </span>
               </div>
 
@@ -416,7 +412,7 @@ export function FaviconGenerator() {
                   ) : (
                     <Package className="w-4 h-4" />
                   )}
-                  {downloadingAll ? "Creating ZIP..." : "Download All (ZIP)"}
+                  {downloadingAll ? t("creatingZip") : t("downloadAll")}
                 </button>
               </motion.div>
 
@@ -464,7 +460,7 @@ export function FaviconGenerator() {
                           {fav.label}
                         </p>
                         <p className="font-mono text-[10px] text-[#71717A] truncate">
-                          {fav.description}
+                          {t(`use${fav.size}`)}
                         </p>
                       </div>
                       <button
@@ -472,7 +468,8 @@ export function FaviconGenerator() {
                         onClick={() => handleDownloadSingle(fav)}
                         disabled={downloadingSize === fav.size}
                         className="flex items-center justify-center w-10 h-10 rounded-lg border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] min-w-[44px] disabled:opacity-50 shrink-0"
-                        title={`Download ${fav.label}`}
+                        title={t("downloadSize", { size: fav.label })}
+                        aria-label={t("downloadSize", { size: fav.label })}
                       >
                         {downloadingSize === fav.size ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -499,24 +496,24 @@ export function FaviconGenerator() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Upload",
-                desc: "Drop any PNG, JPG, WebP, or SVG image to use as your favicon source.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Generate",
-                desc: "All standard favicon sizes are generated instantly using the Canvas API.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Download",
-                desc: "Grab individual sizes or download everything as a ready-to-use ZIP.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -528,7 +525,7 @@ export function FaviconGenerator() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

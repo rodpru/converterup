@@ -11,6 +11,7 @@ import {
   Palette,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -286,6 +287,8 @@ function generatePalettePng(colors: ExtractedColor[]): Promise<Blob> {
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ColorPaletteExtractor() {
+  const t = useTranslations("ToolUI.color-palette");
+  const ts = useTranslations("SharedUI");
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [colors, setColors] = useState<ExtractedColor[]>([]);
@@ -311,16 +314,14 @@ export function ColorPaletteExtractor() {
       resetState();
 
       if (!ACCEPTED_TYPES.includes(selectedFile.type)) {
-        setError(
-          "Unsupported format. Please upload a PNG, JPG, or WebP image.",
-        );
+        setError(t("errUnsupported"));
         return;
       }
 
       setFile(selectedFile);
       setPreviewUrl(URL.createObjectURL(selectedFile));
     },
-    [resetState],
+    [resetState, t],
   );
 
   const handleDrop = useCallback(
@@ -387,11 +388,11 @@ export function ColorPaletteExtractor() {
       setColors(extracted);
       URL.revokeObjectURL(img.src);
     } catch {
-      setError("Failed to extract colors. Please try a different image.");
+      setError(t("errExtract"));
     }
 
     setExtracting(false);
-  }, [file]);
+  }, [file, t]);
 
   // Auto-extract when a file is selected
   useEffect(() => {
@@ -431,10 +432,10 @@ export function ColorPaletteExtractor() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch {
-      setError("Failed to generate palette image.");
+      setError(t("errPalette"));
     }
     setDownloading(false);
-  }, [colors]);
+  }, [colors, t]);
 
   return (
     <>
@@ -450,16 +451,15 @@ export function ColorPaletteExtractor() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Color Palette
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Extractor</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Upload any image and extract its dominant colors. Get HEX, RGB, and
-            HSL values with one click.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -499,7 +499,7 @@ export function ColorPaletteExtractor() {
                 <Upload className="w-6 h-6 text-[#2DD4BF]" />
               </div>
               <p className="text-[#EDEDEF] font-[Inter] text-sm font-medium mb-1">
-                Drop an image here or click to upload
+                {t("drop")}
               </p>
               <p className="text-[#71717A] font-mono text-[11px] uppercase tracking-wider">
                 PNG, JPG, WebP
@@ -525,7 +525,7 @@ export function ColorPaletteExtractor() {
                 onClick={resetState}
                 className="text-sm text-[#71717A] hover:text-[#EDEDEF] font-[Inter] transition-colors min-h-[44px] px-3"
               >
-                Change
+                {t("change")}
               </button>
             </div>
           )}
@@ -560,10 +560,10 @@ export function ColorPaletteExtractor() {
                 <div className="flex items-center gap-2">
                   <Palette className="w-4 h-4 text-primary" />
                   <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-                    Extracted Palette
+                    {t("palette")}
                   </h2>
                   <span className="ml-2 font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                    {colors.length} colors
+                    {t("count", { count: colors.length })}
                   </span>
                 </div>
                 <button
@@ -577,7 +577,7 @@ export function ColorPaletteExtractor() {
                   ) : (
                     <Download className="w-4 h-4" />
                   )}
-                  Download Palette
+                  {t("download")}
                 </button>
               </div>
 
@@ -592,7 +592,7 @@ export function ColorPaletteExtractor() {
                   {/* biome-ignore lint/a11y/useAltText: Dynamic user-uploaded image */}
                   <img
                     src={previewUrl}
-                    alt="Uploaded image for color extraction"
+                    alt={t("imageAlt")}
                     className="w-full h-auto max-h-[400px] object-contain bg-[#0C0A12]"
                   />
                 </motion.div>
@@ -644,7 +644,7 @@ export function ColorPaletteExtractor() {
                         />
                         <div className="pt-1">
                           <span className="font-mono text-[10px] text-[#71717A]">
-                            {color.percentage}% of image
+                            {t("share", { percent: color.percentage })}
                           </span>
                         </div>
                       </div>
@@ -664,7 +664,7 @@ export function ColorPaletteExtractor() {
           >
             <Loader2 className="w-6 h-6 animate-spin text-[#2DD4BF] mx-auto mb-3" />
             <p className="text-[#71717A] text-sm font-[Inter]">
-              Analyzing image colors...
+              {t("analyzing")}
             </p>
           </motion.div>
         )}
@@ -680,24 +680,24 @@ export function ColorPaletteExtractor() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Upload Image",
-                desc: "Drop or select any PNG, JPG, or WebP image.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Extract Colors",
-                desc: "Dominant colors are detected using pixel analysis, all in your browser.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Copy & Download",
-                desc: "Click any color value to copy it, or download the full palette as PNG.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -709,7 +709,7 @@ export function ColorPaletteExtractor() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}
@@ -745,6 +745,7 @@ function ColorValueRow({
   onCopy: (value: string, index: number, format: string) => void;
   textColor?: string;
 }) {
+  const t = useTranslations("ToolUI.color-palette");
   const isCopied = copiedIndex === index && copiedFormat === format;
 
   return (
@@ -752,7 +753,7 @@ function ColorValueRow({
       type="button"
       onClick={() => onCopy(value, index, format)}
       className="w-full flex items-center justify-between gap-2 group/row rounded px-1.5 py-0.5 -mx-1.5 hover:bg-[#0C0A12] transition-colors min-h-[28px]"
-      title={`Copy ${label} value`}
+      title={t("copyValue", { label })}
     >
       <span className="font-mono text-[11px] text-[#71717A] shrink-0 w-7 text-left">
         {label}

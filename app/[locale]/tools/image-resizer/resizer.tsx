@@ -10,6 +10,7 @@ import {
   Unlink,
   Upload,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -110,6 +111,8 @@ function formatFileSize(bytes: number): string {
 }
 
 export function ImageResizer() {
+  const t = useTranslations("ToolUI.image-resizer");
+  const ts = useTranslations("SharedUI");
   const [original, setOriginal] = useState<ImageInfo | null>(null);
   const [targetWidth, setTargetWidth] = useState<number>(0);
   const [targetHeight, setTargetHeight] = useState<number>(0);
@@ -121,37 +124,38 @@ export function ImageResizer() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const aspectRatio = useRef<number>(1);
 
-  const loadImage = useCallback((file: File) => {
-    setError(null);
-    setResizedBlob(null);
-    setResizedUrl(null);
+  const loadImage = useCallback(
+    (file: File) => {
+      setError(null);
+      setResizedBlob(null);
+      setResizedUrl(null);
 
-    if (!ACCEPTED_TYPES.includes(file.type)) {
-      setError(
-        "Unsupported format. Please upload a PNG, JPG, WebP, GIF, or AVIF image.",
-      );
-      return;
-    }
+      if (!ACCEPTED_TYPES.includes(file.type)) {
+        setError(t("errUnsupported"));
+        return;
+      }
 
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => {
-      setOriginal({
-        file,
-        url,
-        width: img.naturalWidth,
-        height: img.naturalHeight,
-      });
-      setTargetWidth(img.naturalWidth);
-      setTargetHeight(img.naturalHeight);
-      aspectRatio.current = img.naturalWidth / img.naturalHeight;
-    };
-    img.onerror = () => {
-      setError("Failed to load image. The file may be corrupted.");
-      URL.revokeObjectURL(url);
-    };
-    img.src = url;
-  }, []);
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        setOriginal({
+          file,
+          url,
+          width: img.naturalWidth,
+          height: img.naturalHeight,
+        });
+        setTargetWidth(img.naturalWidth);
+        setTargetHeight(img.naturalHeight);
+        aspectRatio.current = img.naturalWidth / img.naturalHeight;
+      };
+      img.onerror = () => {
+        setError(t("errCorrupt"));
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    },
+    [t],
+  );
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -228,15 +232,14 @@ export function ImageResizer() {
       img.src = original.url;
       await new Promise<void>((resolve, reject) => {
         img.onload = () => resolve();
-        img.onerror = () =>
-          reject(new Error("Failed to load image for resizing."));
+        img.onerror = () => reject(new Error(t("errLoad")));
       });
 
       const canvas = document.createElement("canvas");
       canvas.width = targetWidth;
       canvas.height = targetHeight;
       const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("Canvas context unavailable.");
+      if (!ctx) throw new Error(t("errCanvas"));
 
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
@@ -250,7 +253,7 @@ export function ImageResizer() {
         canvas.toBlob(
           (b) => {
             if (b) resolve(b);
-            else reject(new Error("Failed to export resized image."));
+            else reject(new Error(t("errExport")));
           },
           mime,
           quality,
@@ -262,18 +265,17 @@ export function ImageResizer() {
       setResizedBlob(blob);
       setResizedUrl(newUrl);
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "An unexpected error occurred.",
-      );
+      setError(err instanceof Error ? err.message : ts("error.unexpected"));
     } finally {
       setResizing(false);
     }
-  }, [original, targetWidth, targetHeight, resizedUrl]);
+  }, [original, targetWidth, targetHeight, resizedUrl, t, ts]);
 
   const handleDownload = useCallback(async () => {
     if (!resizedBlob || !original) return;
-    const mime = getMimeType(original.file);
-    const ext = getExtension(mime);
+    // Use the encoded blob's type: browsers can't encode GIF/AVIF and fall
+    // back to PNG, so the source MIME would mislabel the file.
+    const ext = getExtension(resizedBlob.type);
     const baseName = original.file.name.replace(/\.[^.]+$/, "");
     const filename = `${baseName}-${targetWidth}x${targetHeight}.${ext}`;
 
@@ -300,16 +302,15 @@ export function ImageResizer() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {ts("freeTool")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Image
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Resizer</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Resize images to any dimension. Lock aspect ratio, use presets, and
-            download instantly. 100% client-side.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -338,7 +339,7 @@ export function ImageResizer() {
               <Upload className="w-8 h-8 text-[#71717A]" />
               <div className="text-center">
                 <p className="text-[#EDEDEF] font-[Inter] text-sm font-medium mb-1">
-                  Drop an image here or click to upload
+                  {t("drop")}
                 </p>
                 <p className="text-[#71717A] font-mono text-[11px] uppercase tracking-wider">
                   PNG, JPG, WebP, GIF, AVIF
@@ -359,7 +360,7 @@ export function ImageResizer() {
                 <div className="flex items-center gap-2 mb-4">
                   <ImageIcon className="w-4 h-4 text-primary" />
                   <h2 className="text-base font-[Syne] font-bold text-[#EDEDEF]">
-                    Original Image
+                    {t("originalImage")}
                   </h2>
                   <button
                     type="button"
@@ -373,7 +374,7 @@ export function ImageResizer() {
                     }}
                     className="ml-auto font-mono text-[11px] uppercase tracking-wider text-[#71717A] hover:text-[#2DD4BF] transition-colors"
                   >
-                    Change
+                    {t("change")}
                   </button>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -381,7 +382,7 @@ export function ImageResizer() {
                     {/* biome-ignore lint/performance/noImgElement: Dynamic user-uploaded image preview */}
                     <img
                       src={original.url}
-                      alt="Original"
+                      alt={t("original")}
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -403,7 +404,7 @@ export function ImageResizer() {
               <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-4">
                   <h2 className="text-base font-[Syne] font-bold text-[#EDEDEF]">
-                    New Dimensions
+                    {t("newDimensions")}
                   </h2>
                 </div>
 
@@ -413,7 +414,7 @@ export function ImageResizer() {
                       htmlFor="width-input"
                       className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
                     >
-                      Width (px)
+                      {t("widthPx")}
                     </label>
                     <input
                       id="width-input"
@@ -430,9 +431,7 @@ export function ImageResizer() {
                   <button
                     type="button"
                     onClick={() => setLockAspect(!lockAspect)}
-                    title={
-                      lockAspect ? "Unlock aspect ratio" : "Lock aspect ratio"
-                    }
+                    title={lockAspect ? t("unlockAspect") : t("lockAspect")}
                     className="flex items-center justify-center w-12 h-12 rounded-lg border border-[#2A2535] bg-[#0C0A12] hover:border-[#2DD4BF]/30 transition-colors min-h-[44px] min-w-[44px] shrink-0"
                   >
                     {lockAspect ? (
@@ -447,7 +446,7 @@ export function ImageResizer() {
                       htmlFor="height-input"
                       className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
                     >
-                      Height (px)
+                      {t("heightPx")}
                     </label>
                     <input
                       id="height-input"
@@ -465,7 +464,7 @@ export function ImageResizer() {
                 {/* Presets */}
                 <div className="space-y-3">
                   <p className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                    Scale
+                    {t("scale")}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <button
@@ -485,7 +484,7 @@ export function ImageResizer() {
                   </div>
 
                   <p className="font-mono text-[11px] uppercase tracking-wider text-[#71717A] pt-2">
-                    Common Sizes
+                    {t("commonSizes")}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {PRESET_SIZES.map((preset) => (
@@ -512,10 +511,10 @@ export function ImageResizer() {
                 {resizing ? (
                   <span className="flex items-center justify-center gap-2">
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    Resizing
+                    {t("resizing")}
                   </span>
                 ) : (
-                  `Resize to ${targetWidth} x ${targetHeight}`
+                  t("resizeTo", { width: targetWidth, height: targetHeight })
                 )}
               </button>
 
@@ -549,7 +548,7 @@ export function ImageResizer() {
                       <div className="flex items-center gap-2 mb-4">
                         <ImageIcon className="w-4 h-4 text-primary" />
                         <h2 className="text-base font-[Syne] font-bold text-[#EDEDEF]">
-                          Resized Preview
+                          {t("resizedPreview")}
                         </h2>
                       </div>
 
@@ -557,7 +556,7 @@ export function ImageResizer() {
                         {/* biome-ignore lint/performance/noImgElement: Dynamic resized image preview */}
                         <img
                           src={resizedUrl}
-                          alt="Resized preview"
+                          alt={t("resizedPreview")}
                           className="w-full h-full object-contain max-h-80"
                         />
                       </div>
@@ -569,10 +568,14 @@ export function ImageResizer() {
                           </p>
                           <div className="flex items-center gap-3">
                             <span className="font-mono text-[11px] text-[#71717A]">
-                              Original: {formatFileSize(original.file.size)}
+                              {t("originalSize", {
+                                size: formatFileSize(original.file.size),
+                              })}
                             </span>
                             <span className="font-mono text-[11px] text-[#EDEDEF]">
-                              New: {formatFileSize(resizedBlob.size)}
+                              {t("newSize", {
+                                size: formatFileSize(resizedBlob.size),
+                              })}
                             </span>
                           </div>
                         </div>
@@ -583,7 +586,7 @@ export function ImageResizer() {
                           className="flex items-center justify-center gap-2 h-12 px-6 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-sm uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all min-h-[44px]"
                         >
                           <Download className="w-4 h-4" />
-                          Download
+                          {ts("download")}
                         </button>
                       </div>
                     </div>
@@ -605,24 +608,24 @@ export function ImageResizer() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {ts("howItWorks")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Upload",
-                desc: "Drop or select any image file from your device.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Resize",
-                desc: "Set custom dimensions, scale by percentage, or pick a preset.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Download",
-                desc: "Preview the result and download your resized image instantly.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -634,7 +637,7 @@ export function ImageResizer() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {ts("step", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

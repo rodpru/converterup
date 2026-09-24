@@ -5,71 +5,36 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
 
 const allTools = [
-  {
-    name: "Media Converter",
-    href: "/tools/media-converter",
-    category: "video",
-  },
-  {
-    name: "Image Compressor",
-    href: "/tools/image-compressor",
-    category: "image",
-  },
-  { name: "Image Resizer", href: "/tools/image-resizer", category: "image" },
-  { name: "Video to GIF", href: "/tools/video-to-gif", category: "video" },
-  {
-    name: "QR Code Generator",
-    href: "/tools/qr-code-generator",
-    category: "utility",
-  },
-  {
-    name: "YouTube Thumbnails",
-    href: "/tools/youtube-thumbnail-downloader",
-    category: "video",
-  },
-  { name: "EXIF Viewer", href: "/tools/exif-viewer", category: "image" },
-  { name: "Color Palette", href: "/tools/color-palette", category: "image" },
-  {
-    name: "Favicon Generator",
-    href: "/tools/favicon-generator",
-    category: "image",
-  },
-  { name: "SVG to PNG", href: "/tools/svg-to-png", category: "image" },
-  {
-    name: "Image to Base64",
-    href: "/tools/image-to-base64",
-    category: "image",
-  },
-  {
-    name: "Frame Extractor",
-    href: "/tools/video-frame-extractor",
-    category: "video",
-  },
-  {
-    name: "Stripe Fees",
-    href: "/tools/stripe-fee-calculator",
-    category: "utility",
-  },
-  { name: "Text Repeater", href: "/tools/text-repeater", category: "utility" },
-  { name: "VTT to SRT", href: "/tools/vtt-to-srt", category: "utility" },
-  { name: "JSON Viewer", href: "/tools/json-viewer", category: "code" },
-  { name: "Hex to Decimal", href: "/tools/hex-to-decimal", category: "code" },
-  { name: "HTML Minifier", href: "/tools/html-minifier", category: "code" },
-  { name: "CSS Minifier", href: "/tools/css-minifier", category: "code" },
-  { name: "UUID Generator", href: "/tools/uuid-generator", category: "code" },
-  { name: "Base64 Decoder", href: "/tools/base64-decode", category: "code" },
-  {
-    name: "Case Converter",
-    href: "/tools/case-converter",
-    category: "utility",
-  },
-  { name: "CSV to JSON", href: "/tools/csv-to-json", category: "code" },
+  { href: "/tools/media-converter", category: "video" },
+  { href: "/tools/image-compressor", category: "image" },
+  { href: "/tools/image-resizer", category: "image" },
+  { href: "/tools/video-to-gif", category: "video" },
+  { href: "/tools/qr-code-generator", category: "utility" },
+  { href: "/tools/youtube-thumbnail-downloader", category: "video" },
+  { href: "/tools/exif-viewer", category: "image" },
+  { href: "/tools/color-palette", category: "image" },
+  { href: "/tools/favicon-generator", category: "image" },
+  { href: "/tools/svg-to-png", category: "image" },
+  { href: "/tools/image-to-base64", category: "image" },
+  { href: "/tools/video-frame-extractor", category: "video" },
+  { href: "/tools/stripe-fee-calculator", category: "utility" },
+  { href: "/tools/text-repeater", category: "utility" },
+  { href: "/tools/vtt-to-srt", category: "utility" },
+  { href: "/tools/json-viewer", category: "code" },
+  { href: "/tools/hex-to-decimal", category: "code" },
+  { href: "/tools/html-minifier", category: "code" },
+  { href: "/tools/css-minifier", category: "code" },
+  { href: "/tools/uuid-generator", category: "code" },
+  { href: "/tools/base64-decode", category: "code" },
+  { href: "/tools/case-converter", category: "utility" },
+  { href: "/tools/csv-to-json", category: "code" },
 ];
 
 export function RelatedTools() {
   // Locale-less on server and client (see Breadcrumbs).
   const pathname = usePathname();
   const t = useTranslations("Internal");
+  const tu = useTranslations("SharedUI.tools");
 
   if (pathname === "/tools") return null;
 
@@ -111,7 +76,7 @@ export function RelatedTools() {
               className="bg-[#16131E] border border-[#2A2535] rounded-lg p-3 hover:border-[#2DD4BF]/20 transition-colors text-center"
             >
               <span className="text-sm font-[Syne] font-semibold text-[#EDEDEF] group-hover:text-[#2DD4BF]">
-                {tool.name}
+                {tu(`${tool.href.replace("/tools/", "")}.name`)}
               </span>
             </Link>
           ))}

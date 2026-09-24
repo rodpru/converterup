@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check, ClipboardCopy, Type } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -39,11 +40,13 @@ type CaseType =
   | "kebab"
   | "constant";
 
-const CASE_OPTIONS: { value: CaseType; label: string }[] = [
-  { value: "upper", label: "UPPERCASE" },
-  { value: "lower", label: "lowercase" },
-  { value: "title", label: "Title Case" },
-  { value: "sentence", label: "Sentence case" },
+// Natural-language cases are translated (ToolUI.case-converter.case.*);
+// programming conventions keep their literal names in every language.
+const CASE_OPTIONS: { value: CaseType; label?: string }[] = [
+  { value: "upper" },
+  { value: "lower" },
+  { value: "title" },
+  { value: "sentence" },
   { value: "camel", label: "camelCase" },
   { value: "pascal", label: "PascalCase" },
   { value: "snake", label: "snake_case" },
@@ -128,6 +131,7 @@ function countWords(text: string): number {
 }
 
 export function CaseConverter() {
+  const t = useTranslations("ToolUI.case-converter");
   const [input, setInput] = useState("");
   const [selectedCase, setSelectedCase] = useState<CaseType>("upper");
   const [copied, setCopied] = useState(false);
@@ -166,16 +170,15 @@ export function CaseConverter() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Case
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Converter</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Convert text between UPPERCASE, lowercase, Title Case, camelCase,
-            snake_case, and more.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -193,7 +196,7 @@ export function CaseConverter() {
               htmlFor="case-input"
               className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
             >
-              Input Text
+              {t("inputLabel")}
             </label>
             <div className="relative">
               <Type className="absolute left-4 top-4 w-4 h-4 text-[#71717A]" />
@@ -201,7 +204,7 @@ export function CaseConverter() {
                 id="case-input"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Enter or paste text to convert..."
+                placeholder={t("inputPlaceholder")}
                 rows={5}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-[Inter] text-sm resize-y min-h-[44px]"
               />
@@ -211,7 +214,7 @@ export function CaseConverter() {
           {/* Case type buttons */}
           <div>
             <label className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2">
-              Case Type
+              {t("caseLabel")}
             </label>
             <div className="flex flex-wrap gap-2">
               {CASE_OPTIONS.map((opt) => (
@@ -225,7 +228,7 @@ export function CaseConverter() {
                       : "border border-[#2A2535] text-[#EDEDEF] hover:border-[#2DD4BF]/30"
                   }`}
                 >
-                  {opt.label}
+                  {opt.label ?? t(`case.${opt.value}`)}
                 </button>
               ))}
             </div>
@@ -234,14 +237,14 @@ export function CaseConverter() {
           {/* Stats bar */}
           <div className="flex items-center gap-4 py-3 px-4 bg-[#16131E] border border-[#2A2535] rounded-lg">
             <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-              Characters:{" "}
+              {t("characters")}{" "}
               <span className="text-[#EDEDEF]">
                 {charCount.toLocaleString()}
               </span>
             </span>
             <span className="w-px h-4 bg-[#2A2535]" />
             <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-              Words:{" "}
+              {t("words")}{" "}
               <span className="text-[#EDEDEF]">
                 {wordCount.toLocaleString()}
               </span>
@@ -255,7 +258,7 @@ export function CaseConverter() {
                 htmlFor="case-output"
                 className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A]"
               >
-                Output
+                {t("outputLabel")}
               </label>
               <button
                 type="button"
@@ -266,12 +269,12 @@ export function CaseConverter() {
                 {copied ? (
                   <>
                     <Check className="w-4 h-4" />
-                    Copied
+                    {t("copied")}
                   </>
                 ) : (
                   <>
                     <ClipboardCopy className="w-4 h-4" />
-                    Copy to Clipboard
+                    {t("copy")}
                   </>
                 )}
               </button>
@@ -281,7 +284,7 @@ export function CaseConverter() {
               value={output}
               readOnly
               rows={5}
-              placeholder="Converted text will appear here..."
+              placeholder={t("outputPlaceholder")}
               className="w-full px-4 py-3 border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] rounded-lg font-[Inter] text-sm resize-y min-h-[44px] placeholder:text-[#71717A]/60 focus:outline-none"
             />
           </div>
@@ -298,24 +301,24 @@ export function CaseConverter() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Enter Text",
-                desc: "Type or paste the text you want to convert.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Pick a Case",
-                desc: "Choose from 9 case styles including camelCase and snake_case.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Copy",
-                desc: "Copy the converted text to your clipboard instantly.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -327,7 +330,7 @@ export function CaseConverter() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

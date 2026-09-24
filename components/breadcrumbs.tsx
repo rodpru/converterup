@@ -1,38 +1,39 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { JsonLd } from "@/components/json-ld";
 import { Link, usePathname } from "@/i18n/routing";
 import { localizedUrl } from "@/lib/seo";
 
-const toolNames: Record<string, string> = {
-  "image-compressor": "Image Compressor",
-  "image-resizer": "Image Resizer",
-  "video-to-gif": "Video to GIF",
-  "qr-code-generator": "QR Code Generator",
-  "youtube-thumbnail-downloader": "YouTube Thumbnail Downloader",
-  "exif-viewer": "EXIF Viewer & Remover",
-  "color-palette": "Color Palette Extractor",
-  "favicon-generator": "Favicon Generator",
-  "svg-to-png": "SVG to PNG",
-  "image-to-base64": "Image to Base64",
-  "video-frame-extractor": "Video Frame Extractor",
-  "stripe-fee-calculator": "Stripe Fee Calculator",
-  "text-repeater": "Text Repeater",
-  "vtt-to-srt": "VTT to SRT Converter",
-  "json-viewer": "JSON Viewer",
-  "hex-to-decimal": "Hex to Decimal",
-  "html-minifier": "HTML Minifier",
-  "css-minifier": "CSS Minifier",
-  "uuid-generator": "UUID Generator",
-  "base64-decode": "Base64 Decoder",
-  "case-converter": "Case Converter",
-  "csv-to-json": "CSV to JSON",
-  "heic-to-jpg": "HEIC to JPG",
-  "heic-to-pdf": "HEIC to PDF",
-  "media-converter": "Media Converter",
-};
+// Tool display names live in messages (SharedUI.tools.<slug>.name).
+const toolSlugs = new Set([
+  "image-compressor",
+  "image-resizer",
+  "video-to-gif",
+  "qr-code-generator",
+  "youtube-thumbnail-downloader",
+  "exif-viewer",
+  "color-palette",
+  "favicon-generator",
+  "svg-to-png",
+  "image-to-base64",
+  "video-frame-extractor",
+  "stripe-fee-calculator",
+  "text-repeater",
+  "vtt-to-srt",
+  "json-viewer",
+  "hex-to-decimal",
+  "html-minifier",
+  "css-minifier",
+  "uuid-generator",
+  "base64-decode",
+  "case-converter",
+  "csv-to-json",
+  "heic-to-jpg",
+  "heic-to-pdf",
+  "media-converter",
+]);
 
 export function Breadcrumbs() {
   // next-intl's usePathname is locale-less on both server and client. The
@@ -40,13 +41,14 @@ export function Breadcrumbs() {
   // "/tools/x" in the browser, which broke hydration.
   const pathname = usePathname();
   const locale = useLocale();
+  const t = useTranslations("SharedUI");
 
   // Only show on individual tool pages, not /tools index
   if (pathname === "/tools") return null;
 
   const slug = pathname.replace("/tools/", "");
-  const toolName = toolNames[slug];
-  if (!toolName) return null;
+  if (!toolSlugs.has(slug)) return null;
+  const toolName = t(`tools.${slug}.name`);
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -55,13 +57,13 @@ export function Breadcrumbs() {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Home",
+        name: t("home"),
         item: localizedUrl("", locale),
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Tools",
+        name: t("toolsLabel"),
         item: localizedUrl("/tools", locale),
       },
       {
@@ -80,7 +82,7 @@ export function Breadcrumbs() {
         <ol className="flex items-center gap-1.5 font-mono text-[11px] text-[#71717A]">
           <li>
             <Link href="/" className="hover:text-[#EDEDEF] transition-colors">
-              Home
+              {t("home")}
             </Link>
           </li>
           <li>
@@ -91,7 +93,7 @@ export function Breadcrumbs() {
               href="/tools"
               className="hover:text-[#EDEDEF] transition-colors"
             >
-              Tools
+              {t("toolsLabel")}
             </Link>
           </li>
           <li>

@@ -9,6 +9,7 @@ import {
   Maximize2,
   Minimize2,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -68,6 +69,7 @@ function syntaxHighlight(json: string): string {
 }
 
 export function JsonViewer() {
+  const t = useTranslations("ToolUI.json-viewer");
   const [input, setInput] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState<"formatted" | "minified" | null>(null);
@@ -88,10 +90,10 @@ export function JsonViewer() {
         formatted: null,
         minified: null,
         valid: false,
-        errorMessage: e instanceof Error ? e.message : "Invalid JSON",
+        errorMessage: e instanceof Error ? e.message : t("invalid"),
       };
     }
-  }, [input]);
+  }, [input, t]);
 
   const highlighted = useMemo(() => {
     if (!parsed.formatted) return "";
@@ -113,9 +115,9 @@ export function JsonViewer() {
       setInput(JSON.stringify(obj, null, 2));
       setError(null);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Invalid JSON");
+      setError(e instanceof Error ? e.message : t("invalid"));
     }
-  }, [input]);
+  }, [input, t]);
 
   const handleMinify = useCallback(() => {
     if (!input.trim()) return;
@@ -124,9 +126,9 @@ export function JsonViewer() {
       setInput(JSON.stringify(obj));
       setError(null);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Invalid JSON");
+      setError(e instanceof Error ? e.message : t("invalid"));
     }
-  }, [input]);
+  }, [input, t]);
 
   const handleCopy = useCallback(
     async (type: "formatted" | "minified") => {
@@ -151,16 +153,15 @@ export function JsonViewer() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            JSON Viewer &
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Formatter</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Paste JSON to format, validate, and explore with syntax
-            highlighting. Prettify or minify instantly in your browser.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -180,7 +181,7 @@ export function JsonViewer() {
               className="flex items-center gap-1.5 h-10 px-4 rounded-lg border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] font-mono text-sm"
             >
               <Maximize2 className="w-4 h-4" />
-              Prettify
+              {t("prettify")}
             </button>
             <button
               type="button"
@@ -188,7 +189,7 @@ export function JsonViewer() {
               className="flex items-center gap-1.5 h-10 px-4 rounded-lg border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] hover:border-[#2DD4BF]/30 hover:text-[#2DD4BF] transition-colors min-h-[44px] font-mono text-sm"
             >
               <Minimize2 className="w-4 h-4" />
-              Minify
+              {t("minify")}
             </button>
             {parsed.formatted && (
               <>
@@ -202,7 +203,7 @@ export function JsonViewer() {
                   ) : (
                     <ClipboardCopy className="w-4 h-4" />
                   )}
-                  {copied === "formatted" ? "Copied" : "Copy Formatted"}
+                  {copied === "formatted" ? t("copied") : t("copyFormatted")}
                 </button>
                 <button
                   type="button"
@@ -214,7 +215,7 @@ export function JsonViewer() {
                   ) : (
                     <ClipboardCopy className="w-4 h-4" />
                   )}
-                  {copied === "minified" ? "Copied" : "Copy Minified"}
+                  {copied === "minified" ? t("copied") : t("copyMinified")}
                 </button>
                 <button
                   type="button"
@@ -226,7 +227,7 @@ export function JsonViewer() {
                   ) : (
                     <Minimize2 className="w-4 h-4" />
                   )}
-                  {collapsed ? "Expand" : "Collapse"} Preview
+                  {collapsed ? t("expandPreview") : t("collapsePreview")}
                 </button>
               </>
             )}
@@ -239,14 +240,14 @@ export function JsonViewer() {
               <div className="flex items-center gap-2 mb-2">
                 <Braces className="w-4 h-4 text-primary" />
                 <span className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                  Input
+                  {t("inputLabel")}
                 </span>
                 {input.trim() && (
                   <span className="ml-auto font-mono text-[11px] text-[#71717A]">
                     {parsed.valid ? (
-                      <span className="text-[#4ADE80]">Valid JSON</span>
+                      <span className="text-[#4ADE80]">{t("valid")}</span>
                     ) : (
-                      <span className="text-[#FB7185]">Invalid JSON</span>
+                      <span className="text-[#FB7185]">{t("invalid")}</span>
                     )}
                   </span>
                 )}
@@ -265,7 +266,7 @@ export function JsonViewer() {
               <div className="flex items-center gap-2 mb-2">
                 <Braces className="w-4 h-4 text-primary" />
                 <span className="text-sm font-[Syne] font-bold text-[#EDEDEF]">
-                  Preview
+                  {t("previewLabel")}
                 </span>
               </div>
               <div className="flex-1 min-h-[400px] p-4 border border-[#2A2535] bg-[#0C0A12] rounded-lg overflow-auto">
@@ -285,7 +286,7 @@ export function JsonViewer() {
                   )
                 ) : (
                   <p className="text-[#71717A]/40 font-mono text-sm">
-                    Formatted output will appear here...
+                    {t("outputPlaceholder")}
                   </p>
                 )}
               </div>
@@ -305,7 +306,7 @@ export function JsonViewer() {
                   {error ||
                     ("errorMessage" in parsed
                       ? (parsed as { errorMessage: string }).errorMessage
-                      : "Invalid JSON")}
+                      : t("invalid"))}
                 </p>
               </motion.div>
             )}
@@ -322,24 +323,24 @@ export function JsonViewer() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Paste JSON",
-                desc: "Paste any JSON string into the input area.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Format & Explore",
-                desc: "Instantly see formatted, syntax-highlighted output.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Copy or Minify",
-                desc: "Copy the prettified or minified version to clipboard.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -351,7 +352,7 @@ export function JsonViewer() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

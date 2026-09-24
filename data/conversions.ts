@@ -3,7 +3,7 @@ export interface Conversion {
   fromFormat: string;
   toFormat: string;
   toolSlug: string;
-  category: "image" | "video" | "text" | "data";
+  category: "image" | "video" | "audio" | "text" | "data";
 }
 
 export const conversions: Conversion[] = [
@@ -437,6 +437,63 @@ export const conversions: Conversion[] = [
     category: "video",
   },
   // Text / data conversions
+  // Audio extraction (media-converter extracts the soundtrack)
+  {
+    slug: "mp4-to-mp3",
+    fromFormat: "MP4",
+    toFormat: "MP3",
+    toolSlug: "media-converter",
+    category: "audio",
+  },
+  {
+    slug: "video-to-mp3",
+    fromFormat: "Video",
+    toFormat: "MP3",
+    toolSlug: "media-converter",
+    category: "audio",
+  },
+  {
+    slug: "mov-to-mp3",
+    fromFormat: "MOV",
+    toFormat: "MP3",
+    toolSlug: "media-converter",
+    category: "audio",
+  },
+  {
+    slug: "webm-to-mp3",
+    fromFormat: "WebM",
+    toFormat: "MP3",
+    toolSlug: "media-converter",
+    category: "audio",
+  },
+  {
+    slug: "mkv-to-mp3",
+    fromFormat: "MKV",
+    toFormat: "MP3",
+    toolSlug: "media-converter",
+    category: "audio",
+  },
+  {
+    slug: "avi-to-mp3",
+    fromFormat: "AVI",
+    toFormat: "MP3",
+    toolSlug: "media-converter",
+    category: "audio",
+  },
+  {
+    slug: "mp4-to-wav",
+    fromFormat: "MP4",
+    toFormat: "WAV",
+    toolSlug: "media-converter",
+    category: "audio",
+  },
+  {
+    slug: "mp4-to-aac",
+    fromFormat: "MP4",
+    toFormat: "AAC",
+    toolSlug: "media-converter",
+    category: "audio",
+  },
   {
     slug: "csv-to-json",
     fromFormat: "CSV",

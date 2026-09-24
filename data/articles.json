@@ -2608,15 +2608,20 @@
   {
     "articleId": "compress-images",
     "slug": "como-comprimir-imagens-sem-perder-qualidade",
-    "title": "Como Comprimir Imagens Sem Perder Qualidade",
-    "description": "Aprenda a reduzir o tamanho de imagens em até 80% mantendo a nitidez. Compressão gratuita no navegador, sem necessidade de upload para servidores.",
-    "keyword": "comprimir imagens sem perder qualidade",
+    "title": "Diminuir Tamanho da Foto Sem Perder Qualidade",
+    "description": "Como diminuir o tamanho da foto sem perder qualidade: qualidade certa, formato ideal (JPG, WebP) e compressão grátis no navegador, sem enviar suas fotos.",
+    "keyword": "diminuir tamanho da foto sem perder qualidade",
     "toolHref": "/tools/image-compressor",
     "toolName": "Compressor de Imagens",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para diminuir o tamanho de uma foto sem perder qualidade visível, salve em JPG ou WebP com qualidade entre 75 e 85 e reduza as dimensões para o tamanho em que ela será exibida. Assim o arquivo cai 60% a 80% e a diferença não aparece a olho nu. Dá para fazer isso grátis no navegador, sem enviar a foto."
+      },
       {
         "type": "paragraph",
         "text": "Imagens pesadas deixam sites lentos, consomem dados móveis e são rejeitadas por clientes de e-mail. A boa notícia é que é possível reduzir o tamanho da maioria das imagens em 50-80% sem diferença visível a olho nu. O segredo está em entender a diferença entre compressão com perda e sem perda, e escolher a abordagem certa para cada situação."
@@ -2624,7 +2629,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Compressão Com Perda vs. Sem Perda"
+        "text": "Compressão com perda ou sem perda: qual diminui mais a foto?"
       },
       {
         "type": "paragraph",
@@ -2694,7 +2699,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Otimizando Imagens para Redes Sociais"
+        "text": "Como comprimir foto para redes sociais e formulários (70 KB, 1 MB)"
       },
       {
         "type": "paragraph",
@@ -2731,6 +2736,14 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como comprimir uma foto para 70 KB?",
+            "answer": "Reduza primeiro a largura (por exemplo, para 800–1000 px) e depois baixe a qualidade do JPG até o arquivo ficar abaixo de 70 KB, conferindo a prévia. Para documentos e formulários, 800 px de largura com qualidade 70 costuma bastar."
+          },
+          {
+            "question": "Como diminuir o tamanho de uma foto sem perder qualidade?",
+            "answer": "Use JPG ou WebP com qualidade entre 75 e 85 e reduza as dimensões em pixels para o tamanho de exibição. O arquivo fica 60% a 80% menor sem diferença visível. Evite comprimir várias vezes o mesmo JPG."
+          },
+          {
             "question": "A compressão reduz as dimensões da imagem?",
             "answer": "Não. A compressão reduz o tamanho do arquivo otimizando como os dados dos pixels são armazenados, sem alterar as dimensões da imagem. Uma imagem 1920x1080 continua 1920x1080 após a compressão. Se quiser reduzir as dimensões, precisa redimensionar a imagem separadamente."
           },
@@ -2749,15 +2762,20 @@
   {
     "articleId": "youtube-thumbnail",
     "slug": "como-baixar-thumbnail-youtube-hd",
-    "title": "Como Baixar Thumbnail de Qualquer Vídeo do YouTube em HD",
-    "description": "Baixe thumbnails de vídeos do YouTube em todas as resoluções — de 120x90 até 1280x720. Grátis, instantâneo, sem instalar nada.",
-    "keyword": "baixar thumbnail youtube",
+    "title": "Tamanho da Thumbnail do YouTube 2026 e Como Baixar",
+    "description": "Tamanho da thumbnail do YouTube em 2026 (1280x720, 16:9, até 2 MB) e como baixar a thumbnail de qualquer vídeo em HD, grátis e sem instalar nada.",
+    "keyword": "tamanho thumbnail youtube",
     "toolHref": "/tools/youtube-thumbnail-downloader",
     "toolName": "Baixar Thumbnail do YouTube",
     "category": "video",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "O tamanho ideal da thumbnail do YouTube em 2026 é 1280 × 720 pixels (proporção 16:9), com largura mínima de 640 px e arquivo de até 2 MB em JPG, PNG ou GIF. Para baixar a thumbnail de um vídeo, cole o link em um baixador de thumbnail e salve a versão maxresdefault (1280 × 720)."
+      },
       {
         "type": "paragraph",
         "text": "Todo vídeo do YouTube possui um conjunto de imagens de thumbnail armazenadas nos servidores do Google. Essas imagens são acessíveis publicamente através de um padrão de URL previsível, o que significa que você pode baixar qualquer thumbnail em qualquer resolução disponível apenas com o ID do vídeo. Sem software especial, sem extensões de navegador, sem chaves de API."
@@ -2782,7 +2800,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Resoluções Disponíveis"
+        "text": "Tamanho da thumbnail do YouTube e resoluções disponíveis"
       },
       {
         "type": "paragraph",
@@ -2849,6 +2867,14 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como baixar a thumbnail de um vídeo do YouTube?",
+            "answer": "Copie o link do vídeo, cole no baixador de thumbnail do ConverterUp e escolha a resolução (Max-Res, HD, SD). A imagem é salva direto no seu dispositivo, grátis e sem cadastro."
+          },
+          {
+            "question": "Qual o tamanho da thumbnail do YouTube?",
+            "answer": "1280 × 720 pixels (16:9), largura mínima de 640 px e até 2 MB, em JPG, PNG ou GIF. É o tamanho que o YouTube recomenda e o que fica nítido em TVs e telas grandes."
+          },
+          {
             "question": "É legal baixar thumbnails do YouTube?",
             "answer": "As thumbnails do YouTube são imagens disponíveis publicamente acessíveis via URLs diretas. Para uso pessoal, referência e trabalho editorial, geralmente não há problemas. No entanto, se você pretende usar a thumbnail comercialmente ou como se fosse sua própria criação, verifique os direitos autorais da imagem original."
           },
@@ -2867,15 +2893,20 @@
   {
     "articleId": "image-formats",
     "slug": "png-vs-jpg-vs-webp-qual-formato-usar",
-    "title": "PNG vs JPG vs WebP: Qual Formato de Imagem Usar?",
-    "description": "Guia completo comparando PNG, JPG e WebP. Descubra qual formato oferece melhor qualidade, menor tamanho e quando usar cada um.",
-    "keyword": "png vs jpg vs webp",
+    "title": "PNG ou JPG: Qual Tem Mais Qualidade? (e WebP)",
+    "description": "PNG ou JPG: qual tem mais qualidade, qual é menor e qual usar no Instagram, em sites ou para imprimir. Comparação direta com WebP e tabela de uso.",
+    "keyword": "png ou jpg",
     "toolHref": "/tools/media-converter",
     "toolName": "Conversor de Mídia",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "O PNG tem mais qualidade porque é sem perda: guarda cada pixel exatamente. O JPG perde um pouco de detalhe, mas gera arquivos bem menores. Use JPG para fotos, PNG para logos, prints e imagens com fundo transparente, e WebP quando quiser o menor arquivo possível na web."
+      },
       {
         "type": "paragraph",
         "text": "Escolher o formato de imagem correto pode fazer uma diferença enorme no desempenho do seu site, na qualidade visual e na experiência do usuário. PNG, JPG (JPEG) e WebP são os três formatos mais utilizados na web, e cada um tem pontos fortes e limitações específicas. Este guia explica quando usar cada formato e por quê."
@@ -2944,7 +2975,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Quando Usar Cada Formato"
+        "text": "PNG ou JPG: qual usar em cada caso (Instagram, site, impressão)"
       },
       {
         "type": "list",
@@ -2970,6 +3001,14 @@
         "type": "faq",
         "items": [
           {
+            "question": "PNG ou JPG para impressão?",
+            "answer": "Para impressão, prefira PNG ou TIFF quando a imagem tem texto, logos ou cores chapadas. Para fotos, um JPG em qualidade máxima (95–100) e na resolução certa (300 DPI) também funciona bem."
+          },
+          {
+            "question": "PNG ou JPG: qual tem mais qualidade?",
+            "answer": "O PNG, porque é sem perda. Mas em fotos a diferença para um JPG de qualidade alta (85+) é invisível, e o JPG fica 5 a 10 vezes menor. Para texto, logos e prints, o PNG é claramente melhor."
+          },
+          {
             "question": "WebP substitui completamente JPG e PNG?",
             "answer": "Para uso na web, praticamente sim. O WebP oferece tamanhos menores com qualidade equivalente e suporta transparência. A única exceção são casos onde você precisa de compatibilidade com software antigo ou clientes de e-mail, que ainda preferem JPG e PNG."
           },
@@ -2988,15 +3027,20 @@
   {
     "articleId": "mp4-to-gif",
     "slug": "como-converter-mp4-para-gif",
-    "title": "Como Converter MP4 para GIF: Guia Completo",
-    "description": "Converta qualquer vídeo MP4 para GIF animado no navegador. Sem upload, sem marca d'água, grátis. Aprenda as melhores configurações.",
-    "keyword": "converter mp4 para gif",
+    "title": "Como Transformar Vídeo em GIF (Grátis, Sem App)",
+    "description": "Como transformar vídeo em GIF no celular ou no PC: passo a passo grátis, sem instalar app, com as melhores configurações de FPS, tamanho e duração.",
+    "keyword": "como transformar video em gif",
     "toolHref": "/tools/video-to-gif",
     "toolName": "Conversor de Vídeo para GIF",
     "category": "video",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para transformar um vídeo em GIF, abra um conversor de vídeo para GIF no navegador, envie o MP4 (ou MOV do iPhone), escolha o trecho de até 5 segundos, ajuste 12–15 fps e 480 px de largura e baixe o GIF. Funciona no celular e no PC, sem instalar nenhum app."
+      },
       {
         "type": "paragraph",
         "text": "GIFs animados continuam sendo o formato preferido para memes, demonstrações rápidas de produto, tutoriais curtos e reações nas redes sociais. Apesar de formatos mais modernos existirem, o GIF tem uma vantagem imbatível: funciona em absolutamente qualquer lugar — e-mails, fóruns, mensageiros, redes sociais, e documentação técnica."
@@ -3004,7 +3048,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Por que Converter MP4 para GIF?"
+        "text": "Por que transformar vídeo em GIF?"
       },
       {
         "type": "paragraph",
@@ -3082,6 +3126,14 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como fazer GIF para WhatsApp?",
+            "answer": "Converta o vídeo em GIF com até 6 segundos e largura de 480 px, depois envie pelo WhatsApp como arquivo ou figurinha. O WhatsApp também aceita vídeos curtos marcados como GIF, que ficam ainda mais leves."
+          },
+          {
+            "question": "Como transformar vídeo em GIF no celular?",
+            "answer": "Abra o conversor de vídeo em GIF do ConverterUp no navegador do celular, escolha o vídeo da galeria, corte o trecho e baixe o GIF. Funciona no iPhone e no Android, sem instalar app."
+          },
+          {
             "question": "Qual o tamanho máximo recomendado para um GIF?",
             "answer": "Para uso na web, mantenha abaixo de 5MB. Para e-mails, abaixo de 1MB (muitos clientes de e-mail não carregam GIFs maiores). Plataformas como Twitter aceitam GIFs de até 15MB, mas GIFs menores carregam mais rápido e proporcionam melhor experiência."
           },
@@ -3100,15 +3152,20 @@
   {
     "articleId": "exif-data",
     "slug": "como-ver-e-remover-dados-exif-de-fotos",
-    "title": "Como Ver e Remover Dados EXIF de Fotos",
-    "description": "Visualize metadados EXIF como câmera, localização GPS e configurações. Remova dados sensíveis antes de compartilhar suas fotos online.",
-    "keyword": "dados exif fotos",
+    "title": "Como Remover Localização e Metadados de Fotos",
+    "description": "Como remover a localização e os metadados (EXIF) de fotos antes de postar: o que é EXIF, quais redes já apagam e como limpar grátis no navegador.",
+    "keyword": "remover localização da foto",
     "toolHref": "/tools/exif-viewer",
     "toolName": "Visualizador e Removedor de EXIF",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para remover a localização de uma foto, apague os metadados EXIF antes de compartilhar: envie a foto para um removedor de EXIF no navegador, confira os dados (GPS, câmera, data) e baixe a cópia limpa. Para as próximas fotos, desligue a localização da câmera nas configurações do celular."
+      },
       {
         "type": "paragraph",
         "text": "Toda foto tirada com câmera digital ou smartphone contém dados ocultos chamados <strong>EXIF</strong> (Exchangeable Image File Format). Esses metadados incluem informações sobre a câmera, configurações de exposição, data e hora, e frequentemente a <strong>localização GPS</strong> de onde a foto foi tirada. Saber o que seus arquivos contêm é importante para privacidade e segurança."
@@ -3116,7 +3173,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "O Que São Dados EXIF?"
+        "text": "O que é EXIF (metadados da foto)?"
       },
       {
         "type": "paragraph",
@@ -3137,7 +3194,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Por Que Remover Dados EXIF?"
+        "text": "Por que remover a localização e os metadados da foto?"
       },
       {
         "type": "paragraph",
@@ -3194,6 +3251,14 @@
         "type": "faq",
         "items": [
           {
+            "question": "O que é EXIF de uma foto?",
+            "answer": "EXIF são metadados gravados dentro da foto pela câmera ou celular: modelo do aparelho, configurações de exposição, data e hora e, muitas vezes, a localização GPS exata."
+          },
+          {
+            "question": "Como remover a localização de uma foto?",
+            "answer": "Envie a foto para o visualizador EXIF do ConverterUp e clique em remover: o GPS e os outros metadados são apagados e você baixa uma cópia limpa. Nada é enviado para servidor."
+          },
+          {
             "question": "Remover dados EXIF afeta a qualidade da foto?",
             "answer": "Não. Os dados EXIF são metadados armazenados separadamente dos dados visuais da imagem. Removê-los não altera nenhum pixel da foto — apenas elimina as informações auxiliares como câmera, configurações e localização."
           },
@@ -3212,15 +3277,20 @@
   {
     "articleId": "stripe-fees",
     "slug": "taxas-stripe-como-calcular-custos",
-    "title": "Taxas do Stripe: Como Calcular Custos de Processamento",
-    "description": "Entenda a estrutura de taxas do Stripe para USD, EUR, GBP e BRL. Use nossa calculadora para ver exatamente quanto você pagará e receberá.",
-    "keyword": "calculadora taxas stripe",
+    "title": "Quanto o Stripe Cobra? Taxas no Brasil e Exterior",
+    "description": "Quanto o Stripe cobra por venda no Brasil e no exterior: taxa por transação, cartão internacional, reembolso e como calcular o valor líquido na hora.",
+    "keyword": "quanto o stripe cobra",
     "toolHref": "/tools/stripe-fee-calculator",
     "toolName": "Calculadora de Taxas Stripe",
     "category": "utility",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "No Brasil, o Stripe cobra 3,99% + R$0,39 por venda aprovada com cartão nacional, sem mensalidade. Cartões internacionais e conversão de moeda têm taxas extras. Para saber quanto você recebe, desconte a taxa do valor da venda — ou use uma calculadora para achar o preço que deixa o líquido que você quer."
+      },
       {
         "type": "paragraph",
         "text": "O Stripe é o processador de pagamentos preferido por milhões de empresas, de empreendedores solo a grandes corporações. Sua API amigável para desenvolvedores e preços transparentes são grandes atrativos, mas a estrutura de taxas tem nuances fáceis de ignorar — especialmente ao lidar com transações internacionais, conversão de moeda e reembolsos."
@@ -3228,7 +3298,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Estrutura de Taxas do Stripe por Região"
+        "text": "Quanto o Stripe cobra por região (Brasil, EUA, Europa)"
       },
       {
         "type": "paragraph",
@@ -3321,6 +3391,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "Quanto o Stripe cobra por venda?",
+            "answer": "No Brasil, a tarifa padrão é de 3,99% + R$0,39 por transação aprovada com cartão nacional. Nos EUA, 2,9% + US$0,30. Confira sempre a página de preços do Stripe da sua conta, porque as tarifas podem mudar."
+          },
+          {
             "question": "O Stripe cobra mensalidade?",
             "answer": "Não. O preço padrão do Stripe não tem mensalidade, taxa de configuração ou cobrança mínima. Você só paga quando processa uma transação. Porém, alguns recursos premium como Stripe Tax, Radar para Equipes de Fraude e Stripe Atlas têm custos adicionais."
           },
@@ -3331,6 +3405,10 @@
           {
             "question": "O Stripe é melhor que o PayPal para o Brasil?",
             "answer": "Para desenvolvedores e startups, sim — a API do Stripe é muito superior. As taxas são comparáveis (3,99% + R$0,39 do Stripe vs taxas variáveis do PayPal). A principal vantagem do PayPal é a familiaridade dos compradores e a possibilidade de pagar sem cartão de crédito via saldo PayPal."
+          },
+          {
+            "question": "Qual é a taxa do Stripe para Pix?",
+            "answer": "No Brasil, o Stripe cobra 1,19% por pagamento Pix aprovado, sem taxa fixa e sem mensalidade — bem abaixo dos 3,99% + R$0,39 do cartão nacional. Para vendas de ticket baixo, oferecer Pix costuma reduzir bastante o custo por transação."
           }
         ]
       }
@@ -3339,15 +3417,20 @@
   {
     "articleId": "qr-code-logo",
     "slug": "como-criar-qr-code-com-logo",
-    "title": "Como Criar QR Code com Logo Personalizado",
-    "description": "Gere QR codes com seu logo no centro. Grátis, personalizável e funcional. Guia completo sobre cores, formatos e boas práticas.",
-    "keyword": "criar qr code com logo",
+    "title": "Como Fazer QR Code com Logo (Grátis, Sem Expirar)",
+    "description": "Como fazer QR code com logo no meio: passo a passo grátis, nível de correção certo, cores e tamanho para o QR code continuar lendo — e que não expira.",
+    "keyword": "como fazer qr code com logo",
     "toolHref": "/tools/qr-code-generator",
     "toolName": "Gerador de QR Code",
     "category": "utility",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para fazer um QR code com logo, gere o código com correção de erros nível H (30%), coloque o logo no centro ocupando no máximo 20% da área, mantenha bom contraste e teste a leitura com dois apps antes de imprimir. Um QR code estático feito assim não expira."
+      },
       {
         "type": "paragraph",
         "text": "QR codes estão por toda parte — em cardápios de restaurantes, materiais de marketing, cartões de visita, embalagens de produtos e até em outdoors. Adicionar um logo ao centro do QR code reforça sua marca e aumenta a confiança do usuário para escanear. Graças à correção de erros embutida no padrão QR, é possível sobrepor uma imagem sem comprometer a funcionalidade."
@@ -3391,7 +3474,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Boas Práticas para QR Codes com Logo"
+        "text": "Como fazer QR code com logo que continua funcionando"
       },
       {
         "type": "list",
@@ -3430,6 +3513,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como fazer um QR code grátis?",
+            "answer": "Abra o gerador de QR code do ConverterUp, cole o link, texto ou dados do Wi-Fi, ajuste cores e logo e baixe em PNG. O QR code é estático, não expira e não tem marca d'água."
+          },
+          {
             "question": "QR code com logo funciona mesmo?",
             "answer": "Sim. Graças à correção de erros Reed-Solomon no nível H, até 30% do QR code pode ser obstruído e ainda assim ser lido corretamente. Desde que o logo não ultrapasse 20-25% da área total e seja centralizado, o QR code funcionará normalmente."
           },
@@ -3448,15 +3535,20 @@
   {
     "articleId": "vtt-vs-srt",
     "slug": "como-converter-vtt-para-srt",
-    "title": "Como Converter VTT para SRT: Guia de Legendas",
-    "description": "Converta arquivos de legenda WebVTT para SRT instantaneamente. Entenda as diferenças entre formatos e quando usar cada um.",
-    "keyword": "converter vtt para srt",
+    "title": "Como Converter Legenda para SRT (VTT para SRT)",
+    "description": "Como converter legenda para SRT: transforme arquivos VTT (do YouTube e de cursos) em SRT para VLC, CapCut e Premiere, grátis e sem instalar programa.",
+    "keyword": "converter legenda para srt",
     "toolHref": "/tools/vtt-to-srt",
     "toolName": "Conversor VTT para SRT",
     "category": "utility",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para converter uma legenda para SRT, envie o arquivo .vtt para um conversor de VTT para SRT, confira a prévia e baixe o .srt. A conversão troca o ponto dos milissegundos por vírgula, numera as legendas e remove estilos que o SRT não suporta, mantendo texto e tempos iguais."
+      },
       {
         "type": "paragraph",
         "text": "VTT (WebVTT) e SRT (SubRip) são os dois formatos de legenda mais utilizados no mundo. O WebVTT é o padrão da web moderna, usado pelo HTML5, YouTube e a maioria das plataformas de streaming. O SRT é o formato legado universal, suportado por praticamente todo player de vídeo e software de edição. Frequentemente é necessário converter entre os dois."
@@ -3515,7 +3607,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Quando Converter VTT para SRT"
+        "text": "Quando converter a legenda para SRT"
       },
       {
         "type": "list",
@@ -3552,6 +3644,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como converter legenda VTT para SRT?",
+            "answer": "Envie o arquivo .vtt no conversor do ConverterUp e baixe o .srt na hora. Texto e tempos são mantidos; só o formato dos milissegundos e os estilos mudam."
+          },
+          {
             "question": "A conversão altera o timing das legendas?",
             "answer": "Não. A conversão de VTT para SRT apenas muda o formato do arquivo — o cabeçalho, os separadores decimais nos timestamps (ponto para vírgula), e a remoção de tags de estilização avançada. Os tempos de início e fim de cada legenda permanecem exatamente os mesmos."
           },
@@ -3570,15 +3666,20 @@
   {
     "articleId": "resize-social-media",
     "slug": "como-redimensionar-imagens-para-redes-sociais",
-    "title": "Como Redimensionar Imagens para Redes Sociais",
-    "description": "Guia completo com as dimensões exatas para Instagram, Facebook, Twitter, LinkedIn e YouTube. Redimensione suas imagens gratuitamente.",
-    "keyword": "redimensionar imagens redes sociais",
+    "title": "Tamanho de Post do Instagram 2026 (e Outras Redes)",
+    "description": "Tamanho de post do Instagram em 2026 (feed, stories e reels) e medidas para Facebook, X, LinkedIn e YouTube, com como redimensionar grátis.",
+    "keyword": "tamanho post instagram",
     "toolHref": "/tools/image-resizer",
     "toolName": "Redimensionador de Imagens",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Em 2026, o tamanho recomendado para post do Instagram é 1080 × 1350 px (retrato 4:5) ou 1080 × 1080 px (quadrado). Stories e Reels usam 1080 × 1920 px (9:16). Redimensione a imagem para essas medidas antes de postar para o Instagram não cortar nem comprimir demais."
+      },
       {
         "type": "paragraph",
         "text": "Cada plataforma de rede social tem suas próprias dimensões ideais de imagem. Publicar uma imagem no tamanho errado resulta em cortes inesperados, bordas pretas, ou compressão excessiva. Usar as dimensões corretas garante que suas imagens apareçam nítidas e profissionais em todas as plataformas."
@@ -3586,7 +3687,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Dimensões por Plataforma em 2026"
+        "text": "Tamanho de post do Instagram e das outras redes em 2026"
       },
       {
         "type": "heading",
@@ -3673,6 +3774,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "Qual o tamanho de post do Instagram?",
+            "answer": "1080 × 1350 px (4:5, retrato) é o que ocupa mais espaço no feed; 1080 × 1080 px (1:1) para quadrado. Stories e Reels: 1080 × 1920 px (9:16)."
+          },
+          {
             "question": "Por que minhas imagens ficam borradas nas redes sociais?",
             "answer": "Duas causas principais: a imagem é menor que o recomendado (forçando a plataforma a ampliá-la) ou a imagem já está muito comprimida antes do upload. Use as dimensões recomendadas e faça upload com qualidade de 85-92% para que a recompressão da plataforma não degrade demais."
           },
@@ -3691,15 +3796,20 @@
   {
     "articleId": "extract-video-frames",
     "slug": "como-extrair-frames-de-video",
-    "title": "Como Extrair Frames de um Vídeo",
-    "description": "Extraia frames individuais de qualquer vídeo no navegador. Ideal para criar thumbnails, analisar cenas ou gerar imagens de referência.",
-    "keyword": "extrair frames de video",
+    "title": "Como Tirar Foto de um Vídeo Sem Perder Qualidade",
+    "description": "Como tirar foto de um vídeo sem perder qualidade no celular ou no PC: extraia o frame exato em PNG no navegador, melhor que print de tela.",
+    "keyword": "tirar foto de video",
     "toolHref": "/tools/video-frame-extractor",
     "toolName": "Extrator de Frames de Vídeo",
     "category": "video",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para tirar foto de um vídeo sem perder qualidade, não use print de tela: abra o vídeo em um extrator de frames, pause no momento exato, avance quadro a quadro e salve em PNG. O frame sai na resolução original do vídeo, sem a interface do player."
+      },
       {
         "type": "paragraph",
         "text": "Extrair frames específicos de um vídeo é uma necessidade comum para criadores de conteúdo, designers, analistas esportivos e profissionais de marketing. Seja para criar thumbnails personalizadas, analisar momentos específicos de um vídeo, ou gerar imagens de referência para design, a capacidade de capturar frames individuais é essencial."
@@ -3745,7 +3855,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Dicas para Frames de Alta Qualidade"
+        "text": "Dicas para tirar foto de vídeo com qualidade"
       },
       {
         "type": "list",
@@ -3768,6 +3878,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como tirar foto de um vídeo no iPhone?",
+            "answer": "Abra o extrator de frames do ConverterUp no Safari, escolha o vídeo, pause no momento certo e salve o frame em PNG. Fica melhor que o print de tela, que perde resolução e pega a interface."
+          },
+          {
             "question": "Quais formatos de vídeo são suportados?",
             "answer": "O extrator suporta todos os formatos que seu navegador consegue reproduzir. Na prática, isso inclui MP4 (H.264), WebM e a maioria dos formatos comuns. MP4 é o formato mais amplamente suportado em todos os navegadores."
           },
@@ -3786,15 +3900,20 @@
   {
     "articleId": "image-to-base64",
     "slug": "como-converter-imagem-para-base64",
-    "title": "Como Converter Imagem para Base64 para Uso em HTML e CSS",
-    "description": "Converta imagens para strings Base64 para embedar diretamente em HTML, CSS e JavaScript. Entenda quando usar e quando evitar.",
-    "keyword": "converter imagem para base64",
+    "title": "Como Usar Imagem Base64 no HTML (e no CSS)",
+    "description": "Como usar imagem Base64 no HTML e no CSS: converta a imagem, cole o data URI no src ou no background e saiba quando vale (e quando não vale) a pena.",
+    "keyword": "imagem base64 html",
     "toolHref": "/tools/image-to-base64",
     "toolName": "Conversor Imagem para Base64",
     "category": "developer",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para usar uma imagem Base64 no HTML, converta a imagem em data URI e cole no atributo src: <code>&lt;img src=\"data:image/png;base64,...\"&gt;</code>. No CSS, use <code>background-image: url(\"data:image/png;base64,...\")</code>. Vale a pena só para imagens pequenas, abaixo de 4 KB."
+      },
       {
         "type": "paragraph",
         "text": "Base64 é um método de codificação que converte dados binários (como imagens) em uma string de texto ASCII. Isso permite que você insira uma imagem diretamente no seu código HTML, CSS ou JavaScript sem precisar de um arquivo separado. É uma técnica valiosa em cenários específicos, mas tem trade-offs importantes que todo desenvolvedor precisa entender."
@@ -3819,7 +3938,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Como Usar Base64 em HTML e CSS"
+        "text": "Como usar imagem Base64 no HTML e no CSS"
       },
       {
         "type": "heading",
@@ -3888,6 +4007,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como exibir uma imagem Base64 no HTML?",
+            "answer": "Coloque o data URI completo no src da tag img: <code>&lt;img src=\"data:image/png;base64,iVBOR...\" alt=\"...\"&gt;</code>. O tipo MIME (image/png, image/jpeg) precisa bater com a imagem."
+          },
+          {
             "question": "Base64 aumenta o tamanho do arquivo?",
             "answer": "Sim. A codificação Base64 aumenta o tamanho em aproximadamente 33%. Uma imagem de 10KB se torna uma string de ~13.3KB. Para imagens pequenas (< 2KB), esse aumento é compensado pela eliminação de uma requisição HTTP. Para imagens maiores, use arquivos separados."
           },
@@ -3906,15 +4029,20 @@
   {
     "articleId": "svg-to-png",
     "slug": "como-converter-svg-para-png",
-    "title": "Como Converter SVG para PNG em Alta Resolução",
-    "description": "Converta arquivos SVG para PNG em qualquer resolução — 512, 1024, 2048 px. Entenda quando usar cada formato e obtenha a melhor qualidade possível.",
-    "keyword": "converter svg para png",
+    "title": "O Que É SVG e Como Converter para PNG",
+    "description": "O que é SVG, para que serve e como converter SVG para PNG sem perder qualidade e sem fundo, na resolução certa para web, redes sociais e impressão.",
+    "keyword": "o que é svg",
     "toolHref": "/tools/svg-to-png",
     "toolName": "Conversor SVG para PNG",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "SVG é um formato de imagem vetorial: descreve formas e textos com código, então pode ser ampliado sem perder nitidez. Para usar onde só aceitam PNG, converta o SVG em PNG na escala certa (2× para telas, 4× para impressão) e deixe o fundo transparente se precisar da imagem sem fundo."
+      },
       {
         "type": "paragraph",
         "text": "SVG (Scalable Vector Graphics) e PNG (Portable Network Graphics) servem propósitos fundamentalmente diferentes. SVG é um formato vetorial — definido por fórmulas matemáticas que escalam infinitamente sem perda de qualidade. PNG é um formato raster — uma grade fixa de pixels. Converter SVG para PNG é necessário quando a plataforma de destino não suporta vetores."
@@ -3922,7 +4050,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Por Que Converter SVG para PNG?"
+        "text": "O que é SVG e por que converter para PNG"
       },
       {
         "type": "list",
@@ -3985,6 +4113,14 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como converter SVG para PNG sem fundo?",
+            "answer": "Deixe a opção de fundo em transparente no conversor: o PNG mantém o canal alfa do SVG e sai sem fundo."
+          },
+          {
+            "question": "O que é um arquivo SVG?",
+            "answer": "É uma imagem vetorial em formato de texto (XML), usada para logos, ícones e ilustrações. Ela escala para qualquer tamanho sem pixelar, mas muitos apps e redes sociais não aceitam — aí é preciso converter para PNG."
+          },
+          {
             "question": "Posso converter PNG de volta para SVG?",
             "answer": "Não de forma automática e perfeita. Converter raster (PNG) para vetor (SVG) requer \"tracing\" — um processo que aproxima as formas da imagem em curvas matemáticas. O resultado nunca é idêntico ao SVG original. Para logos e gráficos simples, ferramentas de auto-tracing funcionam razoavelmente. Para fotografias, a conversão não faz sentido."
           },
@@ -4003,15 +4139,20 @@
   {
     "articleId": "create-favicon",
     "slug": "como-criar-favicon-para-site",
-    "title": "Como Criar um Favicon: Gerador Online + Código HTML",
-    "description": "Como criar favicon para o seu site: gere todos os tamanhos (ICO, PNG 16x16, 32x32, Apple Touch, Android) a partir de uma imagem e copie o HTML pronto.",
-    "keyword": "como criar favicon",
+    "title": "Tamanho do Favicon e Como Criar (Guia 2026)",
+    "description": "Qual o tamanho do favicon (16x16, 32x32, 180x180, 192 e 512 px) e como criar favicon para site grátis a partir de uma imagem, com o código HTML pronto.",
+    "keyword": "tamanho favicon",
     "toolHref": "/tools/favicon-generator",
     "toolName": "Gerador de Favicon",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "O tamanho padrão do favicon é 32 × 32 px na aba do navegador, com 180 × 180 px para o ícone da Apple e 192 × 192 e 512 × 512 px para Android e PWA. Crie todos a partir de uma imagem quadrada de pelo menos 512 px e adicione as tags link no head do site."
+      },
       {
         "type": "paragraph",
         "text": "O favicon é o pequeno ícone que aparece nas abas do navegador, nos favoritos, no histórico e — cada vez mais — nos resultados de busca. Apesar do tamanho reduzido, ele tem um papel significativo no reconhecimento de marca e na profissionalidade do site. Um favicon ausente ou quebrado faz o site parecer inacabado."
@@ -4039,7 +4180,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Todos os Tamanhos de Favicon Necessários"
+        "text": "Tamanho do favicon: todas as medidas necessárias"
       },
       {
         "type": "paragraph",
@@ -4121,6 +4262,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "Qual o tamanho do favicon?",
+            "answer": "32 × 32 px para a aba do navegador (com 16 × 16 como alternativa), 180 × 180 px para o Apple Touch Icon e 192 × 192 e 512 × 512 px para Android e PWA."
+          },
+          {
             "question": "Qual formato de arquivo devo usar para o favicon?",
             "answer": "Use PNG para todos os tamanhos modernos de favicon. O formato .ico só é necessário para compatibilidade com Internet Explorer, o que raramente é uma preocupação hoje. Favicons SVG são suportados por navegadores modernos e escalam perfeitamente, mas você ainda precisa de PNGs para dispositivos Apple e manifestos PWA."
           },
@@ -4139,15 +4284,20 @@
   {
     "articleId": "extract-colors",
     "slug": "como-extrair-cores-de-imagem",
-    "title": "Como Extrair Paleta de Cores de Qualquer Imagem",
-    "description": "Extraia automaticamente as cores dominantes de qualquer imagem. Obtenha códigos HEX, RGB e HSL para usar em seus projetos de design.",
-    "keyword": "extrair cores de imagem",
+    "title": "Como Descobrir a Cor de uma Imagem (HEX e RGB)",
+    "description": "Como descobrir a cor de uma imagem e pegar o código HEX, RGB ou HSL: extraia a paleta de cores de qualquer foto ou print, grátis e no navegador.",
+    "keyword": "descobrir cor de uma imagem",
     "toolHref": "/tools/color-palette",
     "toolName": "Extrator de Paleta de Cores",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para descobrir a cor de uma imagem, envie a foto ou o print para um extrator de paleta de cores: ele mostra as cores dominantes com o código HEX, RGB e HSL de cada uma, e basta clicar para copiar. Para uma área específica, corte a imagem antes."
+      },
       {
         "type": "paragraph",
         "text": "A cor é uma das ferramentas mais poderosas no design. Extrair a paleta de cores de uma imagem de referência — seja uma fotografia, um frame de filme, ou uma peça de design existente — é o ponto de partida para criar interfaces, materiais de marketing e identidades visuais coerentes. Em vez de tentar adivinhar cores \"a olho\", uma ferramenta de extração identifica matematicamente as cores dominantes."
@@ -4155,7 +4305,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Como Funciona a Extração de Cores"
+        "text": "Como descobrir as cores de uma imagem"
       },
       {
         "type": "paragraph",
@@ -4250,6 +4400,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como descobrir o código da cor de uma imagem?",
+            "answer": "Envie a imagem para o extrator de paleta do ConverterUp: cada cor dominante aparece com o código HEX, RGB e HSL. Clique na cor para copiar o código."
+          },
+          {
             "question": "Quantas cores são extraídas da imagem?",
             "answer": "Normalmente, ferramentas de extração retornam entre 5 e 10 cores dominantes. Esse número é suficiente para capturar a essência cromática da imagem sem ser excessivo. Paletas menores (5 cores) são mais fáceis de usar diretamente em projetos de design."
           },
@@ -4268,15 +4422,20 @@
   {
     "articleId": "hex-to-decimal",
     "slug": "como-converter-hexadecimal-para-decimal",
-    "title": "Como Converter Hexadecimal para Decimal (e Vice-Versa)",
-    "description": "Converta valores hexadecimais para decimal instantaneamente. Guia completo sobre sistemas numéricos para programadores e estudantes.",
-    "keyword": "converter hexadecimal para decimal",
+    "title": "Como Converter Hexadecimal para Decimal (Tabela)",
+    "description": "Como converter hexadecimal para decimal passo a passo, com tabela de 0 a F, exemplos resolvidos e o caminho inverso (decimal para hexadecimal).",
+    "keyword": "como converter hexadecimal para decimal",
     "toolHref": "/tools/hex-to-decimal",
     "toolName": "Conversor Hex para Decimal",
     "category": "developer",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para converter hexadecimal para decimal, multiplique cada dígito pela potência de 16 da sua posição (da direita para a esquerda, começando em 16⁰) e some tudo, lembrando que A=10, B=11, C=12, D=13, E=14 e F=15. Exemplo: 2F = 2×16 + 15 = 47."
+      },
       {
         "type": "paragraph",
         "text": "O sistema hexadecimal (base 16) é fundamental na programação e ciência da computação. Ele aparece em endereços de memória, códigos de cores CSS, endereços MAC, valores Unicode e muito mais. Entender como converter entre hexadecimal e decimal é uma habilidade essencial para desenvolvedores e estudantes de computação."
@@ -4306,7 +4465,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "Como Converter Hexadecimal para Decimal"
+        "text": "Como converter hexadecimal para decimal passo a passo"
       },
       {
         "type": "paragraph",
@@ -4365,6 +4524,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "Como converter hexadecimal para decimal?",
+            "answer": "Multiplique cada dígito por 16 elevado à sua posição (0 na direita) e some. Exemplo: 1A3 = 1×256 + 10×16 + 3 = 419."
+          },
+          {
             "question": "Por que programadores usam hexadecimal em vez de binário?",
             "answer": "Hexadecimal é muito mais compacto que binário. Um byte (8 bits) requer 8 dígitos binários (ex: 11111111) mas apenas 2 dígitos hexadecimais (FF). A conversão entre hex e binário é trivial porque cada dígito hex corresponde a exatamente 4 bits. Isso torna o hex a representação mais prática para trabalhar com dados binários."
           },
@@ -4383,15 +4546,20 @@
   {
     "articleId": "json-formatting",
     "slug": "como-formatar-e-validar-json",
-    "title": "Como Formatar e Validar JSON Online",
-    "description": "Formate, valide e visualize JSON online. Detecte erros de sintaxe instantaneamente e transforme JSON minificado em formato legível.",
-    "keyword": "formatar e validar json",
+    "title": "O Que É JSON e Para Que Serve (Com Exemplos)",
+    "description": "O que é JSON, para que serve e como é a estrutura (objetos, arrays, tipos), com exemplos simples, erros comuns e como formatar e validar JSON online.",
+    "keyword": "o que é json",
     "toolHref": "/tools/json-viewer",
     "toolName": "Visualizador JSON",
     "category": "developer",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "pt",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "JSON (JavaScript Object Notation) é um formato de texto para guardar e trocar dados estruturados, com pares chave-valor, listas e tipos como texto, número e booleano. Ele serve principalmente para APIs, arquivos de configuração e troca de dados entre sistemas, porque qualquer linguagem de programação lê e gera JSON."
+      },
       {
         "type": "paragraph",
         "text": "JSON (JavaScript Object Notation) é o formato de dados mais usado na web moderna. APIs REST, arquivos de configuração, bancos de dados NoSQL e comunicação entre serviços — JSON está em toda parte. Saber formatar, validar e navegar por documentos JSON complexos é uma habilidade essencial para qualquer desenvolvedor."
@@ -4399,7 +4567,7 @@
       {
         "type": "heading",
         "level": 2,
-        "text": "O Que É JSON?"
+        "text": "O que é JSON e para que serve"
       },
       {
         "type": "paragraph",
@@ -4493,6 +4661,14 @@
         "type": "faq",
         "items": [
           {
+            "question": "Qual um exemplo simples de JSON?",
+            "answer": "<code>{\"nome\": \"Ana\", \"idade\": 30, \"ativo\": true, \"cursos\": [\"HTML\", \"CSS\"]}</code> — um objeto com texto, número, booleano e uma lista."
+          },
+          {
+            "question": "Para que serve o JSON?",
+            "answer": "Para trocar dados entre sistemas: APIs devolvem respostas em JSON, apps guardam configurações em JSON e bancos NoSQL armazenam documentos em formato parecido. É leve, legível e aceito por qualquer linguagem."
+          },
+          {
             "question": "Qual a diferença entre JSON e JavaScript?",
             "answer": "JSON é um subconjunto da sintaxe de objetos JavaScript, mas com regras mais estritas. Em JavaScript, chaves podem ser sem aspas, valores podem ser funções, e vírgulas finais são aceitas. JSON exige aspas duplas em chaves e strings, não aceita funções, undefined ou vírgulas finais. Todo JSON válido é JavaScript válido, mas nem todo JavaScript é JSON válido."
           },
@@ -4511,18 +4687,23 @@
   {
     "articleId": "compress-images",
     "slug": "como-comprimir-imagenes-sin-perder-calidad",
-    "title": "Cómo Comprimir Imágenes Sin Perder Calidad",
-    "description": "Aprende a reducir el tamaño de tus imágenes hasta un 80% sin perder nitidez. Compresión gratuita en el navegador, sin subir archivos.",
-    "keyword": "comprimir imagenes sin perder calidad",
+    "title": "Cómo Reducir el Tamaño de una Foto Sin Perder Calidad",
+    "description": "Aprende a reducir el tamaño de una foto sin perder calidad: qué nivel de compresión usar en JPG, PNG y WebP y cómo comprimir fotos gratis sin subirlas.",
+    "keyword": "reducir tamaño de foto sin perder calidad",
     "toolHref": "/tools/image-compressor",
     "toolName": "Compresor de Imágenes",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
       {
         "type": "paragraph",
-        "text": "Las imágenes pesadas ralentizan sitios web, consumen datos móviles y son rechazadas por clientes de correo electrónico. La buena noticia es que puedes reducir la mayoría de las imágenes entre un 50% y 80% sin que se note diferencia alguna a simple vista. La clave está en entender la diferencia entre compresión con pérdida y sin pérdida, y elegir el método adecuado según tu caso."
+        "text": "Para reducir el tamaño de una foto sin perder calidad visible, guárdala en JPG o WebP con una calidad entre 70 y 85 % y, si es muy grande, baja sus dimensiones al tamaño en que se va a mostrar. Así el peso suele caer entre un 50 y un 80 % sin diferencias a simple vista."
+      },
+      {
+        "type": "paragraph",
+        "text": "Las imágenes pesadas ralentizan sitios web, consumen datos teléfonos y son rechazadas por clientes de correo electrónico. La buena noticia es que puedes reducir la mayoría de las imágenes entre un 50% y 80% sin que se note diferencia alguna a simple vista. La clave está en entender la diferencia entre compresión con pérdida y sin pérdida, y elegir el método adecuado según tu caso."
       },
       {
         "type": "heading",
@@ -4630,6 +4811,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cómo comprimir una foto a menos de 1 MB?",
+            "answer": "Empieza con calidad 80 % en JPG o WebP; si sigue pasando de 1 MB, reduce el ancho a 1920 px o menos y vuelve a comprimir. Una foto de teléfono de 12 MP suele quedar entre 300 y 800 KB con estos ajustes."
+          },
+          {
             "question": "¿La compresión reduce las dimensiones de la imagen?",
             "answer": "No. La compresión reduce el tamaño del archivo optimizando cómo se almacenan los datos de los píxeles, no achicando las dimensiones. Una imagen de 1920x1080 sigue siendo 1920x1080 después de comprimirla. Si quieres reducir dimensiones, necesitas redimensionar la imagen por separado."
           },
@@ -4648,15 +4833,29 @@
   {
     "articleId": "youtube-thumbnail",
     "slug": "como-descargar-miniatura-de-youtube-en-hd",
-    "title": "Cómo Descargar la Miniatura de un Video de YouTube en HD",
-    "description": "Descarga miniaturas de videos de YouTube en todas las resoluciones, desde 120x90 hasta 1280x720. Gratis, al instante y sin instalar nada.",
-    "keyword": "descargar miniatura youtube",
+    "title": "Tamaño de Miniatura de YouTube 2026 y Cómo Descargarla",
+    "description": "Tamaño de la miniatura de YouTube en 2026 (1280 × 720 px, 16:9) y cómo descargar la miniatura de cualquier video en HD gratis, sin programas ni registro.",
+    "keyword": "tamaño miniatura youtube",
     "toolHref": "/tools/youtube-thumbnail-downloader",
     "toolName": "Descargador de Miniaturas de YouTube",
     "category": "video",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "El tamaño recomendado de la miniatura de YouTube es 1280 × 720 píxeles (relación 16:9), con un ancho mínimo de 640 px y un peso máximo de 2 MB en JPG, PNG o GIF. Para descargar la miniatura de un video, pega su enlace en un descargador y elige la resolución maxresdefault."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Tamaño de la miniatura de YouTube en 2026"
+      },
+      {
+        "type": "paragraph",
+        "text": "YouTube recomienda subir miniaturas de 1280 × 720 píxeles, en proporción 16:9, con un mínimo de 640 px de ancho y un máximo de 2 MB. Los formatos aceptados son JPG, PNG y GIF (sin animación). Para Shorts, la miniatura se muestra recortada en vertical, así que deja el motivo principal en el centro."
+      },
       {
         "type": "paragraph",
         "text": "Cada video de YouTube tiene un conjunto de imágenes en miniatura almacenadas en los servidores de Google. Estas imágenes son accesibles públicamente a través de un patrón de URL predecible, lo que significa que puedes descargar cualquier miniatura en cualquier resolución disponible con solo el ID del video. Sin software especial, sin extensiones del navegador, sin claves de API."
@@ -4776,6 +4975,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cuál es el tamaño de la miniatura de YouTube?",
+            "answer": "1280 × 720 píxeles en 16:9, con un mínimo de 640 px de ancho y un peso máximo de 2 MB."
+          },
+          {
             "question": "¿Es legal descargar miniaturas de YouTube?",
             "answer": "Las miniaturas de YouTube son imágenes públicas alojadas en el CDN de Google. Descargarlas para referencia personal, blogs con atribución adecuada o propósitos educativos generalmente se considera uso legítimo. Usar la miniatura de otra persona comercialmente sin permiso podría constituir infracción de derechos de autor."
           },
@@ -4794,15 +4997,20 @@
   {
     "articleId": "image-formats",
     "slug": "png-vs-jpg-vs-webp-diferencias-y-cual-usar",
-    "title": "PNG vs JPG vs WebP: Diferencias y Cuál Usar en Cada Caso",
-    "description": "Comparativa clara entre PNG, JPG y WebP: cuándo usar cada formato, diferencias de peso, transparencia, calidad y cómo convertir entre ellos gratis.",
-    "keyword": "png vs jpg vs webp diferencias",
+    "title": "PNG o JPG: ¿Cuál es Mejor? Diferencias y WebP",
+    "description": "¿PNG o JPG: cuál es mejor y cuál tiene más calidad? Diferencias entre PNG, JPG y WebP, cuándo usar cada uno para web, redes sociales o imprimir.",
+    "keyword": "png o jpg cual es mejor",
     "toolHref": "/tools/media-converter",
     "toolName": "Convertidor de Medios",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "PNG es mejor para logos, capturas de pantalla y gráficos con texto o transparencia, porque no pierde calidad. JPG es mejor para fotografías, porque pesa mucho menos con una diferencia de calidad imperceptible. Para web, WebP combina lo mejor de ambos: archivos más ligeros que JPG y soporte de transparencia como PNG."
+      },
       {
         "type": "paragraph",
         "text": "Elegir el formato de imagen correcto parece una decisión menor, pero tiene un impacto real en los tiempos de carga, la calidad visual y los costos de almacenamiento. PNG, JPG (JPEG) y WebP tienen fortalezas distintas. Esta guía desglosa exactamente cuándo usar cada uno, con comparativas reales de tamaño de archivo."
@@ -4914,6 +5122,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿PNG o JPG tiene más calidad?",
+            "answer": "PNG conserva todos los píxeles (sin pérdida), así que técnicamente tiene más calidad; pero en fotos un JPG de calidad 85–90 % es visualmente igual y pesa entre 5 y 10 veces menos. Para imprimir fotos, usa JPG de alta calidad o TIFF."
+          },
+          {
             "question": "¿Puedo convertir de un formato a otro sin perder calidad?",
             "answer": "Depende de la dirección de la conversión. Pasar de PNG a JPEG implica pérdida porque JPEG usa compresión con pérdida. Pasar de JPEG a PNG no restaura la calidad perdida, pero tampoco la degrada más. Pasar de cualquiera a WebP lossless conserva toda la calidad original."
           },
@@ -4932,15 +5144,20 @@
   {
     "articleId": "mp4-to-gif",
     "slug": "como-convertir-mp4-a-gif-gratis",
-    "title": "Cómo Convertir MP4 a GIF Gratis y Sin Instalar Nada",
-    "description": "Convierte cualquier video MP4 a GIF animado directamente en tu navegador. Sin subir archivos, sin marcas de agua, completamente gratis.",
-    "keyword": "convertir mp4 a gif",
+    "title": "Cómo Hacer un GIF de un Video Gratis",
+    "description": "Cómo hacer un GIF de un video gratis y sin instalar nada: recorta el fragmento, ajusta FPS y tamaño y descarga un GIF ligero para WhatsApp, Discord o redes.",
+    "keyword": "como hacer un gif de un video",
     "toolHref": "/tools/video-to-gif",
     "toolName": "Convertidor de Video a GIF",
     "category": "video",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para hacer un GIF de un video, abre un convertidor de video a GIF, carga el MP4 o MOV, recorta de 2 a 6 segundos, elige 10–15 FPS y un ancho de 320–480 px y descarga el GIF. Todo se puede hacer gratis en el navegador, sin instalar programas."
+      },
       {
         "type": "paragraph",
         "text": "Los GIFs animados siguen siendo el formato preferido para compartir momentos cortos y reacciones en redes sociales, foros y chats. Aunque el formato MP4 ofrece mejor calidad y menor tamaño, los GIFs tienen una ventaja irremplazable: se reproducen automáticamente en casi cualquier plataforma sin necesidad de un reproductor de video."
@@ -5014,6 +5231,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cómo hacer un GIF para WhatsApp?",
+            "answer": "Haz un GIF corto (menos de 6 segundos) y de 480 px de ancho como máximo. WhatsApp lo reproduce en bucle; si el archivo es muy grande, reduce los FPS o el ancho."
+          },
+          {
             "question": "¿Por qué el GIF resultante es más grande que el MP4 original?",
             "answer": "Esto es normal. El formato GIF usa un algoritmo de compresión mucho menos eficiente que los codecs de video como H.264 (usado en MP4). Un video MP4 de 2MB puede producir un GIF de 8-15MB. Para reducir el tamaño, acorta la duración, reduce el framerate y disminuye las dimensiones."
           },
@@ -5032,15 +5253,29 @@
   {
     "articleId": "exif-data",
     "slug": "como-ver-y-eliminar-datos-exif-de-fotos",
-    "title": "Cómo Ver y Eliminar los Datos EXIF de Tus Fotos",
-    "description": "Consulta y elimina los metadatos EXIF de tus fotos: modelo de cámara, ubicación GPS, fecha y más. Gratis, en el navegador, sin subir archivos.",
-    "keyword": "ver datos exif fotos",
+    "title": "Cómo Quitar la Ubicación de una Foto (Metadatos EXIF)",
+    "description": "Cómo quitar la ubicación de una foto y borrar sus metadatos EXIF en iPhone, Android o PC antes de compartirla. Gratis, sin apps y sin subir tus fotos.",
+    "keyword": "quitar ubicacion de una foto",
     "toolHref": "/tools/exif-viewer",
     "toolName": "Visor y Eliminador de EXIF",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para quitar la ubicación de una foto, elimina sus metadatos EXIF: abre la imagen en un visor EXIF, pulsa borrar metadatos y descarga la copia limpia. En iPhone también puedes desactivar la ubicación al compartir (Opciones → Ubicación), y en Android en los ajustes de la cámara."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Cómo quitar la ubicación de una foto en iPhone, Android y PC"
+      },
+      {
+        "type": "paragraph",
+        "text": "En iPhone, al compartir una foto toca Opciones y desactiva Ubicación; para que las nuevas fotos no la guarden, ve a Ajustes → Privacidad → Localización → Cámara y elige Nunca. En Android, desactiva Etiquetas de ubicación en los ajustes de la app Cámara. En PC, o para fotos que ya tienes, usa un eliminador de EXIF en el navegador: borra el GPS y el resto de metadatos sin tocar la imagen."
+      },
       {
         "type": "paragraph",
         "text": "Cada foto que tomas con tu smartphone o cámara digital contiene datos ocultos llamados EXIF (Exchangeable Image File Format). Estos metadatos incluyen información sobre la cámara, los ajustes de exposición, la fecha y hora, y en muchos casos, tu ubicación GPS exacta. Entender y controlar estos datos es fundamental tanto para la privacidad como para la fotografía."
@@ -5119,6 +5354,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cómo saber si una foto tiene la ubicación guardada?",
+            "answer": "Ábrela en un visor EXIF: si aparecen campos GPS (latitud y longitud) la ubicación está incluida. Muchas fotos de teléfono la guardan por defecto."
+          },
+          {
             "question": "¿Todas las fotos tienen datos EXIF?",
             "answer": "La mayoría de las fotos tomadas con cámaras digitales y smartphones incluyen datos EXIF. Sin embargo, las capturas de pantalla generalmente no los contienen, y las imágenes descargadas de internet a menudo tienen los datos EXIF eliminados por la plataforma que las alojó."
           },
@@ -5137,15 +5376,20 @@
   {
     "articleId": "stripe-fees",
     "slug": "calculadora-comisiones-stripe-cuanto-cobra",
-    "title": "Comisiones de Stripe: ¿Cuánto Cobra Realmente?",
-    "description": "Calcula exactamente cuánto te cobra Stripe por cada transacción. Incluye comisiones por país, tipo de tarjeta y conversión de moneda.",
-    "keyword": "calculadora comisiones stripe",
+    "title": "¿Cuánto Cobra Stripe de Comisión? España y México",
+    "description": "¿Cuánto cobra Stripe de comisión por venta en España y México? Tarifas por tarjeta, pagos internacionales y conversión de moneda, con calculadora gratis.",
+    "keyword": "cuanto cobra stripe de comision",
     "toolHref": "/tools/stripe-fee-calculator",
     "toolName": "Calculadora de Comisiones de Stripe",
     "category": "utility",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Stripe cobra un porcentaje más una cuota fija por cada pago con tarjeta. En España la tarifa estándar para tarjetas europeas es del 1,5 % + 0,25 €; en México, del 3,6 % + 3 MXN (más IVA). Las tarjetas internacionales y la conversión de moneda suman un porcentaje adicional. Consulta siempre las tarifas vigentes en la web de Stripe."
+      },
       {
         "type": "paragraph",
         "text": "Stripe es una de las pasarelas de pago más populares para negocios en línea, pero entender su estructura de comisiones puede ser confuso. Más allá de la tarifa básica que aparece en su página principal, hay comisiones adicionales por tarjetas internacionales, conversión de moneda y ciertos tipos de tarjeta que pueden sorprenderte si no las calculas de antemano."
@@ -5233,6 +5477,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cuánto cobra Stripe por transacción en México?",
+            "answer": "La tarifa estándar publicada es 3,6 % + 3 MXN por pago con tarjeta nacional, más IVA; las tarjetas internacionales tienen un recargo adicional. Usa la calculadora para ver el neto exacto de cada cobro."
+          },
+          {
             "question": "¿Stripe cobra comisión por reembolsos?",
             "answer": "Stripe no cobra comisión adicional por procesar un reembolso. Sin embargo, la comisión original de la transacción no se devuelve. Si cobraste $100 y la comisión fue $3.20, al reembolsar $100 tú absorbes la comisión de $3.20."
           },
@@ -5251,15 +5499,20 @@
   {
     "articleId": "qr-code-logo",
     "slug": "como-crear-codigo-qr-con-logo-personalizado",
-    "title": "Cómo Crear un Código QR con Logo Personalizado",
-    "description": "Genera códigos QR con tu logo, colores personalizados y alta resolución. Gratis, sin registro, descarga en PNG o SVG listos para imprimir o compartir.",
-    "keyword": "crear codigo qr con logo",
+    "title": "Cómo Hacer un Código QR con Logo Gratis",
+    "description": "Cómo hacer un código QR con logo en el medio, gratis y sin caducidad: tamaño del logo, colores y corrección de errores para que se escanee siempre.",
+    "keyword": "como hacer un codigo qr con logo",
     "toolHref": "/tools/qr-code-generator",
     "toolName": "Generador de Códigos QR",
     "category": "utility",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para hacer un código QR con logo, genera el QR con nivel de corrección de errores alto (H, 30 %), añade tu logo en el centro ocupando como máximo un 20–25 % del código y mantén buen contraste entre el QR y el fondo. Descárgalo en PNG o SVG y pruébalo con varios teléfonos antes de imprimir."
+      },
       {
         "type": "paragraph",
         "text": "Los códigos QR se han convertido en una herramienta esencial para conectar el mundo físico con el digital. Desde menús de restaurantes hasta tarjetas de presentación, pasando por campañas publicitarias y empaques de productos. Pero un código QR genérico en blanco y negro no transmite la identidad de tu marca. Personalizar tu QR con tu logo y colores corporativos marca una gran diferencia."
@@ -5326,6 +5579,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cómo hacer un código QR gratis que no caduque?",
+            "answer": "Usa un generador de QR estático: el enlace se guarda dentro del propio código, sin redirecciones, así que no caduca nunca mientras la página de destino exista."
+          },
+          {
             "question": "¿Un código QR con logo es igual de fiable que uno sin logo?",
             "answer": "Sí, siempre que se diseñe correctamente. El logo debe ocupar menos del 20% del área del QR y el nivel de corrección de errores debe ser Q (25%) o H (30%). Con estos ajustes, el código funciona igual de bien que uno sin logo."
           },
@@ -5344,15 +5601,20 @@
   {
     "articleId": "vtt-vs-srt",
     "slug": "como-convertir-vtt-a-srt-subtitulos",
-    "title": "Cómo Convertir VTT a SRT: Guía Completa de Subtítulos",
-    "description": "Convierte archivos de subtítulos WebVTT a formato SRT en segundos. Gratis, en el navegador, sin necesidad de instalar software.",
-    "keyword": "convertir vtt a srt",
+    "title": "Cómo Convertir Subtítulos a SRT (VTT a SRT)",
+    "description": "Cómo convertir subtítulos a SRT desde VTT: diferencias entre VTT y SRT, qué se pierde al convertir y cómo hacerlo gratis online, sin programas.",
+    "keyword": "convertir subtitulos a srt",
     "toolHref": "/tools/vtt-to-srt",
     "toolName": "Convertidor VTT a SRT",
     "category": "utility",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para convertir subtítulos VTT a SRT, quita la cabecera WEBVTT, numera cada bloque y cambia el punto de los tiempos por coma (00:00:01.000 → 00:00:01,000). Un convertidor online lo hace en un clic y conserva la sincronización; solo se pierden los estilos y posiciones propios de VTT."
+      },
       {
         "type": "paragraph",
         "text": "Si trabajas con video, tarde o temprano te encontrarás con la necesidad de convertir subtítulos entre formatos. Los dos formatos más comunes son WebVTT (.vtt) y SubRip (.srt). YouTube, Vimeo y la mayoría de plataformas de streaming exportan sus subtítulos en formato VTT, pero muchos reproductores de video, editores y plataformas de distribución solo aceptan SRT."
@@ -5425,6 +5687,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Qué programa uso para convertir subtítulos a SRT?",
+            "answer": "No necesitas instalar nada: un convertidor de VTT a SRT en el navegador genera el archivo .srt al instante y funciona en VLC, Premiere o YouTube."
+          },
+          {
             "question": "¿La conversión afecta la sincronización de los subtítulos?",
             "answer": "No. La conversión solo ajusta el formato del archivo (encabezado, separador decimal, numeración). Las marcas de tiempo permanecen exactamente iguales, por lo que la sincronización se mantiene perfecta."
           },
@@ -5443,15 +5709,20 @@
   {
     "articleId": "resize-social-media",
     "slug": "redimensionar-imagenes-para-redes-sociales",
-    "title": "Tamaños de Imagen para Redes Sociales: Guía 2026",
-    "description": "Todas las medidas de imágenes para Instagram, Facebook, Twitter, LinkedIn y TikTok. Redimensiona tus imágenes gratis en el navegador.",
-    "keyword": "redimensionar imagenes redes sociales",
+    "title": "Medidas de Instagram 2026 y Otras Redes Sociales",
+    "description": "Medidas de Instagram 2026 para post, historias y reels, y tamaños de imagen para Facebook, TikTok, LinkedIn y X. Tabla actualizada y cómo redimensionar gratis.",
+    "keyword": "medidas instagram 2026",
     "toolHref": "/tools/image-resizer",
     "toolName": "Redimensionador de Imágenes",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "En 2026 las medidas de Instagram son 1080 × 1350 px (4:5) para publicaciones verticales, 1080 × 1080 px (1:1) para cuadradas y 1080 × 1920 px (9:16) para historias y reels. Sube siempre a 1080 px de ancho para que Instagram no reduzca la calidad."
+      },
       {
         "type": "paragraph",
         "text": "Cada red social tiene sus propias dimensiones recomendadas para imágenes, y subir una imagen con el tamaño incorrecto significa que la plataforma la recortará o la comprimirá de forma poco favorable. Tener tus imágenes en las dimensiones exactas garantiza que se vean nítidas y profesionales en todos los dispositivos."
@@ -5548,6 +5819,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cuál es el tamaño de una publicación de Instagram en 2026?",
+            "answer": "1080 × 1350 px (4:5) en vertical, que ocupa más espacio en el feed; 1080 × 1080 px si es cuadrada."
+          },
+          {
             "question": "¿Se pierde calidad al redimensionar una imagen?",
             "answer": "Al reducir el tamaño, la pérdida es mínima y generalmente imperceptible. Al ampliar, sí se pierde calidad porque el software debe inventar píxeles que no existen. Por eso siempre es mejor partir de la imagen más grande disponible."
           },
@@ -5566,15 +5841,29 @@
   {
     "articleId": "extract-video-frames",
     "slug": "como-extraer-fotogramas-de-un-video",
-    "title": "Cómo Extraer Fotogramas de un Video: Guía Práctica",
-    "description": "Extrae fotogramas individuales de cualquier video como imágenes de alta calidad. Gratis, en el navegador, sin instalar software.",
-    "keyword": "extraer fotogramas de video",
+    "title": "Cómo Sacar una Foto de un Video Sin Perder Calidad",
+    "description": "Cómo sacar una foto de un video sin perder calidad en iPhone, Android o PC: extrae el fotograma exacto en PNG o JPG, gratis y sin subir el video.",
+    "keyword": "como sacar una foto de un video",
     "toolHref": "/tools/video-frame-extractor",
     "toolName": "Extractor de Fotogramas de Video",
     "category": "video",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para sacar una foto de un video sin perder calidad, no hagas captura de pantalla: usa un extractor de fotogramas, avanza hasta el momento exacto y guarda el fotograma en PNG. Así obtienes la imagen a la resolución original del video, sin barras ni compresión extra."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Cómo sacar una foto de un video en iPhone, Android y PC"
+      },
+      {
+        "type": "paragraph",
+        "text": "En iPhone y Android puedes pausar el video y hacer captura de pantalla, pero la imagen queda a la resolución de la pantalla y con la interfaz encima. En cualquier dispositivo, un extractor de fotogramas en el navegador exporta el frame completo a la resolución original: abre el video, busca el segundo exacto y descarga el PNG."
+      },
       {
         "type": "paragraph",
         "text": "A veces necesitas una imagen estática específica de un video: el fotograma perfecto de una presentación, un momento clave de una grabación de pantalla, o un frame preciso para una miniatura. Hacer una captura de pantalla del reproductor de video parece la solución obvia, pero produce imágenes de baja calidad con barras de reproducción superpuestas."
@@ -5645,6 +5934,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cómo sacar una foto de un video en iPhone?",
+            "answer": "Abre el extractor en Safari, elige el video desde Fotos, avanza al fotograma y descárgalo en PNG: queda a la resolución original, mejor que una captura de pantalla."
+          },
+          {
             "question": "¿En qué formato se exportan los fotogramas?",
             "answer": "Los fotogramas se exportan como imágenes PNG (sin pérdida de calidad) o JPEG (menor tamaño de archivo). PNG es recomendable cuando necesitas máxima calidad, mientras que JPEG es mejor si vas a usar las imágenes en web donde el tamaño importa."
           },
@@ -5663,15 +5956,20 @@
   {
     "articleId": "image-to-base64",
     "slug": "como-convertir-imagen-a-base64-para-desarrollo-web",
-    "title": "Cómo Convertir una Imagen a Base64 para Desarrollo Web",
-    "description": "Convierte imágenes a cadenas Base64 para incrustarlas directamente en HTML, CSS o JavaScript. Gratis, sin subidas al servidor.",
-    "keyword": "convertir imagen a base64",
+    "title": "Cómo Usar una Imagen Base64 en HTML y CSS",
+    "description": "Cómo usar una imagen Base64 en HTML y CSS: convertir la imagen a data URI, insertarla en src o url(), y cuándo conviene (y cuándo no) por rendimiento.",
+    "keyword": "imagen base64 html",
     "toolHref": "/tools/image-to-base64",
     "toolName": "Imagen a Base64",
     "category": "developer",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para usar una imagen Base64 en HTML, conviértela a data URI y colócala en el atributo <code>src</code>: <code>&lt;img src=\"data:image/png;base64,…\"&gt;</code>. En CSS, úsala dentro de <code>url()</code>. Conviene solo para imágenes pequeñas (iconos de menos de 5–10 KB): en imágenes grandes aumenta el peso un 33 % y no se cachea por separado."
+      },
       {
         "type": "paragraph",
         "text": "Base64 es un sistema de codificación que convierte datos binarios (como imágenes) en una cadena de texto ASCII. Esto permite incrustar imágenes directamente en archivos HTML, hojas de estilo CSS o código JavaScript, eliminando la necesidad de hacer peticiones HTTP adicionales para cargar archivos de imagen externos."
@@ -5745,6 +6043,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cómo mostrar una imagen Base64 en HTML?",
+            "answer": "Pon el data URI completo en el src de la etiqueta img, incluido el prefijo data:image/png;base64, o el tipo que corresponda."
+          },
+          {
             "question": "¿Base64 aumenta el tamaño de la imagen?",
             "answer": "Sí. La codificación Base64 incrementa el tamaño en aproximadamente un 33%. Una imagen de 10KB se convierte en ~13.3KB de texto. Por eso solo se recomienda para imágenes pequeñas (menos de 5KB) donde eliminar una petición HTTP compensa el tamaño extra."
           },
@@ -5763,15 +6065,29 @@
   {
     "articleId": "svg-to-png",
     "slug": "como-convertir-svg-a-png-alta-calidad",
-    "title": "Cómo Convertir SVG a PNG en Alta Calidad",
-    "description": "Convierte archivos SVG vectoriales a PNG en la resolución que necesites: 512, 1024 o 2048 px. Gratis, en el navegador, sin perder calidad.",
-    "keyword": "convertir svg a png",
+    "title": "Qué es SVG y Cómo Convertirlo a PNG Sin Perder Calidad",
+    "description": "Qué es SVG, para qué sirve y cómo convertir SVG a PNG sin perder calidad y sin fondo: resoluciones recomendadas para web, redes e impresión.",
+    "keyword": "que es svg",
     "toolHref": "/tools/svg-to-png",
     "toolName": "SVG a PNG",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "SVG (Scalable Vector Graphics) es un formato de imagen vectorial basado en texto: describe formas con coordenadas, así que se puede ampliar a cualquier tamaño sin perder nitidez. Para convertir SVG a PNG sin perder calidad, expórtalo a la resolución final que necesites (2× o 3×) con fondo transparente."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "¿Qué es SVG y para qué sirve?"
+      },
+      {
+        "type": "paragraph",
+        "text": "SVG es un formato vectorial abierto del W3C que guarda la imagen como instrucciones XML (líneas, curvas, colores) en lugar de píxeles. Sirve para logos, iconos, ilustraciones y gráficos web porque pesa poco, se ve nítido en cualquier pantalla y se puede editar con código o animar con CSS. Su limitación es que muchas apps, redes sociales y documentos no lo aceptan, y por eso se convierte a PNG."
+      },
       {
         "type": "paragraph",
         "text": "SVG (Scalable Vector Graphics) es el formato ideal para logotipos, iconos e ilustraciones porque se escala a cualquier tamaño sin perder calidad. Sin embargo, muchas plataformas y aplicaciones no aceptan SVG: redes sociales, editores de documentos, presentaciones y muchos CMS requieren formatos de imagen rasterizados como PNG."
@@ -5856,6 +6172,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Qué es un archivo SVG?",
+            "answer": "Un archivo de imagen vectorial (.svg) basado en XML que se ve nítido a cualquier tamaño; ideal para logos e iconos."
+          },
+          {
             "question": "¿Se mantiene la transparencia al convertir de SVG a PNG?",
             "answer": "Sí. El formato PNG soporta transparencia alfa completa, por lo que todas las áreas transparentes de tu SVG se conservan perfectamente en el PNG resultante."
           },
@@ -5874,16 +6194,20 @@
   {
     "articleId": "create-favicon",
     "slug": "como-crear-favicon-para-tu-sitio-web",
-    "title": "Favicon Web 2026: Medidas, Tamaños y Generador Gratis",
-    "description": "Guía completa de medidas de favicon 2026: 16x16, 32x32, 180x180 Apple, 192x192 Android, 512x512 PWA. Genera todos desde una imagen y copia el HTML.",
-    "keyword": "como crear favicon",
+    "title": "Tamaño del Favicon 2026 y Cómo Crearlo Gratis",
+    "description": "Tamaño del favicon en 2026 (16, 32, 180, 192 y 512 px), qué formato usar (ICO, PNG o SVG) y cómo crear un favicon gratis desde cualquier imagen.",
+    "keyword": "tamaño favicon",
     "toolHref": "/tools/favicon-generator",
     "toolName": "Generador de Favicon",
     "category": "image",
     "publishedAt": "2026-04-01",
-    "updatedAt": "2026-07-30",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "El tamaño básico de un favicon es 32 × 32 px (con 16 × 16 dentro del .ico). Además se recomiendan 180 × 180 px para iPhone y 192 × 192 y 512 × 512 px para Android y PWA. Parte de una imagen cuadrada de al menos 512 px y genera todos los tamaños de una vez."
+      },
       {
         "type": "paragraph",
         "text": "El favicon es ese pequeño icono que aparece en la pestaña del navegador, en los marcadores y en los resultados de búsqueda junto a la URL de tu sitio. Aunque es diminuto, es uno de los elementos más visibles de la identidad visual de tu marca en la web. Un sitio sin favicon se ve inacabado y poco profesional."
@@ -5895,7 +6219,7 @@
       },
       {
         "type": "paragraph",
-        "text": "La respuesta corta: más de los que crees. Los navegadores modernos, los dispositivos móviles y las aplicaciones web progresivas (PWA) requieren diferentes tamaños. Aquí están los esenciales:"
+        "text": "La respuesta corta: más de los que crees. Los navegadores modernos, los dispositivos teléfonos y las aplicaciones web progresivas (PWA) requieren diferentes tamaños. Aquí están los esenciales:"
       },
       {
         "type": "table",
@@ -5949,12 +6273,12 @@
       },
       {
         "type": "paragraph",
-        "text": "El error más frecuente es usar solo <code>favicon.ico</code> y olvidar los tamaños para móviles. Los dispositivos Apple mostrarán una captura de pantalla genérica si no proporcionas un <code>apple-touch-icon</code>. Otro error común es usar una imagen de baja resolución como fuente: siempre parte de una imagen de al menos 512x512 para que las reducciones se vean bien."
+        "text": "El error más frecuente es usar solo <code>favicon.ico</code> y olvidar los tamaños para teléfonos. Los dispositivos Apple mostrarán una captura de pantalla genérica si no proporcionas un <code>apple-touch-icon</code>. Otro error común es usar una imagen de baja resolución como fuente: siempre parte de una imagen de al menos 512x512 para que las reducciones se vean bien."
       },
       {
         "type": "cta",
         "title": "Genera Todos los Tamaños de Favicon",
-        "description": "Sube una imagen y genera automáticamente todos los tamaños de favicon necesarios para navegadores, móviles y PWA. Incluye el código HTML listo para copiar.",
+        "description": "Sube una imagen y genera automáticamente todos los tamaños de favicon necesarios para navegadores, teléfonos y PWA. Incluye el código HTML listo para copiar.",
         "buttonText": "Abrir Generador de Favicon",
         "href": "/tools/favicon-generator"
       },
@@ -6004,7 +6328,7 @@
           },
           {
             "question": "¿Cómo verifico que mi favicon se ve bien?",
-            "answer": "Abre tu sitio en el navegador y revisa la pestaña. Para verificar los tamaños móviles, agrega tu sitio a la pantalla de inicio de un iPhone o Android. También puedes buscar tu sitio en Google para ver cómo aparece el favicon en los resultados de búsqueda."
+            "answer": "Abre tu sitio en el navegador y revisa la pestaña. Para verificar los tamaños teléfonos, agrega tu sitio a la pantalla de inicio de un iPhone o Android. También puedes buscar tu sitio en Google para ver cómo aparece el favicon en los resultados de búsqueda."
           }
         ]
       }
@@ -6013,15 +6337,20 @@
   {
     "articleId": "extract-colors",
     "slug": "como-extraer-paleta-de-colores-de-una-imagen",
-    "title": "Cómo Extraer la Paleta de Colores de una Imagen",
-    "description": "Extrae los colores dominantes de cualquier imagen y obtén los códigos HEX, RGB y HSL. Gratis, en el navegador, sin instalar nada.",
-    "keyword": "extraer colores de imagen",
+    "title": "Cómo Saber el Color de una Imagen (HEX y RGB)",
+    "description": "Cómo saber el color exacto de una imagen y obtener su código HEX, RGB o HSL: extrae la paleta de colores de una foto online, gratis y sin subirla.",
+    "keyword": "saber color de una imagen",
     "toolHref": "/tools/color-palette",
     "toolName": "Extractor de Paleta de Colores",
     "category": "image",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para saber el color de una imagen, súbela a un extractor de colores: detecta los colores dominantes y muestra el código HEX, RGB y HSL de cada uno. Copia el código y úsalo en Canva, Figma, Photoshop o CSS para reproducir el color exacto."
+      },
       {
         "type": "paragraph",
         "text": "Encontrar la combinación de colores perfecta es uno de los mayores retos del diseño. Ya sea que estés creando un sitio web, diseñando material de marketing o definiendo la identidad visual de una marca, una paleta de colores bien elegida marca la diferencia entre un diseño amateur y uno profesional."
@@ -6097,6 +6426,10 @@
         "type": "faq",
         "items": [
           {
+            "question": "¿Cómo saber el código hexadecimal de un color de una imagen?",
+            "answer": "Carga la imagen en el extractor de paleta: cada color muestra su código HEX (por ejemplo #1E90FF), listo para copiar."
+          },
+          {
             "question": "¿Cuántos colores puede extraer la herramienta?",
             "answer": "La herramienta extrae los colores más representativos de la imagen, típicamente entre 5 y 8 colores dominantes. Estos son suficientes para crear una paleta de diseño completa y coherente."
           },
@@ -6115,15 +6448,29 @@
   {
     "articleId": "hex-to-decimal",
     "slug": "como-convertir-hexadecimal-a-decimal",
-    "title": "Cómo Convertir Hexadecimal a Decimal y Viceversa",
-    "description": "Convierte entre sistemas hexadecimal, decimal, binario y octal al instante. Incluye explicación del sistema de numeración base 16.",
-    "keyword": "convertir hexadecimal a decimal",
+    "title": "Cómo Convertir Hexadecimal a Decimal (con Tabla)",
+    "description": "Cómo convertir hexadecimal a decimal paso a paso, con ejemplos y tabla de equivalencias hex, decimal y binario. Incluye calculadora online gratis.",
+    "keyword": "como convertir hexadecimal a decimal",
     "toolHref": "/tools/hex-to-decimal",
     "toolName": "Hexadecimal a Decimal",
     "category": "developer",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "Para convertir hexadecimal a decimal, multiplica cada dígito por 16 elevado a su posición (empezando en 0 por la derecha) y suma los resultados, con A=10, B=11 … F=15. Ejemplo: 1A3 = 1×256 + 10×16 + 3×1 = 419."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Tabla de hexadecimal a decimal"
+      },
+      {
+        "type": "paragraph",
+        "text": "0–9 son iguales en ambos sistemas; A = 10, B = 11, C = 12, D = 13, E = 14 y F = 15. Con dos dígitos: 10 = 16, 1F = 31, 20 = 32, 7F = 127, 80 = 128 y FF = 255, el valor máximo de un byte."
+      },
       {
         "type": "paragraph",
         "text": "El sistema hexadecimal (base 16) es fundamental en programación, diseño web y electrónica. Se usa en colores CSS, direcciones de memoria, valores Unicode y direcciones MAC. Entender cómo convertir entre hexadecimal y decimal es una habilidad esencial para cualquier desarrollador o diseñador."
@@ -6228,15 +6575,29 @@
   {
     "articleId": "json-formatting",
     "slug": "como-formatear-y-validar-json-online",
-    "title": "Cómo Formatear y Validar JSON Online: Guía Práctica",
-    "description": "Formatea, valida y visualiza JSON al instante. Detecta errores de sintaxis, compara estructuras y explora datos con facilidad.",
-    "keyword": "formatear y validar json",
+    "title": "Qué es JSON y Para Qué Sirve (con Ejemplos)",
+    "description": "Qué es JSON y para qué sirve, con ejemplos simples: sintaxis, errores comunes y cómo formatear y validar JSON online gratis, sin enviar tus datos.",
+    "keyword": "que es json y para que sirve",
     "toolHref": "/tools/json-viewer",
     "toolName": "Visor de JSON",
     "category": "developer",
     "publishedAt": "2026-04-01",
+    "updatedAt": "2026-09-24",
     "lang": "es",
     "body": [
+      {
+        "type": "paragraph",
+        "text": "JSON (JavaScript Object Notation) es un formato de texto para guardar e intercambiar datos entre aplicaciones mediante pares clave-valor y listas. Sirve para que las API web, las apps y los archivos de configuración compartan información de forma legible para personas y fácil de procesar para programas."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Ejemplo de JSON simple"
+      },
+      {
+        "type": "paragraph",
+        "text": "Un objeto JSON va entre llaves y usa comillas dobles en las claves: {\"nombre\": \"Ana\", \"edad\": 30, \"activo\": true, \"etiquetas\": [\"cliente\", \"vip\"]}. Admite textos, números, booleanos, null, listas (arrays) y objetos anidados."
+      },
       {
         "type": "paragraph",
         "text": "JSON (JavaScript Object Notation) se ha convertido en el formato estándar para el intercambio de datos en la web. APIs REST, archivos de configuración, bases de datos NoSQL y prácticamente cualquier servicio web moderno usa JSON. Pero trabajar con JSON sin formato — en una sola línea, sin indentación — es una pesadilla cuando intentas depurar o entender la estructura de los datos."
@@ -6332,6 +6693,10 @@
       {
         "type": "faq",
         "items": [
+          {
+            "question": "¿Qué es JSON y para qué sirve?",
+            "answer": "Es un formato de texto para intercambiar datos entre aplicaciones; lo usan casi todas las API web y muchos archivos de configuración."
+          },
           {
             "question": "¿Cuál es la diferencia entre JSON y un objeto de JavaScript?",
             "answer": "Aunque la sintaxis es similar, JSON es más estricto: las claves deben estar entre comillas dobles, no permite comas finales, no acepta funciones ni undefined, y no soporta comentarios. Un objeto de JavaScript es más flexible en todos estos aspectos. JSON es un formato de intercambio de datos, no un lenguaje de programación."

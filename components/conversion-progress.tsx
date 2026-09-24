@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface ConversionProgressProps {
   progress: number;
@@ -12,6 +13,7 @@ export function ConversionProgress({
   progress,
   onCancel,
 }: ConversionProgressProps) {
+  const t = useTranslations("SharedUI.progress");
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -20,7 +22,8 @@ export function ConversionProgress({
       className="w-full max-w-2xl mx-auto text-center"
     >
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-8">
-        Converting<span className="animate-pulse">...</span>
+        {t("converting")}
+        <span className="animate-pulse">...</span>
       </h2>
 
       <div className="mb-4">
@@ -38,7 +41,7 @@ export function ConversionProgress({
       </div>
 
       <p className="font-mono text-sm text-[#71717A] mb-8">
-        {progress}% complete
+        {t("complete", { progress })}
       </p>
 
       {onCancel && (
@@ -48,7 +51,7 @@ export function ConversionProgress({
           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border border-[#2A2535] text-[#EDEDEF] text-sm hover:border-[#FB7185]/50 hover:text-[#FB7185] transition-colors min-h-[44px]"
         >
           <X className="w-4 h-4" />
-          Cancel
+          {t("cancel")}
         </button>
       )}
     </motion.div>

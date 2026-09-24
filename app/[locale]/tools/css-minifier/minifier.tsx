@@ -8,6 +8,7 @@ import {
   Minimize2,
   Palette,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -62,6 +63,7 @@ function formatBytes(bytes: number): string {
 }
 
 export function CssMinifier() {
+  const t = useTranslations("ToolUI.css-minifier");
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [copied, setCopied] = useState(false);
@@ -121,16 +123,15 @@ export function CssMinifier() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            CSS
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Minifier</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Remove comments, collapse whitespace, and optimize your CSS. Fast,
-            free, and entirely in your browser.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -148,7 +149,7 @@ export function CssMinifier() {
               htmlFor="css-input"
               className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A] mb-2"
             >
-              CSS Code
+              {t("inputLabel")}
             </label>
             <div className="relative">
               <Palette className="absolute left-4 top-4 w-4 h-4 text-[#71717A]" />
@@ -156,7 +157,7 @@ export function CssMinifier() {
                 id="css-input"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Paste your CSS code here..."
+                placeholder={t("inputPlaceholder")}
                 rows={8}
                 className="w-full pl-11 pr-4 py-3 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 placeholder:text-[#71717A]/60 font-mono text-sm resize-y min-h-[44px]"
               />
@@ -171,7 +172,7 @@ export function CssMinifier() {
             className="flex items-center gap-2 h-12 px-8 rounded-lg bg-[#2DD4BF] text-[#042F2E] font-mono text-[11px] uppercase tracking-wider font-semibold hover:shadow-[0_0_20px_rgba(45,212,191,0.15)] transition-all disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
           >
             <Minimize2 className="w-4 h-4" />
-            Minify
+            {t("minify")}
           </button>
 
           {/* Stats bar */}
@@ -183,21 +184,22 @@ export function CssMinifier() {
               className="flex flex-wrap items-center gap-4 py-3 px-4 bg-[#16131E] border border-[#2A2535] rounded-lg"
             >
               <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                Original:{" "}
+                {t("original")}{" "}
                 <span className="text-[#EDEDEF]">
                   {formatBytes(originalSize)}
                 </span>
               </span>
               <span className="w-px h-4 bg-[#2A2535]" />
               <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                Minified:{" "}
+                {t("minified")}{" "}
                 <span className="text-[#EDEDEF]">
                   {formatBytes(minifiedSize)}
                 </span>
               </span>
               <span className="w-px h-4 bg-[#2A2535]" />
               <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                Savings: <span className="text-[#2DD4BF]">{savings}%</span>
+                {t("savings")}{" "}
+                <span className="text-[#2DD4BF]">{savings}%</span>
               </span>
             </motion.div>
           )}
@@ -209,7 +211,7 @@ export function CssMinifier() {
                 htmlFor="css-output"
                 className="block font-mono text-[11px] uppercase tracking-wider text-[#71717A]"
               >
-                Minified Output
+                {t("outputLabel")}
               </label>
               <div className="flex items-center gap-2">
                 <button
@@ -219,7 +221,7 @@ export function CssMinifier() {
                   className="flex items-center gap-2 h-10 px-4 rounded-lg border border-[#2A2535] text-[#EDEDEF] font-mono text-[11px] uppercase tracking-wider hover:border-[#2DD4BF]/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
                 >
                   <Download className="w-4 h-4" />
-                  Download .css
+                  {t("download")}
                 </button>
                 <button
                   type="button"
@@ -230,12 +232,12 @@ export function CssMinifier() {
                   {copied ? (
                     <>
                       <Check className="w-4 h-4" />
-                      Copied
+                      {t("copied")}
                     </>
                   ) : (
                     <>
                       <ClipboardCopy className="w-4 h-4" />
-                      Copy
+                      {t("copy")}
                     </>
                   )}
                 </button>
@@ -246,7 +248,7 @@ export function CssMinifier() {
               value={output}
               readOnly
               rows={8}
-              placeholder="Minified CSS will appear here..."
+              placeholder={t("outputPlaceholder")}
               className="w-full px-4 py-3 border border-[#2A2535] bg-[#0C0A12] text-[#EDEDEF] rounded-lg font-mono text-sm resize-y min-h-[44px] placeholder:text-[#71717A]/60 focus:outline-none"
             />
           </div>
@@ -263,24 +265,24 @@ export function CssMinifier() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Paste CSS",
-                desc: "Paste or type your CSS code into the input area.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Minify",
-                desc: "Click Minify to remove comments and optimize whitespace.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "Copy or Download",
-                desc: "Copy the minified code or download it as a .css file.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -292,7 +294,7 @@ export function CssMinifier() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}

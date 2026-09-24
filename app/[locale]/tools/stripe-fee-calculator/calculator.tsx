@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownUp, Calculator, DollarSign, Info } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useMemo, useState } from "react";
 import { JsonLd } from "@/components/json-ld";
 
@@ -117,6 +118,7 @@ function formatMoney(value: number, symbol: string): string {
 }
 
 export function StripeFeeCalculator() {
+  const t = useTranslations("ToolUI.stripe-fee-calculator");
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState<Currency>("USD");
   const [mode, setMode] = useState<CalcMode>("charge");
@@ -159,16 +161,15 @@ export function StripeFeeCalculator() {
           className="max-w-3xl mx-auto text-center"
         >
           <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-            Free Tool
+            {t("badge")}
           </span>
           <h1 className="text-3xl sm:text-5xl font-[Syne] font-bold text-[#EDEDEF] mb-4">
-            Stripe Fee
+            {t("h1a")}
             <br />
-            <span className="gradient-text">Calculator</span>
+            <span className="gradient-text">{t("h1b")}</span>
           </h1>
           <p className="text-[#71717A] font-[Inter] text-base sm:text-lg max-w-xl mx-auto">
-            Calculate Stripe processing fees instantly. See exactly how much
-            you&rsquo;ll pay and receive for any transaction amount.
+            {t("subtitle")}
           </p>
         </motion.div>
       </section>
@@ -189,7 +190,7 @@ export function StripeFeeCalculator() {
             >
               <ArrowDownUp className="w-4 h-4 text-[#2DD4BF] transition-transform group-hover:rotate-180 duration-300" />
               <span className="font-[Inter] text-sm text-[#EDEDEF]">
-                {mode === "charge" ? "I want to charge" : "I want to receive"}
+                {mode === "charge" ? t("modeCharge") : t("modeReceive")}
               </span>
             </button>
           </div>
@@ -205,8 +206,8 @@ export function StripeFeeCalculator() {
                 onChange={handleAmountChange}
                 placeholder={
                   mode === "charge"
-                    ? "Amount to charge..."
-                    : "Amount to receive..."
+                    ? t("placeholderCharge")
+                    : t("placeholderReceive")
                 }
                 className="w-full h-12 pl-11 pr-4 border border-[#2A2535] bg-[#1C1825] text-[#EDEDEF] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2DD4BF]/50 focus:border-[#2DD4BF]/30 min-h-[44px] placeholder:text-[#71717A]/60 font-mono text-sm"
               />
@@ -228,9 +229,11 @@ export function StripeFeeCalculator() {
           <div className="flex items-center gap-2 mb-8 px-1">
             <Info className="w-3.5 h-3.5 text-[#71717A] shrink-0" />
             <p className="font-mono text-[11px] text-[#71717A]">
-              {selectedCurrency.region}: {selectedCurrency.percentFee}% +{" "}
-              {selectedCurrency.symbol}
-              {selectedCurrency.fixedFee.toFixed(2)} per transaction
+              {t("rateInfo", {
+                region: t(`region.${selectedCurrency.code}`),
+                percent: selectedCurrency.percentFee,
+                fixed: `${selectedCurrency.symbol}${selectedCurrency.fixedFee.toFixed(2)}`,
+              })}
             </p>
           </div>
 
@@ -247,7 +250,7 @@ export function StripeFeeCalculator() {
               >
                 <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5">
                   <span className="font-mono text-[11px] text-[#71717A] uppercase tracking-wider">
-                    {mode === "charge" ? "You charge" : "You should charge"}
+                    {mode === "charge" ? t("youCharge") : t("youShouldCharge")}
                   </span>
                   <p className="text-2xl font-mono font-bold text-[#EDEDEF] mt-2">
                     {formatMoney(result.chargeAmount, selectedCurrency.symbol)}
@@ -256,19 +259,21 @@ export function StripeFeeCalculator() {
 
                 <div className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5">
                   <span className="font-mono text-[11px] text-[#71717A] uppercase tracking-wider">
-                    Stripe fee
+                    {t("stripeFee")}
                   </span>
                   <p className="text-2xl font-mono font-bold text-[#FB7185] mt-2">
                     -{formatMoney(result.fee, selectedCurrency.symbol)}
                   </p>
                   <p className="font-mono text-[11px] text-[#71717A] mt-1">
-                    {result.effectiveRate.toFixed(2)}% effective rate
+                    {t("effectiveRate", {
+                      rate: result.effectiveRate.toFixed(2),
+                    })}
                   </p>
                 </div>
 
                 <div className="bg-[#16131E] border border-[#2DD4BF]/20 rounded-xl p-5">
                   <span className="font-mono text-[11px] text-[#2DD4BF] uppercase tracking-wider">
-                    You receive
+                    {t("youReceive")}
                   </span>
                   <p className="text-2xl font-mono font-bold text-[#2DD4BF] mt-2">
                     {formatMoney(result.netAmount, selectedCurrency.symbol)}
@@ -292,7 +297,7 @@ export function StripeFeeCalculator() {
           <div className="flex items-center gap-2 mb-6">
             <Calculator className="w-4 h-4 text-primary" />
             <h2 className="text-lg font-[Syne] font-bold text-[#EDEDEF]">
-              Stripe Fees by Region
+              {t("tableTitle")}
             </h2>
           </div>
 
@@ -301,16 +306,16 @@ export function StripeFeeCalculator() {
               <thead>
                 <tr className="border-b border-[#2A2535]">
                   <th className="py-3 px-4 font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                    Region
+                    {t("colRegion")}
                   </th>
                   <th className="py-3 px-4 font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                    Currency
+                    {t("colCurrency")}
                   </th>
                   <th className="py-3 px-4 font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                    Rate
+                    {t("colRate")}
                   </th>
                   <th className="py-3 px-4 font-mono text-[11px] uppercase tracking-wider text-[#71717A]">
-                    Fixed Fee
+                    {t("colFixed")}
                   </th>
                 </tr>
               </thead>
@@ -321,7 +326,7 @@ export function StripeFeeCalculator() {
                     className="border-b border-[#2A2535]/50 hover:bg-[#16131E]/50 transition-colors"
                   >
                     <td className="py-3 px-4 font-[Inter] text-sm text-[#EDEDEF]">
-                      {c.region}
+                      {t(`region.${c.code}`)}
                     </td>
                     <td className="py-3 px-4 font-mono text-sm text-[#EDEDEF]">
                       {c.code}
@@ -351,24 +356,24 @@ export function StripeFeeCalculator() {
           className="max-w-3xl mx-auto"
         >
           <h2 className="text-xl sm:text-2xl font-[Syne] font-bold text-[#EDEDEF] mb-6 text-center">
-            How It Works
+            {t("howTitle")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               {
                 step: "01",
-                title: "Enter Amount",
-                desc: "Type the amount you want to charge or receive from a payment.",
+                title: t("step1Title"),
+                desc: t("step1Desc"),
               },
               {
                 step: "02",
-                title: "Pick Currency",
-                desc: "Select your currency to apply the correct regional Stripe fee rates.",
+                title: t("step2Title"),
+                desc: t("step2Desc"),
               },
               {
                 step: "03",
-                title: "See Results",
-                desc: "Instantly see the Stripe fee, net amount, and effective fee percentage.",
+                title: t("step3Title"),
+                desc: t("step3Desc"),
               },
             ].map((item, i) => (
               <motion.div
@@ -380,7 +385,7 @@ export function StripeFeeCalculator() {
                 className="bg-[#16131E] border border-[#2A2535] rounded-xl p-5"
               >
                 <span className="font-mono text-[11px] text-primary uppercase tracking-wider">
-                  Step {item.step}
+                  {t("stepLabel", { n: item.step })}
                 </span>
                 <h3 className="text-base font-[Syne] font-bold text-[#EDEDEF] mt-2 mb-1">
                   {item.title}
